@@ -1,0 +1,8 @@
+#Ignore vendor folder
+assets/images/gallery
+assets/images/carousel
+vendor/
+tmp/
+
+#Ignore lock
+composer.lock

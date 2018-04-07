@@ -1,0 +1,13 @@
+{
+  "name": "M-Power Youth",
+  "authors": [
+    {
+      "name": "Aaron Melhaff",
+      "email": "amelhaff2@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master",
+    "twbs/bootstrap": "4.0.0"
+  }
+}
