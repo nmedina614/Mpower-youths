@@ -2,6 +2,7 @@
 /**
  * TODO
  * @author Aaron Melhaff <amelhaff2@mail.greenriver.edu>
+ * @author Scott Medlock <squmed@gmail.com>
  * @version 1.0
  */
 
