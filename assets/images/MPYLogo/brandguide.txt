@@ -1,0 +1,3 @@
+Main Text Font: Aclonica 
+Color HEX: #351A4F 
+Color HSL: hsl(271,50%,21%)
