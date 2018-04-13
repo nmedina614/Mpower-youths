@@ -31,7 +31,8 @@ $f3->route('GET /', function($f3) {
 
     // List of paths for sub-templates being used.
     $includes = array(
-        //'views/_nav.html',
+        'views/_nav.html',
+        'views/_home.html'
     );
 
     // List of paths to scripts being used.
