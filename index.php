@@ -26,7 +26,7 @@ $f3->route('GET /', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
-        //$f3->get('BASE').'/styles/main.css'
+        'assets/styles/_home.css'
     );
 
     // List of paths for sub-templates being used.
