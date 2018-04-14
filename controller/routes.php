@@ -6,6 +6,8 @@
  * Time: 12:57 PM
  */
 
+$GLOBALS['f3'];
+
 $f3->route('GET /', function($f3) {
 
     // Title to use in template.
@@ -37,12 +39,18 @@ $f3->route('GET /', function($f3) {
 
 $f3->route('GET /gallery', function($f3) {
 
+
+    require('model/logic.php');
+
+
+    $f3->set('images', getGalleryImages());
+
     // Title to use in template.
     $title = "M-Power Gallery";
 
     // List of paths to stylesheets.
     $styles = array(
-        //$f3->get('BASE').'/styles/main.css'
+        BASE.'/assets/styles/gallery.css'
     );
 
     // List of paths for sub-templates being used.

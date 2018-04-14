@@ -17,6 +17,14 @@ require_once('vendor/autoload.php');
 $f3 = Base::instance();
 $f3->set('DEBUG', 3);
 
+// Path to root directory.
+define('ROOT', $_SERVER['DOCUMENT_ROOT'] . '/../');
+
+define('BASE', $f3->get('BASE'));
+
+// Domain all the way to project folder.
+define('DOMAIN', $_SERVER['HTTP_HOST'].BASE);
+
 require('controller/routes.php');
 
 
