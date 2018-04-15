@@ -1,0 +1,11 @@
+<div class="container-fluid">
+    <div class="row">
+        <repeat group="{{ @images }}" value="{{ @path }}">
+            <div class="col-12 col-md-6 col-lg-4 mt-2">
+                <a href="{{ @path }}">
+                    <img class="gallery-thumbnail" src="{{ @path }}" alt="Gallery Image">
+                </a>
+            </div>
+        </repeat>
+    </div>
+</div>

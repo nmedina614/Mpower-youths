@@ -17,64 +17,16 @@ require_once('vendor/autoload.php');
 $f3 = Base::instance();
 $f3->set('DEBUG', 3);
 
-// Model::connect();
+// Path to root directory.
+define('ROOT', $_SERVER['DOCUMENT_ROOT'] . '/../');
 
-$f3->route('GET /', function($f3) {
+define('BASE', $f3->get('BASE'));
 
-    // Title to use in template.
-    $title = "M-Power Youth";
+// Domain all the way to project folder.
+define('DOMAIN', $_SERVER['HTTP_HOST'].BASE);
 
-    // List of paths to stylesheets.
-    $styles = array(
-        'assets/styles/_home.css'
-    );
+require('controller/routes.php');
 
-    // List of paths for sub-templates being used.
-    $includes = array(
-        'views/_nav.html',
-        'views/_home.html'
-    );
 
-    // List of paths to scripts being used.
-    $scripts = array(
-    );
-
-    $f3->set('title' , $title);
-    $f3->set('styles' , $styles);
-    $f3->set('includes' , $includes);
-    $f3->set('scripts' , $scripts);
-
-    $template = new Template();
-    echo $template->render('views/_base.html');
-});
-
-$f3->route('GET /account', function($f3) {
-
-    // Title to use in template.
-    $title = "Account Management";
-
-    // List of paths to stylesheets.
-    $styles = array(
-        'assets/styles/_home.css'
-    );
-
-    // List of paths for sub-templates being used.
-    $includes = array(
-        'views/_nav.html',
-        'views/_account.html'
-    );
-
-    // List of paths to scripts being used.
-    $scripts = array(
-    );
-
-    $f3->set('title' , $title);
-    $f3->set('styles' , $styles);
-    $f3->set('includes' , $includes);
-    $f3->set('scripts' , $scripts);
-
-    $template = new Template();
-    echo $template->render('views/_base.html');
-});
 
 $f3->run();
