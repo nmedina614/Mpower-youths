@@ -39,4 +39,9 @@
 </repeat>
 
 </body>
+<footer>
+    <repeat group="{{ @footer }}" value="{{ @path }}">
+        <include href="{{ @path }}" >
+    </repeat>
+</footer>
 </html>

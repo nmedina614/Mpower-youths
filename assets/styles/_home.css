@@ -12,3 +12,14 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.navbar {
+
+    font-size:large;
+
+}
+
+a {
+    color: black;
+    <!-- Change -->
+}

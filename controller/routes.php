@@ -24,6 +24,11 @@ $f3->route('GET /', function($f3) {
         'views/_home.html'
     );
 
+    // List of paths for sub-templates being used.
+    $footer = array(
+        'views/_footer.html'
+    );
+
     // List of paths to scripts being used.
     $scripts = array(
     );
@@ -32,6 +37,7 @@ $f3->route('GET /', function($f3) {
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
+    $f3->set('footer' , $footer);
 
     $template = new Template();
     echo $template->render('views/_base.html');
