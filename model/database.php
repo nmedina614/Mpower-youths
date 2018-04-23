@@ -48,4 +48,17 @@ class Database {
 
         return $result;
     }
+
+    public static function getEvents() {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'SELECT * FROM event';
+
+        $statement = self::$_dbh->prepare($sql);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }
