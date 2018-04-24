@@ -49,7 +49,7 @@ class Database {
         return $result;
     }
 
-    public static function getEvents() {
+    public static function getAllEvents() {
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT * FROM event';
 
@@ -57,7 +57,7 @@ class Database {
 
         $statement->execute();
 
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
     }

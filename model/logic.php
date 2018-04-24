@@ -23,3 +23,16 @@ function getGalleryImages() {
 
     return $images;
 }
+
+function getEvents() {
+    $result = array();
+
+    Database::connect();
+    $resultDB = Database::getAllEvents();
+
+    foreach ($resultDB as $key => $value){
+        array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['date']));
+    }
+
+    return $result;
+}

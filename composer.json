@@ -8,10 +8,17 @@
     {
       "name": "Scott Medlock",
       "email": "squmed@gmail.com"
+    },
+    {
+      "name": "Kyle Johnson",
+      "email": "kyl.johnson@gmail.com"
     }
   ],
   "require": {
     "bcosca/fatfree-core": "dev-master",
     "twbs/bootstrap": "4.0.0"
+  },
+  "autoload": {
+    "classmap": ["model/"]
   }
 }
