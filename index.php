@@ -17,6 +17,9 @@ require_once('vendor/autoload.php');
 $f3 = Base::instance();
 $f3->set('DEBUG', 3);
 
+// Variable used to check if visitor is logged in as an admin.
+$f3->set('isAdmin', Validator::isAdmin());
+
 // Path to root directory.
 define('ROOT', $_SERVER['DOCUMENT_ROOT'] . '/../');
 

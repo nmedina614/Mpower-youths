@@ -7,6 +7,10 @@
  */
 class Validator
 {
+    /**
+     * @param $filename
+     * @return bool
+     */
     public static function validImageFile($filename)
     {
         // Analyze filename.
@@ -22,6 +26,15 @@ class Validator
             $extension == 'png'  ||
             $extension == 'gif'
         );
+    }
+
+    /**
+     * Returns whether the user is currently logged in as an administrator.
+     *
+     * @return bool Returns the administration login status.
+     */
+    public static function isAdmin() {
+        return isset($_SESSION['username']);
     }
 }
 

@@ -7,32 +7,57 @@
  */
 
 // index.php -> routes.php -> THIS -> database/messenger/validator -> views
+class Logic {
 
-function getGalleryImages() {
-    $allFiles = scandir('assets/images/gallery');
+    public static function getGalleryImages() {
+        $allFiles = scandir('assets/images/gallery');
 
-    require('model/validator.php');
+        require('model/validator.php');
 
-    $images = array();
+        $images = array();
 
-    for($i = 0; $i < count($allFiles); $i++) {
-        if(Validator::validImageFile($allFiles[$i])) {
-            $images[] = BASE.'/assets/images/gallery/'.$allFiles[$i];
+        for($i = 0; $i < count($allFiles); $i++) {
+            if(Validator::validImageFile($allFiles[$i])) {
+                $images[] = BASE.'/assets/images/gallery/'.$allFiles[$i];
+            }
         }
+
+        return $images;
     }
 
-    return $images;
-}
+    public static function getEvents() {
+        $result = array();
 
-function getEvents() {
-    $result = array();
+        Database::connect();
+        $resultDB = Database::getAllEvents();
 
-    Database::connect();
-    $resultDB = Database::getAllEvents();
+        foreach ($resultDB as $key => $value){
+            array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['date']));
+        }
 
-    foreach ($resultDB as $key => $value){
-        array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['date']));
+        return $result;
     }
 
-    return $result;
+    public static function adminLogin($username, $password)
+    {
+
+        session_reset();
+
+        if(empty($username) || empty($_POST['password'])) {
+            return false;
+        }
+
+        Database::connect();
+
+        $result = Database::checkCredentials($username, $password);
+
+        if(isset($result['username'])) {
+            // Store user information in Session.
+            $_SESSION['username'] = $result['username'];
+
+            return true;
+        } else return false;
+
+    }
+
 }

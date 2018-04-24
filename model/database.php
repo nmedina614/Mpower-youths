@@ -10,7 +10,8 @@
 require $_SERVER['DOCUMENT_ROOT'] . "/../config/bsharp-config.php";
 
 
-class Database {
+class Database
+{
 
 
     private static $_dbh;
@@ -61,4 +62,6 @@ class Database {
 
         return $result;
     }
+
+
 }
