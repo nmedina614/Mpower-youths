@@ -69,6 +69,9 @@
             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
             nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</li>
+        <repeat group="{{ @events }}" value="{{ @event }}">
+            <li class="list-group-item"><h5>{{ @event->getTitle() }}</h5><br>{{ @event->getDate() }}<br>{{ @event->getDescription() }}</li>
+        </repeat>
     </ul>
 
 </div>
