@@ -6,7 +6,16 @@
         <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+
+        <check if="{{ @invalid }}">
+            <true>
+                <div class="alert alert-danger">Invalid username or password!</div>
+            </true>
+        </check>
+
         <button class="btn btn-lg btn-info btn-block rounded-0" name="submit" type="submit">Sign in</button>
+
+
     </form>
 
 </div> <!-- /container -->

@@ -163,6 +163,8 @@ $f3->route('GET /staff2', function($f3) {
     echo $template->render('views/_base.html');
 });
 
+
+
 // Login route.
 $f3->route('GET|POST /login', function($f3) {
 
@@ -189,7 +191,7 @@ $f3->route('GET|POST /login', function($f3) {
 
     if(isset($_POST['submit'])) {
 
-        $result = Logic::adminLogin($_POST['email'], $_POST['password']);
+        $result = Logic::adminLogin($_POST['username'], $_POST['password']);
 
         // If login is successful, redirect to main page.
         if($result != false) {
