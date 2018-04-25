@@ -50,7 +50,7 @@ $f3->route('GET /gallery', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
-        BASE.'/assets/styles/gallery.css'
+        BASE.'/assets/styles/_gallery.css'
     );
 
     // List of paths for sub-templates being used.
@@ -62,6 +62,7 @@ $f3->route('GET /gallery', function($f3) {
 
     // List of paths to scripts being used.
     $scripts = array(
+        BASE.'/assets/scripts/_gallery.js'
     );
 
     $f3->set('title' , $title);

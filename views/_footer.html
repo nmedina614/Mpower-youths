@@ -17,16 +17,24 @@
                 <h5 class="text-uppercase">Links</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#">Link 1</a>
+                        <a href="#" class="btn btn-sm btn-info">Link 1</a>
                     </li>
                     <li>
-                        <a href="#!">Link 2</a>
+                        <a href="#!" class="btn btn-sm btn-info">Link 2</a>
                     </li>
                 </ul>
             </div>
             <!--/.Second column-->
             <div class="col-md-2">
-                <a href="{{ @BASE }}/login">Login</a>
+                <check if="{{ @isAdmin }}">
+                    <true>
+                        <a href="{{ @BASE }}/login" class="btn btn-sm btn-info">Logout</a>
+                    </true>
+                    <false>
+                        <a href="{{ @BASE }}/login" class="btn btn-sm btn-info">Login</a>
+                    </false>
+                </check>
+
             </div>
         </div>
     </div>

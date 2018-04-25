@@ -1,18 +1,24 @@
 <div class="container-fluid">
+    <check if="{{ @isAdmin }}">
+        <true>
+            <button type="button" class="btn btn-sm btn-info mt-2">
+                <img src="{{ @BASE }}/assets/images/icons/plus.svg">Add
+            </button>
+        </true>
+    </check>
     <div class="row">
-        <check if="{{ @isAdmin }}">
-            <true>
-                <button type="button" class="btn btn-small btn-info rounded-0">
-                    <img src="{{ @BASE }}/assets/images/icons/plus.svg">Add
-                </button>
-            </true>
-        </check>
+
         <repeat group="{{ @images }}" value="{{ @path }}">
             <div class="col-12 col-md-6 col-lg-4 mt-2">
-                <a href="{{ @path }}">
-                    <img class="gallery-thumbnail" src="{{ @path }}" alt="Gallery Image">
-                </a>
+                <img class="gallery-thumbnail" src="{{ @path }}" alt="Gallery Image">
             </div>
         </repeat>
     </div>
+</div>
+<div id="overlay" class="toshow" style="display:none">
+    <div id="overlay-frame">
+        <img src="{{ @BASE }}/assets/images/gallery/breathtaking-landscapes-66-green-river-wyoming-wallpaper-nature-river-mountains-2.jpg" alt="Demo image">
+        <p class="text-white">Example Text asdfasdfasdfasdfasdfasdfasdfafd</p>
+    </div>
+
 </div>

@@ -3,13 +3,16 @@ body {
     background-color: #2b2b2b;
 }
 
+/* Gallery Styles */
+
 .gallery-thumbnail {
     width: 100%;
     margin-top: 10px;
-    object-fit: scale-down;
+    object-fit: cover;
 }
 
 .gallery-thumbnail:hover {
+    cursor: pointer;
     transition: filter 0.25s;
     filter: brightness(80%);
 }
@@ -20,7 +23,6 @@ body {
         height: 350px;
     }
 }
-
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
@@ -48,5 +50,52 @@ body {
     .gallery-thumbnail {
         height: 300px;
     }
+}
+
+/* Overlay Styles */
+
+
+#overlay {
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 11;
+}
+
+#overlay:hover {
+    cursor: pointer;
+}
+
+#overlay-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
+
+#overlay-frame:hover {
+    cursor: default;
+}
+
+#overlay div#overlay-frame img {
+    top: -25%;
+    max-width: 95vw;
+    max-height: 85vh;
+    object-fit: contain;
+}
+
+#overlay div#overlay-frame p {
+    font-size: 16pt;
+}
+
+.toshow {
+    display: none;
 }
 

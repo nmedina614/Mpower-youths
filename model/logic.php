@@ -12,7 +12,6 @@ class Logic {
     public static function getGalleryImages() {
         $allFiles = scandir('assets/images/gallery');
 
-        require('model/validator.php');
 
         $images = array();
 
