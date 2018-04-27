@@ -27,6 +27,8 @@ $f3->route('GET /', function($f3) {
 
     // List of paths to scripts being used.
     $scripts = array(
+        BASE.'/assets/scripts/_home.js',
+        '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
     );
 
     $footer = 'views/_footer.html';
