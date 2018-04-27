@@ -88,4 +88,22 @@ class Database
 
         return $result;
     }
+
+    /**
+     * TODO
+     *
+     * @return mixed
+     */
+    public static function getAllStaff() {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'SELECT * FROM staff';
+
+        $statement = self::$_dbh->prepare($sql);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }
