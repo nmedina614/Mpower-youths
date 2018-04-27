@@ -210,3 +210,14 @@ $f3->route('GET|POST /login', function($f3) {
     $template = new Template();
     echo $template->render('views/_base.html');
 });
+
+$f3->route('POST /new-gallery-image', function($f3) {
+    // Reject unverified users.
+    if($f3->get('isAdmin')) {
+        echo 'Invalid Credentials';
+    }
+
+    echo 'Authorized';
+
+
+});

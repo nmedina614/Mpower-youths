@@ -8,17 +8,18 @@
     </check>
     <div class="row">
 
-        <repeat group="{{ @images }}" value="{{ @path }}">
+        <repeat group="{{ @images }}" value="{{ @image }}">
             <div class="col-12 col-md-6 col-lg-4 mt-2">
-                <img class="gallery-thumbnail" src="{{ @path }}" alt="Gallery Image">
+                <img class="gallery-thumbnail" src="{{ @BASE }}/assets/images/gallery/{{ @image['url'] }}"
+                     data-caption="{{ @image['caption'] }}" data-source="{{ @image['url'] }}" alt="Gallery Image">
             </div>
         </repeat>
     </div>
 </div>
-<div id="overlay" class="toshow" style="display:none">
+<div id="overlay" data-base="{{ @BASE }}" class="toshow" style="display:none">
     <div id="overlay-frame">
-        <img src="{{ @BASE }}/assets/images/gallery/breathtaking-landscapes-66-green-river-wyoming-wallpaper-nature-river-mountains-2.jpg" alt="Demo image">
-        <p class="text-white">Example Text asdfasdfasdfasdfasdfasdfasdfafd</p>
+        <img id="overlay-image" src="" alt="">
+        <p class="text-white" id="overlay-caption"></p>
     </div>
 
 </div>

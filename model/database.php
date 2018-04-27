@@ -32,6 +32,13 @@ class Database
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param $username
+     * @param $password
+     * @return mixed
+     */
     public static function checkCredentials($username, $password) {
 
         // Prepare a select to check if db contains queried params.
@@ -50,6 +57,11 @@ class Database
         return $result;
     }
 
+    /**
+     * TODO
+     *
+     * @return mixed
+     */
     public static function getAllEvents() {
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT * FROM event';
@@ -63,5 +75,17 @@ class Database
         return $result;
     }
 
+    /**
+     * TODO
+     *
+     * @return mixed
+     */
+    public static function pullGalleryImages()
+    {
+        $statement = self::$_dbh->query('SELECT * FROM gallery');
 
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
 }

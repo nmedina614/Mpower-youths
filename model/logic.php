@@ -10,16 +10,11 @@
 class Logic {
 
     public static function getGalleryImages() {
-        $allFiles = scandir('assets/images/gallery');
+        Database::connect();
 
+        $images = Database::pullGalleryImages();
 
-        $images = array();
-
-        for($i = 0; $i < count($allFiles); $i++) {
-            if(Validator::validImageFile($allFiles[$i])) {
-                $images[] = BASE.'/assets/images/gallery/'.$allFiles[$i];
-            }
-        }
+        return $images;
 
         return $images;
     }
