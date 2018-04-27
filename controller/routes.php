@@ -41,7 +41,11 @@ $f3->route('GET /', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET /gallery', function($f3) {
+$f3->route('GET|POST /gallery', function($f3) {
+
+    if(isset($_POST['submit'])) {
+        Logic::submitNewImage($_POST['caption']);
+    }
 
     $f3->set('images', Logic::getGalleryImages());
 
@@ -209,15 +213,4 @@ $f3->route('GET|POST /login', function($f3) {
 
     $template = new Template();
     echo $template->render('views/_base.html');
-});
-
-$f3->route('POST /new-gallery-image', function($f3) {
-    // Reject unverified users.
-    if($f3->get('isAdmin')) {
-        echo 'Invalid Credentials';
-    }
-
-    echo 'Authorized';
-
-
 });

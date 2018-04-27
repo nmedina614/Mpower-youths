@@ -1,15 +1,18 @@
 <div class="container-fluid">
     <check if="{{ @isAdmin }}">
         <true>
-            <button type="button" class="btn btn-sm btn-info mt-2">
+            <button type="button" class="btn btn-sm btn-info rounded-0 mt-2"
+                    data-toggle="modal" data-target="#new-image-modal">
                 <img src="{{ @BASE }}/assets/images/icons/plus.svg">Add
             </button>
+
+            <include href="views/_gallery-modal.html">
         </true>
     </check>
     <div class="row">
 
         <repeat group="{{ @images }}" value="{{ @image }}">
-            <div class="col-12 col-md-6 col-lg-4 mt-2">
+            <div class="col-12 col-md-6 col-lg-4 pl-1 pr-1">
                 <img class="gallery-thumbnail" src="{{ @BASE }}/assets/images/gallery/{{ @image['url'] }}"
                      data-caption="{{ @image['caption'] }}" data-source="{{ @image['url'] }}" alt="Gallery Image">
             </div>
@@ -21,5 +24,4 @@
         <img id="overlay-image" src="" alt="">
         <p class="text-white" id="overlay-caption"></p>
     </div>
-
 </div>

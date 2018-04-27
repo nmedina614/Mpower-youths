@@ -1,3 +1,8 @@
+var imageInput = document.getElementById('image');
+if(imageInput) {
+    imageInput.onchange = readFormImage;
+}
+
 $('.gallery-thumbnail').click(function() {
     openOverlay($(this));
 });
@@ -19,4 +24,17 @@ function openOverlay(sourceImage) {
 
 function closeOverlay() {
     $('#overlay').fadeOut();
+}
+
+function readFormImage() {
+    if (this.files && this.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#image-preview')
+                .attr('src', e.target.result)
+        };
+
+        reader.readAsDataURL(this.files[0]);
+    }
 }
