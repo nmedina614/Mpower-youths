@@ -17,12 +17,15 @@ $f3->route('GET /', function($f3) {
     $title = "M-Power Youth";
 
     // List of paths to stylesheets.
-    $styles = array();
+    $styles = array(
+        'assets/styles/_home.css'
+    );
 
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
         'views/_home.html',
+        'views/_footer.html'
     );
 
     // List of paths to scripts being used.
@@ -37,7 +40,6 @@ $f3->route('GET /', function($f3) {
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
-    $f3->set('footer', $footer);
 
 
     $template = new Template();
@@ -64,6 +66,7 @@ $f3->route('GET|POST /gallery', function($f3) {
     $includes = array(
         'views/_nav.html',
         'views/_gallery.html',
+        'views/_footer.html'
     );
 
     // List of paths to scripts being used.
@@ -71,14 +74,11 @@ $f3->route('GET|POST /gallery', function($f3) {
         BASE.'/assets/scripts/_gallery.js'
     );
 
-    $footer = 'views/_footer.html';
-
 
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
-    $f3->set('footer', $footer);
 
 
     $template = new Template();
@@ -99,21 +99,17 @@ $f3->route('GET /account', function($f3) {
     $includes = array(
         'views/_nav.html',
         'views/_account.html',
+        'views/_footer.html'
     );
 
     // List of paths to scripts being used.
     $scripts = array(
     );
 
-    $footer = 'views/_footer.html';
-
-
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
-    $f3->set('footer', $footer);
-
 
     $template = new Template();
     echo $template->render('views/_base.html');
@@ -143,13 +139,10 @@ $f3->route('GET /staff', function($f3) {
     $scripts = array(
     );
 
-    $footer = 'views/_footer.html';
-
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
-    $f3->set('footer', $footer);
 
     $template = new Template();
     echo $template->render('views/_base.html');
@@ -169,20 +162,17 @@ $f3->route('GET /staff2', function($f3) {
     $includes = array(
         'views/_nav.html',
         'views/_staff2.html',
+        'views/_footer.html'
     );
 
     // List of paths to scripts being used.
     $scripts = array(
     );
 
-    $footer = 'views/_footer.html';
-
-
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
-    $f3->set('footer', $footer);
 
     $template = new Template();
     echo $template->render('views/_base.html');
@@ -252,20 +242,18 @@ $f3->route('GET /NewEvent', function($f3) {
     $includes = array(
         'views/_nav.html',
         'views/_NewEvent.html',
+        'views/_footer.html'
     );
 
     // List of paths to scripts being used.
     $scripts = array(
     );
 
-    $footer = 'views/_footer.html';
-
 
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
-    $f3->set('footer', $footer);
 
     $template = new Template();
     echo $template->render('views/_base.html');
