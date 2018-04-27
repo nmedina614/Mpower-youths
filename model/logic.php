@@ -73,6 +73,12 @@ class Logic {
 
     }
 
+    /**
+     * TODO
+     *
+     * @param $file
+     * @param $captions
+     */
     public static function submitNewImage($file, $captions)
     {
         $target_dir = "uploads/";
