@@ -6,17 +6,21 @@
 
 
     <br>
-    <ul class="list-group list-group-flush">
-        <repeat group="{{ @StaffMembers }}" value="{{ @StaffMember }}">
-            <li class="list-group-item">
-                <img class="float-left" style="width: 150px" src="{{ @StaffMember->getPortraitURL() }}">
-                <h5 class="mt-4">{{ @StaffMember->getFName() }} {{ @StaffMember->getLname() }}</h5>
-                <p>{{ @StaffMember->getBiography() }}</p>
-                <check if="{{ @StaffMember->getEmail() }}">
-                    <p>Email: {{ @StaffMember->getEmail() }}</p>
-                </check>
-            </li>
-        </repeat>
-    </ul>
+    <div class="container">
+            <repeat group="{{ @StaffMembers }}" value="{{ @StaffMember }}">
+                <div class="row my-3">
+                        <div class="col-sm-2 text-center my-auto">
+                            <img class="rounded-circle" style="width: 150px; height: 150px" src="{{ @StaffMember->getPortraitURL() }}">
+                        </div>
+                        <div class="col-sm-10">
+                            <h5 class="mt-4">{{ @StaffMember->getFName() }} {{ @StaffMember->getLname() }} - {{ @StaffMember->getTitle() }}</h5>
+                            <p>{{ @StaffMember->getBiography() }}</p>
+                            <check if="{{ @StaffMember->getEmail() }}">
+                                <p>Email: <a href="mailto:{{ @StaffMember->getEmail() }}>{{ @StaffMember->getEmail() }}">{{ @StaffMember->getEmail() }}</a></p>
+                            </check>
+                        </div>
+                </div>
+            </repeat>
+    </div>
 
 </div>
