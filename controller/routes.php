@@ -110,6 +110,9 @@ $f3->route('GET /account', function($f3) {
 
 $f3->route('GET /staff', function($f3) {
 
+    require('model/logic.php');
+    $f3->set('StaffMembers', Logic::getAllStaff());
+
     // Title to use in template.
     $title = "M-Power Staff";
 

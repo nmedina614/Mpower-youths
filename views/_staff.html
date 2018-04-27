@@ -7,50 +7,16 @@
 
     <br>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <img class="float-left" src="assets/images/random/unknown.png">
-            <h5 class="mt-4">First Name Last Name</h5>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            </p>
-            <p>Email: example@gmail.com</p>
-        </li>
-        <li class="list-group-item">
-            <img class="float-left" src="assets/images/random/unknown.png">
-            <h5 class="mt-4">First Name Last Name</h5>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            </p>
-            <p>Email: example@gmail.com</p>
-        </li>
-        <li class="list-group-item">
-            <img class="float-left" src="assets/images/random/unknown.png">
-            <h5 class="mt-4">First Name Last Name</h5>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            </p>
-            <p>Email: example@gmail.com</p>
-        </li>
-        <li class="list-group-item">
-            <img class="float-left" src="assets/images/random/unknown.png">
-            <h5 class="mt-4">First Name Last Name</h5>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            </p>
-            <p>Email: example@gmail.com</p>
-        </li>
+        <repeat group="{{ @StaffMembers }}" value="{{ @StaffMember }}">
+            <li class="list-group-item">
+                <img class="float-left" style="width: 150px" src="{{ @StaffMember->getPortraitURL() }}">
+                <h5 class="mt-4">{{ @StaffMember->getFName() }} {{ @StaffMember->getLname() }}</h5>
+                <p>{{ @StaffMember->getBiography() }}</p>
+                <check if="{{ @StaffMember->getEmail() }}">
+                    <p>Email: {{ @StaffMember->getEmail() }}</p>
+                </check>
+            </li>
+        </repeat>
     </ul>
 
 </div>
