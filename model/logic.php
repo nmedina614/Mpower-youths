@@ -100,46 +100,36 @@ class Logic {
      * @param $file
      * @param $captions
      */
-    public static function submitNewImage($file, $captions)
+    public static function submitNewImage($file, $caption)
     {
-        var_dump($file);
-
-        $target_dir = 'assets/images/gallery';
+        $target_dir = 'assets/images/gallery/';
         $target_file = $target_dir . basename($file["name"]);
-        $uploadOk = 1;
-        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-        $check = getimagesize($file["tmp_name"]);
-        if($check !== false) {
-            return "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            return "File is not an image.";
-            $uploadOk = 0;
+
+        if (Validator::validFileSize($file['size'])) {
+            return "File is too large.";
         }
 
         // Check if file already exists
         if (file_exists($target_file)) {
-            echo "File already exists";
-            $uploadOk = 0;
+            return "File already exists";
         }
 
         // Allow certain file formats
-        if(Validator::validImageFile($imageFileType)) {
-            echo "Only JPG, JPEG, PNG & GIF files are allowed.";
-            $uploadOk = 0;
+        if(!Validator::validImageFile($target_file)) {
+            return "Only JPG, JPEG, PNG & GIF files are allowed.";
         }
 
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            return "Your file was not uploaded.";
-            // if everything is ok, try to upload file
+        if (move_uploaded_file($file["tmp_name"], $target_file)) {
+            Database::connect();
+
+            echo Database::insertGalleryImage($file["name"], $caption);
+
+            return "The file ". basename( $file["name"]). " has been uploaded.";
+
+
         } else {
-            if (move_uploaded_file($file["tmp_name"], $target_file)) {
-                return "The file ". basename( $file["name"]). " has been uploaded.";
-            } else {
-                return "There was an error uploading your file.";
-            }
+            return "There was an error uploading your file.";
         }
 
     }

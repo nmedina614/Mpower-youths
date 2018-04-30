@@ -42,63 +42,25 @@
 
     <div class="jumbotron text-center">
         <h1>MPower-Youth Mission Statement</h1>
+        <h2>How We're Helping</h2>
             <p>
-                To provide academic or economic disadvantaged youth a path to becoming self-confident,
-                productive citizens through participation in music
-            </p>
+            The Board of Directors seeks your support for M-Power Youth, a 501(c )3 , a free after-school weekly music program. It seeks to provide academic or economic disadvantaged youth in elementary and junior high a path to become self-confident productive citizens through participation in music.
+
+            We seek to transform the lives of youth by providing high quality music instruction based on the successful program “El Sistema” (CBS-60 Minutes-April 17,2008) in a welcoming and safe team based environment, beyond their regular school day. Our 5 professional music instructors are complemented with volunteer music tutors.
+
+            Through the discipline and dedication to learn one or more instruments and play in an orchestra before the public, they learn self-confidence; the skills required for academic success and how to work with others in a collaborative environment.
+
+            A complement to the music segment is having professionals from a variety of careers present to the youth what their jobs entail and what are the education requirements. This, we hope, will inspire each student to focus on the education necessary to attain their career vision thereby moving up the economic ladder.</p>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modify Event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <include href="views/_editEvent.html" >
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Update!</button>
-                </div>
-            </div>
-        </div>
+    <div class="text-right">
+        <a href="{{@BASE}}/NewEvent"><button class="btn btn-primary my-3" id="addEvent">Add Event</button></a>
     </div>
-
-    <check if="{{ @isAdmin }}">
-        <div class="text-right">
-            <a href="{{@BASE}}/NewEvent"><button class="btn btn-primary my-3" id="addEvent">Add Event</button></a>
-        </div>
-    </check>
-
     <h3>Upcoming Events</h3>
-    <div class="container">
-        <hr>
+    <ul class="list-group list-group-flush">
         <repeat group="{{ @events }}" value="{{ @event }}">
-            <div class="row my-3 mx-1">
-                <div class="col-sm">
-                    <h5>{{ @event->getTitle() }}</h5><br>
-                    {{ @event->getDate() }}<br>
-                    {{ @event->getDescription() }}
-                </div>
-
-                <check if="{{ @isAdmin }}">
-                    <div class="row">
-                        <div class="my-auto">
-                        <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal">
-                                Edit Event
-                            </button>
-                        </div>
-                    </div>
-                </check>
-            </div>
-            <hr>
+            <li class="list-group-item"><h5>{{ @event->getTitle() }}</h5><br>{{ @event->getDate() }}<br>{{ @event->getDescription() }}</li>
         </repeat>
-    </div>
+    </ul>
 
 </div>

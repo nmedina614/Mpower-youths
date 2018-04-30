@@ -92,6 +92,24 @@ class Database
     /**
      * TODO
      *
+     * @param $path
+     * @param $caption
+     * @return mixed
+     */
+    public static function insertGalleryImage($path, $caption)
+    {
+        $sql = 'INSERT INTO gallery (url, caption, postDate) VALUES (:path, :caption, NOW());';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':path', $path, PDO::PARAM_STR);
+        $statement->bindParam(':caption', $caption, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    /**
+     * TODO
+     *
      * @return mixed
      */
     public static function getAllStaff() {

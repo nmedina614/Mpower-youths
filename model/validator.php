@@ -8,16 +8,14 @@
 class Validator
 {
     /**
+     * TODO
+     *
      * @param $filename
      * @return bool
      */
-    public static function validImageFile($filename)
+    public static function validImageFile($filepath)
     {
-        // Analyze filename.
-        $path      = pathinfo($filename);
-
-        // Find file extension.
-        $extension = strtolower($path['extension']);
+        $extension = strtolower(pathinfo($filepath,PATHINFO_EXTENSION));;
 
         // Return whether file extension is an image.
         return (
@@ -26,6 +24,17 @@ class Validator
             $extension == 'png'  ||
             $extension == 'gif'
         );
+    }
+
+    /**
+     * TODO
+     *
+     * @param $size
+     * @return bool
+     */
+    public static function validFileSize($size)
+    {
+        return $size > 500000;
     }
 
     /**
