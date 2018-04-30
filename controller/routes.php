@@ -261,6 +261,8 @@ $f3->route('GET /NewEvent', function($f3) {
 
 $f3->route('GET /event', function($f3) {
 
+    require('model/logic.php');
+    $f3->set('events', Logic::getEvents());
 
     // Title to use in template.
     $title = "M-Power Youth: Events";
