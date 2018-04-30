@@ -49,7 +49,7 @@ $f3->route('GET /', function($f3) {
 $f3->route('GET|POST /gallery', function($f3) {
 
     if(isset($_POST['submit'])) {
-        Logic::submitNewImage($_POST['caption']);
+        $f3->set('invalid', Logic::submitNewImage($_FILES['image'], $_POST['caption']));
     }
 
     $f3->set('images', Logic::getGalleryImages());
