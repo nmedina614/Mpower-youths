@@ -1,0 +1,25 @@
+<h3>Upcoming Events</h3>
+<div class="container">
+    <hr>
+    <repeat group="{{ @events }}" value="{{ @event }}">
+        <div class="row my-3 mx-1">
+            <div class="col-sm">
+                <h5>{{ @event->getTitle() }}</h5><br>
+                {{ @event->getDate() }}<br>
+                {{ @event->getDescription() }}
+            </div>
+
+            <check if="{{ @isAdmin }}">
+                <div class="row">
+                    <div class="my-auto">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventModal">
+                            Edit Event
+                        </button>
+                    </div>
+                </div>
+            </check>
+        </div>
+        <hr>
+    </repeat>
+</div>
