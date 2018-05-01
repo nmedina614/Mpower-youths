@@ -1,17 +1,18 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: scottmedlock
+ * User: Scott Medlock
  * Date: 4/26/18
  * Time: 11:53 PM
  */
 
+/**
+ * Class StaffMember
+ * This class stores information about a staff member
+ */
 class StaffMember
 {
 
-/*$value['idstaff'], $value['fname'], $value['lname'], $value['title'],
-$value['biography'],
-$value['email'], $value['phone'], $value['portraitURL']*/
     private $_id;
     private $_fname;
     private $_lname;
@@ -22,15 +23,16 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     private $_portraitURL;
 
     /**
-     * event constructor.
-     * @param $id
-     * @param $fname
-     * @param $lname
-     * @param $title
-     * @param $biography
-     * @param $email
-     * @param $phone
-     * @param $portraitURL
+     * StaffMember constructor.
+     *
+     * @param $id Database ID number
+     * @param $fname First name of staff member
+     * @param $lname Last name of staff member
+     * @param $title Title of staff member
+     * @param $biography Staff member's biography
+     * @param $email Email of staff member
+     * @param $phone Staff member's phone number
+     * @param $portraitURL URL of staff member's portrait
      */
     public function __construct($id, $fname, $lname, $title, $biography, $email, $phone, $portraitURL)
     {
@@ -45,7 +47,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the ID of staff member
+     *
+     * @return mixed ID of staff member
      */
     public function getId()
     {
@@ -53,7 +57,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $id
+     * Sets the ID of the staff member
+     *
+     * @param mixed $id ID to set for staff member
      */
     public function setId($id)
     {
@@ -61,7 +67,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the first name of staff member
+     *
+     * @return mixed First name of staff member
      */
     public function getFName()
     {
@@ -69,7 +77,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $fname
+     * Sets the first name of staff member
+     *
+     * @param mixed $fname First name to set for staff member
      */
     public function setFName($fname)
     {
@@ -77,7 +87,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the last name of staff member
+     *
+     * @return mixed Last name of staff member
      */
     public function getLName()
     {
@@ -85,7 +97,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $lname
+     * Sets the last name of staff member
+     *
+     * @param mixed $lname Last name to set for staff member
      */
     public function setLName($lname)
     {
@@ -93,7 +107,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the title of staff member
+     *
+     * @return mixed Title of staff member
      */
     public function getTitle()
     {
@@ -101,7 +117,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $title
+     * Sets the title of staff member
+     *
+     * @param mixed $title Title to set for staff member
      */
     public function setTitle($title)
     {
@@ -109,7 +127,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the biography of staff member
+     *
+     * @return mixed Biography of staff member
      */
     public function getBiography()
     {
@@ -117,7 +137,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $biography
+     * Sets the biography of staff member
+     *
+     * @param mixed $biography Biography to set for staff member
      */
     public function setBiography($biography)
     {
@@ -125,7 +147,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the email of staff member
+     *
+     * @return mixed Email of staff member
      */
     public function getEmail()
     {
@@ -133,7 +157,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $email
+     * Sets the email of staff member
+     *
+     * @param mixed $email Email to set for staff member
      */
     public function setEmail($email)
     {
@@ -141,7 +167,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the phone number of staff member
+     *
+     * @return mixed Phone number of staff member
      */
     public function getPhone()
     {
@@ -149,7 +177,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $phone
+     * Sets the phone number of staff member
+     *
+     * @param mixed $phone Phone number to set for staff member
      */
     public function setPhone($phone)
     {
@@ -157,7 +187,9 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @return mixed
+     * Gets the portrait URL of staff member
+     *
+     * @return mixed portrait URL of staff member
      */
     public function getPortraitURL()
     {
@@ -165,13 +197,20 @@ $value['email'], $value['phone'], $value['portraitURL']*/
     }
 
     /**
-     * @param mixed $portraitURL
+     * Sets the portrait URL of staff member
+     *
+     * @param mixed $portraitURL portrait URL to set for staff member
      */
     public function setPortraitURL($portraitURL)
     {
         $this->_portraitURL = $portraitURL;
     }
 
+    /**
+     * Returns a string representation of the staff member
+     *
+     * @return string String representation of this staff member
+     */
     public function __toString()
     {
         return "".self::getId()." "
@@ -183,6 +222,5 @@ $value['email'], $value['phone'], $value['portraitURL']*/
             .self::getPhone()." "
             .self::getPortraitURL();
     }
-
 
 }

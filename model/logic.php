@@ -41,7 +41,7 @@ class Logic {
         Database::connect();
         $resultDB = Database::getAllEvents();
 
-        foreach ($resultDB as $key => $value){
+        foreach ($resultDB as $key => $value) {
             array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['date']));
         }
 
@@ -59,11 +59,11 @@ class Logic {
         Database::connect();
         $resultDB = Database::getAllStaff();
 
-        foreach ($resultDB as $key => $value){
+        foreach ($resultDB as $key => $value) {
             array_push($result,
-                new StaffMember($value['idstaff'], $value['fname'], $value['lname'],
-                    $value['title'], $value['biography'], $value['email'],
-                    $value['phone'], $value['portraitURL']));
+                new StaffMember($value['idstaff'], $value['fname'],
+                    $value['lname'], $value['title'], $value['biography'],
+                    $value['email'], $value['phone'], $value['portraitURL']));
         }
 
         return $result;
