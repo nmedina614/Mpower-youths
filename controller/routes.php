@@ -1,9 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: scottmedlock
- * Date: 4/13/18
- * Time: 12:57 PM
+ * File containing routing information.
+ *
+ * @author Aaron Melhaff
+ * @author Scott Medlock
+ * @author Kyle Johnson
+ * @author Nolan Medina
+ *
+ * @since 4/30/2018
  */
 
 $GLOBALS['f3'];

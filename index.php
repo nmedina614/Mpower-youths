@@ -1,9 +1,14 @@
 <?php
 /**
- * TODO
+ * File that initiates settings and protocol for the
+ * M-Power Youth website.
+ *
  * @author Aaron Melhaff <amelhaff2@mail.greenriver.edu>
  * @author Scott Medlock <squmed@gmail.com>
- * @version 1.0
+ * @author Kyle Johnson
+ * @author Nolan Medina
+ *
+ * @since 4/30/2018
  */
 
 session_start();

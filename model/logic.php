@@ -3,18 +3,23 @@
 // index.php -> routes.php -> THIS -> database/messenger/validator -> views
 
 /**
- * TODO
+ * Class used to perform business logic operations
+ * and data manipulation.
  *
- * User: scottmedlock
- * Date: 4/13/18
- * Time: 12:59 PM
+ * @author Aaron Melhaff
+ * @author Scott Medlock
+ * @author Kyle Johnson
+ * @author Nolan Medina
+ *
+ * @since 4/30/2018
  */
 class Logic {
 
     /**
-     * TODO
+     * Method used to process information regarding
+     * gallery images.
      *
-     * @return mixed
+     * @return mixed Returns the images from the galler.
      */
     public static function getGalleryImages() {
         Database::connect();
@@ -23,13 +28,12 @@ class Logic {
 
         return $images;
 
-        return $images;
     }
 
     /**
-     * TODO
+     * Method used to process event information.
      *
-     * @return array
+     * @return array Returns an array if event information.
      */
     public static function getEvents() {
         $result = array();
@@ -45,9 +49,9 @@ class Logic {
     }
 
     /**
-     * TODO
+     * Method used to process staff information.
      *
-     * @return array
+     * @return array Returns an array of staff information.
      */
     public static function getAllStaff() {
         $result = array();
@@ -66,11 +70,11 @@ class Logic {
     }
 
     /**
-     * TODO
+     * Method used to check if a user is an administrator.
      *
-     * @param $username
-     * @param $password
-     * @return bool
+     * @param $username String username being evaluated.
+     * @param $password String password being evaluated.
+     * @return bool Returns true if the user is an admin.
      */
     public static function adminLogin($username, $password)
     {
@@ -95,10 +99,13 @@ class Logic {
     }
 
     /**
-     * TODO
+     * Method used to process and submit a new image
+     * to the server.
      *
-     * @param $file
-     * @param $captions
+     * @param $file File being processed.
+     * @param $captions String caption to go along with the file.
+     *
+     * @return String Returns the result of the submission as a string.
      */
     public static function submitNewImage($file, $caption)
     {
@@ -123,7 +130,7 @@ class Logic {
         if (move_uploaded_file($file["tmp_name"], $target_file)) {
             Database::connect();
 
-            echo Database::insertGalleryImage($file["name"], $caption);
+            Database::insertGalleryImage($file["name"], $caption);
 
             return "The file ". basename( $file["name"]). " has been uploaded.";
 
