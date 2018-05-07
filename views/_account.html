@@ -1,29 +1,52 @@
-<h1>Profile</h1>
+<h1 class="text-center">Profile</h1 class>
 
-<button>Edit</button>
-
-<label>Username</label>
-<p>FillUsername</p>
-<label>Email</label>
-<p>FillEmail</p>
-<label>Phone</label>
-<p>FillPhone</p>
-
-<form>
+<div class="container mx-auto w-50">
+    <div class="text-center">
+        <form method="post">
+            <button type="submit" class="btn btn-info" name="edit">Edit</button><br>
+        </form>
+    </div>
     <label>Username</label>
-    <input type="text"><br>
-
-    <label>Password</label>
-    <input type="text"><br>
-
-    <label>Confirm Password</label>
-    <input type="text"><br>
-
+    <input class="form-control" type="text" placeholder="JoeSmoe8" readonly>
     <label>Email</label>
-    <input type="text"><br>
-
+    <input class="form-control" type="text" placeholder="JoeSmoe@gmail.com" readonly>
     <label>Phone</label>
-    <input type="text"><br>
+    <input class="form-control" type="text" placeholder="253-222-3333" readonly>
+</div>
 
-    <button>Save</button>
-</form>
+<div class="mx-auto w-50">
+    <form method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username"><br>
+            <small id="accountHelpBox" class="form-text text-muted">
+                Your account must not have spaces!
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password"><br>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword"><br>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email"><br>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone"><br>
+            <small id="phoneHelpBox" class="form-text text-muted">
+                Your phone must be 10 characters long and contain no special characters.
+            </small>
+        </div>
+
+        <button type="submit" class="btn btn-success" name="save">Save</button>
+    </form>
+</div>
