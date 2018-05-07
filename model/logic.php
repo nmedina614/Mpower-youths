@@ -140,4 +140,14 @@ class Logic {
         }
 
     }
+
+    public static function updateAccount($account){
+        if($account instanceof account) {
+            Database::connect();
+
+//            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
+//                $account->getPassword(), $account->getEmail(), $account->getPhone());
+
+        }
+    }
 }
