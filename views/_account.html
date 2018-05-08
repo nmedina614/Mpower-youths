@@ -1,50 +1,60 @@
 <h1 class="text-center">Profile</h1 class>
 
-<div class="container mx-auto w-50">
+<div class="mx-auto w-50">
     <div class="text-center">
         <form method="post">
             <button type="submit" class="btn btn-info" name="edit">Edit</button><br>
         </form>
     </div>
-    <label>Username</label>
-    <input class="form-control" type="text" placeholder="JoeSmoe8" readonly>
-    <label>Email</label>
-    <input class="form-control" type="text" placeholder="JoeSmoe@gmail.com" readonly>
-    <label>Phone</label>
-    <input class="form-control" type="text" placeholder="253-222-3333" readonly>
-</div>
 
-<div class="mx-auto w-50">
     <form method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username"><br>
+            <input type="text" class="form-control" id="username" placeholder="{{ @accountData['username'] }}"
+            <check if="{{ !@editMode }}">
+                readonly
+            </check>
+            ><br>
+            <check if="{{ @editMode }}">
             <small id="accountHelpBox" class="form-text text-muted">
                 Your account must not have spaces!
             </small>
+            </check>
         </div>
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password"><br>
-        </div>
+        <check if="{{ @editMode }}">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password"><br>
+            </div>
 
-        <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword"><br>
-        </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword"><br>
+            </div>
+        </check>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" id="email"><br>
+            <input type="text" class="form-control" id="email" placeholder="{{ @accountData['email'] }}"
+            <check if="{{ !@editMode }}">
+                readonly
+            </check>
+            ><br>
         </div>
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone"><br>
+            <input type="text" class="form-control" id="phone" placeholder="{{ @accountData['phone'] }}"
+            <check if="{{ !@editMode }}">
+                readonly
+            </check>
+            ><br>
+            <check if="{{ @editMode }}">
             <small id="phoneHelpBox" class="form-text text-muted">
                 Your phone must be 10 characters long and contain no special characters.
             </small>
+            </check>
         </div>
 
         <button type="submit" class="btn btn-success" name="save">Save</button>

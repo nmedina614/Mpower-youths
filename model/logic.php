@@ -175,11 +175,13 @@ class Logic
         if($account instanceof account) {
             Database::connect();
 
+            $account->getId();
 //            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
 //                $account->getPassword(), $account->getEmail(), $account->getPhone());
 
         }
     }
+
 
     /**
      * Method that generates a string of random characters.
@@ -187,7 +189,8 @@ class Logic
      * @param int $length Integer length of the generated string (10 by default)
      * @return string Returns a string of random characters.
      */
-    public static function randomString($length = 10) {
+    public static function randomString($length = 10)
+    {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $randomString = '';
@@ -195,5 +198,13 @@ class Logic
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public static function accountSummaryData($account)
+    {
+        if($account instanceof account){
+            Database::connect();
+            return Database::getAccountById($account->getId());
+        }
     }
 }
