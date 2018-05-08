@@ -315,3 +315,143 @@ $f3->route('GET /event', function($f3) {
     $template = new Template();
     echo $template->render('views/_base.html');
 });
+
+$f3->route('GET /contact', function($f3) {
+
+    // Title to use in template.
+    $title = "M-Power Youth: Contact Us";
+
+    // List of paths to stylesheets.
+    $styles = array();
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_event.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array();
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+
+    $template = new Template();
+    echo $template->render('views/_contact.html');
+});
+
+$f3->route('GET /donate', function($f3) {
+
+    // Title to use in template.
+    $title = "M-Power Youth: Donate!";
+
+    // List of paths to stylesheets.
+    $styles = array();
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_event.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array();
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+
+    $template = new Template();
+    echo $template->render('views/_donate.html');
+});
+
+$f3->route('GET /join', function($f3) {
+
+    // Title to use in template.
+    $title = "M-Power Youth: Join Us!";
+
+    // List of paths to stylesheets.
+    $styles = array();
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_event.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array();
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+
+    $template = new Template();
+    echo $template->render('views/_join.html');
+});
+
+$f3->route('GET /rent', function($f3) {
+
+    // Title to use in template.
+    $title = "M-Power Youth: Rent-A-Instrument";
+
+    // List of paths to stylesheets.
+    $styles = array();
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_event.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array();
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+
+    $template = new Template();
+    echo $template->render('views/_rent.html');
+});
+
+$f3->route('GET /videos', function($f3) {
+
+    // Title to use in template.
+    $title = "M-Power Youth: Videos";
+
+    // List of paths to stylesheets.
+    $styles = array();
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_event.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array();
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+
+    $template = new Template();
+    echo $template->render('views/_videos.html');
+});
