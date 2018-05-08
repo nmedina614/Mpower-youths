@@ -167,7 +167,7 @@ class Logic
             echo json_encode("File not found!");
         }
     }
-}
+
     public static function updateAccount($account){
         if($account instanceof account) {
             Database::connect();
