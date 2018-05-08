@@ -117,6 +117,7 @@ $f3->route('GET /account', function($f3) {
 
     // List of paths to scripts being used.
     $scripts = array(
+        BASE.'/assets/scripts/_account.js'
     );
 
     $f3->set('title' , $title);
