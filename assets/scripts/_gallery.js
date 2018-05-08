@@ -3,6 +3,9 @@ if(imageInput) {
     imageInput.onchange = readFormImage;
 }
 
+$('.btn-del-image').click(function() {
+    deleteGalleryImage(this);
+});
 $('.gallery-thumbnail').click(function() {
     openOverlay($(this));
 });
@@ -38,3 +41,30 @@ function readFormImage() {
         reader.readAsDataURL(this.files[0]);
     }
 }
+
+function deleteGalleryImage(target) {
+    let confirmed = confirm("Are you sure you want to delete this image?");
+    if(confirmed) {
+        let imageSrc = $(target).parent().find('.gallery-thumbnail').attr('src');
+        let targetImage = imageSrc.split("/").pop();
+
+        $.ajax('ajax-delete-image', {
+            method : "POST",
+            data : {image : targetImage},
+            dataType : 'json',
+            success : function(response) {
+                if(response == true) {
+                    location.reload();
+                } else {
+                    alert(response);
+                }
+            },
+            error : function() {
+                console.log("Failed to connect!");
+            }
+        });
+    }
+
+}
+
+

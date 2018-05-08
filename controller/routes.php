@@ -89,6 +89,15 @@ $f3->route('GET|POST /gallery', function($f3) {
     echo $template->render('views/_base.html');
 });
 
+$f3->route('POST /ajax-delete-image', function($f3) {
+    if($f3->get('isAdmin')) {
+        Logic::deleteGalleryImage($_POST['image']);
+    } else {
+        echo json_encode('Invalid Credentials!');
+    }
+
+});
+
 $f3->route('GET /account', function($f3) {
 
     // Title to use in template.
@@ -197,6 +206,7 @@ $f3->route('GET|POST /login', function($f3) {
 
     // List of paths for sub-templates being used.
     $includes = array(
+        'views/_nav.html',
         'views/_login.html'
     );
 

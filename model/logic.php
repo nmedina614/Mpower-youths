@@ -140,4 +140,27 @@ class Logic {
         }
 
     }
+
+    /**
+     * Method that handles image deletion from the gallery.
+     *
+     * @param $image takes a string filename of the file to be removed.
+     */
+    public static function deleteGalleryImage($image)
+    {
+        $targetFile = 'assets/images/gallery/' . $image;
+
+        if(file_exists($targetFile)) {
+            try {
+                unlink($targetFile);
+                Database::connect();
+                Database::deleteGalleryImage($image);
+                echo json_encode(true);
+            } catch(Exception $e) {
+                echo json_encode($e->getMessage());
+            }
+        } else {
+            echo json_encode("File not found!");
+        }
+    }
 }

@@ -27,6 +27,13 @@
             <div class="col-12 col-md-6 col-lg-4 pl-1 pr-1">
                 <img class="gallery-thumbnail" src="{{ @BASE }}/assets/images/gallery/{{ @image['url'] }}"
                      data-caption="{{ @image['caption'] }}" data-source="{{ @image['url'] }}" alt="Gallery Image">
+                <check if="{{ @isAdmin }}">
+                    <true>
+                        <button type="button" class="btn btn-dark btn-del-image rounded-0">
+                            <img src="{{ @BASE }}/assets/images/icons/close.svg" alt="X">
+                        </button>
+                    </true>
+                </check>
             </div>
         </repeat>
     </div>

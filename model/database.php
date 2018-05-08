@@ -113,6 +113,22 @@ class Database
     }
 
     /**
+     * Method used to delete image entries from the database.
+     *
+     * @param $path Takes a string path of the image file.
+     * @return mixed Returns the result of the query.
+     */
+    public static function deleteGalleryImage($path)
+    {
+        $sql = 'DELETE FROM gallery WHERE url=:path';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':path', $path, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    /**
      * Method used to pull all staff information from
      * the database.
      *
