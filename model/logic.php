@@ -13,7 +13,8 @@
  *
  * @since 4/30/2018
  */
-class Logic {
+class Logic
+{
 
     /**
      * Method used to process information regarding
@@ -21,7 +22,8 @@ class Logic {
      *
      * @return mixed Returns the images from the galler.
      */
-    public static function getGalleryImages() {
+    public static function getGalleryImages()
+    {
         Database::connect();
 
         $images = Database::pullGalleryImages();
@@ -35,7 +37,8 @@ class Logic {
      *
      * @return array Returns an array if event information.
      */
-    public static function getEvents() {
+    public static function getEvents()
+    {
         $result = array();
 
         Database::connect();
@@ -53,7 +56,8 @@ class Logic {
      *
      * @return array Returns an array of staff information.
      */
-    public static function getAllStaff() {
+    public static function getAllStaff()
+    {
         $result = array();
 
         Database::connect();
@@ -81,7 +85,7 @@ class Logic {
 
         session_reset();
 
-        if(empty($username) || empty($_POST['password'])) {
+        if (empty($username) || empty($_POST['password'])) {
             return false;
         }
 
@@ -89,7 +93,7 @@ class Logic {
 
         $result = Database::checkCredentials($username, $password);
 
-        if(isset($result['username'])) {
+        if (isset($result['username'])) {
             // Store user information in Session.
             $_SESSION['username'] = $result['username'];
 
@@ -123,7 +127,7 @@ class Logic {
         }
 
         // Allow certain file formats
-        if(!Validator::validImageFile($target_file)) {
+        if (!Validator::validImageFile($target_file)) {
             return "Only JPG, JPEG, PNG & GIF files are allowed.";
         }
 
@@ -132,7 +136,7 @@ class Logic {
 
             Database::insertGalleryImage($file["name"], $caption);
 
-            return "The file ". basename( $file["name"]). " has been uploaded.";
+            return "The file " . basename($file["name"]) . " has been uploaded.";
 
 
         } else {
@@ -150,17 +154,27 @@ class Logic {
     {
         $targetFile = 'assets/images/gallery/' . $image;
 
-        if(file_exists($targetFile)) {
+        if (file_exists($targetFile)) {
             try {
                 unlink($targetFile);
                 Database::connect();
                 Database::deleteGalleryImage($image);
                 echo json_encode(true);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 echo json_encode($e->getMessage());
             }
         } else {
             echo json_encode("File not found!");
+        }
+    }
+}
+    public static function updateAccount($account){
+        if($account instanceof account) {
+            Database::connect();
+
+//            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
+//                $account->getPassword(), $account->getEmail(), $account->getPhone());
+
         }
     }
 }
