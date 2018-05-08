@@ -53,7 +53,10 @@ $f3->route('GET /', function($f3) {
 $f3->route('GET|POST /gallery', function($f3) {
 
     if(isset($_POST['submit']) && $f3->get('isAdmin')) {
-        $f3->set('invalid', Logic::submitNewImage($_FILES['image'], $_POST['caption']));
+        $f3->set('result', Logic::submitNewImage($_FILES['image'], $_POST['caption']));
+        if($f3->get('result') === true) {
+            $f3->reroute('/gallery');
+        }
     }
 
     $f3->set('images', Logic::getGalleryImages());

@@ -86,7 +86,7 @@ class Database
      */
     public static function pullGalleryImages()
     {
-        $statement = self::$_dbh->query('SELECT * FROM gallery');
+        $statement = self::$_dbh->query('SELECT * FROM `gallery` ORDER BY postDate DESC');
 
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 

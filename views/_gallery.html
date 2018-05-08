@@ -8,10 +8,10 @@
 
             <include href="views/_gallery-modal.html">
 
-            <check if="{{ isset(@invalid) }}">
+            <check if="{{ isset(@result) }}">
                 <true>
                     <div class="alert alert-info alert-dismissible fade show mt-2 w-50" role="alert">
-                        {{ @invalid }}
+                        {{ @result }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

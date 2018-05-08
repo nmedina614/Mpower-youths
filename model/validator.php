@@ -21,7 +21,7 @@ class Validator
      */
     public static function validImageFile($filepath)
     {
-        $extension = strtolower(pathinfo($filepath,PATHINFO_EXTENSION));;
+        $extension = strtolower(pathinfo($filepath,PATHINFO_EXTENSION));
 
         // Return whether file extension is an image.
         return (

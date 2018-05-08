@@ -113,8 +113,11 @@ class Logic
      */
     public static function submitNewImage($file, $caption)
     {
-        $target_dir = 'assets/images/gallery/';
-        $target_file = $target_dir . basename($file["name"]);
+        $targetDir  = 'assets/images/gallery/';
+        $targetFile = $targetDir . basename($file["name"]);
+        $extension  = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+        $newName    = self::randomString(60) . ".$extension";
+        $newFile    = $targetDir . $newName;
 
 
         if (Validator::validFileSize($file['size'])) {
@@ -122,21 +125,21 @@ class Logic
         }
 
         // Check if file already exists
-        if (file_exists($target_file)) {
+        if (file_exists($newFile)) {
             return "File already exists";
         }
 
         // Allow certain file formats
-        if (!Validator::validImageFile($target_file)) {
+        if (!Validator::validImageFile($targetFile)) {
             return "Only JPG, JPEG, PNG & GIF files are allowed.";
         }
 
-        if (move_uploaded_file($file["tmp_name"], $target_file)) {
+        if (move_uploaded_file($file["tmp_name"], $newFile)) {
             Database::connect();
 
-            Database::insertGalleryImage($file["name"], $caption);
+            Database::insertGalleryImage($newName, $caption);
 
-            return "The file " . basename($file["name"]) . " has been uploaded.";
+            return true;
 
 
         } else {
@@ -176,5 +179,21 @@ class Logic
 //                $account->getPassword(), $account->getEmail(), $account->getPhone());
 
         }
+    }
+
+    /**
+     * Method that generates a string of random characters.
+     *
+     * @param int $length Integer length of the generated string (10 by default)
+     * @return string Returns a string of random characters.
+     */
+    public static function randomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
