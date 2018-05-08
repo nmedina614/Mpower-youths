@@ -98,7 +98,18 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 });
 
-$f3->route('GET /account', function($f3) {
+$f3->route('GET|POST /account', function($f3) {
+
+    if(isset($_POST['edit'])){
+        $f3->set('editMode', true);
+    }else{
+        $f3->set('editMode', false);
+    }
+
+    // TEMP DEBUG CODE
+    $testAccount = new account(1, NULL, NULL, NULL, NULL);
+
+    $f3->set('accountData', Logic::accountSummaryData($testAccount));
 
     // Title to use in template.
     $title = "Account Management";

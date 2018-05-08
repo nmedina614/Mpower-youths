@@ -172,9 +172,17 @@ class Logic
         if($account instanceof account) {
             Database::connect();
 
+            $account->getId();
 //            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
 //                $account->getPassword(), $account->getEmail(), $account->getPhone());
 
+        }
+    }
+
+    public static function accountSummaryData($account){
+        if($account instanceof account){
+            Database::connect();
+            return Database::getAccountById($account->getId());
         }
     }
 }
