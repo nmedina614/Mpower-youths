@@ -174,7 +174,7 @@ class Database
     public static function updateAccount($id, $username, $password, $email, $phone) {
         // Prepare a select to check if db contains queried params.
         $sql = 'UPDATE account 
-                SET username = :username, password = :password, email = :email, phone = :phone 
+                SET username = :username, password = sha2(:password, 256), email = :email, phone = :phone 
                 WHERE idaccount = :id';
 
         $statement = self::$_dbh->prepare($sql);
