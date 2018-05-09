@@ -1,16 +1,16 @@
-<h1 class="text-center">Profile</h1 class>
+<h1 class="text-center">Hello, {{@accountData['username']}}</h1>
 
 <div class="mx-auto w-50">
     <div class="text-center">
         <form method="post">
-            <button type="submit" class="btn btn-info" name="edit">Edit</button><br>
+            <button type="submit" class="btn btn-info" name="edit">Edit Profile</button><br>
         </form>
     </div>
 
     <form method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="{{ @accountData['username'] }}"
+            <input type="text" class="form-control" name="username" id="username" value="{{ @accountData['username'] }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -25,18 +25,18 @@
         <check if="{{ @editMode }}">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password"><br>
+                <input type="password" class="form-control" name="password" id="password"><br>
             </div>
 
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmPassword"><br>
+                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"><br>
             </div>
         </check>
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="{{ @accountData['email'] }}"
+            <input type="text" class="form-control" name="email" id="email" value="{{ @accountData['email'] }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -45,7 +45,7 @@
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" placeholder="{{ @accountData['phone'] }}"
+            <input type="text" class="form-control" name="phone" id="phone" value="{{ @accountData['phone'] }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -57,6 +57,8 @@
             </check>
         </div>
 
-        <button type="submit" class="btn btn-success" name="save">Save</button>
+        <check if="{{ @editMode }}">
+            <button type="submit" class="btn btn-success" name="save">Save</button>
+        </check>
     </form>
 </div>

@@ -175,10 +175,10 @@ class Logic
         if($account instanceof account) {
             Database::connect();
 
-            $account->getId();
-//            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
-//                $account->getPassword(), $account->getEmail(), $account->getPhone());
+            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
+                $account->getPassword(), $account->getEmail(), $account->getPhone());
 
+            return $result;
         }
     }
 

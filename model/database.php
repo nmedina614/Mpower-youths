@@ -164,4 +164,26 @@ class Database
 
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Pulls relevant account information.
+     *
+     * @param $id id of account to fetch
+     * @return mixed Returns an associative array of staff information.
+     */
+    public static function updateAccount($id, $username, $password, $email, $phone) {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'UPDATE account 
+                SET username = :username, password = :password, email = :email, phone = :phone 
+                WHERE idaccount = :id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+        $statement->bindParam(':username', $username, PDO::PARAM_STR);
+        $statement->bindParam(':password', $password, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
 }

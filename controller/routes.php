@@ -103,14 +103,40 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 $f3->route('GET|POST /account', function($f3) {
 
-    if(isset($_POST['edit'])){
-        $f3->set('editMode', true);
-    }else{
-        $f3->set('editMode', false);
-    }
-
     // TEMP DEBUG CODE
     $testAccount = new account(1, NULL, NULL, NULL, NULL);
+
+    if(isset($_POST['edit'])){
+        $f3->set('editMode', true);
+    }
+
+    if(isset($_POST['save'])){
+        $isValid = true;
+        $bothEmpty = empty($_POST['password']) && empty($_POST['confirmPassword']);
+        if(!$bothEmpty){
+            if ($_POST['password'] != $_POST['confirmPassword']){
+                $isValid = false;
+                $f3->set('validPassword', false);
+            }
+        }
+
+        if ($_POST['username'] != '') {
+            $testAccount->setUsername($_POST['username']);
+        }
+        if ($_POST['password'] != '') {
+            $testAccount->setPassword($_POST['password']);
+        }
+        if ($_POST['email'] != '') {
+            $testAccount->setEmail($_POST['email']);
+        }
+        if ($_POST['phone'] != '') {
+            $testAccount->setPhone($_POST['phone']);
+        }
+
+        if($isValid) {
+            Logic::updateAccount($testAccount);
+        }
+    }
 
     $f3->set('accountData', Logic::accountSummaryData($testAccount));
 
