@@ -188,6 +188,7 @@ class Logic
 //            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
 //                $account->getPassword(), $account->getEmail(), $account->getPhone());
 
+            return $result;
         }
     }
 
