@@ -6,13 +6,14 @@
  * Time: 11:49 PM
  */
 
-class account
+class Account
 {
     private $_id;
     private $_username;
     private $_password; // never retrieved from db, used for updating accounts
     private $_email;
     private $_phone;
+    private $_privilege;
 
     /**
      * account constructor.
@@ -22,13 +23,14 @@ class account
      * @param $_email
      * @param $_phone
      */
-    public function __construct($_id, $_username, $_password, $_email, $_phone)
+    public function __construct($id, $username, $password, $email, $phone, $privilege)
     {
-        $this->_id = $_id;
-        $this->_username = $_username;
-        $this->_password = $_password;
-        $this->_email = $_email;
-        $this->_phone = $_phone;
+        $this->_id = $id;
+        $this->_username = $username;
+        $this->_password = $password;
+        $this->_email = $email;
+        $this->_phone = $phone;
+        $this->_privilege = $privilege;
     }
 
     /**
@@ -109,5 +111,13 @@ class account
     public function setPhone($phone)
     {
         $this->_phone = $phone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrivilege()
+    {
+        return $this->_privilege;
     }
 }

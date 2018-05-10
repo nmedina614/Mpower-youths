@@ -49,7 +49,27 @@ class Validator
      * @return bool Returns the administration login status.
      */
     public static function isAdmin() {
-        return isset($_SESSION['username']);
+        if(isset($_SESSION['account'])) {
+            $account = unserialize($_SESSION['account']);
+            return ($account->getPrivilege() >= 1);
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns whether the user is currently logged in as an administrator.
+     *
+     * @return bool Returns the administration login status.
+     */
+    public static function loggedIn() {
+        if(isset($_SESSION['account'])) {
+            $account = unserialize($_SESSION['account']);
+            return ($account->getPrivilege() >= 0);
+        }
+
+        return false;
+
     }
 }
 

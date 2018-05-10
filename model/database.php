@@ -40,19 +40,22 @@ class Database
      *
      * @param $username String username of user.
      * @param $password String password of User.
+     * @param $requiredPrivilege int required privilege level.
      *
-     * @return mixed Returns true or false if the user is an admin.
+     * @return mixed Returns true or false if a matching user is found.
      */
-    public static function checkCredentials($username, $password) {
+    public static function login($username, $password, $requiredPrivilege) {
 
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT username FROM account WHERE username=:username AND password=:password';
+        $sql = 'SELECT idaccount, username, password, email, phone, privilege FROM account WHERE username=:username AND password=:password AND privilege=:privilege';
 
         $statement = self::$_dbh->prepare($sql);
 
         $statement->bindParam(':username', $username, PDO::PARAM_STR);
 
         $statement->bindParam(':password', hash('sha256', $password, false), PDO::PARAM_STR);
+
+        $statement->bindParam(':privilege', $requiredPrivilege, PDO::PARAM_INT);
 
         $statement->execute();
 
@@ -145,23 +148,5 @@ class Database
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return $result;
-    }
-
-    /**
-     * Pulls relevant account information.
-     *
-     * @param $id id of account to fetch
-     * @return mixed Returns an associative array of staff information.
-     */
-    public static function getAccountById($id) {
-        // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT username, email, phone FROM account WHERE idaccount = :accountID';
-
-        $statement = self::$_dbh->prepare($sql);
-        $statement->bindParam(':accountID', $id, PDO::PARAM_STR);
-
-        $statement->execute();
-
-        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 }

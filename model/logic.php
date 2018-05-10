@@ -91,16 +91,25 @@ class Logic
 
         Database::connect();
 
-        $result = Database::checkCredentials($username, $password);
+        $result = Database::login($username, $password, 1);
 
         if (isset($result['username'])) {
             // Store user information in Session.
-            $_SESSION['username'] = $result['username'];
+            $account = new Admin(
+                $result['idaccount'],
+                $result['username'],
+                $result['password'],
+                $result['email'],
+                $result['phone'],
+                $result['privilege']
+            );
+            $_SESSION['account'] = serialize($account);
 
             return true;
         } else return false;
-
     }
+
+
 
     /**
      * Method used to process and submit a new image
