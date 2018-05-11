@@ -397,7 +397,9 @@ $f3->route('GET /contact', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Contact Us";
     // List of paths to stylesheets.
-    $styles = array();
+    $styles = array(
+        'assets/styles/_donate.css'
+    );
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
@@ -413,17 +415,21 @@ $f3->route('GET /contact', function($f3) {
     $template = new Template();
     echo $template->render('views/_base.html');
 });
+
 $f3->route('GET /donate', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Donate!";
     // List of paths to stylesheets.
-    $styles = array();
+    $styles = array(
+        'assets/styles/_donate.css'
+    );
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
         'views/_donate.html',
         'views/_footer.html'
     );
+
     // List of paths to scripts being used.
     $scripts = array();
     $f3->set('title' , $title);
