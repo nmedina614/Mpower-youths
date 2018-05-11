@@ -190,4 +190,17 @@ class Database
 
         return $statement->execute();
     }
+
+    public static function updateEvent($title, $desc, $date, $id) {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'UPDATE event SET title=:title, description=:desc, date=:date WHERE idevent=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam(':desc', $desc, PDO::PARAM_STR);
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
 }

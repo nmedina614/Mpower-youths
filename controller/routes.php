@@ -12,9 +12,14 @@
 
 $GLOBALS['f3'];
 
-$f3->route('GET /', function($f3) {
+$f3->route('GET|POST /', function($f3) {
 
-    require('model/logic.php');
+    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+        //$title = $_POST['']
+        $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
+        Logic::updateEvent($event);
+    }
+
     $f3->set('events', Logic::getEvents());
 
     // Title to use in template.

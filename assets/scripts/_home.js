@@ -15,6 +15,9 @@ $(".btn-edit").click(function(e) {
     $("#eventDate").val(eventDateFormatted);
     $("#eventDesc").val(eventDesc);
 
+    $("#eventid").val(id);
+
+    console.log($("#eventid").val());
     // find the current buttons id
 
     // find the row for element in dom
