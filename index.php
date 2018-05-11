@@ -24,7 +24,7 @@ $f3->set('DEBUG', 3);
 
 // Variable used to check if visitor is logged in as an admin.
 $f3->set('isAdmin', Validator::isAdmin());
-$f3->set('LoggedIn', Validator::loggedIn());
+$f3->set('loggedIn', Validator::loggedIn());
 
 // Path to root directory.
 define('ROOT', $_SERVER['DOCUMENT_ROOT'] . '/../');

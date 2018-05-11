@@ -109,6 +109,42 @@ class Logic
         } else return false;
     }
 
+    /**
+     * Method used to check if a user has a valid account.
+     *
+     * @param $username String username being evaluated.
+     * @param $password String password being evaluated.
+     * @return bool Returns true if the user is an admin.
+     */
+    public static function login($username, $password)
+    {
+
+        session_reset();
+
+        if (empty($username) || empty($_POST['password'])) {
+            return false;
+        }
+
+        Database::connect();
+
+        $result = Database::login($username, $password, 0);
+
+        if (isset($result['username'])) {
+            // Store user information in Session.
+            $account = new Account(
+                $result['idaccount'],
+                $result['username'],
+                $result['password'],
+                $result['email'],
+                $result['phone'],
+                $result['privilege']
+            );
+            $_SESSION['account'] = serialize($account);
+
+            return true;
+        } else return false;
+    }
+
 
 
     /**
@@ -134,8 +170,9 @@ class Logic
         }
 
         // Check if file already exists
-        if (file_exists($newFile)) {
-            return "File already exists";
+        while (file_exists($newFile)) {
+            $newName    = self::randomString(60) . ".$extension";
+            $newFile    = $targetDir . $newName;
         }
 
         // Allow certain file formats
