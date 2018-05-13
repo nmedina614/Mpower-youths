@@ -103,9 +103,9 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 
 $f3->route('GET|POST /account', function($f3) {
-
-    // TEMP DEBUG CODE
-    $testAccount = new account(1, NULL, NULL, NULL, NULL);
+    echo "hi".$f3->get('username');
+    $curAccount = Logic::accountData($f3->get('username'));
+    $f3->set('curAccount', $curAccount);
 
     if(isset($_POST['edit'])){
         $f3->set('editMode', true);
@@ -122,24 +122,22 @@ $f3->route('GET|POST /account', function($f3) {
         }
 
         if ($_POST['username'] != '') {
-            $testAccount->setUsername($_POST['username']);
+            $curAccount->setUsername($_POST['username']);
         }
         if ($_POST['password'] != '') {
-            $testAccount->setPassword($_POST['password']);
+            $curAccount->setPassword($_POST['password']);
         }
         if ($_POST['email'] != '') {
-            $testAccount->setEmail($_POST['email']);
+            $curAccount->setEmail($_POST['email']);
         }
         if ($_POST['phone'] != '') {
-            $testAccount->setPhone($_POST['phone']);
+            $curAccount->setPhone($_POST['phone']);
         }
 
         if($isValid) {
-            Logic::updateAccount($testAccount);
+            Logic::updateAccount($curAccount);
         }
     }
-
-    $f3->set('accountData', Logic::accountSummaryData($testAccount));
 
     // Title to use in template.
     $title = "Account Management";

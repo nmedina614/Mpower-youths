@@ -157,12 +157,12 @@ class Database
      * @param $id id of account to fetch
      * @return mixed Returns an associative array of staff information.
      */
-    public static function getAccountById($id) {
+    public static function getAccountByUsername($username) {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT username, email, phone FROM account WHERE idaccount = :accountID';
+        $sql = 'SELECT idaccount, username, email, phone, privilege FROM account WHERE username = :username';
 
         $statement = self::$_dbh->prepare($sql);
-        $statement->bindParam(':accountID', $id, PDO::PARAM_STR);
+        $statement->bindParam(':username', $username, PDO::PARAM_STR);
 
         $statement->execute();
 
