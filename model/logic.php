@@ -51,6 +51,13 @@ class Logic
         return $result;
     }
 
+    public static function updateEvent($event)
+    {
+
+        Database::connect();
+        /*$resultDB = */return Database::updateEvent($event->getTitle(), $event->getDescription(), $event->getDate(), $event->getId());
+    }
+
     /**
      * Method used to process staff information.
      *
@@ -247,11 +254,10 @@ class Logic
         return $randomString;
     }
 
-    public static function accountSummaryData($account)
+    public static function accountData($username)
     {
-        if($account instanceof account){
-            Database::connect();
-            return Database::getAccountById($account->getId());
-        }
+        Database::connect();
+        $res = Database::getAccountByUsername($username);
+        return new Account($res['idaccount'], $res['username'], NULL, $res['email'], $res['phone'], $res['privilege']);
     }
 }

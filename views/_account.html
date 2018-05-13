@@ -1,4 +1,4 @@
-<h1 class="text-center">Hello, {{@accountData['username']}}</h1>
+<h1 class="text-center">Hello, {{@curAccount->getUsername() }}</h1>
 
 <div class="mx-auto w-50">
     <div class="text-center">
@@ -10,7 +10,7 @@
     <form method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username" value="{{ @accountData['username'] }}"
+            <input type="text" class="form-control" name="username" id="username" value="{{ @curAccount->getUsername() }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -36,7 +36,7 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" value="{{ @accountData['email'] }}"
+            <input type="text" class="form-control" name="email" id="email" value="{{ @curAccount->getEmail() }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -45,7 +45,7 @@
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" name="phone" id="phone" value="{{ @accountData['phone'] }}"
+            <input type="text" class="form-control" name="phone" id="phone" value="{{ @curAccount->getPhone() }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>

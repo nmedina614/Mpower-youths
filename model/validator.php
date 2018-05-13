@@ -71,5 +71,34 @@ class Validator
         return false;
 
     }
+
+    public static function validateAccountPage($username, $password, $confirmPassword, $email, $phone) {
+        $isValid = true;
+
+        if(!self::validateAccount($username)) $isValid = false;
+        if(!self::validateEmail($email)) $isValid = false;
+        if(!self::validatePhone($phone)) $isValid = false;
+
+        return $isValid;
+    }
+
+    public static function validateAccount($value) {
+        // validate account is letters and digits and fits in database
+        // /^(\w|\d){1,45}$/
+        $pattern = '/^(\w|\d){1,45}$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validateEmail($value) {
+        // email
+        return filter_var($value, FILTER_VALIDATE_EMAIL)''
+    }
+
+    public static function validatePhone($value) {
+        // phone
+        // /^\d{10}$/
+        $pattern = '/^\d{10}$/';
+        return preg_match($pattern, $value);
+    }
 }
 
