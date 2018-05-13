@@ -91,7 +91,7 @@ class Validator
 
     public static function validateEmail($value) {
         // email
-        return filter_var($value, FILTER_VALIDATE_EMAIL)''
+        return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 
     public static function validatePhone($value) {

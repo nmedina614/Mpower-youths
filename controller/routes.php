@@ -446,7 +446,9 @@ $f3->route('GET /join', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Join Us!";
     // List of paths to stylesheets.
-    $styles = array();
+    $styles = array(
+        'assets/styles/_join.css'
+    );
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
