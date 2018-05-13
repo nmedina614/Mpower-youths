@@ -401,7 +401,7 @@ $f3->route('GET /contact', function($f3) {
     $title = "M-Power Youth: Contact Us";
     // List of paths to stylesheets.
     $styles = array(
-        'assets/styles/_donate.css'
+        'assets/styles/_contact.css'
     );
     // List of paths for sub-templates being used.
     $includes = array(
