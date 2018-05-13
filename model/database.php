@@ -71,7 +71,7 @@ class Database
      */
     public static function getAllEvents() {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT * FROM event';
+        $sql = 'SELECT idevent, title, description, DATE_FORMAT(`date`, "%m/%d/%Y") AS `date` FROM event';
 
         $statement = self::$_dbh->prepare($sql);
 
@@ -187,6 +187,19 @@ class Database
         $statement->bindParam(':password', $password, PDO::PARAM_STR);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    public static function updateEvent($title, $desc, $date, $id) {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'UPDATE event SET title=:title, description=:desc, date=:date WHERE idevent=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam(':desc', $desc, PDO::PARAM_STR);
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $statement->execute();
     }

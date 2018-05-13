@@ -51,6 +51,13 @@ class Logic
         return $result;
     }
 
+    public static function updateEvent($event)
+    {
+
+        Database::connect();
+        /*$resultDB = */return Database::updateEvent($event->getTitle(), $event->getDescription(), $event->getDate(), $event->getId());
+    }
+
     /**
      * Method used to process staff information.
      *
