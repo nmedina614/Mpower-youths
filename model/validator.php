@@ -73,16 +73,14 @@ class Validator
     }
 
     public static function validateAccountPage($username, $password, $confirmPassword, $email, $phone) {
-        $isValid = true;
+        $errors = array();
 
-        if(!self::validateAccount($username)) $isValid = false;
-        if($password != $confirmPassword){
-            $isValid = false;
-        }
-        if(!self::validateEmail($email)) $isValid = false;
-        if(!self::validatePhone($phone)) $isValid = false;
+        if(!self::validateAccount($username)) $errors['account'] = "Please enter username under 45 letters with letters and numbers";
+        if($password != $confirmPassword) $errors['password'] = "Please enter matching passwords";
+        if(!self::validateEmail($email)) $errors['email'] = "Please a valid email";
+        if(!self::validatePhone($phone)) $errors['phone'] = "Please valid phone number";
 
-        return $isValid;
+        return $errors;
     }
 
     public static function validateAccount($value) {
