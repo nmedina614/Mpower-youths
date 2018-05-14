@@ -108,8 +108,9 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 
 $f3->route('GET|POST /account', function($f3) {
-    echo "hi".$f3->get('username');
     $curAccount = Logic::accountData($f3->get('username'));
+    $storedAccount = new Account($curAccount->getId(), $curAccount->getUsername(), $curAccount->getPassword(), $curAccount->getEmail(), $curAccount->getPhone(), $curAccount->getPrivilege());
+    $f3->set('storedAccount', $storedAccount);
     $f3->set('curAccount', $curAccount);
 
     if(isset($_POST['edit'])){
@@ -117,30 +118,20 @@ $f3->route('GET|POST /account', function($f3) {
     }
 
     if(isset($_POST['save'])){
-        $isValid = true;
-        $bothEmpty = empty($_POST['password']) && empty($_POST['confirmPassword']);
-        if(!$bothEmpty){
-            if ($_POST['password'] != $_POST['confirmPassword']){
-                $isValid = false;
-                $f3->set('validPassword', false);
-            }
-        }
+        // check errors is empty
+        // $errors in array
+        $errors = Validator::validateAccountPage($_POST['username'], $_POST['password'], $_POST['confirmPassword'], $_POST['email'], $_POST['phone']);
 
-        if ($_POST['username'] != '') {
-            $curAccount->setUsername($_POST['username']);
-        }
-        if ($_POST['password'] != '') {
-            $curAccount->setPassword($_POST['password']);
-        }
-        if ($_POST['email'] != '') {
-            $curAccount->setEmail($_POST['email']);
-        }
-        if ($_POST['phone'] != '') {
-            $curAccount->setPhone($_POST['phone']);
-        }
+        $curAccount->setUsername($_POST['username']);
+        $curAccount->setPassword($_POST['password']);
+        $curAccount->setEmail($_POST['email']);
+        $curAccount->setPhone($_POST['phone']);
 
-        if($isValid) {
+        if(count($errors) == 0) {
             Logic::updateAccount($curAccount);
+        }else{
+            $f3->set('errors', $errors);
+            $f3->set('editMode', true);
         }
     }
 
