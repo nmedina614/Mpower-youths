@@ -195,6 +195,7 @@ $f3->route('GET /staff', function($f3) {
 
     // List of paths to scripts being used.
     $scripts = array(
+        BASE.'/assets/scripts/_staff.js'
     );
 
     $f3->set('title' , $title);
