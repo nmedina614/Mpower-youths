@@ -76,6 +76,9 @@ class Validator
         $isValid = true;
 
         if(!self::validateAccount($username)) $isValid = false;
+        if($password != $confirmPassword){
+            $isValid = false;
+        }
         if(!self::validateEmail($email)) $isValid = false;
         if(!self::validatePhone($phone)) $isValid = false;
 
