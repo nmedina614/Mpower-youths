@@ -9,12 +9,13 @@ $(".btn-edit").click(function(e) {
     //var eventDesc = $("div[data-id='" + id +"']").find(".desc").text();
 
     var staffFName = $("div[data-id='" + id + "']").find(".fname").text();
+    console.log(staffFName);
     var staffLName = 0;
     var staffTitle = 0;
     var staffEmail = 0;
     var staffPhone = 0;
 
-    $("#staffFname").val(staffFname);
+    $("#staffFname").val(staffFName);
     //$("#eventDate").val(eventDateFormatted);
     //$("#eventDesc").val(eventDesc);
 
