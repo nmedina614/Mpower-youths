@@ -1,4 +1,4 @@
-<h1 class="text-center">Hello, {{@curAccount->getUsername() }}</h1>
+<h1 class="text-center">Hello, {{@storedAccount->getUsername() }}</h1>
 
 <div class="mx-auto w-50">
     <div class="text-center">
@@ -15,10 +15,10 @@
                 readonly
             </check>
             ><br>
-            <check if="{{ @editMode }}">
-            <small id="accountHelpBox" class="form-text text-muted">
-                Your account must not have spaces!
-            </small>
+            <check if="{{ !is_null(@errors) && array_key_exists('account', @errors) }}">
+                <small id="accountHelpBox" class="form-text text-muted">
+                    {{ @errors['account'] }}
+                </small>
             </check>
         </div>
 
@@ -26,11 +26,21 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password"><br>
+                <check if="{{ !is_null(@errors) && array_key_exists('password', @errors) }}">
+                    <small id="passwordHelpBox" class="form-text text-muted">
+                        {{ @errors['password'] }}
+                    </small>
+                </check>
             </div>
 
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
                 <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"><br>
+                <check if="{{ !is_null(@errors) && array_key_exists('confirmPassword', @errors) }}">
+                    <small id="confirmPasswordHelpBox" class="form-text text-muted">
+                        {{ @errors['confirmPassword'] }}
+                    </small>
+                </check>
             </div>
         </check>
 
@@ -41,6 +51,11 @@
                 readonly
             </check>
             ><br>
+            <check if="{{ !is_null(@errors) && array_key_exists('email', @errors) }}">
+                <small id="emailHelpBox" class="form-text text-muted">
+                    {{ @errors['email'] }}
+                </small>
+            </check>
         </div>
 
         <div class="form-group">
@@ -50,10 +65,10 @@
                 readonly
             </check>
             ><br>
-            <check if="{{ @editMode }}">
-            <small id="phoneHelpBox" class="form-text text-muted">
-                Your phone must be 10 characters long and contain no special characters.
-            </small>
+            <check if="{{ !is_null(@errors) && array_key_exists('phone', @errors) }}">
+                <small id="phoneHelpBox" class="form-text text-muted">
+                    {{ @errors['phone'] }}
+                </small>
             </check>
         </div>
 

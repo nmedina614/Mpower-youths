@@ -22,19 +22,28 @@
     <br>
     <div class="container">
         <repeat group="{{ @StaffMembers }}" value="{{ @StaffMember }}">
-            <div class="row my-3">
+            <div class="row my-3" data-id="{{ @StaffMember->getId() }}">
                 <div class="col-md-3 text-center my-auto">
-                    <img class="rounded-circle" style="width: 150px; height: 150px" src="{{ @StaffMember->getPortraitURL() }}" alt="Staff Member photo">
+                    <img class="rounded-circle image" style="width: 150px; height: 150px" src="{{ @StaffMember->getPortraitURL() }}" alt="Staff Member photo">
                     <check if="{{ @isAdmin }}">
                         <button type="button" class="btn btn-info btn-edit" data-id="{{ @StaffMember->getId() }}" data-toggle="modal" data-target="#staffModal">Edit Staff Member</button>
                     </check>
                 </div>
                 <div class="col-md-9">
-                    <h5 class="mt-4">{{ @StaffMember->getFName() }} {{ @StaffMember->getLname() }} - {{ @StaffMember->getTitle() }}</h5>
-                    <p>{{ @StaffMember->getBiography() }}</p>
-                    <check if="{{ @StaffMember->getEmail() }}">
-                        <p>Email: <a href="mailto:{{ @StaffMember->getEmail() }}">{{ @StaffMember->getEmail() }}">{{ @StaffMember->getEmail() }}</a></p>
-                    </check>
+                    <h5 class="mt-4"><span class="fname">{{ @StaffMember->getFName() }}</span> <span class="lname">{{ @StaffMember->getLname() }}</span>
+                        <check if="{{ @StaffMember->getTitle() }}">
+                            - <span class="title">{{ @StaffMember->getTitle() }}</span>
+                        </check>
+                    </h5>
+                    <p class="biography">{{ @StaffMember->getBiography() }}</p>
+                    <p>
+                        <check if="{{ @StaffMember->getEmail() }}">
+                            Email: <a href="mailto:{{ @StaffMember->getEmail() }}" class="email">{{ @StaffMember->getEmail() }}</a>
+                        </check>
+                        <check if="{{ @StaffMember->getPhone() }}">
+                            Phone: <span class="phone">{{ @StaffMember->getPhone() }}</span>
+                        </check>
+                    </p>
                 </div>
             </div>
         </repeat>
