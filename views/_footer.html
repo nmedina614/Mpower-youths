@@ -1,39 +1,34 @@
-<!--Footer-->
-<div class="page-footer font-small bg-info pt-4 mt-2" style="">
+<footer>
+    <!--Footer-->
+    <div class="page-footer font-small bg-info pt-4" style="">
 
-    <!--Footer Links-->
-    <div class="container-fluid text-center text-md-left">
-        <div class="row">
+        <!--Footer Links-->
+        <div class="container-fluid text-center text-md-left">
+            <div class="row">
 
-            <!--First column-->
-            <div class="col-md-6">
-                <h5 class="text-uppercase">Temp Concept</h5>
-                <p>Legal info and stuff goes here</p>
-            </div>
-            <!--/.First column-->
+                <!--First column-->
+                <div class="col-md-6">
+                    <h5 class="text-uppercase">Temp Concept</h5>
+                    <p>Legal info and stuff goes here</p>
+                </div>
+                <!--/.First column-->
 
-            <!--/.Second column-->
-            <div class="col-md-2">
-                <check if="{{ @isAdmin }}">
-                    <true>
-                        <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Logout</a>
-                    </true>
-                    <false>
-                        <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Login</a>
-                    </false>
-                </check>
+                <!--/.Second column-->
+                <div class="col-md-2">
+                    <check if="{{ @isAdmin }}">
+                        <true>
+                            <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Logout</a>
+                        </true>
+                        <false>
+                            <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Login</a>
+                        </false>
+                    </check>
 
+                </div>
             </div>
         </div>
-    </div>
-    <!--/.Footer Links-->
+        <!--/.Footer Links-->
 
-    <!--Copyright-->
-    <div class="footer-copyright py-3 text-center bg-secondary">
-        © 2018 Copyright:
-        M-Power Youths
     </div>
-    <!--/.Copyright-->
-
-</div>
-<!--/.Footer-->
+    <!--/.Footer-->
+</footer>
