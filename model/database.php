@@ -44,7 +44,8 @@ class Database
      *
      * @return mixed Returns true or false if a matching user is found.
      */
-    public static function login($username, $password, $requiredPrivilege) {
+    public static function login($username, $password, $requiredPrivilege)
+    {
 
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT idaccount, username, password, email, phone, privilege FROM account WHERE username=:username AND password=:password AND privilege=:privilege';
@@ -69,7 +70,8 @@ class Database
      *
      * @return mixed Returns an associative array of results.
      */
-    public static function getAllEvents() {
+    public static function getAllEvents()
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT idevent, title, description, DATE_FORMAT(`date`, "%m/%d/%Y") AS `dateFormatted` FROM event ORDER BY `date`';
 
@@ -137,7 +139,8 @@ class Database
      *
      * @return mixed Returns an associative array of staff information.
      */
-    public static function getAllStaff() {
+    public static function getAllStaff()
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT * FROM staff';
 
@@ -150,6 +153,28 @@ class Database
         return $result;
     }
 
+    /**
+     * Method used to update a staff member.
+     *
+     * @return mixed Returns an associative array of staff information.
+     */
+    public static function updateStaffMember($idstaff, $fname, $lname, $title, $biography, $email, $phone, $portraitURL)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'UPDATE staff SET fname=:fname, lname=:lname, title=:title, biography=:biography, email=:email, phone=:phone, portraitURL=:portraitURL WHERE idstaff=:idstaff';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
+        $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $statement->bindParam(':portraitURL', $portraitURL, PDO::PARAM_STR);
+        $statement->bindParam(':idstaff', $idstaff, PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
 
     /**
      * Pulls relevant account information.
@@ -157,7 +182,8 @@ class Database
      * @param $id id of account to fetch
      * @return mixed Returns an associative array of staff information.
      */
-    public static function getAccountByUsername($username) {
+    public static function getAccountByUsername($username)
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT idaccount, username, email, phone, privilege FROM account WHERE username = :username';
 
@@ -175,7 +201,8 @@ class Database
      * @param $id id of account to fetch
      * @return mixed Returns an associative array of staff information.
      */
-    public static function updateAccount($id, $username, $password, $email, $phone) {
+    public static function updateAccount($id, $username, $password, $email, $phone)
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'UPDATE account 
                 SET username = :username, password = sha2(:password, 256), email = :email, phone = :phone 
@@ -191,7 +218,8 @@ class Database
         return $statement->execute();
     }
 
-    public static function updateEvent($title, $desc, $date, $id) {
+    public static function updateEvent($title, $desc, $date, $id)
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'UPDATE event SET title=:title, description=:desc, date=:date WHERE idevent=:id';
 

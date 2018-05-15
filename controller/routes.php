@@ -170,8 +170,8 @@ $f3->route('GET|POST /staff', function($f3) {
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
 
         $f3->set('result', Logic::submitImageToFolder($_FILES['image'], 'staffportraits'));
+
         if($f3->get('result') != null) {
-            //$f3->reroute('/gallery');
 
             $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
                 $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
