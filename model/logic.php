@@ -175,7 +175,7 @@ class Logic
      */
     public static function submitNewImage($file, $caption, $folder)
     {
-        $targetDir  = 'assets/images/' + $folder + '/';
+        $targetDir  = 'assets/images/' . $folder . '/';
         $targetFile = $targetDir . basename($file["name"]);
         $extension  = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
         $newName    = self::randomString(60) . ".$extension";
