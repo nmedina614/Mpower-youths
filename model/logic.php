@@ -90,6 +90,53 @@ class Logic
     }
 
     /**
+     * Method used to process and submit a new image
+     * to the server.
+     *
+     * @param $file File being processed.
+     * @param $folder the folder within the image folder to add the image to
+     *
+     * @return String Returns the result of the submission as a string.
+     */
+    public static function submitImageToFolder($file, $folder)
+    {
+        $targetDir  = 'assets/images/' . $folder . '/';
+        $targetFile = $targetDir . basename($file["name"]);
+        $extension  = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+        $newName    = self::randomString(60) . ".$extension";
+        $newFile    = $targetDir . $newName;
+
+
+        if (Validator::validFileSize($file['size'])) {
+            return "File is too large.";
+        }
+
+        // Check if file already exists
+        while (file_exists($newFile)) {
+            $newName    = self::randomString(60) . ".$extension";
+            $newFile    = $targetDir . $newName;
+        }
+
+        // Allow certain file formats
+        if (!Validator::validImageFile($targetFile)) {
+            return "Only JPG, JPEG, PNG & GIF files are allowed.";
+        }
+
+        if (move_uploaded_file($file["tmp_name"], $newFile)) {
+            //Database::connect();
+
+            //Database::insertGalleryImage($newName, $caption);
+
+            return $newFile;
+
+
+        } else {
+            return null;
+        }
+
+    }
+
+    /**
      * Method used to check if a user is an administrator.
      *
      * @param $username String username being evaluated.
