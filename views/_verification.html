@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-6 offset-3">
+            <check if="{{ @result }}">
+                <true>
+                    <div class="alert alert-success">
+                        Account Verified!
+                    </div>
+                </true>
+                <false>
+                    <div class="alert alert-danger">
+                        Failed to verify!
+                    </div>
+                </false>
+            </check>
+
+        </div>
+    </div>
+</div>

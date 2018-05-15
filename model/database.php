@@ -137,7 +137,8 @@ class Database
      *
      * @return mixed Returns an associative array of staff information.
      */
-    public static function getAllStaff() {
+    public static function getAllStaff()
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT * FROM staff';
 
@@ -157,7 +158,8 @@ class Database
      * @param $id id of account to fetch
      * @return mixed Returns an associative array of staff information.
      */
-    public static function getAccountByUsername($username) {
+    public static function getAccountByUsername($username)
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'SELECT idaccount, username, email, phone, privilege FROM account WHERE username = :username';
 
@@ -175,7 +177,8 @@ class Database
      * @param $id id of account to fetch
      * @return mixed Returns an associative array of staff information.
      */
-    public static function updateAccount($id, $username, $password, $email, $phone) {
+    public static function updateAccount($id, $username, $password, $email, $phone)
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'UPDATE account 
                 SET username = :username, password = sha2(:password, 256), email = :email, phone = :phone 
@@ -191,7 +194,8 @@ class Database
         return $statement->execute();
     }
 
-    public static function updateEvent($title, $desc, $date, $id) {
+    public static function updateEvent($title, $desc, $date, $id)
+    {
         // Prepare a select to check if db contains queried params.
         $sql = 'UPDATE event SET title=:title, description=:desc, date=:date WHERE idevent=:id';
 
@@ -202,5 +206,85 @@ class Database
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $statement->execute();
+    }
+
+    public static function insertAccount($username, $password, $email, $phone)
+    {
+        $hashedPass = hash('sha256', $password);
+        $sql = 'INSERT INTO `account`(`username`, `password`, `email`, `phone`) VALUES ( :username, :password, :email, :phone)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':username', $username, PDO::PARAM_STR);
+        $statement->bindParam(':password', $hashedPass, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    public static function insertVerification($code)
+    {
+        $id = self::$_dbh->lastInsertId();
+        echo "$id $code";
+
+        $verifyInsert = 'INSERT INTO `verification`(`userid`, `verifyCode`) VALUES (:id, :hash)';
+
+        $stmt = self::$_dbh->prepare($verifyInsert);
+        $stmt->bindParam(':id',   $id,   PDO::PARAM_INT);
+        $stmt->bindParam(':hash', $code, PDO::PARAM_STR);
+
+        return $stmt->execute();
+    }
+
+    /**
+     * Method for verifying an account email.
+     *
+     * Takes a given hash and checks that there
+     * is a corresponding hash in the database.
+     * If there is, it takes the userid associated with
+     * the hash and changes the users privilege level to
+     * basic. Then deletes the hash from the db.
+     *
+     * @param $hash String verification hash being compared.
+     * @return mixed true or false based on if statement executed correctly
+     */
+    public static function verifyAccount($hash)
+    {
+        $sql = 'SELECT userid FROM verification WHERE verifyCode=:hash';
+
+        $searchQuery = self::$_dbh->prepare($sql);
+
+        $searchQuery->bindParam(':hash', $hash, PDO::PARAM_STR);
+
+        $searchQuery->execute();
+
+        $result = $searchQuery->fetch();
+
+        // If result comes back positive, then activate account.
+        if(isset($result['userid'])) {
+            $userid = $result['userid'];
+            $sql2 = 'UPDATE account SET privilege=0 WHERE idaccount=:userid';
+
+            $updateQuery = self::$_dbh->prepare($sql2);
+
+            $updateQuery->bindParam(':userid', $userid, PDO::PARAM_INT);
+
+            $success = $updateQuery->execute();
+
+            if($success) {
+                $sql3 = 'DELETE FROM verification WHERE verifyCode=:hash';
+
+                $deleteQuery = self::$_dbh->prepare($sql3);
+
+                $deleteQuery->bindParam(':hash', $hash, PDO::PARAM_STR);
+
+                return $deleteQuery->execute();
+            } else {
+                return false;
+            }
+
+
+
+        } else return false;
     }
 }

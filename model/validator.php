@@ -90,16 +90,26 @@ class Validator
         return preg_match($pattern, $value);
     }
 
-    public static function validateEmail($value) {
-        // email
-        return filter_var($value, FILTER_VALIDATE_EMAIL);
-    }
-
     public static function validatePhone($value) {
         // phone
         // /^\d{10}$/
         $pattern = '/^\d{10}$/';
         return preg_match($pattern, $value);
+    }
+
+    /**
+     * Function for validating email addresses.
+     *
+     * @param $email String address being checked.
+     * @return Returns true if input matches email format.
+     */
+    public static function validateEmail($email)
+    {
+        if(isset($email)) {
+            return filter_var($email, FILTER_VALIDATE_EMAIL);
+        }
+
+        return false;
     }
 }
 

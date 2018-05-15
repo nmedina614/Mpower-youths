@@ -277,7 +277,7 @@ $f3->route('GET|POST /admin/login', function($f3) {
         }
     }
 
-    session_unset();
+    session_destroy();
 
     $template = new Template();
     echo $template->render('views/_base.html');
@@ -323,7 +323,7 @@ $f3->route('GET|POST /login', function($f3) {
         }
     }
 
-    session_unset();
+    session_destroy();
 
     $template = new Template();
     echo $template->render('views/_base.html');
@@ -569,6 +569,81 @@ $f3->route('GET /files', function($f3) {
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('GET|POST /accounts/register', function($f3) {
+    if(isset($_POST['submit'])) {
+        $f3->set('result', Logic::register(
+            $_POST['username'],
+            $_POST['password1'],
+            $_POST['password2'],
+            $_POST['email'],
+            $_POST['phone']
+        ));
+    }
+
+    // Title to use in template.
+    $title = "M-Power Youth: Registration";
+    // List of paths to stylesheets.
+    $styles = array(
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_register.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array(
+        BASE.'/assets/scripts/_register.js'
+    );
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+
+// Route for link for verifying new users.
+$f3->route('GET /accounts/register/verify/@hash', function($f3, $params) {
+    if(isset($_SESSION['account'])) {
+        $f3->reroute('/');
+    }
+
+    $hash = $params['hash'];
+
+    $result = Logic::verifyAccount($hash);
+
+
+    // Title to use in template.
+    $title = "Verify Account";
+
+    // List of paths to stylesheets.
+    $styles = array();
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_verification.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array();
+
+    // Store page attributes to hive.
+    $f3->set('result',   $result);
+    $f3->set('title',    $title);
+    $f3->set('styles',   $styles);
+    $f3->set('includes', $includes);
+    $f3->set('scripts',  $scripts);
+
+    // Display Template
     $template = new Template();
     echo $template->render('views/_base.html');
 });

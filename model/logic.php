@@ -269,4 +269,63 @@ class Logic
         $res = Database::getAccountByUsername($username);
         return new Account($res['idaccount'], $res['username'], NULL, $res['email'], $res['phone'], $res['privilege']);
     }
+
+    /**
+     * Method for registering a new user.
+     *
+     * Takes input data from POST array.
+     * If the fields are valid, it adds
+     * them to the database. If not,
+     * it returns an array of strings
+     * containing reasons for failure.
+     *
+     * @return array Returns an array of strings containing reasons for failure.
+     */
+    public static function register($username, $password1, $password2, $email, $phone) {
+
+        $errors = array();
+        if(!Validator::validateAccount($username)) $errors['account'] = "Please enter username under 45 letters with letters and numbers";
+        if($password1 != $password2) $errors['password'] = "Please enter matching passwords";
+        if(!Validator::validateEmail($email)) $errors['email'] = "Please a valid email";
+        if(!Validator::validatePhone($phone)) $errors['phone'] = "Please valid phone number";
+
+        if(count($errors) == 0) {
+            Database::connect();
+
+            // Launch Query.
+            $success = Database::insertAccount($username, $password1, $email, $phone);
+
+            // If the user is inserted, use the new users id to create a verification hash
+            // and store it in the db.
+            if($success) {
+                $hash = hash('sha256', self::randomString());
+
+                $result = Database::insertVerification($hash);
+
+                // If the hash is stored successfully, send an email with the hash.
+                if($result) {
+                    Messenger::sendMessage($email, 'Account verification',
+                        'Thank you for signing up with M-Power Music!
+                        in order to activate your account, please open the following link. 
+                        ' . ($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']) ."/verify/$hash"
+                    );
+                }
+            } else {
+                $errors[] = 'Username or email is already in use.';
+            }
+        }
+        print_r($errors);
+
+        // Return list of invalid inputs.
+        return $errors;
+
+
+
+    }
+
+    public static function verifyAccount($hash)
+    {
+        Database::connect();
+        return Database::verifyAccount($hash);
+    }
 }
