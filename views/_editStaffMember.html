@@ -1,6 +1,6 @@
 <form action="#" method="post" enctype="multipart/form-data">
     <div class="modal-body">
-        <img id="image-preview" class="mb-2" src="#" alt="your image" />
+        <!--<img id="image-preview" class="mb-2" src="#" alt="your image" />-->
         <div class="mb-2">
             <label for="image">Select Image</label>
             <br>
@@ -27,10 +27,11 @@
             <input type="text" class="form-control" id="staffPhone" name="staffPhone" aria-describedby="staffPhone" placeholder="phone number">
         </div>
         <div class="form-group">
-            <label for="staffBio">First Name</label>
+            <label for="staffBio">Biography</label>
             <textarea rows="5" cols="30" class="form-control" id="staffBio" name="staffBio" aria-describedby="staffBio" placeholder="staff member's biography"></textarea>
         </div>
         <input type="number" id="staffid" name="staffid" class="d-none">
+        <input type="text" id="staffImage" name="staffImage" class="d-none">
     </div>
     <div class="modal-footer">
         <button type="clear" class="btn btn-danger" data-dismiss="modal">Close</button>

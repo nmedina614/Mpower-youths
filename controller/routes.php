@@ -165,19 +165,18 @@ $f3->route('GET|POST /account', function($f3) {
 
 $f3->route('GET|POST /staff', function($f3) {
 
-    //require('model/logic.php');
-
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
 
-        $f3->set('result', Logic::submitImageToFolder($_FILES['image'], 'staffportraits'));
-
-        if($f3->get('result') != null) {
-
-            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
-                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $f3->get('result'));
-            Logic::updateStaffMember($staffMember);
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
+        } else {
+            $portraitURL = $_POST['staffImage'];
         }
+
+        $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
+            $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+            $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+        Logic::updateStaffMember($staffMember);
     }
 
     $f3->set('StaffMembers', Logic::getAllStaff());

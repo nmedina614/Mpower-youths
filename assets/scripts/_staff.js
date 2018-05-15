@@ -9,6 +9,7 @@ $(".btn-edit").click(function(e) {
     var staffEmail = $("div[data-id='" + id + "']").find(".email").text();
     var staffPhone = $("div[data-id='" + id + "']").find(".phone").text();
     var staffBio = $("div[data-id='" + id + "']").find(".biography").text();
+    var staffImage = $("div[data-id='" + id + "']").find(".image").attr("src");
 
     $("#staffFName").val(staffFName);
     $("#staffLName").val(staffLName);
@@ -16,6 +17,7 @@ $(".btn-edit").click(function(e) {
     $("#staffEmail").val(staffEmail);
     $("#staffPhone").val(staffPhone);
     $("#staffBio").val(staffBio);
+    $("#staffImage").val(staffImage);
 
     $("#staffid").val(id);
 
