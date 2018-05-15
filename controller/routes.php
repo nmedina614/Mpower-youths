@@ -345,9 +345,14 @@ $f3->route('GET|POST /login', function($f3) {
 
 $f3->route('GET|POST /NewEvent', function($f3) {
 
-    require('model/logic.php');
+
     if(isset($_POST['submit'])){
-        Logic::addEvent(new Event(NULL, $_POST['eventName'], $_POST['desc'], $_POST['date']));
+        $success = Logic::addEvent(new Event(NULL, $_POST['eventName'], $_POST['desc'], $_POST['date']));
+        if($success){
+            echo "submitted new event!";
+        }else{
+            echo "did not succeed";
+        }
     }
     // Title to use in template.
     $title = "M-Power Youth";
