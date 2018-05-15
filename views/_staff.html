@@ -19,6 +19,12 @@
         </div>
     </div>
 
+    <check if="{{ @isAdmin }}">
+        <div class="text-left mt-4">
+            <button type="button" class="btn btn-info btn-add" data-toggle="modal" data-target="#staffModal">Add Staff Member</button>
+        </div>
+    </check>
+
     <br>
     <div class="container">
         <repeat group="{{ @StaffMembers }}" value="{{ @StaffMember }}">

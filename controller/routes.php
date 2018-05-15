@@ -173,10 +173,18 @@ $f3->route('GET|POST /staff', function($f3) {
             $portraitURL = $_POST['staffImage'];
         }
 
-        $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
-            $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-            $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
-        Logic::updateStaffMember($staffMember);
+        // if editing an existing staff member, staffid will be set.
+        if ($_POST['staffid'] == -1) {
+            $staffMember = new StaffMember(-1, $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::addStaffMember($staffMember);
+        } else {
+            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::updateStaffMember($staffMember);
+        }
     }
 
     $f3->set('StaffMembers', Logic::getAllStaff());

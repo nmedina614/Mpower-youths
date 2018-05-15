@@ -80,8 +80,21 @@ class Logic
         return $result;
     }
 
+    public static function addStaffMember($staffMember)
+    {
+
+        // TODO add validation before sending to database
+
+        Database::connect();
+        return Database::addStaffMember($staffMember->getFName(), $staffMember->getLName(),
+            $staffMember->getTitle(), $staffMember->getBiography(), $staffMember->getEmail(),
+            $staffMember->getPhone(), $staffMember->getPortraitURL());
+    }
+
     public static function updateStaffMember($staffMember)
     {
+
+        // TODO add validation before sending to database
 
         Database::connect();
         return Database::updateStaffMember($staffMember->getID(), $staffMember->getFName(),
