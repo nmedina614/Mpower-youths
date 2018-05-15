@@ -15,7 +15,6 @@ $GLOBALS['f3'];
 $f3->route('GET|POST /', function($f3) {
 
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
-        //$title = $_POST['']
         $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
         Logic::updateEvent($event);
     }
@@ -164,9 +163,17 @@ $f3->route('GET|POST /account', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET /staff', function($f3) {
+$f3->route('GET|POST /staff', function($f3) {
 
     require('model/logic.php');
+
+    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+        $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
+            $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+            $_POST['staffEmail'], $_POST['staffPhone'], $_POST['staffPortraitURL']);
+        Logic::updateStaffMember($staffMember);
+    }
+
     $f3->set('StaffMembers', Logic::getAllStaff());
 
     // Title to use in template.

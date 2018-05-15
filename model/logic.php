@@ -55,7 +55,7 @@ class Logic
     {
 
         Database::connect();
-        /*$resultDB = */return Database::updateEvent($event->getTitle(), $event->getDescription(), $event->getDate(), $event->getId());
+        return Database::updateEvent($event->getTitle(), $event->getDescription(), $event->getDate(), $event->getId());
     }
 
     /**
@@ -78,6 +78,15 @@ class Logic
         }
 
         return $result;
+    }
+
+    public static function updateStaffMember($staffMember)
+    {
+
+        Database::connect();
+        return Database::updateStaffMember($staffMember->getID(), $staffMember->getFName(),
+            $staffMember->getLName(), $staffMember->getTitle(), $staffMember->getBiography(),
+            $staffMember->getEmail(), $staffMember->getPhone(), $staffMember->getPortraitURL());
     }
 
     /**
