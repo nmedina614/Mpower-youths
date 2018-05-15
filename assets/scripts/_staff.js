@@ -1,31 +1,22 @@
-console.log(1);
 // create input elements foreach piece
 $(".btn-edit").click(function(e) {
 
     var id = $(e.target).data('id');
-    //var eventTitle = $("div[data-id='" + id +"']").find("h5").text();
-    //var eventDate = $("div[data-id='" + id +"']").find(".date").text().split("/");
-    //var eventDateFormatted = eventDate[2] + "-" + eventDate[0] + "-" + eventDate[1];
-    //var eventDesc = $("div[data-id='" + id +"']").find(".desc").text();
 
     var staffFName = $("div[data-id='" + id + "']").find(".fname").text();
-    console.log(staffFName);
-    var staffLName = 0;
-    var staffTitle = 0;
-    var staffEmail = 0;
-    var staffPhone = 0;
+    var staffLName = $("div[data-id='" + id + "']").find(".lname").text();
+    var staffTitle = $("div[data-id='" + id + "']").find(".title").text();
+    var staffEmail = $("div[data-id='" + id + "']").find(".email").text();
+    var staffPhone = $("div[data-id='" + id + "']").find(".phone").text();
+    var staffBio = $("div[data-id='" + id + "']").find(".biography").text();
 
-    $("#staffFname").val(staffFName);
-    //$("#eventDate").val(eventDateFormatted);
-    //$("#eventDesc").val(eventDesc);
+    $("#staffFName").val(staffFName);
+    $("#staffLName").val(staffLName);
+    $("#staffTitle").val(staffTitle);
+    $("#staffEmail").val(staffEmail);
+    $("#staffPhone").val(staffPhone);
+    $("#staffBio").val(staffBio);
 
-    //$("#eventid").val(id);
-
-    //console.log($("#eventid").val());
-    // find the current buttons id
-
-    // find the row for element in dom
-
-    // add input element around each child
+    $("#staffid").val(id);
 
 });
