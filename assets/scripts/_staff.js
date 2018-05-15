@@ -1,6 +1,9 @@
 // when edit staff member button is clicked
 $(".btn-edit").click(function(e) {
 
+    // change modal title for modifying
+    $("#exampleModalLabel").text("Modify Staff Member");
+
     // get id of staff member to be edited
     var id = $(e.target).data('id');
 
@@ -29,6 +32,9 @@ $(".btn-edit").click(function(e) {
 
 // when add staff member button is clicked
 $(".btn-add").click(function(e) {
+
+    // change modal title for adding
+    $("#exampleModalLabel").text("Add Staff Member");
 
     // value indicating the member needs to be added
     $("#staffid").val(-1);
