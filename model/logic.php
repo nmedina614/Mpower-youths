@@ -51,6 +51,12 @@ class Logic
         return $result;
     }
 
+    /**
+     * Sends an event to the database to be updated.
+     *
+     * @param $event the event to update
+     * @return mixed the result of the update query
+     */
     public static function updateEvent($event)
     {
 
@@ -80,6 +86,12 @@ class Logic
         return $result;
     }
 
+    /**
+     * Validates and sends a staffmember to the database to be added
+     *
+     * @param $staffMember the staffmember to add
+     * @return mixed the result of the query
+     */
     public static function addStaffMember($staffMember)
     {
 
@@ -91,6 +103,12 @@ class Logic
             $staffMember->getPhone(), $staffMember->getPortraitURL());
     }
 
+    /**
+     * Validates and sends a staffmember to the database to be updated
+     *
+     * @param $staffMember the staffmember to update
+     * @return mixed the result of the query
+     */
     public static function updateStaffMember($staffMember)
     {
 

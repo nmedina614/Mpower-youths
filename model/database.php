@@ -154,9 +154,16 @@ class Database
     }
 
     /**
-     * Method used to add a staff member.
+     * Method used to add a staff member
      *
-     * @return mixed Returns an associative array of staff information.
+     * @param $fname first name
+     * @param $lname last name
+     * @param $title title
+     * @param $biography biography of the staff member
+     * @param $email staff member's email
+     * @param $phone staff member's phone number
+     * @param $portraitURL URL of staff member's portrait
+     * @return mixed true or false based on if statement executed correctly
      */
     public static function addStaffMember($fname, $lname, $title, $biography, $email, $phone, $portraitURL)
     {
@@ -179,7 +186,15 @@ class Database
     /**
      * Method used to update a staff member.
      *
-     * @return mixed Returns an associative array of staff information.
+     * @param $idstaff id of the staff member
+     * @param $fname first name
+     * @param $lname last name
+     * @param $title title
+     * @param $biography biography of the staff member
+     * @param $email staff member's email
+     * @param $phone staff member's phone number
+     * @param $portraitURL URL of staff member's portrait
+     * @return mixed true or false based on if statement executed correctly
      */
     public static function updateStaffMember($idstaff, $fname, $lname, $title, $biography, $email, $phone, $portraitURL)
     {
@@ -263,6 +278,15 @@ class Database
         return $statement->execute();
     }
 
+    /**
+     * Updates an event
+     *
+     * @param $title title of the event
+     * @param $desc description of the event
+     * @param $date date of the vent
+     * @param $id id of the event
+     * @return mixed true or false based on if statement executed correctly
+     */
     public static function updateEvent($title, $desc, $date, $id)
     {
         // Prepare a select to check if db contains queried params.
@@ -277,6 +301,15 @@ class Database
         return $statement->execute();
     }
 
+    /**
+     * Inserts an account to the accound table.
+     *
+     * @param $username username of the account
+     * @param $password password of the account
+     * @param $email email of the account
+     * @param $phone phone of the account
+     * @return mixed true or false based on if statement executed correctly
+     */
     public static function insertAccount($username, $password, $email, $phone)
     {
         $hashedPass = hash('sha256', $password);
@@ -290,6 +323,7 @@ class Database
 
         return $statement->execute();
     }
+
 
     public static function insertVerification($code)
     {
@@ -356,6 +390,14 @@ class Database
         } else return false;
     }
 
+    /**
+     * Add an event.
+     *
+     * @param $title title of the event
+     * @param $desc description of the event
+     * @param $date date of the event
+     * @return mixed true or false based on if statement executed correctly
+     */
     public static function addEvent($title, $desc, $date)
     {
         // Prepare a select to check if db contains queried params.
