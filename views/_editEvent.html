@@ -1,21 +1,21 @@
 <form action="#" method="post">
     <div class="modal-body">
         <div class="form-group">
-            <label for="eventTitle">Event Name</label>
-            <input type="text" class="form-control" id="eventTitle" name="eventTitle" aria-describedby="eventName" placeholder="Event name">
+            <label for="eventTitle" id="nameLbl">Event Name</label>
+            <input type="text" class="form-control" id="eventTitle" name="eventTitle" aria-describedby="nameLbl" placeholder="Event name">
         </div>
         <div class="form-group">
-            <label for="eventDate">Date</label>
+            <label for="eventDate" id="dateLbl">Date</label>
             <input type="date" class="form-control" id="eventDate" name="eventDate">
         </div>
         <div class="form-group">
-            <label for="eventDesc">Event Name</label>
-            <textarea class="form-control" id="eventDesc" name="eventDesc" aria-describedby="description" placeholder="Enter a description of the event"></textarea>
+            <label for="eventDesc" id="descLbl">Event Description</label>
+            <textarea class="form-control" id="eventDesc" name="eventDesc" aria-describedby="descLbl" placeholder="Enter a description of the event"></textarea>
         </div>
         <input type="number" id="eventid" name="eventid" class="d-none">
     </div>
     <div class="modal-footer">
-        <button type="clear" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         <button type="submit" name="submit" class="btn btn-success">Update!</button>
     </div>
 </form>
