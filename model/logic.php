@@ -169,12 +169,13 @@ class Logic
      *
      * @param $file File being processed.
      * @param $captions String caption to go along with the file.
+     * @param $folder the folder within the image folder to add the image to
      *
      * @return String Returns the result of the submission as a string.
      */
-    public static function submitNewImage($file, $caption)
+    public static function submitNewImage($file, $caption, $folder)
     {
-        $targetDir  = 'assets/images/gallery/';
+        $targetDir  = 'assets/images/' + $folder + '/';
         $targetFile = $targetDir . basename($file["name"]);
         $extension  = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
         $newName    = self::randomString(60) . ".$extension";
