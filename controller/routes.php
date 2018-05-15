@@ -457,7 +457,9 @@ $f3->route('GET /instruments/rent', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Rent-A-Instrument";
     // List of paths to stylesheets.
-    $styles = array();
+    $styles = array(
+        BASE.'/assets/styles/_rent.css'
+    );
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
