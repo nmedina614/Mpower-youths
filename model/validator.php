@@ -77,8 +77,8 @@ class Validator
 
         if(!self::validateAccount($username)) $errors['account'] = "Please enter username under 45 letters with letters and numbers";
         if($password != $confirmPassword) $errors['password'] = "Please enter matching passwords";
-        if(!self::validateEmail($email)) $errors['email'] = "Please a valid email";
-        if(!self::validatePhone($phone)) $errors['phone'] = "Please valid phone number";
+        if(strlen($email) > 0 && !self::validateEmail($email)) $errors['email'] = "Please a valid email";
+        if(strlen($phone) > 0 && !self::validatePhone($phone)) $errors['phone'] = "Please valid phone number";
 
         return $errors;
     }

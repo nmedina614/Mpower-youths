@@ -298,9 +298,38 @@ class Logic
         if($account instanceof account) {
             Database::connect();
 
-            $account->getId();
-//            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
-//                $account->getPassword(), $account->getEmail(), $account->getPhone());
+            $activeAccData = Logic::accountData($GLOBALS['f3']->get('username'));
+            $id = $account->getId();
+
+            if(strlen($account->getUsername()) == 0){
+                $username = $activeAccData->getUsername();
+            }else{
+                $username = $account->getUsername();
+            }
+
+            if(strlen($account->getPassword()) == 0){
+                $password = NULL;
+            }else{
+                $password = $account->getPassword();
+            }
+
+            if(strlen($account->getEmail()) == 0){
+                $email = $activeAccData->getEmail();
+            }else{
+                $email = $account->getEmail();
+            }
+
+            if(strlen($account->getPhone()) == 0){
+                $phone = $activeAccData->getPhone();
+            }else{
+                $phone = $account->getPhone();
+            }
+
+            if(is_null($password)){
+                $result = Database::updateAccountWithoutPwd($id, $username, $email, $phone);
+            }else{
+                $result = Database::updateAccount($id, $username, $password, $email, $phone);
+            }
 
             return $result;
         }
