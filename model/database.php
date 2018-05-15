@@ -71,7 +71,7 @@ class Database
      */
     public static function getAllEvents() {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT idevent, title, description, DATE_FORMAT(`date`, "%m/%d/%Y") AS `date` FROM event';
+        $sql = 'SELECT idevent, title, description, DATE_FORMAT(`date`, "%m/%d/%Y") AS `dateFormatted` FROM event ORDER BY `date`';
 
         $statement = self::$_dbh->prepare($sql);
 
