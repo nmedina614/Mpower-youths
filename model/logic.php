@@ -346,4 +346,12 @@ class Logic
         $res = Database::getAccountByUsername($username);
         return new Account($res['idaccount'], $res['username'], NULL, $res['email'], $res['phone'], $res['privilege']);
     }
+
+    public static function addEvent($event)
+    {
+        if($event instanceof Event) {
+            Database::connect();
+            return Database::addEvent($event->getTitle(), $event->getDescription(), $event->getDate());
+        }
+    }
 }

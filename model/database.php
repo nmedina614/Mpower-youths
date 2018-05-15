@@ -253,4 +253,17 @@ class Database
 
         return $statement->execute();
     }
+
+    public static function addEvent($title, $desc, $date)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'INSERT INTO event (title, description, date) VALUES (:title, :desc, :date)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam(':desc', $desc, PDO::PARAM_STR);
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
 }
