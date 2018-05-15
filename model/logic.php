@@ -45,7 +45,7 @@ class Logic
         $resultDB = Database::getAllEvents();
 
         foreach ($resultDB as $key => $value) {
-            array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['date']));
+            array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['dateFormatted']));
         }
 
         return $result;
