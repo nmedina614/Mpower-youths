@@ -1,25 +1,22 @@
 <footer>
     <!--Footer-->
     <div class="page-footer font-small bg-info pt-4" style="">
-
         <!--Footer Links-->
         <div class="container-fluid text-center text-md-left">
-
             <h5 class="text-left text-uppercase">M-Power Youth</h5>
             <p class="text-left">Find us at the Kent Lutheran Church</p>
-            <check if="{{ @isAdmin }}">
             <div class="text-center">
-                <true>
-                    <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Logout</a>
-                </true>
-                <false>
-                    <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Login</a>
-                </false>
+                <check if="{{ @isAdmin }}">
+                    <true>
+                        <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Logout</a>
+                    </true>
+                    <false>
+                        <a href="{{ @BASE }}/admin/login" class="btn btn-sm btn-info">Login</a>
+                    </false>
+                </check>
             </div>
-            </check>
         </div>
         <!--/.Footer Links-->
-
     </div>
     <!--/.Footer-->
 </footer>
