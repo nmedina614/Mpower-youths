@@ -80,13 +80,73 @@ class Logic
         return $result;
     }
 
+    public static function addStaffMember($staffMember)
+    {
+
+        // TODO add validation before sending to database
+
+        Database::connect();
+        return Database::addStaffMember($staffMember->getFName(), $staffMember->getLName(),
+            $staffMember->getTitle(), $staffMember->getBiography(), $staffMember->getEmail(),
+            $staffMember->getPhone(), $staffMember->getPortraitURL());
+    }
+
     public static function updateStaffMember($staffMember)
     {
+
+        // TODO add validation before sending to database
 
         Database::connect();
         return Database::updateStaffMember($staffMember->getID(), $staffMember->getFName(),
             $staffMember->getLName(), $staffMember->getTitle(), $staffMember->getBiography(),
             $staffMember->getEmail(), $staffMember->getPhone(), $staffMember->getPortraitURL());
+    }
+
+    /**
+     * Method used to process and submit a new image
+     * to the server.
+     *
+     * @param $file File being processed.
+     * @param $folder the folder within the image folder to add the image to
+     *
+     * @return String Returns the result of the submission as a string.
+     */
+    public static function submitImageToFolder($file, $folder)
+    {
+        $targetDir  = 'assets/images/' . $folder . '/';
+        $targetFile = $targetDir . basename($file["name"]);
+        $extension  = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+        $newName    = self::randomString(60) . ".$extension";
+        $newFile    = $targetDir . $newName;
+
+
+        if (Validator::validFileSize($file['size'])) {
+            return "File is too large.";
+        }
+
+        // Check if file already exists
+        while (file_exists($newFile)) {
+            $newName    = self::randomString(60) . ".$extension";
+            $newFile    = $targetDir . $newName;
+        }
+
+        // Allow certain file formats
+        if (!Validator::validImageFile($targetFile)) {
+            return "Only JPG, JPEG, PNG & GIF files are allowed.";
+        }
+
+        if (move_uploaded_file($file["tmp_name"], $newFile)) {
+            //Database::connect();
+
+            //Database::insertGalleryImage($newName, $caption);
+
+            return $newFile;
+
+
+        } else {
+            return null;
+        }
+
     }
 
     /**
@@ -169,12 +229,13 @@ class Logic
      *
      * @param $file File being processed.
      * @param $captions String caption to go along with the file.
+     * @param $folder the folder within the image folder to add the image to
      *
      * @return String Returns the result of the submission as a string.
      */
-    public static function submitNewImage($file, $caption)
+    public static function submitNewImage($file, $caption, $folder)
     {
-        $targetDir  = 'assets/images/gallery/';
+        $targetDir  = 'assets/images/' . $folder . '/';
         $targetFile = $targetDir . basename($file["name"]);
         $extension  = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
         $newName    = self::randomString(60) . ".$extension";
@@ -237,9 +298,38 @@ class Logic
         if($account instanceof account) {
             Database::connect();
 
-            $account->getId();
-//            $result = Database::UpdateAccount($account->getId(), $account->getUsername(),
-//                $account->getPassword(), $account->getEmail(), $account->getPhone());
+            $activeAccData = Logic::accountData($GLOBALS['f3']->get('username'));
+            $id = $account->getId();
+
+            if(strlen($account->getUsername()) == 0){
+                $username = $activeAccData->getUsername();
+            }else{
+                $username = $account->getUsername();
+            }
+
+            if(strlen($account->getPassword()) == 0){
+                $password = NULL;
+            }else{
+                $password = $account->getPassword();
+            }
+
+            if(strlen($account->getEmail()) == 0){
+                $email = $activeAccData->getEmail();
+            }else{
+                $email = $account->getEmail();
+            }
+
+            if(strlen($account->getPhone()) == 0){
+                $phone = $activeAccData->getPhone();
+            }else{
+                $phone = $account->getPhone();
+            }
+
+            if(is_null($password)){
+                $result = Database::updateAccountWithoutPwd($id, $username, $email, $phone);
+            }else{
+                $result = Database::updateAccount($id, $username, $password, $email, $phone);
+            }
 
             return $result;
         }
@@ -314,7 +404,6 @@ class Logic
                 $errors[] = 'Username or email is already in use.';
             }
         }
-        print_r($errors);
 
         // Return list of invalid inputs.
         return $errors;
@@ -327,5 +416,13 @@ class Logic
     {
         Database::connect();
         return Database::verifyAccount($hash);
+    }
+
+    public static function addEvent($event)
+    {
+        if($event instanceof Event) {
+            Database::connect();
+            return Database::addEvent($event->getTitle(), $event->getDescription(), $event->getDate());
+        }
     }
 }

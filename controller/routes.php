@@ -57,7 +57,7 @@ $f3->route('GET|POST /', function($f3) {
 $f3->route('GET|POST /gallery', function($f3) {
 
     if(isset($_POST['submit']) && $f3->get('isAdmin')) {
-        $f3->set('result', Logic::submitNewImage($_FILES['image'], $_POST['caption']));
+        $f3->set('result', Logic::submitNewImage($_FILES['image'], $_POST['caption'], 'gallery'));
         if($f3->get('result') === true) {
             $f3->reroute('/gallery');
         }
@@ -165,13 +165,26 @@ $f3->route('GET|POST /account', function($f3) {
 
 $f3->route('GET|POST /staff', function($f3) {
 
-    require('model/logic.php');
-
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
-        $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
-            $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-            $_POST['staffEmail'], $_POST['staffPhone'], $_POST['staffPortraitURL']);
-        Logic::updateStaffMember($staffMember);
+
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
+        } else {
+            $portraitURL = $_POST['staffImage'];
+        }
+
+        // if editing an existing staff member, staffid will be set.
+        if ($_POST['staffid'] == -1) {
+            $staffMember = new StaffMember(-1, $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::addStaffMember($staffMember);
+        } else {
+            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::updateStaffMember($staffMember);
+        }
     }
 
     $f3->set('StaffMembers', Logic::getAllStaff());
@@ -330,11 +343,17 @@ $f3->route('GET|POST /login', function($f3) {
 });
 
 
-$f3->route('GET /NewEvent', function($f3) {
+$f3->route('GET|POST /NewEvent', function($f3) {
 
-    require('model/logic.php');
-    $f3->set('events', Logic::getEvents());
 
+    if(isset($_POST['submit'])){
+        $success = Logic::addEvent(new Event(NULL, $_POST['eventName'], $_POST['desc'], $_POST['date']));
+        if($success){
+            echo "submitted new event!";
+        }else{
+            echo "did not succeed";
+        }
+    }
     // Title to use in template.
     $title = "M-Power Youth";
 
@@ -582,6 +601,9 @@ $f3->route('GET|POST /accounts/register', function($f3) {
             $_POST['email'],
             $_POST['phone']
         ));
+        if(count($f3->get('result')) == 0) {
+            $f3->reroute('/accounts/register/confirmation');
+        }
     }
 
     // Title to use in template.
@@ -599,6 +621,29 @@ $f3->route('GET|POST /accounts/register', function($f3) {
     $scripts = array(
         BASE.'/assets/scripts/_register.js'
     );
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('GET|POST /accounts/register/confirmation', function($f3) {
+    // Title to use in template.
+    $title = "M-Power Youth: Confirmation";
+    // List of paths to stylesheets.
+    $styles = array(
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_confirmation.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array();
 
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);

@@ -1,24 +1,24 @@
 <div class="container">
-    <form>
+    <form method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="col-10">
                     <label for="example-datetime-local-input" class="col-6 col-form-label">Date and time</label>
                     <input class="form-control" type="datetime-local"
-                           value="2018-04-27T13:45:00" id="example-datetime-local-input">
+                           value="2018-04-27T13:45:00" name="date" id="example-datetime-local-input">
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <div class="col-10">
                     <label for="name" class="col-6 col-form-label">Name of Event</label>
-                    <input class="form-control" type="text" id="name">
+                    <input class="form-control" type="text" name="eventName" id="name">
                 </div>
             </div>
         </div>
         <div class="form-group">
             <label for="inputAddress">Description</label>
-            <textarea class="form-control" id="inputAddress"></textarea>
+            <textarea class="form-control" name="desc" id="inputAddress"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Add Event</button>
+        <button type="submit" name="submit" class="btn btn-primary">Add Event</button>
     </form>
 </div>
