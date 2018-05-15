@@ -154,6 +154,29 @@ class Database
     }
 
     /**
+     * Method used to add a staff member.
+     *
+     * @return mixed Returns an associative array of staff information.
+     */
+    public static function addStaffMember($fname, $lname, $title, $biography, $email, $phone, $portraitURL)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'INSERT INTO staff (fname, lname, title, biography, email, phone, portraitURL)
+                VALUES (:fname, :lname, :title, :biography, :email, :phone, :portraitURL)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
+        $statement->bindParam(':lname', $lname, PDO::PARAM_STR);
+        $statement->bindParam(':title', $title, PDO::PARAM_STR);
+        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+        $statement->bindParam(':email', $email, PDO::PARAM_STR);
+        $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $statement->bindParam(':portraitURL', $portraitURL, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    /**
      * Method used to update a staff member.
      *
      * @return mixed Returns an associative array of staff information.
