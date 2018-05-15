@@ -161,8 +161,8 @@ class Database
     public static function addStaffMember($fname, $lname, $title, $biography, $email, $phone, $portraitURL)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'INSERT INTO staff
-                VALUES fname=:fname, lname=:lname, title=:title, biography=:biography, email=:email, phone=:phone, portraitURL=:portraitURL';
+        $sql = 'INSERT INTO staff (fname, lname, title, biography, email, phone, portraitURL)
+                VALUES (:fname, :lname, :title, :biography, :email, :phone, :portraitURL)';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
