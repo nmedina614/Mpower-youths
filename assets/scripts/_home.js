@@ -2,7 +2,7 @@ function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
 }
 
-// create input elements foreach piece
+// when edit event button is clicked
 $(".btn-edit").click(function(e) {
 
     var id = $(e.target).data('id');
@@ -11,17 +11,25 @@ $(".btn-edit").click(function(e) {
     var eventDateFormatted = eventDate[2] + "-" + eventDate[0] + "-" + eventDate[1];
     var eventDesc = $("div[data-id='" + id +"']").find(".desc").text();
 
-    $("#eventName").val(eventTitle);
-    $("#eventDate").val(eventDateFormatted);
+    fillModal("Modify Event", eventTitle, eventDateFormatted, eventDesc, id);
+
+});
+
+// when add event button is clicked
+$(".btn-add").click(function(e) {
+
+    fillModal("Add Event");
+
+});
+
+function fillModal(modalTitle, eventTitle = "", eventDate = "mm/dd/yyyy", eventDesc = "", id = -1) {
+
+    $("#exampleModalLabel").text(modalTitle);
+
+    $("#eventTitle").val(eventTitle);
+    $("#eventDate").val(eventDate);
     $("#eventDesc").val(eventDesc);
 
     $("#eventid").val(id);
 
-    console.log($("#eventid").val());
-    // find the current buttons id
-
-    // find the row for element in dom
-
-    // add input element around each child
-
-});
+}
