@@ -11,7 +11,7 @@ $(".btn-edit").click(function(e) {
     var eventDateFormatted = eventDate[2] + "-" + eventDate[0] + "-" + eventDate[1];
     var eventDesc = $("div[data-id='" + id +"']").find(".desc").text();
 
-    $("#eventName").val(eventTitle);
+    $("#eventTitle").val(eventTitle);
     $("#eventDate").val(eventDateFormatted);
     $("#eventDesc").val(eventDesc);
 

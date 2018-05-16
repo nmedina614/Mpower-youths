@@ -16,6 +16,22 @@ $(".btn-edit").click(function(e) {
     var staffBio = $("div[data-id='" + id + "']").find(".biography").text();
     var staffImage = $("div[data-id='" + id + "']").find(".image").attr("src");
 
+    fillModal("Modify Staff Member", staffFName, staffLName, staffTitle, staffEmail, staffPhone, staffBio, staffImage, id);
+
+});
+
+// when add staff member button is clicked
+$(".btn-add").click(function(e) {
+
+    fillModal("Add Staff Member");
+
+});
+
+function fillModal(modalTitle, staffFName = "", staffLName = "", staffTitle = "", staffEmail = "",
+                   staffPhone = "", staffBio = "", staffImage = "", id = -1) {
+
+    $("#exampleModalLabel").text(modalTitle);
+
     // populate the form with the current staff member's data
     $("#staffFName").val(staffFName);
     $("#staffLName").val(staffLName);
@@ -27,16 +43,4 @@ $(".btn-edit").click(function(e) {
 
     // set the ID for the form
     $("#staffid").val(id);
-
-});
-
-// when add staff member button is clicked
-$(".btn-add").click(function(e) {
-
-    // change modal title for adding
-    $("#exampleModalLabel").text("Add Staff Member");
-
-    // value indicating the member needs to be added
-    $("#staffid").val(-1);
-
-});
+}
