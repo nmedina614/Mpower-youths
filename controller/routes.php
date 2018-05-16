@@ -15,8 +15,26 @@ $GLOBALS['f3'];
 $f3->route('GET|POST /', function($f3) {
 
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
-        $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
-        Logic::updateEvent($event);
+        if ($_POST['eventid'] == -1) {
+            $event = new Event(-1, $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
+            Logic::addEvent($event);
+        } else {
+            $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
+            Logic::updateEvent($event);
+        }
+
+        /*// if editing an existing staff member, staffid will be set.
+        if ($_POST['staffid'] == -1) {
+            $staffMember = new StaffMember(-1, $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::addStaffMember($staffMember);
+        } else {
+            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::updateStaffMember($staffMember);
+        }*/
     }
 
     $f3->set('events', Logic::getEvents());
