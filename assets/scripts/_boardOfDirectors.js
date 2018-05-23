@@ -2,7 +2,7 @@
 $(".btn-edit").click(function(e) {
 
     // change modal title for modifying
-    $("#exampleModalLabel").text("Modify BOD Member");
+    $("#exampleModalLabel").text("Modify Director");
 
     // get id of BOD member to be edited
     var id = $(e.target).data('id');
@@ -23,7 +23,7 @@ $(".btn-edit").click(function(e) {
 // when add BOD member button is clicked
 $(".btn-add").click(function(e) {
 
-    fillModal("Add BOD Member");
+    fillModal("Add Director");
 
 });
 
