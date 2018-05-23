@@ -1,0 +1,57 @@
+<div class="container">
+    <br>
+    <h1 class="text-center">Board of Directors</h1>
+
+    <!-- Modal -->
+    <div class="modal fade" id="BODModal" tabindex="-1" role="dialog" aria-labelledby="BODModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modify BOD Member</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <include href="views/_editBODMember.html" >
+
+            </div>
+        </div>
+    </div>
+
+    <check if="{{ @isAdmin }}">
+        <div class="text-left mt-4">
+            <button type="button" class="btn btn-info btn-add" data-toggle="modal" data-target="#BODModal">Add BOD Member</button>
+        </div>
+    </check>
+
+    <br>
+    <div class="container">
+        <repeat group="{{ @BODMembers }}" value="{{ @BODMember }}">
+            <div class="row my-3" data-id="{{ @BODMember->getId() }}">
+                <div class="col-md-3 text-center my-auto">
+                    <img class="rounded-circle image" style="width: 150px; height: 150px" src="{{ @BODMember->getPortraitURL() }}" alt="BOD Member photo">
+                    <check if="{{ @isAdmin }}">
+                        <button type="button" class="btn btn-info btn-edit" data-id="{{ @BODMember->getId() }}" data-toggle="modal" data-target="#BODModal">Edit BOD Member</button>
+                    </check>
+                </div>
+                <div class="col-md-9">
+                    <h5 class="mt-4"><span class="fname">{{ @BODMember->getFName() }}</span> <span class="lname">{{ @BODMember->getLname() }}</span>
+                        <check if="{{ @BODMember->getTitle() }}">
+                            - <span class="title">{{ @BODMember->getTitle() }}</span>
+                        </check>
+                    </h5>
+                    <p class="biography">{{ @BODMember->getBiography() }}</p>
+                    <p>
+                        <check if="{{ @BODMember->getEmail() }}">
+                            Email: <a href="mailto:{{ @BODMember->getEmail() }}" class="email">{{ @BODMember->getEmail() }}</a>
+                        </check>
+                        <check if="{{ @BODMember->getPhone() }}">
+                            Phone: <span class="phone">{{ @BODMember->getPhone() }}</span>
+                        </check>
+                    </p>
+                </div>
+            </div>
+        </repeat>
+    </div>
+
+</div>

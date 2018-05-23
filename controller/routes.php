@@ -223,6 +223,61 @@ $f3->route('GET|POST /staff', function($f3) {
     echo $template->render('views/_base.html');
 });
 
+$f3->route('GET|POST /board_of_directors', function($f3) {
+
+    /*if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
+        } else {
+            $portraitURL = $_POST['staffImage'];
+        }
+
+        // if editing an existing staff member, staffid will be set.
+        if ($_POST['staffid'] == -1) {
+            $staffMember = new StaffMember(-1, $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::addStaffMember($staffMember);
+        } else {
+            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::updateStaffMember($staffMember);
+        }
+    }*/
+
+    $f3->set('BODMembers', Logic::getAllBOD());
+
+    // Title to use in template.
+    $title = "M-Power Board of Directors";
+
+    // List of paths to stylesheets.
+    $styles = array(
+        'assets/styles/_home.css'
+    );
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_boardOfDirectors.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array(
+        BASE.'/assets/scripts/_boardOfDirectors.js'
+    );
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
 // Login route.
 $f3->route('GET|POST /admin/login', function($f3) {
 
