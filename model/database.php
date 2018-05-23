@@ -139,10 +139,10 @@ class Database
      *
      * @return mixed Returns an associative array of staff information.
      */
-    public static function getAllStaff()
+    public static function getAllStaff($memberType)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT * FROM staff';
+        $sql = 'SELECT * FROM '.$memberType;
 
         $statement = self::$_dbh->prepare($sql);
 
@@ -154,7 +154,7 @@ class Database
     }
 
     /**
-     * Method used to add a staff member
+     * Method used to add a member
      *
      * @param $fname first name
      * @param $lname last name
@@ -165,10 +165,10 @@ class Database
      * @param $portraitURL URL of staff member's portrait
      * @return mixed true or false based on if statement executed correctly
      */
-    public static function addStaffMember($fname, $lname, $title, $biography, $email, $phone, $portraitURL)
+    public static function addStaffMember($fname, $lname, $title, $biography, $email, $phone, $portraitURL, $memberType)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'INSERT INTO staff (fname, lname, title, biography, email, phone, portraitURL)
+        $sql = 'INSERT INTO '.$memberType.' (fname, lname, title, biography, email, phone, portraitURL)
                 VALUES (:fname, :lname, :title, :biography, :email, :phone, :portraitURL)';
 
         $statement = self::$_dbh->prepare($sql);
@@ -184,7 +184,7 @@ class Database
     }
 
     /**
-     * Method used to update a staff member.
+     * Method used to update a member.
      *
      * @param $idstaff id of the staff member
      * @param $fname first name
@@ -194,12 +194,13 @@ class Database
      * @param $email staff member's email
      * @param $phone staff member's phone number
      * @param $portraitURL URL of staff member's portrait
+     * @param $memberType the type of member
      * @return mixed true or false based on if statement executed correctly
      */
-    public static function updateStaffMember($idstaff, $fname, $lname, $title, $biography, $email, $phone, $portraitURL)
+    public static function updateStaffMember($id, $fname, $lname, $title, $biography, $email, $phone, $portraitURL, $memberType, $idColumnName)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'UPDATE staff SET fname=:fname, lname=:lname, title=:title, biography=:biography, email=:email, phone=:phone, portraitURL=:portraitURL WHERE idstaff=:idstaff';
+        $sql = 'UPDATE '.$memberType.' SET fname=:fname, lname=:lname, title=:title, biography=:biography, email=:email, phone=:phone, portraitURL=:portraitURL WHERE '.$idColumnName.'=:id';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
@@ -209,7 +210,7 @@ class Database
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
         $statement->bindParam(':portraitURL', $portraitURL, PDO::PARAM_STR);
-        $statement->bindParam(':idstaff', $idstaff, PDO::PARAM_INT);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $statement->execute();
     }

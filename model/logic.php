@@ -65,7 +65,7 @@ class Logic
     }
 
     /**
-     * Method used to process staff information.
+     * Method used to get information of all of the staff.
      *
      * @return array Returns an array of staff information.
      */
@@ -74,7 +74,7 @@ class Logic
         $result = array();
 
         Database::connect();
-        $resultDB = Database::getAllStaff();
+        $resultDB = Database::getAllStaff('staff');
 
         foreach ($resultDB as $key => $value) {
             array_push($result,
@@ -100,7 +100,7 @@ class Logic
         Database::connect();
         return Database::addStaffMember($staffMember->getFName(), $staffMember->getLName(),
             $staffMember->getTitle(), $staffMember->getBiography(), $staffMember->getEmail(),
-            $staffMember->getPhone(), $staffMember->getPortraitURL());
+            $staffMember->getPhone(), $staffMember->getPortraitURL(), 'staff');
     }
 
     /**
@@ -117,7 +117,64 @@ class Logic
         Database::connect();
         return Database::updateStaffMember($staffMember->getID(), $staffMember->getFName(),
             $staffMember->getLName(), $staffMember->getTitle(), $staffMember->getBiography(),
-            $staffMember->getEmail(), $staffMember->getPhone(), $staffMember->getPortraitURL());
+            $staffMember->getEmail(), $staffMember->getPhone(), $staffMember->getPortraitURL(), 'staff', 'idstaff');
+    }
+
+    /**
+     * Method used to get information of all members of the board of directors.
+     *
+     * @return array Returns an array of board of directors information.
+     */
+    public static function getAllBOD()
+    {
+        $result = array();
+
+        Database::connect();
+        $resultDB = Database::getAllStaff('board_of_directors');
+
+        foreach ($resultDB as $key => $value) {
+            array_push($result,
+                new StaffMember($value['idbod'], $value['fname'],
+                    $value['lname'], $value['title'], $value['biography'],
+                    $value['email'], $value['phone'], $value['portraitURL']));
+        }
+
+        return $result;
+    }
+
+    /**
+     * Validates and sends a member of the board of directors to the database to be added
+     *
+     * @param $BODMember the member of the board of directors to add
+     * @return mixed the result of the query
+     */
+    public static function addBODMember($BODMember)
+    {
+
+        // TODO add validation before sending to database
+
+        Database::connect();
+        return Database::addStaffMember($BODMember->getFName(), $BODMember->getLName(),
+            $BODMember->getTitle(), $BODMember->getBiography(), $BODMember->getEmail(),
+            $BODMember->getPhone(), $BODMember->getPortraitURL(), 'board_of_directors');
+    }
+
+    /**
+     * Validates and sends a member of the board of directors to the database to be updated
+     *
+     * @param $BODMember the member of the board of directors to update
+     * @return mixed the result of the query
+     */
+    public static function updateBODMember($BODMember)
+    {
+
+        // TODO add validation before sending to database
+
+        Database::connect();
+        return Database::updateBODMember($BODMember->getID(), $BODMember->getFName(),
+            $BODMember->getLName(), $BODMember->getTitle(), $BODMember->getBiography(),
+            $BODMember->getEmail(), $BODMember->getPhone(), $BODMember->getPortraitURL(),
+            'board_of_directors', 'idbod');
     }
 
     /**
@@ -312,7 +369,8 @@ class Logic
         }
     }
 
-    public static function updateAccount($account){
+    public static function updateAccount($account)
+    {
         if($account instanceof account) {
             Database::connect();
 
@@ -389,7 +447,8 @@ class Logic
      *
      * @return array Returns an array of strings containing reasons for failure.
      */
-    public static function register($username, $password1, $password2, $email, $phone) {
+    public static function register($username, $password1, $password2, $email, $phone)
+    {
 
         $errors = array();
         if(!Validator::validateAccount($username)) $errors['account'] = "Please enter username under 45 letters with letters and numbers";
