@@ -225,27 +225,28 @@ $f3->route('GET|POST /staff', function($f3) {
 
 $f3->route('GET|POST /board_of_directors', function($f3) {
 
-    /*if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
 
         if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            // should we make a folder for BOD and volunteer portraits too?
             $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
         } else {
-            $portraitURL = $_POST['staffImage'];
+            $portraitURL = $_POST['BODImage'];
         }
 
-        // if editing an existing staff member, staffid will be set.
-        if ($_POST['staffid'] == -1) {
-            $staffMember = new StaffMember(-1, $_POST['staffFName'],
-                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
-            Logic::addStaffMember($staffMember);
+        // if editing an existing BOD member, idbod will be set.
+        if ($_POST['idbod'] == -1) {
+            $BODMember = new StaffMember(-1, $_POST['BODFName'],
+                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+            Logic::addBODMember($BODMember);
         } else {
-            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
-                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
-            Logic::updateStaffMember($staffMember);
+            $BODMember = new StaffMember($_POST['idbod'], $_POST['BODFName'],
+                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+            Logic::updateBODMember($BODMember);
         }
-    }*/
+    }
 
     $f3->set('BODMembers', Logic::getAllBOD());
 

@@ -171,7 +171,7 @@ class Logic
         // TODO add validation before sending to database
 
         Database::connect();
-        return Database::updateBODMember($BODMember->getID(), $BODMember->getFName(),
+        return Database::updateStaffMember($BODMember->getID(), $BODMember->getFName(),
             $BODMember->getLName(), $BODMember->getTitle(), $BODMember->getBiography(),
             $BODMember->getEmail(), $BODMember->getPhone(), $BODMember->getPortraitURL(),
             'board_of_directors', 'idbod');

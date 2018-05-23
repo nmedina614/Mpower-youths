@@ -1,0 +1,40 @@
+<form action="#" method="post" enctype="multipart/form-data">
+    <div class="modal-body">
+        <!--<img id="image-preview" class="mb-2" src="#" alt="your image" />-->
+        <div class="mb-2">
+            <label for="image">Select Image</label>
+            <br>
+            <input type="file" id="image" name="image">
+        </div>
+        <div class="form-group">
+            <label for="BODFName">First Name</label>
+            <input type="text" class="form-control" id="BODFName" name="BODFName" aria-describedby="BODFName" placeholder="First name">
+        </div>
+        <div class="form-group">
+            <label for="BODLName">Last Name</label>
+            <input type="text" class="form-control" id="BODLName" name="BODLName" aria-describedby="BODLName" placeholder="Last name">
+        </div>
+        <div class="form-group">
+            <label for="BODTitle">Title</label>
+            <input type="text" class="form-control" id="BODTitle" name="BODTitle" aria-describedby="BODTitle" placeholder="Director's title">
+        </div>
+        <div class="form-group">
+            <label for="BODEmail">Email</label>
+            <input type="text" class="form-control" id="BODEmail" name="BODEmail" aria-describedby="BODEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="BODPhone">Phone</label>
+            <input type="text" class="form-control" id="BODPhone" name="BODPhone" aria-describedby="BODPhone" placeholder="Phone number">
+        </div>
+        <div class="form-group">
+            <label for="BODBio">Biography</label>
+            <textarea rows="5" cols="30" class="form-control" id="BODBio" name="BODBio" aria-describedby="BODBio" placeholder="Director's biography"></textarea>
+        </div>
+        <input type="number" id="idbod" name="idbod" class="d-none">
+        <input type="text" id="BODImage" name="BODImage" class="d-none">
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" name="submit" class="btn btn-success">Update!</button>
+    </div>
+</form>
