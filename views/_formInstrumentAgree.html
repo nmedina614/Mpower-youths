@@ -1,4 +1,5 @@
 <form>
+
     <h1>Instrument Rental Agreement Form</h1>
 
     <div class="form-group">
@@ -21,25 +22,27 @@
         <input type="text" class="form-control" name="instrument" id="instrument">
     </div>
 
-    <div class="form-group">
-        <label for="serialno">Serial No.</label>
-        <input type="text" class="form-control" name="serialno" id="serialno">
-    </div>
+    <check if="{{ @isAdmin }}">
+        <div class="form-group">
+            <label for="serialno">Serial No.</label>
+            <input type="text" class="form-control" name="serialno" id="serialno">
+        </div>
 
-    <div class="form-group">
-        <label for="contract">Contract Year</label>
-        <input type="number" class="form-control" min="2016" max="2099" step="1" value="2018" name="contract" id="contract">
-    </div>
+        <div class="form-group">
+            <label for="contract">Contract Year</label>
+            <input type="number" class="form-control" min="2016" max="2099" step="1" value="2018" name="contract" id="contract">
+        </div>
 
-    <div class="form-group">
-        <label for="make">Make</label>
-        <input type="text" class="form-control" name="make" id="make">
-    </div>
+        <div class="form-group">
+            <label for="make">Make</label>
+            <input type="text" class="form-control" name="make" id="make">
+        </div>
 
-    <div class="form-group">
-        <label for="model">Model</label>
-        <input type="text" class="form-control" name="model" id="model">
-    </div>
+        <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" class="form-control" name="model" id="model">
+        </div>
+    </check>
 
     <p>I accept full responsibility for the instrument and accessories described above. I will return it for inspection
         promptly when called for, and will return it on or before the end of the contract period. I agree to maintain

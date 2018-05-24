@@ -31,7 +31,7 @@ $f3->route('GET|POST /', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
-        'assets/styles/_home.css'
+        BASE.'/assets/styles/_home.css'
     );
 
     // List of paths for sub-templates being used.

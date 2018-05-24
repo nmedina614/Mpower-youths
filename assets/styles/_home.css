@@ -1,0 +1,9 @@
+#carouselExampleSlidesOnly img {
+    position: center;
+    margin-top: -25%;
+    margin-bottom: -25%;
+}
+
+.rest-body {
+    z-index: 500;
+}
