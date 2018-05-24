@@ -103,7 +103,7 @@ $f3->route('GET|POST /gallery', function($f3) {
 
 $f3->route('POST /ajax-delete-image', function($f3) {
     if($f3->get('isAdmin')) {
-        Logic::deleteGalleryImage($_POST['image']);
+        Logic::deleteImage($_POST['image'], 'gallery');
     } else {
         echo json_encode('Invalid Credentials!');
     }

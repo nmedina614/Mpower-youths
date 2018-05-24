@@ -347,13 +347,14 @@ class Logic
     }
 
     /**
-     * Method that handles image deletion from the gallery.
+     * Method that handles image deletion from a folder.
      *
      * @param $image takes a string filename of the file to be removed.
+     * @param $folder takes a string folder name of the folder that contains the image.
      */
-    public static function deleteGalleryImage($image)
+    public static function deleteImage($image, $folder)
     {
-        $targetFile = 'assets/images/gallery/' . $image;
+        $targetFile = 'assets/images/'. $folder . '/' . $image;
 
         if (file_exists($targetFile)) {
             try {
