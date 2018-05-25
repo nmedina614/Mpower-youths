@@ -177,17 +177,19 @@ $f3->route('GET|POST /account', function($f3) {
 
 $f3->route('GET|POST /staff', function($f3) {
 
+    // this should work for adding and editing.
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
 
-        $portraitURL = $_POST['staffImage'];
+        $portraitURL = $_POST['staffImage']; // sets variable to old portrait to start
 
+        // check if a new image has been uploaded
         if (is_uploaded_file($_FILES['image']['tmp_name'])) {
             $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
             $portraitSubstr = substr($portraitURL, 0, 5);
 
             if ($portraitSubstr === "File " || $portraitSubstr === "Only ") { // failed image upload
-                $portraitURL = $_POST['staffImage'];
-            } else { // successful image upload, delete old image
+                $portraitURL = $_POST['staffImage']; // reassign to old portraitURL
+            } else if (!empty($_POST['staffImage']))  { // successful image upload, delete old image if it exists
                 $imageNameWithoutFolder = substr($_POST['staffImage'], strrpos($_POST['staffImage'], '/') + 1);
                 $imageFolder = 'staffportraits';
                 Logic::deleteImage($imageNameWithoutFolder, $imageFolder);

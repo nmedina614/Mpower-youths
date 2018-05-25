@@ -45,25 +45,13 @@ function fillModal(modalTitle, staffFName = "", staffLName = "", staffTitle = ""
     $("#staffid").val(id);
 }
 
+// when delete staff member button is clicked
 $('.btn-delete').click(function(e) {
-    console.log($(e.target).data('id'));
-    deletePortrait(e);
-});
-
-function deletePortrait(target) {
-
-
-    var id = $(target.target).data('id');
-    console.log(id);
-
     let confirmed = confirm("Are you sure you want to delete this staff member?");
+
     if(confirmed) {
-        //let imageSrc = $("div[data-id='" + id + "']").find(".image").attr("src");
-        //let targetImage = imageSrc.split("/").pop();
+        var id = $(e.target).data('id');
 
-        //let id = $(target).data('id');
-
-        console.log(id);
         $.ajax('ajax-delete-staff', {
             method : "POST",
             data : {idstaff : id},
@@ -71,7 +59,7 @@ function deletePortrait(target) {
             success : function(response) {
                 if(response == true) {
                     location.reload();
-                    console.log("we got here1");
+                    alert("Staff Member removed!")
                 } else {
                     alert(response);
                 }
@@ -81,5 +69,4 @@ function deletePortrait(target) {
             }
         });
     }
-
-}
+});

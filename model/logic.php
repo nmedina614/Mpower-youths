@@ -127,7 +127,6 @@ class Logic
      */
     public static function deleteStaffMember($idstaff)
     {
-
         Database::connect();
         $image = Database::getPortraitUrl('staff', 'idstaff', $idstaff);
 
