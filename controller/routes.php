@@ -15,13 +15,8 @@ $GLOBALS['f3'];
 $f3->route('GET|POST /', function($f3) {
 
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
-        if ($_POST['eventid'] == -1) {
-            $event = new Event(-1, $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
-            Logic::addEvent($event);
-        } else {
-            $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
-            Logic::updateEvent($event);
-        }
+        $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
+        Logic::updateEvent($event);
     }
 
     $f3->set('events', Logic::getEvents());
@@ -31,7 +26,7 @@ $f3->route('GET|POST /', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
-        BASE.'/assets/styles/_home.css'
+        'assets/styles/_home.css'
     );
 
     // List of paths for sub-templates being used.
@@ -103,20 +98,13 @@ $f3->route('GET|POST /gallery', function($f3) {
 
 $f3->route('POST /ajax-delete-image', function($f3) {
     if($f3->get('isAdmin')) {
-        Logic::deleteImage($_POST['image'], 'gallery');
+        Logic::deleteGalleryImage($_POST['image']);
     } else {
         echo json_encode('Invalid Credentials!');
     }
 
 });
 
-$f3->route('POST /ajax-delete-member', function($f3) {
-    if ($f3->get('isAdmin')) {
-        Logic::deleteMember($_POST['id'], $_POST['memberType'], $_POST['idColumnName']);
-    } else {
-        echo json_encode('Invalid Credentials!');
-    }
-});
 
 $f3->route('GET|POST /account', function($f3) {
     $curAccount = Logic::accountData($f3->get('username'));
@@ -177,6 +165,28 @@ $f3->route('GET|POST /account', function($f3) {
 
 $f3->route('GET|POST /staff', function($f3) {
 
+    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
+        } else {
+            $portraitURL = $_POST['staffImage'];
+        }
+
+        // if editing an existing staff member, staffid will be set.
+        if ($_POST['staffid'] == -1) {
+            $staffMember = new StaffMember(-1, $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::addStaffMember($staffMember);
+        } else {
+            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
+                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+            Logic::updateStaffMember($staffMember);
+        }
+    }
+
     $f3->set('StaffMembers', Logic::getAllStaff());
 
     // Title to use in template.
@@ -208,49 +218,10 @@ $f3->route('GET|POST /staff', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('POST /staff-modify', function($f3) {
-    // this should work for adding and editing.
-    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
-
-        $portraitURL = $_POST['staffImage']; // sets variable to old portrait to start
-
-        // check if a new image has been uploaded
-        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
-            $portraitSubstr = substr($portraitURL, 0, 5);
-
-            if ($portraitSubstr === "File " || $portraitSubstr === "Only ") { // failed image upload
-                $portraitURL = $_POST['staffImage']; // reassign to old portraitURL
-            } else if (!empty($_POST['staffImage']))  { // successful image upload, delete old image if it exists
-                $imageNameWithoutFolder = substr($_POST['staffImage'], strrpos($_POST['staffImage'], '/') + 1);
-                $imageFolder = 'staffportraits';
-                Logic::deleteImage($imageNameWithoutFolder, $imageFolder);
-            }
-        }
-
-        // if editing an existing staff member, staffid will be set.
-        if ($_POST['staffid'] == -1) {
-            $staffMember = new StaffMember(-1, $_POST['staffFName'],
-                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
-            Logic::addStaffMember($staffMember);
-        } else {
-            $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
-                $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
-            Logic::updateStaffMember($staffMember);
-        }
-    }
-
-    $f3->reroute('staff');
-});
-
-$f3->route('GET|POST /board_of_directors', function($f3) {
-
-    $f3->set('BODMembers', Logic::getAllBOD());
+$f3->route('GET /staff2', function($f3) {
 
     // Title to use in template.
-    $title = "M-Power Board of Directors";
+    $title = "M-Power Staff";
 
     // List of paths to stylesheets.
     $styles = array(
@@ -260,13 +231,12 @@ $f3->route('GET|POST /board_of_directors', function($f3) {
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
-        'views/_boardOfDirectors.html',
+        'views/_staff2.html',
         'views/_footer.html'
     );
 
     // List of paths to scripts being used.
     $scripts = array(
-        BASE.'/assets/scripts/_boardOfDirectors.js'
     );
 
     $f3->set('title' , $title);
@@ -278,42 +248,7 @@ $f3->route('GET|POST /board_of_directors', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('POST /bod-modify', function($f3) {
-    // this should work for adding and editing.
-    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
 
-        $portraitURL = $_POST['BODImage']; // sets variable to old portrait to start
-
-        // check if a new image has been uploaded
-        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
-            $portraitSubstr = substr($portraitURL, 0, 5);
-
-            if ($portraitSubstr === "File " || $portraitSubstr === "Only ") { // failed image upload
-                $portraitURL = $_POST['BODImage']; // reassign to old portraitURL
-            } else if (!empty($_POST['BODImage']))  { // successful image upload, delete old image if it exists
-                $imageNameWithoutFolder = substr($_POST['BODImage'], strrpos($_POST['BODImage'], '/') + 1);
-                $imageFolder = 'staffportraits';
-                Logic::deleteImage($imageNameWithoutFolder, $imageFolder);
-            }
-        }
-
-        // if editing an existing BOD member, idbod will be set.
-        if ($_POST['idbod'] == -1) {
-            $BODMember = new StaffMember(-1, $_POST['BODFName'],
-                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
-            Logic::addBODMember($BODMember);
-        } else {
-            $BODMember = new StaffMember($_POST['idbod'], $_POST['BODFName'],
-                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
-            Logic::updateBODMember($BODMember);
-        }
-    }
-
-    $f3->reroute('board_of_directors');
-});
 
 // Login route.
 $f3->route('GET|POST /admin/login', function($f3) {
@@ -402,6 +337,47 @@ $f3->route('GET|POST /login', function($f3) {
     }
 
     session_destroy();
+
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+
+$f3->route('GET|POST /NewEvent', function($f3) {
+
+
+    if(isset($_POST['submit'])){
+        $success = Logic::addEvent(new Event(NULL, $_POST['eventName'], $_POST['desc'], $_POST['date']));
+        if($success){
+            echo "submitted new event!";
+        }else{
+            echo "did not succeed";
+        }
+    }
+    // Title to use in template.
+    $title = "M-Power Youth";
+
+    // List of paths to stylesheets.
+    $styles = array(
+        'assets/styles/_newEvent.css'
+    );
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_NewEvent.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array(
+    );
+
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
 
     $template = new Template();
     echo $template->render('views/_base.html');
@@ -717,46 +693,37 @@ $f3->route('GET /accounts/register/verify/@hash', function($f3, $params) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET|POST /PhotoVideoRelease', function($f3) {
-    // Title to use in template.
-    $title = "M-Power Youth: Media Release";
-    // List of paths to stylesheets.
-    $styles = array(
-    );
-    // List of paths for sub-templates being used.
-    $includes = array(
-        'views/_nav.html',
-        'views/_formMediaRelease.html',
-        'views/_footer.html'
-    );
-    // List of paths to scripts being used.
-    $scripts = array();
-    $f3->set('title' , $title);
-    $f3->set('styles' , $styles);
-    $f3->set('includes' , $includes);
-    $f3->set('scripts' , $scripts);
-    $template = new Template();
-    echo $template->render('views/_base.html');
-});
 
-$f3->route('GET|POST /InstrumentAgreement', function($f3) {
+$f3->route('GET /instruments/rent/form', function($f3) {
+    /*if(isset($_SESSION['account'])) {
+        $f3->reroute('/');
+    }*/
+
+
     // Title to use in template.
-    $title = "M-Power Youth: Instrument Agreement";
+    $title = "Rent Instrument";
+
     // List of paths to stylesheets.
-    $styles = array(
-    );
+    $styles = array();
+
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
-        'views/_formInstrumentAgree.html',
+        'views/_rentForm.html',
         'views/_footer.html'
     );
+
     // List of paths to scripts being used.
     $scripts = array();
-    $f3->set('title' , $title);
-    $f3->set('styles' , $styles);
-    $f3->set('includes' , $includes);
-    $f3->set('scripts' , $scripts);
+
+    // Store page attributes to hive.
+    $f3->set('result',   $result);
+    $f3->set('title',    $title);
+    $f3->set('styles',   $styles);
+    $f3->set('includes', $includes);
+    $f3->set('scripts',  $scripts);
+
+    // Display Template
     $template = new Template();
     echo $template->render('views/_base.html');
 });
