@@ -47,14 +47,15 @@ function fillModal(modalTitle, staffFName = "", staffLName = "", staffTitle = ""
 
 // when delete staff member button is clicked
 $('.btn-delete').click(function(e) {
+
     let confirmed = confirm("Are you sure you want to delete this staff member?");
 
     if(confirmed) {
         var id = $(e.target).data('id');
 
-        $.ajax('ajax-delete-staff', {
+        $.ajax('ajax-delete-member', {
             method : "POST",
-            data : {idstaff : id},
+            data : {id : id, memberType : 'staff', idColumnName : 'idstaff'},
             dataType : 'json',
             success : function(response) {
                 if(response == true) {

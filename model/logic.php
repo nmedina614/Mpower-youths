@@ -125,12 +125,12 @@ class Logic
      *
      * @param $idstaff the id of the staff member to delete
      */
-    public static function deleteStaffMember($idstaff)
+    public static function deleteMember($id, $memberType, $idColumnName)
     {
         Database::connect();
-        $image = Database::getPortraitUrl('staff', 'idstaff', $idstaff);
+        $image = Database::getPortraitUrl($memberType, $idColumnName, $id);
 
-        $result = Database::deleteStaffMember('staff', 'idstaff', $idstaff);
+        $result = Database::deleteStaffMember($memberType, $idColumnName, $id);
 
         if ($result) {
             deleteImage($image, 'staffportraits');

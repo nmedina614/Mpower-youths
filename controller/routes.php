@@ -110,9 +110,9 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 });
 
-$f3->route('POST /ajax-delete-staff', function($f3) {
+$f3->route('POST /ajax-delete-member', function($f3) {
     if ($f3->get('isAdmin')) {
-        Logic::deleteStaffMember($_POST['idstaff']);
+        Logic::deleteMember($_POST['id'], $_POST['memberType'], $_POST['idColumnName']);
     } else {
         echo json_encode('Invalid Credentials!');
     }

@@ -44,3 +44,30 @@ function fillModal(modalTitle, BODFName = "", BODLName = "", BODTitle = "", BODE
     // set the ID for the form
     $("#idbod").val(id);
 }
+
+// when delete staff member button is clicked
+$('.btn-delete').click(function(e) {
+
+    let confirmed = confirm("Are you sure you want to delete this staff member?");
+
+    if(confirmed) {
+        var id = $(e.target).data('id');
+
+        $.ajax('ajax-delete-member', {
+            method : "POST",
+            data : {id : id, memberType : 'board_of_directors', idColumnName : 'idbod'},
+            dataType : 'json',
+            success : function(response) {
+                if(response == true) {
+                    location.reload();
+                    alert("Director removed!")
+                } else {
+                    alert(response);
+                }
+            },
+            error : function() {
+                console.log("Failed to connect!");
+            }
+        });
+    }
+});
