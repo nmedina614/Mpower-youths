@@ -534,4 +534,15 @@ class Logic
             return Database::addEvent($event->getTitle(), $event->getDescription(), $event->getDate());
         }
     }
+
+    /**
+     * Method used to create a notification in the database.
+     * Example types include 'rental', 'application', 'notification'.
+     *
+     * @param $type String containing the type of notification ('notification' by default)
+     * @return int Returns the id of the new notification as an int.
+     */
+    public static function createNotification($type='notification') {
+
+    }
 }
