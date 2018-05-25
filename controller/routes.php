@@ -110,6 +110,14 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 });
 
+$f3->route('POST /ajax-delete-staff', function($f3) {
+    if ($f3->get('isAdmin')) {
+        Logic::deleteStaffMember($_POST['idstaff']);
+    } else {
+        echo json_encode('Invalid Credentials!');
+    }
+});
+
 $f3->route('GET|POST /account', function($f3) {
     $curAccount = Logic::accountData($f3->get('username'));
     $storedAccount = new Account($curAccount->getId(), $curAccount->getUsername(), $curAccount->getPassword(), $curAccount->getEmail(), $curAccount->getPhone(), $curAccount->getPrivilege());

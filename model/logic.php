@@ -121,6 +121,26 @@ class Logic
     }
 
     /**
+     * Deletes a staff member from the database
+     *
+     * @param $idstaff the id of the staff member to delete
+     */
+    public static function deleteStaffMember($idstaff)
+    {
+
+        Database::connect();
+        $image = Database::getPortraitUrl('staff', 'idstaff', $idstaff);
+
+        $result = Database::deleteStaffMember('staff', 'idstaff', $idstaff);
+
+        if ($result) {
+            deleteImage($image, 'staffportraits');
+        }
+        echo json_encode(true);
+        return result;
+    }
+
+    /**
      * Method used to get information of all members of the board of directors.
      *
      * @return array Returns an array of board of directors information.

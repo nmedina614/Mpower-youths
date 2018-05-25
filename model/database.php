@@ -154,6 +154,29 @@ class Database
     }
 
     /**
+     * Method used to get a member's portrait location
+     *
+     * @param $memberType the type of member
+     * @param $idColumnName the name of the id column
+     * @param $id the id of the member
+     * @return the portrait url of the member. false if the query fails
+     */
+    public static function getPortraitUrl($memberType, $idColumnName, $id)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'SELECT portraitURL FROM '.$memberType.' WHERE '.$idColumnName.'=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
      * Method used to add a member
      *
      * @param $fname first name
@@ -195,6 +218,7 @@ class Database
      * @param $phone staff member's phone number
      * @param $portraitURL URL of staff member's portrait
      * @param $memberType the type of member
+     * @param $idColumnName the name of the id column
      * @return mixed true or false based on if statement executed correctly
      */
     public static function updateStaffMember($id, $fname, $lname, $title, $biography, $email, $phone, $portraitURL, $memberType, $idColumnName)
@@ -213,6 +237,29 @@ class Database
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
 
         return $statement->execute();
+    }
+
+    /**
+     * Deletes a member.
+     *
+     * @param $memberType the type of member
+     * @param $idColumnName the name of the id column
+     * @param $id the id of the member
+     * @return true or false whether the member is deleted
+     */
+    public static function deleteStaffMember($memberType, $idColumnName, $id)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'DELETE FROM '.$memberType.' WHERE '.$idColumnName.'=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
     /**

@@ -45,27 +45,33 @@ function fillModal(modalTitle, staffFName = "", staffLName = "", staffTitle = ""
     $("#staffid").val(id);
 }
 
-$('.btn-delete').click(function() {
-    deleteGalleryImage(this);
+$('.btn-delete').click(function(e) {
+    console.log($(e.target).data('id'));
+    deletePortrait(e);
 });
 
-function deleteGalleryImage(target) {
+function deletePortrait(target) {
+
 
     var id = $(target.target).data('id');
-
+    console.log(id);
 
     let confirmed = confirm("Are you sure you want to delete this staff member?");
-    /*if(confirmed) {
-        let imageSrc = $(target).parent().find('.gallery-thumbnail').attr('src');
-        let targetImage = imageSrc.split("/").pop();
+    if(confirmed) {
+        //let imageSrc = $("div[data-id='" + id + "']").find(".image").attr("src");
+        //let targetImage = imageSrc.split("/").pop();
 
-        $.ajax('ajax-delete-image', {
+        //let id = $(target).data('id');
+
+        console.log(id);
+        $.ajax('ajax-delete-staff', {
             method : "POST",
-            data : {image : targetImage},
+            data : {idstaff : id},
             dataType : 'json',
             success : function(response) {
                 if(response == true) {
                     location.reload();
+                    console.log("we got here1");
                 } else {
                     alert(response);
                 }
@@ -74,6 +80,6 @@ function deleteGalleryImage(target) {
                 console.log("Failed to connect!");
             }
         });
-    }*/
+    }
 
 }
