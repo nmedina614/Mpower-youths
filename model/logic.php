@@ -359,9 +359,11 @@ class Logic
         if (file_exists($targetFile)) {
             try {
                 unlink($targetFile);
-                Database::connect();
-                Database::deleteGalleryImage($image);
-                echo json_encode(true);
+                if ($folder === 'gallery') {
+                    Database::connect();
+                    Database::deleteGalleryImage($image);
+                    echo json_encode(true);
+                }
             } catch (Exception $e) {
                 echo json_encode($e->getMessage());
             }

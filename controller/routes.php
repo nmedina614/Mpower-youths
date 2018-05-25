@@ -172,10 +172,19 @@ $f3->route('GET|POST /staff', function($f3) {
 
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
 
+        $portraitURL = $_POST['staffImage'];
+
         if (is_uploaded_file($_FILES['image']['tmp_name'])) {
             $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
-        } else {
-            $portraitURL = $_POST['staffImage'];
+            $portraitSubstr = substr($portraitURL, 0, 5);
+
+            if ($portraitSubstr === "File " || $portraitSubstr === "Only ") { // failed image upload
+                $portraitURL = $_POST['staffImage'];
+            } else { // successful image upload, delete old image
+                $imageNameWithoutFolder = substr($_POST['staffImage'], strrpos($_POST['staffImage'], '/') + 1);
+                $imageFolder = 'staffportraits';
+                Logic::deleteImage($imageNameWithoutFolder, $imageFolder);
+            }
         }
 
         // if editing an existing staff member, staffid will be set.
