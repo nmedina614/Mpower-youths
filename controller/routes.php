@@ -177,6 +177,38 @@ $f3->route('GET|POST /account', function($f3) {
 
 $f3->route('GET|POST /staff', function($f3) {
 
+    $f3->set('StaffMembers', Logic::getAllStaff());
+
+    // Title to use in template.
+    $title = "M-Power Staff";
+
+    // List of paths to stylesheets.
+    $styles = array(
+        'assets/styles/_home.css'
+    );
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_staff.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array(
+        BASE.'/assets/scripts/_staff.js'
+    );
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('POST /staff-modify', function($f3) {
     // this should work for adding and editing.
     if ($f3->get('isAdmin') && isset($_POST['submit'])) {
 
@@ -210,35 +242,7 @@ $f3->route('GET|POST /staff', function($f3) {
         }
     }
 
-    $f3->set('StaffMembers', Logic::getAllStaff());
-
-    // Title to use in template.
-    $title = "M-Power Staff";
-
-    // List of paths to stylesheets.
-    $styles = array(
-        'assets/styles/_home.css'
-    );
-
-    // List of paths for sub-templates being used.
-    $includes = array(
-        'views/_nav.html',
-        'views/_staff.html',
-        'views/_footer.html'
-    );
-
-    // List of paths to scripts being used.
-    $scripts = array(
-        BASE.'/assets/scripts/_staff.js'
-    );
-
-    $f3->set('title' , $title);
-    $f3->set('styles' , $styles);
-    $f3->set('includes' , $includes);
-    $f3->set('scripts' , $scripts);
-
-    $template = new Template();
-    echo $template->render('views/_base.html');
+    $f3->reroute('staff');
 });
 
 $f3->route('GET|POST /board_of_directors', function($f3) {
