@@ -350,6 +350,22 @@ class Database
     }
 
     /**
+     * deletes the event with the given id
+     *
+     * @param $id id of the event to delete
+     * @return mixed true or false whether the event was deleted
+     */
+    public static function deleteEvent($id) {
+
+        $sql = 'DELETE FROM event WHERE idevent=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
+
+    /**
      * Inserts an account to the accound table.
      *
      * @param $username username of the account

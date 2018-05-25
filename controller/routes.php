@@ -14,16 +14,6 @@ $GLOBALS['f3'];
 
 $f3->route('GET|POST /', function($f3) {
 
-    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
-        if ($_POST['eventid'] == -1) {
-            $event = new Event(-1, $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
-            Logic::addEvent($event);
-        } else {
-            $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
-            Logic::updateEvent($event);
-        }
-    }
-
     $f3->set('events', Logic::getEvents());
 
     // Title to use in template.
@@ -57,6 +47,21 @@ $f3->route('GET|POST /', function($f3) {
 
     $template = new Template();
     echo $template->render('views/_base.html');
+});
+
+$f3->route('POST /event-modify', function($f3) {
+    // this should work for adding and editing.
+    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+        if ($_POST['eventid'] == -1) {
+            $event = new Event(-1, $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
+            Logic::addEvent($event);
+        } else {
+            $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
+            Logic::updateEvent($event);
+        }
+    }
+
+    $f3->reroute('/');
 });
 
 $f3->route('GET|POST /gallery', function($f3) {
@@ -113,6 +118,14 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 $f3->route('POST /ajax-delete-member', function($f3) {
     if ($f3->get('isAdmin')) {
         Logic::deleteMember($_POST['id'], $_POST['memberType'], $_POST['idColumnName']);
+    } else {
+        echo json_encode('Invalid Credentials!');
+    }
+});
+
+$f3->route('POST /ajax-delete-event', function($f3) {
+    if ($f3->get('isAdmin')) {
+        Logic::deleteEvent($_POST['id']);
     } else {
         echo json_encode('Invalid Credentials!');
     }

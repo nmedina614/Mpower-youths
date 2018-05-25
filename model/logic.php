@@ -64,6 +64,16 @@ class Logic
         return Database::updateEvent($event->getTitle(), $event->getDescription(), $event->getDate(), $event->getId());
     }
 
+    public static function deleteEvent($idevent)
+    {
+
+        Database::connect();
+        $result = Database::deleteEvent($idevent);
+        echo json_encode($result);
+        return $result;
+
+    }
+
     /**
      * Method used to get information of all of the staff.
      *

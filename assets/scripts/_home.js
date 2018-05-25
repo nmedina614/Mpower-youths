@@ -33,3 +33,31 @@ function fillModal(modalTitle, eventTitle = "", eventDate = "mm/dd/yyyy", eventD
     $("#eventid").val(id);
 
 }
+
+// when delete event button is clicked
+$('.btn-delete').click(function(e) {
+
+    var id = $(e.target).data('id');
+    var eventTitle = $("div[data-id='" + id +"']").find("h5").text();
+    let confirmed = confirm("Are you sure you want to delete the event titled, '" + eventTitle + "'?");
+
+    if(confirmed) {
+
+        $.ajax('ajax-delete-event', {
+            method : "POST",
+            data : {id : id},
+            dataType : 'json',
+            success : function(response) {
+                if(response == true) {
+                    location.reload();
+                    alert("Event removed!")
+                } else {
+                    alert(response);
+                }
+            },
+            error : function() {
+                console.log("Failed to connect!");
+            }
+        });
+    }
+});
