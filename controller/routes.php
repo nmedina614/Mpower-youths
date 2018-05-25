@@ -110,7 +110,6 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 });
 
-
 $f3->route('GET|POST /account', function($f3) {
     $curAccount = Logic::accountData($f3->get('username'));
     $storedAccount = new Account($curAccount->getId(), $curAccount->getUsername(), $curAccount->getPassword(), $curAccount->getEmail(), $curAccount->getPhone(), $curAccount->getPrivilege());

@@ -44,3 +44,36 @@ function fillModal(modalTitle, staffFName = "", staffLName = "", staffTitle = ""
     // set the ID for the form
     $("#staffid").val(id);
 }
+
+$('.btn-delete').click(function() {
+    deleteGalleryImage(this);
+});
+
+function deleteGalleryImage(target) {
+
+    var id = $(target.target).data('id');
+
+
+    let confirmed = confirm("Are you sure you want to delete this staff member?");
+    /*if(confirmed) {
+        let imageSrc = $(target).parent().find('.gallery-thumbnail').attr('src');
+        let targetImage = imageSrc.split("/").pop();
+
+        $.ajax('ajax-delete-image', {
+            method : "POST",
+            data : {image : targetImage},
+            dataType : 'json',
+            success : function(response) {
+                if(response == true) {
+                    location.reload();
+                } else {
+                    alert(response);
+                }
+            },
+            error : function() {
+                console.log("Failed to connect!");
+            }
+        });
+    }*/
+
+}
