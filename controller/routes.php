@@ -247,29 +247,6 @@ $f3->route('POST /staff-modify', function($f3) {
 
 $f3->route('GET|POST /board_of_directors', function($f3) {
 
-    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
-
-        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-            // should we make a folder for BOD and volunteer portraits too?
-            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
-        } else {
-            $portraitURL = $_POST['BODImage'];
-        }
-
-        // if editing an existing BOD member, idbod will be set.
-        if ($_POST['idbod'] == -1) {
-            $BODMember = new StaffMember(-1, $_POST['BODFName'],
-                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
-            Logic::addBODMember($BODMember);
-        } else {
-            $BODMember = new StaffMember($_POST['idbod'], $_POST['BODFName'],
-                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
-            Logic::updateBODMember($BODMember);
-        }
-    }
-
     $f3->set('BODMembers', Logic::getAllBOD());
 
     // Title to use in template.
@@ -299,6 +276,43 @@ $f3->route('GET|POST /board_of_directors', function($f3) {
 
     $template = new Template();
     echo $template->render('views/_base.html');
+});
+
+$f3->route('POST /bod-modify', function($f3) {
+    // this should work for adding and editing.
+    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+
+        $portraitURL = $_POST['BODImage']; // sets variable to old portrait to start
+
+        // check if a new image has been uploaded
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $portraitURL = Logic::submitImageToFolder($_FILES['image'], 'staffportraits');
+            $portraitSubstr = substr($portraitURL, 0, 5);
+
+            if ($portraitSubstr === "File " || $portraitSubstr === "Only ") { // failed image upload
+                $portraitURL = $_POST['BODImage']; // reassign to old portraitURL
+            } else if (!empty($_POST['BODImage']))  { // successful image upload, delete old image if it exists
+                $imageNameWithoutFolder = substr($_POST['BODImage'], strrpos($_POST['BODImage'], '/') + 1);
+                $imageFolder = 'staffportraits';
+                Logic::deleteImage($imageNameWithoutFolder, $imageFolder);
+            }
+        }
+
+        // if editing an existing BOD member, idbod will be set.
+        if ($_POST['idbod'] == -1) {
+            $BODMember = new StaffMember(-1, $_POST['BODFName'],
+                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+            Logic::addBODMember($BODMember);
+        } else {
+            $BODMember = new StaffMember($_POST['idbod'], $_POST['BODFName'],
+                $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+            Logic::updateBODMember($BODMember);
+        }
+    }
+
+    $f3->reroute('board_of_directors');
 });
 
 // Login route.
