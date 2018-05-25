@@ -48,10 +48,12 @@ function fillModal(modalTitle, BODFName = "", BODLName = "", BODTitle = "", BODE
 // when delete staff member button is clicked
 $('.btn-delete').click(function(e) {
 
-    let confirmed = confirm("Are you sure you want to delete this staff member?");
+    var id = $(e.target).data('id');
+    var fullName = $("div[data-id='" + id + "']").find(".fname").text() +
+                " " + $("div[data-id='" + id + "']").find(".lname").text();
+    let confirmed = confirm("Are you sure you want to remove " + fullName + " from the list?");
 
     if(confirmed) {
-        var id = $(e.target).data('id');
 
         $.ajax('ajax-delete-member', {
             method : "POST",
