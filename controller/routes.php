@@ -752,7 +752,7 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET|POST /InstrumentAgreement', function($f3) {
+$f3->route('GET|POST /instruments/rent', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Instrument Agreement";
     // List of paths to stylesheets.
@@ -761,7 +761,7 @@ $f3->route('GET|POST /InstrumentAgreement', function($f3) {
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
-        'views/_formInstrumentAgree.html',
+        'views/_rentForm.html',
         'views/_footer.html'
     );
     // List of paths to scripts being used.
