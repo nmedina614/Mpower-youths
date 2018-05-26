@@ -253,41 +253,6 @@ class Logic
 
     }
 
-    /**
-     * Method used to check if a user is an administrator.
-     *
-     * @param $username String username being evaluated.
-     * @param $password String password being evaluated.
-     * @return bool Returns true if the user is an admin.
-     */
-    public static function adminLogin($username, $password)
-    {
-
-        session_reset();
-
-        if (empty($username) || empty($_POST['password'])) {
-            return false;
-        }
-
-        Database::connect();
-
-        $result = Database::login($username, $password, 1);
-
-        if (isset($result['username'])) {
-            // Store user information in Session.
-            $account = new Admin(
-                $result['idaccount'],
-                $result['username'],
-                $result['password'],
-                $result['email'],
-                $result['phone'],
-                $result['privilege']
-            );
-            $_SESSION['account'] = serialize($account);
-
-            return true;
-        } else return false;
-    }
 
     /**
      * Method used to check if a user has a valid account.
@@ -310,18 +275,37 @@ class Logic
         $result = Database::login($username, $password, 0);
 
         if (isset($result['username'])) {
-            // Store user information in Session.
-            $account = new Account(
-                $result['idaccount'],
-                $result['username'],
-                $result['password'],
-                $result['email'],
-                $result['phone'],
-                $result['privilege']
-            );
-            $_SESSION['account'] = serialize($account);
+            // Response for normal login
+            if($result['privilege'] == 0) {
+                // Store user information in Session.
+                $account = new Account(
+                    $result['idaccount'],
+                    $result['username'],
+                    $result['password'],
+                    $result['email'],
+                    $result['phone'],
+                    $result['privilege']
+                );
+                $_SESSION['account'] = serialize($account);
 
-            return true;
+                return true;
+            }
+
+            // Response for admin login.
+            if ($result['privilege'] == 1) {
+                // Store user information in Session.
+                $account = new Admin(
+                    $result['idaccount'],
+                    $result['username'],
+                    $result['password'],
+                    $result['email'],
+                    $result['phone'],
+                    $result['privilege']
+                );
+                $_SESSION['account'] = serialize($account);
+
+                return true;
+            } else return false;
         } else return false;
     }
 
