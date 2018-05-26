@@ -40,15 +40,15 @@ class Database
      *
      * @param $username String username of user.
      * @param $password String password of User.
-     * @param $requiredPrivilege int required privilege level.
+     * @param $minimumPrivilege int required privilege level.
      *
      * @return mixed Returns true or false if a matching user is found.
      */
-    public static function login($username, $password, $requiredPrivilege)
+    public static function login($username, $password, $minimumPrivilege)
     {
 
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT idaccount, username, password, email, phone, privilege FROM account WHERE username=:username AND password=:password AND privilege=:privilege';
+        $sql = 'SELECT idaccount, username, password, email, phone, privilege FROM account WHERE username=:username AND password=:password AND privilege>=:privilege';
 
         $statement = self::$_dbh->prepare($sql);
 
@@ -56,7 +56,7 @@ class Database
 
         $statement->bindParam(':password', hash('sha256', $password, false), PDO::PARAM_STR);
 
-        $statement->bindParam(':privilege', $requiredPrivilege, PDO::PARAM_INT);
+        $statement->bindParam(':privilege', $minimumPrivilege, PDO::PARAM_INT);
 
         $statement->execute();
 

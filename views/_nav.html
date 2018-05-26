@@ -29,14 +29,6 @@
                 </div>
             </li>
 
-            <check if="{{ @loggedIn }}">
-                <true>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ @BASE }}/instruments/rent">Rent An Instrument</a>
-                    </li>
-                </true>
-            </check>
-
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{ @BASE }}/contribute" id="contributeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Contribute
@@ -54,30 +46,28 @@
                 <a class="nav-link" href="{{ @BASE }}/contact">Contact</a>
             </li>
 
-            <check if="{{ @isAdmin }}">
-                <false>
-                    <check if="{{ @loggedIn }}">
-                        <true>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="memberDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ @username }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="memberDropdown">
-                                    <a class="dropdown-item" href="{{ @BASE }}/instrument/rent">Rent a Instrument</a>
-                                    <a class="dropdown-item" href="{{ @BASE }}/account">Profile Settings</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ @BASE }}/login">Logout</a>
-                                </div>
-                            </li>
-                        </true>
-                        <false>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ @BASE }}/login">Login</a>
-                            </li>
-                        </false>
-                    </check>
-                </false>
-            </check>
+
+                <check if="{{ @loggedIn }}">
+                    <true>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="memberDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ @username }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="memberDropdown">
+                                <a class="dropdown-item" href="{{ @BASE }}/instrument/rent">Rent a Instrument</a>
+                                <a class="dropdown-item" href="{{ @BASE }}/account">Profile Settings</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ @BASE }}/login">Logout</a>
+                            </div>
+                        </li>
+                    </true>
+                    <false>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ @BASE }}/login">Login</a>
+                        </li>
+                    </false>
+                </check>
+
 
         </ul>
     </div>

@@ -329,52 +329,6 @@ $f3->route('POST /bod-modify', function($f3) {
 });
 
 // Login route.
-$f3->route('GET|POST /admin/login', function($f3) {
-
-    // Title to use in template.
-    $title = "Login";
-
-    // List of paths to stylesheets.
-    $styles = array(
-        BASE.'/assets/styles/_login.css'
-    );
-
-    // List of paths for sub-templates being used.
-    $includes = array(
-        'views/_nav.html',
-        'views/_login.html'
-    );
-
-    // List of paths to scripts being used.
-    $scripts = array();
-
-    $f3->set('title',    $title);
-    $f3->set('styles',   $styles);
-    $f3->set('includes', $includes);
-    $f3->set('scripts',  $scripts);
-
-    if(isset($_POST['submit'])) {
-
-        $result = Logic::adminLogin($_POST['username'], $_POST['password']);
-
-        // If login is successful, redirect to main page.
-        if($result != false) {
-
-            $f3->reroute('/');
-
-        } else { // Otherwise generate error.
-
-            $f3->set('invalid', true);
-        }
-    }
-
-    session_destroy();
-
-    $template = new Template();
-    echo $template->render('views/_base.html');
-});
-
-// Login route.
 $f3->route('GET|POST /login', function($f3) {
 
     // Title to use in template.
