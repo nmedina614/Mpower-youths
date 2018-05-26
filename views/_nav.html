@@ -13,12 +13,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ @BASE }}">Home</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="infoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    About
+            <li class="nav-item dropdown d-inline-flex">
+                <a class="nav-link" href="{{ @BASE }}">About</a>
+                <a class="nav-link dropdown-toggle pl-0" href="#" id="infoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="infoDropdown">
-                    <a class="dropdown-item" href="{{ @BASE }}/about">About us</a>
                     <a class="dropdown-item" href="{{ @BASE }}/staff">Staff</a>
                     <a class="dropdown-item" href="{{ @BASE }}/board_of_directors">Board of Directors</a>
                     <div class="dropdown-divider"></div>
