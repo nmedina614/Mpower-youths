@@ -801,3 +801,29 @@ $f3->route('GET|POST /volunteer', function($f3) {
     echo $template->render('views/_base.html');
 });
 
+$f3->route('GET /administration', function($f3) {
+    if ($f3->get('isAdmin')) {
+        $f3->reroute('/');
+    }
+
+    // Title to use in template.
+    $title = "M-Power Youth: Administration";
+    // List of paths to stylesheets.
+    $styles = array(
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_admin.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array();
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
