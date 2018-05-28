@@ -802,7 +802,7 @@ $f3->route('GET|POST /volunteer', function($f3) {
 });
 
 $f3->route('GET /administration', function($f3) {
-    if ($f3->get('isAdmin')) {
+    if (!$f3->get('isAdmin')) {
         $f3->reroute('/');
     }
 
