@@ -62,7 +62,7 @@ $('.btn-delete').click(function(e) {
             success : function(response) {
                 if(response == true) {
                     location.reload();
-                    alert("Staff Member removed!")
+                    alert("Staff Member removed!");
                 } else {
                     alert(response);
                 }
