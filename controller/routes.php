@@ -706,6 +706,28 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
     echo $template->render('views/_base.html');
 });
 
+$f3->route('GET|POST /enrollment', function($f3) {
+    // Title to use in template.
+    $title = "M-Power Youth: Enrollment";
+    // List of paths to stylesheets.
+    $styles = array(
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_formEnrollment.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array();
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
 $f3->route('GET|POST /instruments/rent', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Instrument Agreement";
