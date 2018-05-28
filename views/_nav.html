@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{ @BASE }}">Home</a>
             </li>
             <li class="nav-item dropdown d-inline-flex">
-                <a class="nav-link" href="{{ @BASE }}">About</a>
+                <a class="nav-link" href="{{ @BASE }}/about">About</a>
                 <a class="nav-link dropdown-toggle pl-0" href="#" id="infoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                 </a>
@@ -54,7 +54,14 @@
                                 {{ @username }}
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="memberDropdown">
-                                <a class="dropdown-item" href="{{ @BASE }}/instrument/rent">Rent a Instrument</a>
+                                <check if="{{ @isAdmin }}">
+                                    <true>
+                                        <a class="dropdown-item" href="{{ @BASE }}/instruments">Instruments</a>
+                                    </true>
+                                    <false>
+                                        <a class="dropdown-item" href="{{ @BASE }}/instruments/rent">Instrument Rentals</a>
+                                    </false>
+                                </check>
                                 <a class="dropdown-item" href="{{ @BASE }}/account">Profile Settings</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ @BASE }}/login">Logout</a>

@@ -134,18 +134,21 @@ class Logic
      * Deletes a staff member from the database
      *
      * @param $idstaff the id of the staff member to delete
+     * @return true or false whether the deletion was successful
      */
     public static function deleteMember($id, $memberType, $idColumnName)
     {
         Database::connect();
-        $image = Database::getPortraitUrl($memberType, $idColumnName, $id);
+        $image = Database::getPortraitUrl($memberType, $idColumnName, $id)[0]['portraitURL'];
+
+        $imageNameWithoutFolder = substr($image, strrpos($image, '/') + 1);
 
         $result = Database::deleteStaffMember($memberType, $idColumnName, $id);
 
         if ($result) {
-            deleteImage($image, 'staffportraits');
+            Logic::deleteImage($imageNameWithoutFolder, 'staffportraits');
         }
-        echo json_encode(true);
+        echo json_encode($result);
         return result;
     }
 
