@@ -598,10 +598,21 @@ class Logic
 
     }
 
+    /**
+     * Method that verifies a hash associated with a certain account.
+     *
+     * @param $hash Hash being evaluated
+     * @return mixed Returns if the account was verified.
+     */
     public static function verifyAccount($hash)
     {
         Database::connect();
-        return Database::verifyAccount($hash);
+        $result = Database::verifyAccount($hash);
+        if(isset($result)) {
+            Database::createNotification('new user');
+        }
+
+        return $result;
     }
 
     public static function addEvent($event)
@@ -610,17 +621,6 @@ class Logic
             Database::connect();
             return Database::addEvent($event->getTitle(), $event->getDescription(), $event->getDate());
         }
-    }
-
-    /**
-     * Method used to create a notification in the database.
-     * Example types include 'rental', 'application', 'notification'.
-     *
-     * @param $type String containing the type of notification ('notification' by default)
-     * @return int Returns the id of the new notification as an int.
-     */
-    public static function createNotification($name, $type='notification') {
-
     }
 
     /**
@@ -698,6 +698,8 @@ class Logic
 
         Database::connect();
 
+        Database::createNotification('rental');
+
         return Database::requestInstrument($student, $guardian, $add1, $add2,
                                            $city, $zip, $phone, $school,
                                            $grade, $instrument, $date);
@@ -721,6 +723,8 @@ class Logic
     {
 
         Database::connect();
+
+        Database::createNotification('volunteer');
 
         return Database::volunteerRequest($name, $address, $zip, $dob,
             $phone, $drivers, $dateRequested);

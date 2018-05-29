@@ -592,6 +592,23 @@ class Database
     }
 
     /**
+     * Method used to create a notification in the database.
+     * Example types include 'rental', 'application', 'notification'.
+     *
+     * @param $type String containing the type of notification ('notification' by default)
+     * @return int Returns the id of the new notification as an int.
+     */
+    public static function createNotification($type='notification') {
+        $sql = 'INSERT INTO `notification`(`type`, `status`) VALUES (:type, 0)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':type', $type, PDO::PARAM_STR);
+
+        return $statement->execute();
+
+    }
+
+    /**
      * Method pulls all rentals from the database
      * and returns them as an array.
      *
