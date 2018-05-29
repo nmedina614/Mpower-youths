@@ -15,8 +15,9 @@ $(".btn-edit").click(function(e) {
     var BODPhone = $("div[data-id='" + id + "']").find(".phone").text();
     var BODBio = $("div[data-id='" + id + "']").find(".biography").text();
     var BODImage = $("div[data-id='" + id + "']").find(".image").attr("src");
+    var pageOrder = $(e.target).data('order');
 
-    fillModal("Modify BOD Member", BODFName, BODLName, BODTitle, BODEmail, BODPhone, BODBio, BODImage, id);
+    fillModal("Modify BOD Member", BODFName, BODLName, BODTitle, BODEmail, BODPhone, BODBio, BODImage, id, pageOrder);
 
 });
 
@@ -28,7 +29,7 @@ $(".btn-add").click(function(e) {
 });
 
 function fillModal(modalTitle, BODFName = "", BODLName = "", BODTitle = "", BODEmail = "",
-                   BODPhone = "", BODBio = "", BODImage = "", id = -1) {
+                   BODPhone = "", BODBio = "", BODImage = "", id = -1, pageOrder = 0) {
 
     $("#exampleModalLabel").text(modalTitle);
 
@@ -40,6 +41,7 @@ function fillModal(modalTitle, BODFName = "", BODLName = "", BODTitle = "", BODE
     $("#BODPhone").val(BODPhone);
     $("#BODBio").val(BODBio);
     $("#BODImage").val(BODImage);
+    $("#pageOrder").val(pageOrder);
 
     // set the ID for the form
     $("#idbod").val(id);
@@ -72,4 +74,48 @@ $('.btn-delete').click(function(e) {
             }
         });
     }
+});
+
+// when shift member up button is clicked
+$('.btn-shift-up').click(function(e) {
+
+    var id = $(e.target).data('id');
+
+    $.ajax('ajax-shift-member', {
+        method : "POST",
+        data : {id : id, memberType : 'board_of_directors', idColumnName : 'idbod', direction : 'up'},
+        dataType : 'json',
+        success : function(response) {
+            if (response == true) {
+                location.reload();
+            } else {
+                alert(response);
+            }
+        },
+        error : function() {
+            console.log("Failed to connect!");
+        }
+    });
+});
+
+// when shift member down button is clicked
+$('.btn-shift-down').click(function(e) {
+
+    var id = $(e.target).data('id');
+
+    $.ajax('ajax-shift-member', {
+        method : "POST",
+        data : {id : id, memberType : 'board_of_directors', idColumnName : 'idbod', direction : 'down'},
+        dataType : 'json',
+        success : function(response) {
+            if (response == true) {
+                location.reload();
+            } else {
+                alert(response);
+            }
+        },
+        error : function() {
+            console.log("Failed to connect!");
+        }
+    });
 });

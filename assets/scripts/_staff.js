@@ -6,7 +6,6 @@ $(".btn-edit").click(function(e) {
 
     // get id of staff member to be edited
     var id = $(e.target).data('id');
-    var pageOrder = $(e.target).data('order');
 
     // get variables for autofilling edit form
     var staffFName = $("div[data-id='" + id + "']").find(".fname").text();

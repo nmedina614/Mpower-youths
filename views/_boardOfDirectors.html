@@ -32,8 +32,12 @@
                     <img class="rounded-circle image" style="width: 150px; height: 150px" src="{{ @BODMember->getPortraitURL() }}" alt="BOD Member photo">
                     <check if="{{ @isAdmin }}">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-info btn-edit" data-id="{{ @BODMember->getId() }}" data-toggle="modal" data-target="#BODModal">Edit</button>
+                            <button type="button" class="btn btn-info btn-edit" data-id="{{ @BODMember->getId() }}" data-order="{{ @BODMember->getPageOrder() }}" data-toggle="modal" data-target="#BODModal">Edit</button>
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ @BODMember->getId() }}">Remove</button>
+                            <div class="btn-group-vertical btn-group-sm my-auto" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-info btn-shift-up" data-id="{{ @BODMember->getId() }}">&#9650;</button>
+                                <button type="button" class="btn btn-info btn-shift-down" data-id="{{ @BODMember->getId() }}">&#9660;</button>
+                            </div>
                         </div>
                     </check>
                 </div>

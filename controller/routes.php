@@ -198,7 +198,7 @@ $f3->route('GET|POST /account', function($f3) {
 
 $f3->route('GET|POST /staff', function($f3) {
 
-    $f3->set('StaffMembers', Logic::getAllStaff());
+    $f3->set('StaffMembers', Logic::getAllStaff('staff', 'idstaff'));
 
     // Title to use in template.
     $title = "M-Power Staff";
@@ -253,7 +253,7 @@ $f3->route('POST /staff-modify', function($f3) {
         if ($_POST['staffid'] == -1) {
             $newMemberPageOrder = 1;
 
-            if (sizeof(Logic::getAllStaff()) > 0) {
+            if (sizeof(Logic::getAllStaff('staff', 'idstaff')) > 0) {
                 $newMemberPageOrder = Logic::getMaxPageOrder('staff') + 1;
             }
 
@@ -274,7 +274,7 @@ $f3->route('POST /staff-modify', function($f3) {
 
 $f3->route('GET|POST /board_of_directors', function($f3) {
 
-    $f3->set('BODMembers', Logic::getAllBOD());
+    $f3->set('BODMembers', Logic::getAllStaff('board_of_directors', 'idbod'));
 
     // Title to use in template.
     $title = "M-Power Board of Directors";
@@ -327,14 +327,20 @@ $f3->route('POST /bod-modify', function($f3) {
 
         // if editing an existing BOD member, idbod will be set.
         if ($_POST['idbod'] == -1) {
+            $newMemberPageOrder = 1;
+
+            if (sizeof(Logic::getAllStaff('board_of_directors', 'idbod')) > 0) {
+                $newMemberPageOrder = Logic::getMaxPageOrder('board_of_directors') + 1;
+            }
+
             $BODMember = new StaffMember(-1, $_POST['BODFName'],
                 $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, 0);
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, $newMemberPageOrder);
             Logic::addBODMember($BODMember);
         } else {
             $BODMember = new StaffMember($_POST['idbod'], $_POST['BODFName'],
                 $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, 0);
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, $_POST['pageOrder']);
             Logic::updateBODMember($BODMember);
         }
     }
