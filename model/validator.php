@@ -111,5 +111,38 @@ class Validator
 
         return false;
     }
+
+
+    public static function validateInstrument($student, $guardian, $zip, $phone,
+                                              $instrument){
+
+        $errors = array();
+        $instruments = array("Trumpet", "Clarinet", "Violin", "Cello", "Viola", "Trombone", "Flute", "Drums", "Alto Sax");
+
+        if(!self::validateName($student)) $errors['student'] = "Your Student's Name is Invalid Please make sure it contains no numbers";
+        if(!self::validateName($guardian)) $errors['guardian'] = "Your Guardians's Name is Invalid Please make sure it contains no numbers";
+        if(!self::validateZip($zip)) $errors['zip'] = "Your Zip Code is Invalid, please make sure it is 5 numbers only.";
+        if(!self::validatePhone($phone)) $errors['phone'] = "Your Phone number is invalid";
+        if(!in_array($instrument, $instruments)) $errors['instrument'] = "Your Instrument is Invalid, please choose an instrument from the previous page";
+
+
+        return $errors;
+
+    }
+
+    public static function validateName($name){
+
+        $pattern = '/^([^0-9]*)$/';
+        return preg_match($pattern, $name);
+
+    }
+
+    public static function validateZip($zip){
+        $pattern = '/^\d\d\d\d\d$/';
+        return preg_match($pattern, $zip);
+    }
+
 }
+
+
 

@@ -522,6 +522,7 @@ $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
 
     if(isset($_POST['submit'])){
 
+        print_r($_POST);
         $student = $_POST['student_name'];
         $guardian = $_POST['guard_name'];
         $add1 = $_POST['street1'];
@@ -532,23 +533,46 @@ $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
         $school = $_POST['school'];
         $grade = $_POST['grade'];
         $instrument = $_POST['instrument'];
-        date_default_timezone_set('America/Los_Angeles');
-        $date = date('Y-m-d');
 
-        $result = Logic::requestInstrument($student, $guardian, $add1,
-                                 $add2, $city, $zip, $phone,
-                                 $school, $grade, $instrument,
-                                 $date);
+        $errors = Validator::validateInstrument($student, $guardian, $zip, $phone, $instrument);
 
-        if($result != false){
-            $f3->set('result', "Request Submitted");
+        if(count($errors)==0) {
+
+            date_default_timezone_set('America/Los_Angeles');
+            $date = date('Y-m-d');
+
+            $result = Logic::requestInstrument($student, $guardian, $add1,
+                                     $add2, $city, $zip, $phone,
+                                     $school, $grade, $instrument,
+                                     $date);
+
+            if($result != false){
+                $f3->set('result', "Request Submitted");
+            } else {
+                $f3->set('result', "Request failed to send");
+            }
+
         } else {
+
             $f3->set('result', "Request failed to send");
+
+            $f3->set('errors', $errors);
+
+            $f3->set('student',$student);
+            $f3->set('guardian', $guardian);
+            $f3->set('add1', $add1);
+            $f3->set('add2', $add2);
+            $f3->set('city', $city);
+            $f3->set('zip', $zip);
+            $f3->set('phone', $phone);
+            $f3->set('school', $school);
+            $f3->set('grade', $grade);
+            $f3->set('instrument', $instrument);
+
         }
+    } else {
+        $instrument = $params['instrument'];
     }
-
-
-    $instrument = $params['instrument'];
 
 
     // Title to use in template.
