@@ -1,73 +1,92 @@
-<div class="container-fluid pt-4">
-    <div class="row mt-4">
-        <div class="col-12 col-sm-8 col-md-6 col-lg-4 offset-sm-2 offset-md-3 offset-lg-4">
-            <h1>Administration</h1>
-
-        </div>
-        <div class="card">
-            <div class="card-header text-center">
-                Notifications <img src="{{ @BASE }}/assets/images/icons/bell.svg">
-            </div>
-            <div class="card-body p-0">
-                <table class="table table-sm">
-                    <thead>
+<div class="container-fluid mt-4 pt-4">
+    <h1>Administration</h1>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Notifications
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm">
+                        <thead>
                         <tr>
-                            <th>Source</th>
-                            <th>Date</th>
-                            <th>Type</th>
-                            <th></th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Type</th>
+                            <th class="text-center">Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Aaron Melhaff</td>
-                        <td>01/23/2018</td>
-                        <td>Rental</td>
-                        <td class="btn btn-sm btn-light">
-                            <a href="#">
-                                <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Boogles</td>
-                        <td>01/23/2018</td>
-                        <td>New User</td>
-                        <td class=""></td>
-                    </tr>
-
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <repeat group="{{ @notifications }}" value="{{ @notification }}">
+                            <tr>
+                                <td>{{ @notification['type'] }}</td>
+                                <td>{{ @notification['time'] }}</td>
+                                <check if="{{ @notification['type'] == 'rental' }}">
+                                    <true>
+                                        <td class="btn btn-sm btn-light">
+                                            <a href="#">
+                                                <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg">
+                                            </a>
+                                        </td>
+                                    </true>
+                                    <false>
+                                        <check if="{{ @notification['type'] == 'application' }}">
+                                            <true>
+                                                <td class="btn btn-sm btn-light">
+                                                    <a href="#">
+                                                        <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg">
+                                                    </a>
+                                                </td>
+                                            </true>
+                                            <false>
+                                                <td></td>
+                                            </false>
+                                        </check>
+                                    </false>
+                                </check>
+                            </tr>
+                        </repeat>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </div>
+        </div> <!-- NOTIFICATIONS TABLE -->
 
-    <table id="rentals" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Instrument</th>
-                <th>Date</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <repeat group="{{ @rentals }}" value="{{ @rental }}">
-                <tr>
-                    <td>{{ @rental['studentName'] }}</td>
-                    <td>{{ @rental['instrument'] }}</td>
-                    <td>{{ @rental['dateSubmited'] }}</td>
-                    <td>{{ Logic::translateRequestStatus(@rental['requestStatus']) }}</td>
-                </tr>
-            </repeat>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Instrument</th>
-                <th>Date</th>
-                <th>Status</th>
-            </tr>
-        </tfoot>
-    </table>
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Rentals
+                </div>
+                <div class="card-body">
+                    <table id="rentals" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Instrument</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <repeat group="{{ @rentals }}" value="{{ @rental }}">
+                            <tr>
+                                <td>{{ @rental['studentName'] }}</td>
+                                <td>{{ @rental['instrument'] }}</td>
+                                <td>{{ @rental['dateSubmited'] }}</td>
+                                <td>{{ Logic::translateRequestStatus(@rental['requestStatus']) }}</td>
+                            </tr>
+                        </repeat>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Instrument</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div> <!-- RENTALS TABLE -->
+    </div>
 </div>
