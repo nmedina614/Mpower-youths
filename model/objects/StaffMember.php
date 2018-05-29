@@ -21,6 +21,7 @@ class StaffMember
     private $_email;
     private $_phone;
     private $_portraitURL;
+    private $_pageOrder;
 
     /**
      * StaffMember constructor.
@@ -34,7 +35,7 @@ class StaffMember
      * @param $phone Staff member's phone number
      * @param $portraitURL URL of staff member's portrait
      */
-    public function __construct($id, $fname, $lname, $title, $biography, $email, $phone, $portraitURL)
+    public function __construct($id, $fname, $lname, $title, $biography, $email, $phone, $portraitURL, $pageOrder)
     {
         $this->_id = $id;
         $this->_fname = $fname;
@@ -44,6 +45,7 @@ class StaffMember
         $this->_email = $email;
         $this->_phone = $phone;
         $this->_portraitURL = $portraitURL;
+        $this->_pageOrder = $pageOrder;
     }
 
     /**
@@ -207,6 +209,26 @@ class StaffMember
     }
 
     /**
+     * Gets the page order of staff member
+     *
+     * @return mixed page order of staff member
+     */
+    public function getPageOrder()
+    {
+        return $this->_pageOrder;
+    }
+
+    /**
+     * Sets the page order of staff member
+     *
+     * @param mixed $pageOrder page order to set for staff member
+     */
+    public function setPageOrder($pageOrder)
+    {
+        $this->_pageOrder = $pageOrder;
+    }
+
+    /**
      * Returns a string representation of the staff member
      *
      * @return string String representation of this staff member
@@ -220,7 +242,7 @@ class StaffMember
             .self::getBiography()." "
             .self::getEmail()." "
             .self::getPhone()." "
-            .self::getPortraitURL();
+            .self::getPortraitURL()." "
+            .self::getPageOrder();
     }
-
 }

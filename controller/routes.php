@@ -123,6 +123,14 @@ $f3->route('POST /ajax-delete-member', function($f3) {
     }
 });
 
+$f3->route('POST /ajax-shift-member', function($f3) {
+    if ($f3->get('isAdmin')) {
+        Logic::shiftMember($_POST['id'], $_POST['memberType'], $_POST['idColumnName'], $_POST['direction']);
+    } else {
+        echo json_encode('Invalid Credentials!');
+    }
+});
+
 $f3->route('POST /ajax-delete-event', function($f3) {
     if ($f3->get('isAdmin')) {
         Logic::deleteEvent($_POST['id']);
@@ -245,12 +253,12 @@ $f3->route('POST /staff-modify', function($f3) {
         if ($_POST['staffid'] == -1) {
             $staffMember = new StaffMember(-1, $_POST['staffFName'],
                 $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, 0);
             Logic::addStaffMember($staffMember);
         } else {
             $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
                 $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, 0);
             Logic::updateStaffMember($staffMember);
         }
     }
@@ -315,12 +323,12 @@ $f3->route('POST /bod-modify', function($f3) {
         if ($_POST['idbod'] == -1) {
             $BODMember = new StaffMember(-1, $_POST['BODFName'],
                 $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, 0);
             Logic::addBODMember($BODMember);
         } else {
             $BODMember = new StaffMember($_POST['idbod'], $_POST['BODFName'],
                 $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, 0);
             Logic::updateBODMember($BODMember);
         }
     }
@@ -752,6 +760,16 @@ $f3->route('GET /accounts/register/verify/@hash', function($f3, $params) {
 });
 
 $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
+
+    if(!$f3->get('loggedIn')){
+        $f3->reroute('/');
+    }
+
+    if(isset($_POST['submit'])) {
+        $data = array($_POST['childName'], $_POST['parent']);
+        Logic::insertMediaRelease($data);
+    }
+
     // Title to use in template.
     $title = "M-Power Youth: Media Release";
     // List of paths to stylesheets.
@@ -774,6 +792,14 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
 });
 
 $f3->route('GET|POST /enrollment', function($f3) {
+    $f3->set('curDate', (new DateTime("now", new DateTimeZone('America/Los_Angeles')))->format("Y-m-d"));
+
+    if(isset($_POST['submit'])) {
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+    }
+
     // Title to use in template.
     $title = "M-Power Youth: Enrollment";
     // List of paths to stylesheets.
