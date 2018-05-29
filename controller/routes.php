@@ -947,6 +947,9 @@ $f3->route('GET /administration', function($f3) {
 
     $f3->set('notifications', Logic::getNotifications());
     $f3->set('rentals', Logic::getRentalRequests());
+    $f3->set('applications', Logic::getApplications());
+    $f3->set('volunteers', Logic::getVolunteers());
+    $f3->set('accounts', Logic::getAccounts());
 
     // Title to use in template.
     $title = "M-Power Youth: Administration";

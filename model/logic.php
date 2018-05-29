@@ -58,6 +58,8 @@ class Logic
         Database::connect();
 
         $userId = unserialize($_SESSION['account'])->getId();
+
+        Database::createNotification('application');
         return Database::insertEnrollment($data, $userId);
     }
 
@@ -634,6 +636,51 @@ class Logic
         Database::connect();
 
         $result = Database::getNotifications();
+
+        return $result;
+    }
+
+    /**
+     * Method pulls all notifications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
+    public static function getApplications()
+    {
+        Database::connect();
+
+        $result = Database::getApplications();
+
+        return $result;
+    }
+
+    /**
+     * Method pulls all notifications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
+    public static function getVolunteers()
+    {
+        Database::connect();
+
+        $result = Database::getVolunteers();
+
+        return $result;
+    }
+
+    /**
+     * Method pulls all notifications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
+    public static function getAccounts()
+    {
+        Database::connect();
+
+        $result = Database::getAccounts();
 
         return $result;
     }

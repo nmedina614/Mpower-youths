@@ -624,6 +624,45 @@ class Database
     }
 
     /**
+     * Method pulls all applications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all application requests.
+     */
+    public static function getApplications()
+    {
+        $sql = 'SELECT studentName, grade, submissionDate, decision FROM formEnrollment';
+
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Method pulls all volunteer applications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all volunteer applications requests.
+     */
+    public static function getVolunteers()
+    {
+        $sql = 'SELECT name, phone, dateRequested, requestStatus FROM formVolunteer';
+
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getAccounts()
+    {
+        $sql = 'SELECT username, email, phone, privilege FROM account';
+
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Send a Request for an Instrument
      *
      * @param $student string Student Full Name

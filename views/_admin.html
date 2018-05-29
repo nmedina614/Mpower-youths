@@ -36,45 +36,173 @@
         <div class="col-12 col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Rentals
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link table-selector active" data-target="rentals" href="#">Rentals</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link table-selector" data-target="applications" href="#">Applications</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link table-selector" data-target="volunteers" href="#">Volunteers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link table-selector" data-target="users" href="#">Users</a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="card-body">
-                    <table id="rentals" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Instrument</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <repeat group="{{ @rentals }}" value="{{ @rental }}">
+                    <div id="rentals" class="table-container active">
+                        <table class="data-table table table-striped table-bordered w-100">
+                            <thead>
                             <tr>
-                                <td>{{ @rental['studentName'] }}</td>
-                                <td>{{ @rental['instrument'] }}</td>
-                                <td>{{ @rental['dateSubmited'] }}</td>
-                                <td>{{ Logic::translateRequestStatus(@rental['requestStatus']) }}</td>
-                                <td class="btn btn-light btn-sm">
-                                    <a href="#">
-                                        <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
-                                    </a>
-                                </td>
+                                <th>Name</th>
+                                <th>Instrument</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th></th>
                             </tr>
-                        </repeat>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Instrument</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                        </tfoot>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <repeat group="{{ @rentals }}" value="{{ @rental }}">
+                                <tr>
+                                    <td>{{ @rental['studentName'] }}</td>
+                                    <td>{{ @rental['instrument'] }}</td>
+                                    <td>{{ @rental['dateSubmited'] }}</td>
+                                    <td>{{ Logic::translateRequestStatus(@rental['requestStatus']) }}</td>
+                                    <td class="btn btn-light btn-sm">
+                                        <a href="#">
+                                            <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </repeat>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Instrument</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- RENTALS -->
+                    <div id="applications" class="table-container toshow" style="display:none">
+                        <table class="data-table table table-striped table-bordered w-100">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Grade</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <repeat group="{{ @applications }}" value="{{ @application }}">
+                                <tr>
+                                    <td>{{ @application['studentName'] }}</td>
+                                    <td>{{ @application['grade'] }}</td>
+                                    <td>{{ @application['submissionDate'] }}</td>
+                                    <td>{{ Logic::translateRequestStatus(@application['decision']) }}</td>
+                                    <td class="btn btn-light btn-sm">
+                                        <a href="#">
+                                            <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </repeat>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Grade</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- APPLICATIONS -->
+
+                    <div id="volunteers" class="table-container toshow" style="display:none">
+                        <table class="data-table table table-striped table-bordered w-100">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <repeat group="{{ @volunteer }}" value="{{ @volunteer }}">
+                                <tr>
+                                    <td>{{ @volunteer['name'] }}</td>
+                                    <td>{{ @volunteer['phone'] }}</td>
+                                    <td>{{ @volunteer['dateRequested'] }}</td>
+                                    <td>{{ Logic::translateRequestStatus(@volunteer['requestStatus']) }}</td>
+                                    <td class="btn btn-light btn-sm">
+                                        <a href="#">
+                                            <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </repeat>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- VOLUNTEERS -->
+
+                    <div id="users" class="table-container toshow" style="display:none">
+                        <table class="data-table table table-striped table-bordered w-100">
+                            <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Privilege</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <repeat group="{{ @accounts }}" value="{{ @account }}">
+                                <tr>
+                                    <td>{{ @account['username'] }}</td>
+                                    <td>{{ @account['email'] }}</td>
+                                    <td>{{ @account['phone'] }}</td>
+                                    <td>{{ @account['privilege'] }}</td>
+                                    <td class="btn btn-light btn-sm">
+                                        <a href="#">
+                                            <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </repeat>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Privilege</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- USERS -->
                 </div>
-            </div>
-        </div> <!-- RENTALS TABLE -->
+            </div><!-- TABLES -->
+        </div> <!-- INFO TABLE AREA -->
     </div>
 </div>
