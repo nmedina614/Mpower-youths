@@ -104,6 +104,42 @@ class Database
     }
 
     /**
+     * Method used to insert a enrollment form to database
+     * @param form data for each element
+     * @param account that is signed in
+     * @return if the query executed successfully
+     */
+    public static function insertEnrollment($formData, $accountId)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'INSERT INTO formEnrollment (accountId, studentName, school, grade, instrument, 
+        parent, email, phone, street1, street2, city, zip, allergies, referral, decision,
+        takeHomeInstrument) VALUES (:accountId, :studentName, :school, :grade, :instrument, 
+        :parent, :email, :phone, :street1, :street2, :city, :zip, :allergies, :referral, :decision,
+        :takeHomeInstrument)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_STR);
+        $statement->bindParam(':studentName', $formData[0], PDO::PARAM_STR);
+        $statement->bindParam(':school', $formData[1], PDO::PARAM_STR);
+        $statement->bindParam(':grade', $formData[2], PDO::PARAM_STR);
+        $statement->bindParam(':instrument', $formData[3], PDO::PARAM_STR);
+        $statement->bindParam(':parent', $formData[4], PDO::PARAM_STR);
+        $statement->bindParam(':email', $formData[5], PDO::PARAM_STR);
+        $statement->bindParam(':phone', $formData[6], PDO::PARAM_STR);
+        $statement->bindParam(':street1', $formData[7], PDO::PARAM_STR);
+        $statement->bindParam(':street2', $formData[8], PDO::PARAM_STR);
+        $statement->bindParam(':city', $formData[9], PDO::PARAM_STR);
+        $statement->bindParam(':zip', $formData[10], PDO::PARAM_STR);
+        $statement->bindParam(':allergies', $formData[11], PDO::PARAM_STR);
+        $statement->bindParam(':referral', $formData[12], PDO::PARAM_STR);
+        $statement->bindParam(':decision', $formData[13], PDO::PARAM_STR);
+        $statement->bindParam(':takeHomeInstrument', $formData[14], PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    /**
      * Method used to pull all gallery data from the database.
      *
      * @return mixed Returns the data as an associative array.

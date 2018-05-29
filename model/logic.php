@@ -47,6 +47,21 @@ class Logic
     }
 
     /**
+     * Passes the media release form data into database query
+     *
+     * @param data is a list of data for media release - [studentName],[school],[grade],[instrument],[parent],[email],
+     * [phone],[street1],[street2],[city],[zip],[allergies],[referral],[decision],[takeHomeInstrument]
+     * @return if the database submitted successfully
+     */
+    public static function insertEnrollment($data)
+    {
+        Database::connect();
+
+        $userId = unserialize($_SESSION['account'])->getId();
+        return Database::insertEnrollment($data, $userId);
+    }
+
+    /**
      * Method used to process event information.
      *
      * @return array Returns an array if event information.
