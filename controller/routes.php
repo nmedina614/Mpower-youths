@@ -736,6 +736,10 @@ $f3->route('GET /accounts/register/verify/@hash', function($f3, $params) {
 });
 
 $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
+    if(isset($_POST['submit'])) {
+        print_r($_POST);
+    }
+
     // Title to use in template.
     $title = "M-Power Youth: Media Release";
     // List of paths to stylesheets.
@@ -758,6 +762,12 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
 });
 
 $f3->route('GET|POST /enrollment', function($f3) {
+    if(isset($_POST['submit'])) {
+        echo '<pre>';
+        print_r($_POST);
+        echo '</pre>';
+    }
+
     // Title to use in template.
     $title = "M-Power Youth: Enrollment";
     // List of paths to stylesheets.
