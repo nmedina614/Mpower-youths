@@ -485,12 +485,12 @@ $f3->route('GET /join', function($f3) {
 
 /* -------------------------- INSTRUMENT RENTALS ----------------------------- */
 
-$f3->route('GET /instruments/rent', function($f3) {
+
+$f3->route('GET /instruments', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Rent-A-Instrument";
     // List of paths to stylesheets.
     $styles = array(
-        BASE.'/assets/styles/_rent.css'
     );
     // List of paths for sub-templates being used.
     $includes = array(
@@ -508,28 +508,43 @@ $f3->route('GET /instruments/rent', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET /instruments/', function($f3) {
-    // Title to use in template.
-    $title = "M-Power Youth: Rent-A-Instrument";
-    // List of paths to stylesheets.
-    $styles = array(
-    );
-    // List of paths for sub-templates being used.
-    $includes = array(
-        'views/_nav.html',
-        'views/_footer.html'
-    );
-    // List of paths to scripts being used.
-    $scripts = array();
-    $f3->set('title' , $title);
-    $f3->set('styles' , $styles);
-    $f3->set('includes' , $includes);
-    $f3->set('scripts' , $scripts);
-    $template = new Template();
-    echo $template->render('views/_base.html');
-});
+$f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
 
-$f3->route('GET|POST /instruments/rental', function($f3) {
+    if(!$f3->get('loggedIn')){
+        $f3->reroute('/');
+    }
+
+    if(isset($_POST['submit'])){
+
+        $student = $_POST['student_name'];
+        $guardian = $_POST['guard_name'];
+        $add1 = $_POST['street1'];
+        $add2 = $_POST['street2'];
+        $city = $_POST['city'];
+        $zip = $_POST['zip'];
+        $phone = $_POST['phone'];
+        $school = $_POST['school'];
+        $grade = $_POST['grade'];
+        $instrument = $_POST['instrument'];
+        date_default_timezone_set('America/Los_Angeles');
+        $date = date('Y-m-d');
+
+        $result = Logic::requestInstrument($student, $guardian, $add1,
+                                 $add2, $city, $zip, $phone,
+                                 $school, $grade, $instrument,
+                                 $date);
+
+        if($result != false){
+            $f3->set('result', "Request Submitted");
+        } else {
+            $f3->set('result', "Request failed to send");
+        }
+    }
+
+
+    $instrument = $params['instrument'];
+
+
     // Title to use in template.
     $title = "M-Power Youth: Instrument Agreement";
     // List of paths to stylesheets.
@@ -547,6 +562,11 @@ $f3->route('GET|POST /instruments/rental', function($f3) {
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
     $f3->set('scripts' , $scripts);
+
+    //Variables going to be used
+    $f3->set('instrument', $instrument);
+
+
     $template = new Template();
     echo $template->render('views/_base.html');
 });
@@ -813,6 +833,35 @@ $f3->route('GET|POST /enrollment', function($f3) {
 });
 
 $f3->route('GET|POST /volunteer', function($f3) {
+
+    if(!$f3->get('loggedIn')){
+        $f3->reroute('/');
+    }
+
+    if(isset($_POST['submit'])) {
+
+        //Values from POST array
+        $name = $_POST['full_name']; //Name
+        $address = $_POST['address']; //Address
+        $zip = $_POST['zip']; //Zip code
+        $dob = $_POST['date']; //Date of Birth
+        $phone = $_POST['phone']; //phone number
+        $dl = $_POST['dl']; //Driver's License Number
+
+        date_default_timezone_set('America/Los_Angeles');
+        $date = date('Y-m-d'); //Date of Request
+
+        $result = Logic::volunteerRequest($name, $address, $zip, $dob, $phone,
+                                          $dl, $date);
+
+        if ($result != false) {
+            $f3->set('result', "Request Submitted");
+        } else {
+            $f3->set('result', "Request failed to send");
+        }
+
+    }
+
     // Title to use in template.
     $title = "M-Power Youth: Volunteer Registration";
     // List of paths to stylesheets.
