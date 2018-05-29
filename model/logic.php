@@ -125,6 +125,13 @@ class Logic
         return $result;
     }
 
+    public static function getMaxPageOrder($memberType)
+    {
+
+        Database::connect();
+        return Database::getMaxPageOrder($memberType)[0]['pageOrder'];
+    }
+
     /**
      * Validates and sends a staffmember to the database to be added
      *
@@ -139,7 +146,7 @@ class Logic
         Database::connect();
         return Database::addStaffMember($staffMember->getFName(), $staffMember->getLName(),
             $staffMember->getTitle(), $staffMember->getBiography(), $staffMember->getEmail(),
-            $staffMember->getPhone(), $staffMember->getPortraitURL(), 'staff');
+            $staffMember->getPhone(), $staffMember->getPortraitURL(), 'staff', $staffMember->getPageOrder());
     }
 
     /**
@@ -591,10 +598,21 @@ class Logic
 
     }
 
+    /**
+     * Method that verifies a hash associated with a certain account.
+     *
+     * @param $hash Hash being evaluated
+     * @return mixed Returns if the account was verified.
+     */
     public static function verifyAccount($hash)
     {
         Database::connect();
-        return Database::verifyAccount($hash);
+        $result = Database::verifyAccount($hash);
+        if(isset($result)) {
+            Database::createNotification('new user');
+        }
+
+        return $result;
     }
 
     public static function addEvent($event)
@@ -606,17 +624,11 @@ class Logic
     }
 
     /**
-     * Method used to create a notification in the database.
-     * Example types include 'rental', 'application', 'notification'.
+     * Method pulls all notifications from the database
+     * and returns them as an array.
      *
-     * @param $type String containing the type of notification ('notification' by default)
-     * @return int Returns the id of the new notification as an int.
+     * @return mixed Returns an array containing all rental requests.
      */
-    public static function createNotification($name, $type='notification') {
-
-    }
-
-
     public static function getNotifications()
     {
         Database::connect();
@@ -626,6 +638,12 @@ class Logic
         return $result;
     }
 
+    /**
+     * Method pulls all rentals from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
     public static function getRentalRequests()
     {
         Database::connect();
@@ -636,6 +654,13 @@ class Logic
 
     }
 
+    /**
+     * Method used to convert the numeric value received into
+     * a text string for ease of reading.
+     *
+     * @param $numericStatus int status from database.
+     * @return string String representing the status of a request.
+     */
     public static function translateRequestStatus($numericStatus)
     {
         switch($numericStatus)
@@ -673,6 +698,8 @@ class Logic
 
         Database::connect();
 
+        Database::createNotification('rental');
+
         return Database::requestInstrument($student, $guardian, $add1, $add2,
                                            $city, $zip, $phone, $school,
                                            $grade, $instrument, $date);
@@ -696,6 +723,8 @@ class Logic
     {
 
         Database::connect();
+
+        Database::createNotification('volunteer');
 
         return Database::volunteerRequest($name, $address, $zip, $dob,
             $phone, $drivers, $dateRequested);

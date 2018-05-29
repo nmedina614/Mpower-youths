@@ -251,14 +251,20 @@ $f3->route('POST /staff-modify', function($f3) {
 
         // if editing an existing staff member, staffid will be set.
         if ($_POST['staffid'] == -1) {
+            $newMemberPageOrder = 1;
+
+            if (sizeof(Logic::getAllStaff()) > 0) {
+                $newMemberPageOrder = Logic::getMaxPageOrder('staff') + 1;
+            }
+
             $staffMember = new StaffMember(-1, $_POST['staffFName'],
                 $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, 0);
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, $newMemberPageOrder);
             Logic::addStaffMember($staffMember);
         } else {
             $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
                 $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, 0);
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, $_POST['pageOrder']);
             Logic::updateStaffMember($staffMember);
         }
     }

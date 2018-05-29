@@ -6,6 +6,7 @@ $(".btn-edit").click(function(e) {
 
     // get id of staff member to be edited
     var id = $(e.target).data('id');
+    var pageOrder = $(e.target).data('order');
 
     // get variables for autofilling edit form
     var staffFName = $("div[data-id='" + id + "']").find(".fname").text();
@@ -15,8 +16,9 @@ $(".btn-edit").click(function(e) {
     var staffPhone = $("div[data-id='" + id + "']").find(".phone").text();
     var staffBio = $("div[data-id='" + id + "']").find(".biography").text();
     var staffImage = $("div[data-id='" + id + "']").find(".image").attr("src");
+    var pageOrder = $(e.target).data('order');
 
-    fillModal("Modify Staff Member", staffFName, staffLName, staffTitle, staffEmail, staffPhone, staffBio, staffImage, id);
+    fillModal("Modify Staff Member", staffFName, staffLName, staffTitle, staffEmail, staffPhone, staffBio, staffImage, id, pageOrder);
 
 });
 
@@ -28,7 +30,7 @@ $(".btn-add").click(function(e) {
 });
 
 function fillModal(modalTitle, staffFName = "", staffLName = "", staffTitle = "", staffEmail = "",
-                   staffPhone = "", staffBio = "", staffImage = "", id = -1) {
+                   staffPhone = "", staffBio = "", staffImage = "", id = -1, pageOrder = 0) {
 
     $("#exampleModalLabel").text(modalTitle);
 
@@ -40,6 +42,7 @@ function fillModal(modalTitle, staffFName = "", staffLName = "", staffTitle = ""
     $("#staffPhone").val(staffPhone);
     $("#staffBio").val(staffBio);
     $("#staffImage").val(staffImage);
+    $("#pageOrder").val(pageOrder);
 
     // set the ID for the form
     $("#staffid").val(id);
