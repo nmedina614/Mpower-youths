@@ -253,12 +253,12 @@ $f3->route('POST /staff-modify', function($f3) {
         if ($_POST['staffid'] == -1) {
             $staffMember = new StaffMember(-1, $_POST['staffFName'],
                 $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, 0);
             Logic::addStaffMember($staffMember);
         } else {
             $staffMember = new StaffMember($_POST['staffid'], $_POST['staffFName'],
                 $_POST['staffLName'], $_POST['staffTitle'], $_POST['staffBio'],
-                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL);
+                $_POST['staffEmail'], $_POST['staffPhone'], $portraitURL, 0);
             Logic::updateStaffMember($staffMember);
         }
     }
@@ -323,12 +323,12 @@ $f3->route('POST /bod-modify', function($f3) {
         if ($_POST['idbod'] == -1) {
             $BODMember = new StaffMember(-1, $_POST['BODFName'],
                 $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, 0);
             Logic::addBODMember($BODMember);
         } else {
             $BODMember = new StaffMember($_POST['idbod'], $_POST['BODFName'],
                 $_POST['BODLName'], $_POST['BODTitle'], $_POST['BODBio'],
-                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL);
+                $_POST['BODEmail'], $_POST['BODPhone'], $portraitURL, 0);
             Logic::updateBODMember($BODMember);
         }
     }

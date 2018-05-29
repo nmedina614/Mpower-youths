@@ -83,7 +83,12 @@ $('.btn-shift-up').click(function(e) {
         data : {id : id, memberType : 'staff', idColumnName : 'idstaff', direction : 'up'},
         dataType : 'json',
         success : function(response) {
-
+            if (response == true) {
+                location.reload();
+                alert("we should be reloading now");
+            } else {
+                alert(response);
+            }
         },
         error : function() {
             console.log("Failed to connect!");

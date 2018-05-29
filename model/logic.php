@@ -88,9 +88,9 @@ class Logic
 
         foreach ($resultDB as $key => $value) {
             array_push($result,
-                new StaffMember($value['idstaff'], $value['fname'],
-                    $value['lname'], $value['title'], $value['biography'],
-                    $value['email'], $value['phone'], $value['portraitURL']));
+                new StaffMember($value['idstaff'], $value['fname'], $value['lname'],
+                    $value['title'], $value['biography'], $value['email'],
+                    $value['phone'], $value['portraitURL'], $value['pageOrder']));
         }
 
         return $result;
@@ -154,18 +154,21 @@ class Logic
 
     public static function shiftMember($id, $memberType, $idColumnName, $direction) {
 
+        Database::connect();
         $memberArray = Database::getAllStaff($memberType);
 
         if (sizeof($memberArray) < 2) {
+            echo json_encode('not enough members to swap');
             return;
         }
 
         $memberIndex = 0;
-        while ($memberIndex < sizeof($memberArray) && $memberArray[$memberIndex]->getId() != $id) {
+        /*while ($memberIndex < sizeof($memberArray) && $memberArray[$memberIndex]->getId() != $id) {
             $memberIndex++;
         }
 
-        if ($memberIndex = sizeof($memberArray)) {
+        /*if ($memberIndex = sizeof($memberArray)) {
+            echo json_encode('did not find id in member list')
             return;
         }
 
@@ -173,14 +176,18 @@ class Logic
 
         if ($direction === 'up') {
             $swapIndex = $memberIndex - 1;
-        } else if ($direction = 'down') {
+        } else if ($direction === 'down') {
             $swapIndex = $memberIndex + 1;
         }
 
         if ($swapIndex > 0 && $swapIndex < sizeof($memberArray)) {
             Database::swapMembers($id, $memberArray[$swapIndex]->getId(), $memberArray[$memberIndex]->getPageOrder(),
                 $memberArray[$swapIndex]->getPageOrder(), $memberType, $idColumnName);
-        }
+            echo json_encode(true);
+            return;
+        }*/
+
+        echo json_encode('value is already at the top or bottom');
 
     }
 
@@ -198,9 +205,9 @@ class Logic
 
         foreach ($resultDB as $key => $value) {
             array_push($result,
-                new StaffMember($value['idbod'], $value['fname'],
-                    $value['lname'], $value['title'], $value['biography'],
-                    $value['email'], $value['phone'], $value['portraitURL']));
+                new StaffMember($value['idbod'], $value['fname'], $value['lname'],
+                    $value['title'], $value['biography'], $value['email'],
+                    $value['phone'], $value['portraitURL'], $value['pageOrder']));
         }
 
         return $result;
