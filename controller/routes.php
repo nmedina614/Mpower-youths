@@ -522,7 +522,6 @@ $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
 
     if(isset($_POST['submit'])){
 
-        print_r($_POST);
         $student = $_POST['student_name'];
         $guardian = $_POST['guard_name'];
         $add1 = $_POST['street1'];
@@ -870,6 +869,8 @@ $f3->route('GET|POST /volunteer', function($f3) {
 
     if(isset($_POST['submit'])) {
 
+
+
         //Values from POST array
         $name = $_POST['full_name']; //Name
         $address = $_POST['address']; //Address
@@ -878,16 +879,36 @@ $f3->route('GET|POST /volunteer', function($f3) {
         $phone = $_POST['phone']; //phone number
         $dl = $_POST['dl']; //Driver's License Number
 
-        date_default_timezone_set('America/Los_Angeles');
-        $date = date('Y-m-d'); //Date of Request
 
-        $result = Logic::volunteerRequest($name, $address, $zip, $dob, $phone,
-                                          $dl, $date);
+        $errors = Validator::validateVolunteer($name, $phone);
 
-        if ($result != false) {
-            $f3->set('result', "Request Submitted");
+        if(count($errors)==0) {
+
+            date_default_timezone_set('America/Los_Angeles');
+            $date = date('Y-m-d'); //Date of Request
+
+            $result = Logic::volunteerRequest($name, $address, $zip, $dob, $phone,
+                $dl, $date);
+
+            if ($result != false) {
+                $f3->set('result', "Request Submitted");
+            } else {
+                $f3->set('result', "Request failed to send");
+            }
+
         } else {
+
             $f3->set('result', "Request failed to send");
+
+            $f3->set('errors', $errors);
+
+             $f3->set('name',$name);
+             $f3->set('address',$address);
+             $f3->set('zip',$zip);
+             $f3->set('dob',$dob);
+             $f3->set('phone',$phone);
+             $f3->set('dl',$dl);
+
         }
 
     }

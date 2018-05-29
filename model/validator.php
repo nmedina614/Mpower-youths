@@ -130,6 +130,18 @@ class Validator
 
     }
 
+    public static function validateVolunteer($name, $phone){
+
+        $errors = array();
+
+        if(!self::validateName($name)) $errors['student'] = "Your Name is Invalid Please make sure it contains no numbers";
+        if(!self::validatePhone($phone)) $errors['phone'] = "Your Phone number is invalid";
+
+
+        return $errors;
+
+    }
+
     public static function validateName($name){
 
         $pattern = '/^([^0-9]*)$/';
