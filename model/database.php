@@ -555,6 +555,25 @@ class Database
         return $statement->execute();
     }
 
+
+    public static function getNotifications()
+    {
+        $sql = 'SELECT * FROM notification ORDER BY time';
+
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getInstrumentRentals()
+    {
+        $sql = 'SELECT studentName, instrument, dateSubmited, requestStatus FROM `formInstrumentRequest`';
+
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     /**
      * Send a Request for an Instrument
      *
