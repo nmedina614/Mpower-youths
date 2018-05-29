@@ -108,16 +108,16 @@ class Logic
      *
      * @return array Returns an array of staff information.
      */
-    public static function getAllStaff()
+    public static function getAllStaff($memberType, $idColumnName)
     {
         $result = array();
 
         Database::connect();
-        $resultDB = Database::getAllStaff('staff');
+        $resultDB = Database::getAllStaff($memberType);
 
         foreach ($resultDB as $key => $value) {
             array_push($result,
-                new StaffMember($value['idstaff'], $value['fname'], $value['lname'],
+                new StaffMember($value[$idColumnName], $value['fname'], $value['lname'],
                     $value['title'], $value['biography'], $value['email'],
                     $value['phone'], $value['portraitURL'], $value['pageOrder']));
         }
@@ -201,7 +201,7 @@ class Logic
 
         // get member array
         Database::connect();
-        $memberArray = Logic::getAllStaff($memberType);
+        $memberArray = Logic::getAllStaff($memberType, $idColumnName);
 
         // check if there are enough members to swap
         if (sizeof($memberArray) < 2) {
@@ -276,9 +276,9 @@ class Logic
         // TODO add validation before sending to database
 
         Database::connect();
-        return Database::addStaffMember($BODMember->getFName(), $BODMember->getLName(),
-            $BODMember->getTitle(), $BODMember->getBiography(), $BODMember->getEmail(),
-            $BODMember->getPhone(), $BODMember->getPortraitURL(), 'board_of_directors');
+        return Database::addStaffMember($BODMember->getFName(), $BODMember->getLName(), $BODMember->getTitle(),
+            $BODMember->getBiography(), $BODMember->getEmail(), $BODMember->getPhone(),
+            $BODMember->getPortraitURL(), 'board_of_directors', $BODMember->getPageOrder());
     }
 
     /**
