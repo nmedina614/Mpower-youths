@@ -74,6 +74,7 @@ $('.btn-delete').click(function(e) {
     }
 });
 
+// when shift member up button is clicked
 $('.btn-shift-up').click(function(e) {
 
     var id = $(e.target).data('id');
@@ -85,7 +86,28 @@ $('.btn-shift-up').click(function(e) {
         success : function(response) {
             if (response == true) {
                 location.reload();
-                alert("we should be reloading now");
+            } else {
+                alert(response);
+            }
+        },
+        error : function() {
+            console.log("Failed to connect!");
+        }
+    });
+});
+
+// when shift member down button is clicked
+$('.btn-shift-down').click(function(e) {
+
+    var id = $(e.target).data('id');
+
+    $.ajax('ajax-shift-member', {
+        method : "POST",
+        data : {id : id, memberType : 'staff', idColumnName : 'idstaff', direction : 'down'},
+        dataType : 'json',
+        success : function(response) {
+            if (response == true) {
+                location.reload();
             } else {
                 alert(response);
             }

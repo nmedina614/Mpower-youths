@@ -47,7 +47,7 @@
 
                 <div class="form-group col-md-3">
                     <label for="studentSignDate">Date</label>
-                    <input type="date" class="form-control" id="studentSignDate" value='{{ date("Y-m-d") }}' readonly>
+                    <input type="date" class="form-control" id="studentSignDate" value='{{ @curDate }}' readonly>
                 </div>
             </div>
 
@@ -204,7 +204,7 @@
 
                 <div class="form-group col-md-3">
                     <label for="parentSignDate">Date</label>
-                    <input type="date" class="form-control" id="parentSignDate" value='{{ date("Y-m-d") }}' readonly>
+                    <input type="date" class="form-control" id="parentSignDate" value='{{ @curDate }}' readonly>
                 </div>
             </div>
         </div>

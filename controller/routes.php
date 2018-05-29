@@ -744,8 +744,14 @@ $f3->route('GET /accounts/register/verify/@hash', function($f3, $params) {
 });
 
 $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
+
+    if(!$f3->get('loggedIn')){
+        $f3->reroute('/');
+    }
+
     if(isset($_POST['submit'])) {
-        print_r($_POST);
+        $data = array($_POST['childName'], $_POST['parent']);
+        Logic::insertMediaRelease($data);
     }
 
     // Title to use in template.
@@ -770,6 +776,8 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
 });
 
 $f3->route('GET|POST /enrollment', function($f3) {
+    $f3->set('curDate', (new DateTime("now", new DateTimeZone('America/Los_Angeles')))->format("Y-m-d"));
+
     if(isset($_POST['submit'])) {
         echo '<pre>';
         print_r($_POST);

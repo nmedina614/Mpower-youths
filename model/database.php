@@ -85,6 +85,25 @@ class Database
     }
 
     /**
+     * Method used to insert a media release form to database
+     * @param form data for each element
+     * @param account that is signed in
+     * @return if the query executed successfully
+     */
+    public static function insertMediaRelease($formData, $accountId)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'INSERT INTO formMediaRelease (accountId, childName, parentName) VALUES (:accountId, :childName, :parentName)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_STR);
+        $statement->bindParam(':childName', $formData[0], PDO::PARAM_STR);
+        $statement->bindParam(':parentName', $formData[1], PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    /**
      * Method used to pull all gallery data from the database.
      *
      * @return mixed Returns the data as an associative array.

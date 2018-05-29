@@ -33,6 +33,20 @@ class Logic
     }
 
     /**
+     * Passes the form data into database query
+     *
+     * @param data is a list of data for media release - student name, parent name
+     * @return if the database submitted successfully
+     */
+    public static function insertMediaRelease($data)
+    {
+        Database::connect();
+
+        $userId = unserialize($_SESSION['account'])->getId();
+        return Database::insertMediaRelease($data, $userId);
+    }
+
+    /**
      * Method used to process event information.
      *
      * @return array Returns an array if event information.
@@ -152,40 +166,55 @@ class Logic
         return result;
     }
 
-    public static function shiftMember($id, $memberType, $idColumnName, $direction) {
+    /**
+     * Shifts a member up or down on the page
+     *
+     * @param $id id of the member selected
+     * @param $memberType the type of member
+     * @param $idColumnName the id column name
+     * @param $direction the direction to move the member, 'up' or 'down'
+     */
+    public static function shiftMember($id, $memberType, $idColumnName, $direction)
+    {
 
+        // get member array
         Database::connect();
-        $memberArray = Database::getAllStaff($memberType);
+        $memberArray = Logic::getAllStaff($memberType);
 
+        // check if there are enough members to swap
         if (sizeof($memberArray) < 2) {
             echo json_encode('not enough members to swap');
             return;
         }
 
+        // get the index of the member in the member array
         $memberIndex = 0;
-        /*while ($memberIndex < sizeof($memberArray) && $memberArray[$memberIndex]->getId() != $id) {
+        while ($memberIndex < sizeof($memberArray) && $memberArray[$memberIndex]->getId() != $id) {
             $memberIndex++;
         }
 
-        /*if ($memberIndex = sizeof($memberArray)) {
-            echo json_encode('did not find id in member list')
+        // if the member was not found in the member array
+        if ($memberIndex == sizeof($memberArray)) {
+            echo json_encode('did not find id in member list');
             return;
         }
 
         $swapIndex = 0;
 
+        // select the swap index depending on shifting up or down
         if ($direction === 'up') {
             $swapIndex = $memberIndex - 1;
         } else if ($direction === 'down') {
             $swapIndex = $memberIndex + 1;
         }
 
-        if ($swapIndex > 0 && $swapIndex < sizeof($memberArray)) {
-            Database::swapMembers($id, $memberArray[$swapIndex]->getId(), $memberArray[$memberIndex]->getPageOrder(),
+        // if the swap index is in the array bounds, swap
+        if ($swapIndex > -1 && $swapIndex < sizeof($memberArray)) {
+            Database::swapMember($id, $memberArray[$swapIndex]->getId(), $memberArray[$memberIndex]->getPageOrder(),
                 $memberArray[$swapIndex]->getPageOrder(), $memberType, $idColumnName);
             echo json_encode(true);
             return;
-        }*/
+        }
 
         echo json_encode('value is already at the top or bottom');
 
