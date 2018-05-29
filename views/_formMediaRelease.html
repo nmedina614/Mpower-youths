@@ -1,27 +1,48 @@
-<form>
-    <h1>Minor Photo/Video Release Form</h1>
-    <p>I give M-Power Youths my permission to publish in print, electronic, or video format the image or video of
-    my child, for the sole purpose of M-Power Youths</p>
+<form method="post">
+    <div class="container">
+        <h1 class="text-center">Minor Photo/Video Release Form</h1>
+        <p>I give M-Power Youths my permission to publish in print, electronic, or video format the image or video of
+        my child, for the sole purpose of M-Power Youths</p>
 
-    <div class="form-group">
-        <label for="childName">Child's Name</label>
-        <input type="text" class="form-control" name="childName" id="childName">
+        <div class="form-group">
+            <label for="childName">Child's Name</label>
+            <input type="text" class="form-control" name="childName" id="childName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="parentName">Parent's Name</label>
+            <input type="text" class="form-control" name="parent" id="parentName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" name="date" id="date" required>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="btn btn-success w-25" data-toggle="modal" data-target="#exampleModal">Send</button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Media Agreement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        I give M-Power Youths my permission to publish in print, electronic, or video format the image or video of
+                        my child, for the sole purpose of M-Power Youths
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+                        <button type="submit" class="btn btn-success">I Agree</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label for="parentName">Parent's Name</label>
-        <input type="text" class="form-control" name="parent" id="parentName">
-    </div>
-
-    <div class="form-group">
-        <label for="signedName">Sign Name</label>
-        <input type="text" class="form-control" name="signedName" id="signedName">
-    </div>
-
-    <div class="form-group">
-        <label for="signedDate">Sign Date</label>
-        <input type="date" class="form-control" name="signedDate" id="signedDate">
-    </div>
-
-    <button type="submit" class="btn btn-success">I Agree</button>
 </form>
