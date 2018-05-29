@@ -155,7 +155,7 @@ class Logic
     public static function shiftMember($id, $memberType, $idColumnName, $direction) {
 
         Database::connect();
-        $memberArray = Database::getAllStaff($memberType);
+        $memberArray = Logic::getAllStaff($memberType);
 
         if (sizeof($memberArray) < 2) {
             echo json_encode('not enough members to swap');
@@ -163,12 +163,12 @@ class Logic
         }
 
         $memberIndex = 0;
-        /*while ($memberIndex < sizeof($memberArray) && $memberArray[$memberIndex]->getId() != $id) {
+        while ($memberIndex < sizeof($memberArray) && $memberArray[$memberIndex]->getId() != $id) {
             $memberIndex++;
         }
 
-        /*if ($memberIndex = sizeof($memberArray)) {
-            echo json_encode('did not find id in member list')
+        if ($memberIndex == sizeof($memberArray)) {
+            echo json_encode('did not find id in member list');
             return;
         }
 
@@ -180,12 +180,12 @@ class Logic
             $swapIndex = $memberIndex + 1;
         }
 
-        if ($swapIndex > 0 && $swapIndex < sizeof($memberArray)) {
-            Database::swapMembers($id, $memberArray[$swapIndex]->getId(), $memberArray[$memberIndex]->getPageOrder(),
+        if ($swapIndex > -1 && $swapIndex < sizeof($memberArray)) {
+            Database::swapMember($id, $memberArray[$swapIndex]->getId(), $memberArray[$memberIndex]->getPageOrder(),
                 $memberArray[$swapIndex]->getPageOrder(), $memberType, $idColumnName);
             echo json_encode(true);
             return;
-        }*/
+        }
 
         echo json_encode('value is already at the top or bottom');
 
