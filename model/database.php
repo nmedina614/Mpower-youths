@@ -500,4 +500,11 @@ class Database
         return $statement->execute();
     }
 
+    public static function getNotifications()
+    {
+        $sql = 'SELECT * FROM notification ORDER BY time';
+
+        return self::query($sql);
+    }
+
 }

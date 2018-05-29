@@ -828,6 +828,8 @@ $f3->route('GET /administration', function($f3) {
     $title = "M-Power Youth: Administration";
     // List of paths to stylesheets.
     $styles = array(
+        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css',
+        'https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css'
     );
     // List of paths for sub-templates being used.
     $includes = array(
@@ -836,7 +838,12 @@ $f3->route('GET /administration', function($f3) {
         'views/_footer.html'
     );
     // List of paths to scripts being used.
-    $scripts = array();
+    $scripts = array(
+        BASE.'/assets/scripts/_admin.js',
+        'https://code.jquery.com/jquery-1.12.4.js',
+        'https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js',
+        'https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js'
+    );
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);
