@@ -125,6 +125,13 @@ class Logic
         return $result;
     }
 
+    public static function getMaxPageOrder($memberType)
+    {
+
+        Database::connect();
+        return Database::getMaxPageOrder($memberType)[0]['pageOrder'];
+    }
+
     /**
      * Validates and sends a staffmember to the database to be added
      *
@@ -139,7 +146,7 @@ class Logic
         Database::connect();
         return Database::addStaffMember($staffMember->getFName(), $staffMember->getLName(),
             $staffMember->getTitle(), $staffMember->getBiography(), $staffMember->getEmail(),
-            $staffMember->getPhone(), $staffMember->getPortraitURL(), 'staff');
+            $staffMember->getPhone(), $staffMember->getPortraitURL(), 'staff', $staffMember->getPageOrder());
     }
 
     /**

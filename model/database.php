@@ -232,6 +232,26 @@ class Database
     }
 
     /**
+     * Method used to get a member's portrait location
+     *
+     * @param $memberType the type of member
+     * @return the max page order of the member table. false if the query fails
+     */
+    public static function getMaxPageOrder($memberType)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'SELECT MAX(pageOrder) AS pageOrder FROM '.$memberType;
+
+        $statement = self::$_dbh->prepare($sql);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
      * Method used to add a member
      *
      * @param $fname first name
@@ -243,11 +263,11 @@ class Database
      * @param $portraitURL URL of staff member's portrait
      * @return mixed true or false based on if statement executed correctly
      */
-    public static function addStaffMember($fname, $lname, $title, $biography, $email, $phone, $portraitURL, $memberType)
+    public static function addStaffMember($fname, $lname, $title, $biography, $email, $phone, $portraitURL, $memberType, $pageOrder)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'INSERT INTO '.$memberType.' (fname, lname, title, biography, email, phone, portraitURL)
-                VALUES (:fname, :lname, :title, :biography, :email, :phone, :portraitURL)';
+        $sql = 'INSERT INTO '.$memberType.' (fname, lname, title, biography, email, phone, portraitURL, pageOrder)
+                VALUES (:fname, :lname, :title, :biography, :email, :phone, :portraitURL, :pageOrder)';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':fname', $fname, PDO::PARAM_STR);
@@ -257,6 +277,7 @@ class Database
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
         $statement->bindParam(':portraitURL', $portraitURL, PDO::PARAM_STR);
+        $statement->bindParam(':pageOrder', $pageOrder, PDO::PARAM_INT);
 
         return $statement->execute();
     }
