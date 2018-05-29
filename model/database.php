@@ -523,7 +523,18 @@ class Database
     {
         $sql = 'SELECT * FROM notification ORDER BY time';
 
-        return self::query($sql);
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getInstrumentRentals()
+    {
+        $sql = 'SELECT studentName, instrument, dateSubmited, requestStatus FROM `formInstrumentRequest`';
+
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

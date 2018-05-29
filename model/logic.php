@@ -597,7 +597,39 @@ class Logic
      * @param $type String containing the type of notification ('notification' by default)
      * @return int Returns the id of the new notification as an int.
      */
-    public static function createNotification($type='notification') {
+    public static function createNotification($name, $type='notification') {
 
+    }
+
+    public static function getNotifications()
+    {
+        Database::connect();
+
+        $result = Database::getNotifications();
+
+        return $result;
+    }
+
+    public static function getRentalRequests()
+    {
+        Database::connect();
+
+        $result = Database::getInstrumentRentals();
+
+        return $result;
+
+    }
+
+    public static function translateRequestStatus($numericStatus)
+    {
+        switch($numericStatus)
+        {
+            case -1:
+                return 'Declined';
+            case 0:
+                return 'Pending';
+            case 1:
+                return 'Accepted';
+        }
     }
 }

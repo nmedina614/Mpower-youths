@@ -832,6 +832,9 @@ $f3->route('GET /administration', function($f3) {
         $f3->reroute('/');
     }
 
+    $f3->set('notifications', Logic::getNotifications());
+    $f3->set('rentals', Logic::getRentalRequests());
+
     // Title to use in template.
     $title = "M-Power Youth: Administration";
     // List of paths to stylesheets.
