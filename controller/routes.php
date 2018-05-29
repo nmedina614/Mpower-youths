@@ -510,6 +510,10 @@ $f3->route('GET /instruments', function($f3) {
 
 $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
 
+    if(!$f3->get('loggedIn')){
+        $f3->reroute('/');
+    }
+
     if(isset($_POST['submit'])){
 
         $student = $_POST['student_name'];
@@ -822,6 +826,10 @@ $f3->route('GET|POST /enrollment', function($f3) {
 });
 
 $f3->route('GET|POST /volunteer', function($f3) {
+
+    if(!$f3->get('loggedIn')){
+        $f3->reroute('/');
+    }
 
     if(isset($_POST['submit'])) {
 
