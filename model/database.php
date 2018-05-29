@@ -161,7 +161,7 @@ class Database
     public static function getAllStaff($memberType)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT * FROM '.$memberType;
+        $sql = 'SELECT * FROM '.$memberType.' ORDER BY pageOrder';
 
         $statement = self::$_dbh->prepare($sql);
 
@@ -273,6 +273,33 @@ class Database
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $result = $statement->execute();
+
+        return $result;
+    }
+
+    /**
+     * Swaps the page order value of two members.
+     *
+     * @param $id1 id of member 1
+     * @param $id2 id of member 2
+     * @param $pageOrder1 page order of member 1
+     * @param $pageOrder2 page order of member 2
+     * @param $memberType the type of member
+     * @param $idColumnName the name of the id column
+     * @return mixed true or false based on if statement executed correctly
+     */
+    public static function swapMember($id1, $id2, $pageOrder1, $pageOrder2, $memberType, $idColumnName) {
+
+        $sql = 'UPDATE '.$memberType.' SET pageOrder=:pageOrder2 WHERE '.$idColumnName.'=:id1;
+                UPDATE '.$memberType.' SET pageOrder=:pageOrder1 WHERE '.$idColumnName.'=:id2';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id1', $id1, PDO::PARAM_INT);
+        $statement->bindParam(':id2', $id2, PDO::PARAM_INT);
+        $statement->bindParam(':pageOrder1', $pageOrder1, PDO::PARAM_INT);
+        $statement->bindParam(':pageOrder2', $pageOrder2, PDO::PARAM_INT);
 
         $result = $statement->execute();
 
