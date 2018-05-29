@@ -1,6 +1,5 @@
 #Ignore vendor folder
 assets/images/gallery
-assets/images/carousel
 assets/images/staffportraits
 vendor/
 tmp/
