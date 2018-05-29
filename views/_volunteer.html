@@ -3,11 +3,12 @@
 
         <div class="col-md-6">
             <h2>Volunteer Registration</h2>
+            <h4>{{@result}}</h4>
         </div>
 
         <hr>
 
-        <form class="pb-4">
+        <form class="pb-4" method="post">
 
             <div class="form-group col-lg-6"> <!-- Student Full Name -->
                 <label for="Student_full_name_id" class="control-label">Full Legal Name</label>
@@ -34,8 +35,13 @@
                 <input type="text" class="form-control" id="phone" name="phone">
             </div>
 
-            <div class="form-group col-lg-6" > <!-- Request Button -->
-                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Submit Request</button>
+            <div class="form-group col-lg-6"> <!-- Drivers Licence -->
+                <label for="dl" class="control-label">Drivers License #</label>
+                <input type="text" class="form-control" id="dl" name="dl">
+            </div>
+
+            <div class="form-group col-lg-6" > <!-- submit Button -->
+                <button type="submit" class="btn btn-primary" name='submit' value="yes">Submit Request</button>
             </div>
 
         </form>

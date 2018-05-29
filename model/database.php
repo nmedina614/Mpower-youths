@@ -473,4 +473,80 @@ class Database
         return $statement->execute();
     }
 
+    /**
+     * Send a Request for an Instrument
+     *
+     * @param $student string Student Full Name
+     * @param $guardian string Parent/Guardians Full Name
+     * @param $add1 string Address 1 given
+     * @param $add2 string Address 2 given
+     * @param $city string City given
+     * @param $zip int Zip Code given
+     * @param $phone string Telephone Number given
+     * @param $school string School of Student
+     * @param $grade string Grade in which student is in.
+     * @param $instrument string Instrument that the user is Requesting to rent.
+     * @param $date mixed date of the instrument request
+     * @return mixed true or false based on if statement executed correctly
+     */
+    public static function requestInstrument($student, $guardian, $add1, $add2,
+                                             $city, $zip, $phone, $school,
+                                             $grade, $instrument, $date)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = "INSERT INTO formInstrumentRequest (studentName, guardianName,
+                address1, address2, city, zip, phone, school, grade, instrument,
+                dateSubmited, requestStatus, formType) VALUES (:studentName, :guardName, :add1,
+                :add2, :city, :zip, :phone, :school, :grade, :instrument, :date, 0, 4)";
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':studentName', $student, PDO::PARAM_STR);
+        $statement->bindParam(':guardName', $guardian, PDO::PARAM_STR);
+        $statement->bindParam(':add1', $add1, PDO::PARAM_STR);
+        $statement->bindParam(':add2', $add2, PDO::PARAM_STR);
+        $statement->bindParam(':city', $city, PDO::PARAM_STR);
+        $statement->bindParam(':zip', $zip, PDO::PARAM_INT);
+        $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $statement->bindParam(':school', $school, PDO::PARAM_STR);
+        $statement->bindParam(':grade', $grade, PDO::PARAM_STR);
+        $statement->bindParam(':instrument', $instrument, PDO::PARAM_STR);
+        $statement->bindParam(':date', $date, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+
+    /**
+     * Send a Request to be a Volunteer
+     *
+     * @param $name string full legal name of volunteer
+     * @param $address string address of volunteer
+     * @param $zip int Zip Code for volunteer
+     * @param $dob string date of birth of volunteer
+     * @param $phone string Telephone Number for volunteer
+     * @param $drivers string Drivers License # of volunteer
+     * @param $dateRequested string The date being requested
+     * @return mixed true or false based on if statement executed correctly
+     */
+    public static function volunteerRequest($name, $address, $zip, $dob,
+                                            $phone, $drivers, $dateRequested)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'INSERT INTO `formVolunteer` (name, address, zip, dob, 
+        phone, drivers, dateRequested, requestStatus, formType) VALUES 
+        ( :name, :address, :zip, :dob, :phone, :drivers, :dateRequested, 
+        0, 1)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':name', $name, PDO::PARAM_STR);
+        $statement->bindParam(':address', $address, PDO::PARAM_STR);
+        $statement->bindParam(':zip', $zip, PDO::PARAM_INT);
+        $statement->bindParam(':dob', $dob, PDO::PARAM_STR);
+        $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
+        $statement->bindParam(':drivers', $drivers, PDO::PARAM_STR);
+        $statement->bindParam(':dateRequested', $dateRequested, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
 }
