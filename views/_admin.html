@@ -12,7 +12,7 @@
                         <tr>
                             <th class="text-center">Date</th>
                             <th class="text-center">Type</th>
-                            <th class="text-center">Actions</th>
+                            <th class="text-center"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -20,29 +20,11 @@
                             <tr>
                                 <td>{{ @notification['type'] }}</td>
                                 <td>{{ @notification['time'] }}</td>
-                                <check if="{{ @notification['type'] == 'rental' }}">
-                                    <true>
-                                        <td class="btn btn-sm btn-light">
-                                            <a href="#">
-                                                <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg">
-                                            </a>
-                                        </td>
-                                    </true>
-                                    <false>
-                                        <check if="{{ @notification['type'] == 'application' }}">
-                                            <true>
-                                                <td class="btn btn-sm btn-light">
-                                                    <a href="#">
-                                                        <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg">
-                                                    </a>
-                                                </td>
-                                            </true>
-                                            <false>
-                                                <td></td>
-                                            </false>
-                                        </check>
-                                    </false>
-                                </check>
+                                <td class="btn btn-dark btn-sm">
+                                    <a href="#">
+                                        <img src="{{ @BASE }}/assets/images/icons/close.svg" alt="X">
+                                    </a>
+                                </td>
                             </tr>
                         </repeat>
                         </tbody>
@@ -64,6 +46,7 @@
                             <th>Instrument</th>
                             <th>Date</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -73,6 +56,11 @@
                                 <td>{{ @rental['instrument'] }}</td>
                                 <td>{{ @rental['dateSubmited'] }}</td>
                                 <td>{{ Logic::translateRequestStatus(@rental['requestStatus']) }}</td>
+                                <td class="btn btn-light btn-sm">
+                                    <a href="#">
+                                        <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                    </a>
+                                </td>
                             </tr>
                         </repeat>
                         </tbody>
