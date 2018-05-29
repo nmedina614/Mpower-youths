@@ -47,6 +47,21 @@ class Logic
     }
 
     /**
+     * Passes the media release form data into database query
+     *
+     * @param data is a list of data for media release - [studentName],[school],[grade],[instrument],[parent],[email],
+     * [phone],[street1],[street2],[city],[zip],[allergies],[referral],[decision],[takeHomeInstrument]
+     * @return if the database submitted successfully
+     */
+    public static function insertEnrollment($data)
+    {
+        Database::connect();
+
+        $userId = unserialize($_SESSION['account'])->getId();
+        return Database::insertEnrollment($data, $userId);
+    }
+
+    /**
      * Method used to process event information.
      *
      * @return array Returns an array if event information.
@@ -601,6 +616,7 @@ class Logic
 
     }
 
+
     public static function getNotifications()
     {
         Database::connect();
@@ -631,5 +647,57 @@ class Logic
             case 1:
                 return 'Accepted';
         }
+    }
+
+    /**
+     *
+     * Send a Request for an Instrument
+     *
+     * @param $student string Student Full Name
+     * @param $guardian string Parent/Guardians Full Name
+     * @param $add1 string Address 1 given
+     * @param $add2 string Address 2 given
+     * @param $city string City given
+     * @param $zip int Zip Code given
+     * @param $phone string Telephone Number given
+     * @param $school string School of Student
+     * @param $grade string Grade in which student is in.
+     * @param $instrument string Instrument that the user is Requesting to rent.
+     * @param $date mixed date of the instrument request
+     * @return mixed true or false based on if statement executed correctly
+     */
+    public static function requestInstrument($student, $guardian, $add1, $add2,
+                                             $city, $zip, $phone, $school,
+                                             $grade, $instrument, $date)
+    {
+
+        Database::connect();
+
+        return Database::requestInstrument($student, $guardian, $add1, $add2,
+                                           $city, $zip, $phone, $school,
+                                           $grade, $instrument, $date);
+    }
+
+
+    /**
+     * Send a Request to be a Volunteer
+     *
+     * @param $name string full legal name of volunteer
+     * @param $address string address of volunteer
+     * @param $zip int Zip Code for volunteer
+     * @param $dob string date of birth of volunteer
+     * @param $phone string Telephone Number for volunteer
+     * @param $drivers string Drivers License # of volunteer
+     * @param $dateRequested string The date being requested
+     * @return mixed true or false based on if statement executed correctly
+     */
+    public static function volunteerRequest($name, $address, $zip, $dob,
+                                            $phone, $drivers, $dateRequested)
+    {
+
+        Database::connect();
+
+        return Database::volunteerRequest($name, $address, $zip, $dob,
+            $phone, $drivers, $dateRequested);
     }
 }

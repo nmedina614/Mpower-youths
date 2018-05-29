@@ -57,10 +57,16 @@
                                 <check if="{{ @isAdmin }}">
                                     <true>
                                         <a class="dropdown-item" href="{{ @BASE }}/administration">Administration</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/instruments">Instruments</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/volunteer">Volunteer Registration</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/enrollment">Enrollment</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/PhotoVideoRelease">Photo/Video Release Form</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/instruments">Instrument Rentals</a>
                                     </true>
                                     <false>
-                                        <a class="dropdown-item" href="{{ @BASE }}/instruments/rent">Instrument Rentals</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/volunteer">Volunteer Registration</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/enrollment">Enrollment</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/PhotoVideoRelease">Photo/Video Release Form</a>
+                                        <a class="dropdown-item" href="{{ @BASE }}/instruments">Instrument Rentals</a>
                                     </false>
                                 </check>
                                 <a class="dropdown-item" href="{{ @BASE }}/account">Profile Settings</a>

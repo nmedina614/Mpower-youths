@@ -3,20 +3,21 @@
 
         <div class="col-md-6">
             <h2>Rental Agreement</h2>
+            <h4>{{@result}}</h4>
         </div>
 
             <hr>
 
-            <form class="pb-4">
+            <form class="pb-4" method="post">
 
                 <div class="form-group col-lg-6"> <!-- Student Full Name -->
                     <label for="Student_full_name_id" class="control-label">Student Full Name</label>
-                    <input type="text" class="form-control" id="Student_full_name_id" name="full_name" placeholder="John Deer jr.">
+                    <input type="text" class="form-control" id="Student_full_name_id" name="student_name" placeholder="John Deer jr.">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Guard Full Name -->
                     <label for="Guard_full_name_id" class="control-label">Parent/Guardian Full Name</label>
-                    <input type="text" class="form-control" id="Guard_full_name_id" name="full_name" placeholder="John Deer">
+                    <input type="text" class="form-control" id="Guard_full_name_id" name="guard_name" placeholder="John Deer">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Street 1 -->
@@ -96,11 +97,6 @@
                     <input type="text" class="form-control" id="zip_id" name="zip" placeholder="98042">
                 </div>
 
-                <div class="form-group col-lg-6"> <!-- Date -->
-                    <label for="date" class="control-label">Date</label>
-                    <input type="date" class="form-control" id="date" name="date">
-                </div>
-
                 <div class="form-group col-lg-6"> <!-- Telephone -->
                     <label for="phone" class="control-label">Telephone</label>
                     <input type="text" class="form-control" id="phone" name="phone">
@@ -116,36 +112,38 @@
                     <input type="text" class="form-control" id="grade" name="grade">
                 </div>
 
-                <div class="form-group col-lg-6"> <!-- Instrument //TODO Should auto fill when instrument is chosen -->
+                <div class="form-group col-lg-6"> <!-- Instrument Selector //TODO make dropdown and then select-->
                     <label for="instrument" class="control-label">Instrument</label>
-                    <input type="text" class="form-control" id="instrument" name="instrument">
+                    <input type="text" class="form-control" id="instrument" name="instrument" value="{{@instrument}}">
                 </div>
 
 
 
                 <!-- TODO Rest of form is only seen for admin -->
 
-                <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
-                    <label for="serial" class="control-label">Serial No.</label>
-                    <input type="text" class="form-control" id="serial" name="serial">
-                </div>
+                <check if="{{ @isAdmin }}">
+                    <true>
+                        <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
+                            <label for="serial" class="control-label">Serial Num.</label>
+                            <input type="text" class="form-control" id="serial" name="serial">
+                        </div>
 
-                <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
-                    <label for="contract" class="control-label">Contract Year</label>
-                    <input type="text" class="form-control" id="contract" name="school">
-                </div>
+                        <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
+                            <label for="contract" class="control-label">Contract Year</label>
+                            <input type="text" class="form-control" id="contract" name="school">
+                        </div>
 
-                <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
-                    <label for="make" class="control-label">Make</label>
-                    <input type="text" class="form-control" id="make" name="grade">
-                </div>
+                        <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
+                            <label for="make" class="control-label">Make</label>
+                            <input type="text" class="form-control" id="make" name="grade">
+                        </div>
 
-                <div class="form-group col-lg-6"> <!-- Model of Instrument -->
-                    <label for="model" class="control-label">Model</label>
-                    <input type="text" class="form-control" id="model" name="grade">
-                </div>
-
-
+                        <div class="form-group col-lg-6"> <!-- Model of Instrument -->
+                            <label for="model" class="control-label">Model</label>
+                            <input type="text" class="form-control" id="model" name="grade">
+                        </div>
+                    </true>
+                </check>
 
                 <div class="form-group col-lg-6" > <!-- Request Button -->
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Request</button>
@@ -175,11 +173,13 @@
                                 Financial aid is available to cover the cost for using M-Power instruments if needed
                                 <br><br>
                                 Equipment should not be loaned to any outside groups or individuals except by written authority of Music Director: Stephanie Fiskum
+                                <br><br>
+                                Date of request will be automatically recorded
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
-                                <button type="submit" class="btn btn-success">I Agree</button>
+                                <button type="submit" class="btn btn-success" name="submit" value="yes">I Agree</button>
                             </div>
                         </div>
                     </div>
