@@ -623,7 +623,12 @@ class Logic
 
     }
 
-
+    /**
+     * Method pulls all notifications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
     public static function getNotifications()
     {
         Database::connect();
@@ -633,6 +638,12 @@ class Logic
         return $result;
     }
 
+    /**
+     * Method pulls all rentals from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
     public static function getRentalRequests()
     {
         Database::connect();
@@ -643,6 +654,13 @@ class Logic
 
     }
 
+    /**
+     * Method used to convert the numeric value received into
+     * a text string for ease of reading.
+     *
+     * @param $numericStatus int status from database.
+     * @return string String representing the status of a request.
+     */
     public static function translateRequestStatus($numericStatus)
     {
         switch($numericStatus)

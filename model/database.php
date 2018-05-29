@@ -576,7 +576,12 @@ class Database
         return $statement->execute();
     }
 
-
+    /**
+     * Method pulls all notifications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
     public static function getNotifications()
     {
         $sql = 'SELECT * FROM notification ORDER BY time';
@@ -586,6 +591,12 @@ class Database
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Method pulls all rentals from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
     public static function getInstrumentRentals()
     {
         $sql = 'SELECT studentName, instrument, dateSubmited, requestStatus FROM `formInstrumentRequest`';
