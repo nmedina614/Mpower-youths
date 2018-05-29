@@ -152,6 +152,38 @@ class Logic
         return result;
     }
 
+    public static function shiftMember($id, $memberType, $idColumnName, $direction) {
+
+        $memberArray = Database::getAllStaff($memberType);
+
+        if (sizeof($memberArray) < 2) {
+            return;
+        }
+
+        $memberIndex = 0;
+        while ($memberIndex < sizeof($memberArray) && $memberArray[$memberIndex]->getId() != $id) {
+            $memberIndex++;
+        }
+
+        if ($memberIndex = sizeof($memberArray)) {
+            return;
+        }
+
+        $swapIndex = 0;
+
+        if ($direction === 'up') {
+            $swapIndex = $memberIndex - 1;
+        } else if ($direction = 'down') {
+            $swapIndex = $memberIndex + 1;
+        }
+
+        if ($swapIndex > 0 && $swapIndex < sizeof($memberArray)) {
+            Database::swapMembers($id, $memberArray[$swapIndex]->getId(), $memberArray[$memberIndex]->getPageOrder(),
+                $memberArray[$swapIndex]->getPageOrder(), $memberType, $idColumnName);
+        }
+
+    }
+
     /**
      * Method used to get information of all members of the board of directors.
      *

@@ -73,3 +73,20 @@ $('.btn-delete').click(function(e) {
         });
     }
 });
+
+$('.btn-shift-up').click(function(e) {
+
+    var id = $(e.target).data('id');
+
+    $.ajax('ajax-shift-member', {
+        method : "POST",
+        data : {id : id, memberType : 'staff', idColumnName : 'idstaff', direction : 'up'},
+        dataType : 'json',
+        success : function(response) {
+
+        },
+        error : function() {
+            console.log("Failed to connect!");
+        }
+    });
+});
