@@ -40,7 +40,7 @@ class Validator
      */
     public static function validFileSize($size)
     {
-        return $size < MAX_FILE_SIZE;
+        return $size < self::MAX_FILE_SIZE;
     }
 
     /**
