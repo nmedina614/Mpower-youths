@@ -34,7 +34,6 @@ $f3->route('GET|POST /', function($f3) {
     // List of paths to scripts being used.
     $scripts = array(
         BASE.'/assets/scripts/_home.js',
-        '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
     );
 
     $footer = 'views/_footer.html';
@@ -663,7 +662,7 @@ $f3->route('GET /about', function($f3) {
     // List of paths to scripts being used.
     $scripts = array(
         BASE.'/assets/scripts/_home.js',
-        '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'
+
     );
 
 

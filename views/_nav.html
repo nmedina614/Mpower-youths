@@ -1,88 +1,102 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="{{ @BASE }}">
-        <!--<img src="./assets/images/MPYLogo/svg/color_logo_transparent.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
-        M-Power Youth
-    </a>
+<div class="fixed-top">
+    <nav class="navbar navbar-sm navbar-light text-dark bg-secondary justify-content-end">
+        <a class=" btn btn-secondary navbar-sm-icon p-0 mr-2" href="https://www.facebook.com/mpoweryouthmusic/">
+            <img src="{{ @BASE }}/assets/images/icons/facebook.svg" alt="Facebook">
+        </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ @BASE }}">Home</a>
-            </li>
-            <li class="nav-item dropdown d-inline-flex">
-                <a class="nav-link" href="{{ @BASE }}/about">About</a>
-                <a class="nav-link dropdown-toggle pl-0" href="#" id="infoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="infoDropdown">
-                    <a class="dropdown-item" href="{{ @BASE }}/staff">Staff</a>
-                    <a class="dropdown-item" href="{{ @BASE }}/board_of_directors">Board of Directors</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ @BASE }}/gallery">Gallery</a>
-                    <a class="dropdown-item" href="{{ @BASE }}/videos">Videos</a>
-                    <a class="dropdown-item" href="{{ @BASE }}/files">Files</a>
-                    <a class="dropdown-item" href="{{ @BASE }}/testimonials">Testimonials</a>
-                </div>
-            </li>
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ @BASE }}/contribute" id="contributeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Contribute
-                </a>
-                <div class="dropdown-menu" aria-labelledby="contributeDropdown">
-                    <a class="dropdown-item" href="{{ @BASE }}/donate">Donate</a>
-                    <a class="dropdown-item" href="{{ @BASE }}/join">Join the team</a>
-                    <div class="dropdown-divider"></div>
-                </div>
-            </li>
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link" href="#">Donate</a>-->
-            <!--</li>-->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ @BASE }}/contact">Contact</a>
-            </li>
-
-
-                <check if="{{ @loggedIn }}">
-                    <true>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="memberDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ @username }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="memberDropdown">
-                                <check if="{{ @isAdmin }}">
-                                    <true>
-                                        <a class="dropdown-item" href="{{ @BASE }}/administration">Administration</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/volunteer">Volunteer Registration</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/enrollment">Enrollment</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/PhotoVideoRelease">Photo/Video Release Form</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/instruments">Instrument Rentals</a>
-                                    </true>
-                                    <false>
-                                        <a class="dropdown-item" href="{{ @BASE }}/volunteer">Volunteer Registration</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/enrollment">Enrollment</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/PhotoVideoRelease">Photo/Video Release Form</a>
-                                        <a class="dropdown-item" href="{{ @BASE }}/instruments">Instrument Rentals</a>
-                                    </false>
-                                </check>
-                                <a class="dropdown-item" href="{{ @BASE }}/account">Profile Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ @BASE }}/login">Logout</a>
-                            </div>
-                        </li>
-                    </true>
-                    <false>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ @BASE }}/login">Login</a>
-                        </li>
-                    </false>
-                </check>
-
-
-        </ul>
+        <div class="text-right">
+            <div class="my-3" id="google_translate_element"></div>
+        </div>
+    </nav>
+    <div class="jumbotron p-4 mb-0 bg-white">
+        <h1>Awesome Logo!</h1>
     </div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand acme" href="{{ @BASE }}">
+            <!--<img src="./assets/images/MPYLogo/svg/color_logo_transparent.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
+            M-Power Youth
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ @BASE }}">Home</a>
+                </li>
+                <li class="nav-item dropdown d-inline-flex">
+                    <a class="nav-link" href="{{ @BASE }}/about">About</a>
+                    <a class="nav-link dropdown-toggle pl-0" href="#" id="infoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="infoDropdown">
+                        <a class="dropdown-item" href="{{ @BASE }}/staff">Staff</a>
+                        <a class="dropdown-item" href="{{ @BASE }}/board_of_directors">Board of Directors</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ @BASE }}/gallery">Gallery</a>
+                        <a class="dropdown-item" href="{{ @BASE }}/videos">Videos</a>
+                        <a class="dropdown-item" href="{{ @BASE }}/files">Files</a>
+                        <a class="dropdown-item" href="{{ @BASE }}/testimonials">Testimonials</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ @BASE }}/contribute" id="contributeDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Contribute
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="contributeDropdown">
+                        <a class="dropdown-item" href="{{ @BASE }}/donate">Donate</a>
+                        <a class="dropdown-item" href="{{ @BASE }}/join">Join the team</a>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </li>
+                <!--<li class="nav-item">-->
+                    <!--<a class="nav-link" href="#">Donate</a>-->
+                <!--</li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ @BASE }}/contact">Contact</a>
+                </li>
+
+
+                    <check if="{{ @loggedIn }}">
+                        <true>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="memberDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ @username }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="memberDropdown">
+                                    <check if="{{ @isAdmin }}">
+                                        <true>
+                                            <a class="dropdown-item" href="{{ @BASE }}/administration">Administration</a>
+                                            <a class="dropdown-item" href="{{ @BASE }}/volunteer">Volunteer Registration</a>
+                                            <a class="dropdown-item" href="{{ @BASE }}/enrollment">Enrollment</a>
+                                            <a class="dropdown-item" href="{{ @BASE }}/PhotoVideoRelease">Photo/Video Release Form</a>
+                                            <a class="dropdown-item" href="{{ @BASE }}/instruments">Instrument Rentals</a>
+                                        </true>
+                                        <false>
+                                            <a class="dropdown-item" href="{{ @BASE }}/volunteer">Volunteer Registration</a>
+                                            <a class="dropdown-item" href="{{ @BASE }}/enrollment">Enrollment</a>
+                                            <a class="dropdown-item" href="{{ @BASE }}/PhotoVideoRelease">Photo/Video Release Form</a>
+                                            <a class="dropdown-item" href="{{ @BASE }}/instruments">Instrument Rentals</a>
+                                        </false>
+                                    </check>
+                                    <a class="dropdown-item" href="{{ @BASE }}/account">Profile Settings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ @BASE }}/login">Logout</a>
+                                </div>
+                            </li>
+                        </true>
+                        <false>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ @BASE }}/login">Login</a>
+                            </li>
+                        </false>
+                    </check>
+
+
+            </ul>
+        </div>
+    </nav>
+</div>

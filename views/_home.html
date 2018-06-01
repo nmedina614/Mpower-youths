@@ -36,10 +36,6 @@
 <div class="container rest-body">
     <br>
 
-    <div class="text-right">
-        <div class="my-3" id="google_translate_element"></div>
-    </div>
-
     <div class="jumbotron text-center">
         <h1>Our Mission</h1>
         <p>
@@ -88,10 +84,12 @@
                         <!-- Button trigger modal -->
 
                             <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary btn-edit" data-id="{{ @event->getId() }}" data-toggle="modal" data-target="#eventModal">
-                                    Edit Event
+                                <button type="button" class="btn btn-warning btn-edit" data-id="{{ @event->getId() }}" data-toggle="modal" data-target="#eventModal">
+                                    <img src="{{ @BASE }}/assets/images/icons/pencil.svg" alt="Edit">
                                 </button>
-                                <button type="button" class="btn btn-danger btn-delete" data-id="{{ @event->getId() }}">Remove Event</button>
+                                <button type="button" class="btn btn-danger btn-delete" data-id="{{ @event->getId() }}">
+                                    <img src="{{ @BASE }}/assets/images/icons/close.svg" alt="X">
+                                </button>
                             </div>
                         </div>
                     </div>
