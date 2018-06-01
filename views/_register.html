@@ -2,33 +2,33 @@
     <div class="row mt-4">
         <div class="col-6 offset-3">
             <form action="#" method="post">
-                <div class="card mb-3 rounded-0">
+                <div class="card mb-3 ">
                     <div class="card-body">
                         <h4 class="card-title">Create Account</h4>
                         <hr>
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="username">Username:</label>
-                                <input type="username" class="form-control rounded-0" id="username" name="username"
+                                <input type="username" class="form-control " id="username" name="username"
                                        value="{{ $_POST['username'] }}" maxlength="45" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="password1">Password:</label>
-                                <input type="password" class="form-control rounded-0" id="password1" name="password1" required>
+                                <input type="password" class="form-control " id="password1" name="password1" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="password2">Repeat Password:</label>
-                                <input type="password" class="form-control rounded-0" id="password2" name="password2" required>
+                                <input type="password" class="form-control " id="password2" name="password2" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="email">Email address:</label>
-                                <input type="email" class="form-control rounded-0" id="email" name="email" placeholder="name@example.com"
+                                <input type="email" class="form-control " id="email" name="email" placeholder="name@example.com"
                                        value="{{ $_POST['email'] }}" maxlength="60" required>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="phone">Phone:</label>
-                                <input type="text" class="form-control rounded-0" id="phone" name="phone" value="{{ $_POST['phone'] }}"
+                                <input type="text" class="form-control " id="phone" name="phone" value="{{ $_POST['phone'] }}"
                                        pattern="[0-9]{10}" title="Must be at least 7 numbers." required>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                             </true>
                         </check>
 
-                        <button type="submit" name="submit" class="btn btn-info btn-block rounded-0 mt-4">Register</button>
+                        <button type="submit" name="submit" class="btn btn-primary btn-block  mt-4">Register</button>
                     </div>
                 </div>
             </form>

@@ -65,7 +65,7 @@
 
     <check if="{{ @isAdmin }}">
         <div class="text-right">
-            <button type="button" class="btn btn-info btn-add" data-toggle="modal" data-target="#eventModal">Add Event</button>
+            <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#eventModal">Add Event</button>
         </div>
     </check>
 
@@ -88,7 +88,7 @@
                         <!-- Button trigger modal -->
 
                             <div class="btn-group-vertical" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-info btn-edit" data-id="{{ @event->getId() }}" data-toggle="modal" data-target="#eventModal">
+                                <button type="button" class="btn btn-primary btn-edit" data-id="{{ @event->getId() }}" data-toggle="modal" data-target="#eventModal">
                                     Edit Event
                                 </button>
                                 <button type="button" class="btn btn-danger btn-delete" data-id="{{ @event->getId() }}">Remove Event</button>

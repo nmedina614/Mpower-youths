@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <check if="{{ @isAdmin }}">
         <true>
-            <button type="button" class="btn btn-sm btn-info rounded-0 mt-2"
+            <button type="button" class="btn btn-sm btn-primary  mt-2"
                     data-toggle="modal" data-target="#new-image-modal">
                 <img src="{{ @BASE }}/assets/images/icons/plus.svg">Add
             </button>
@@ -10,7 +10,7 @@
 
             <check if="{{ isset(@result) }}">
                 <true>
-                    <div class="alert alert-info alert-dismissible fade show mt-2 w-50" role="alert">
+                    <div class="alert alert-primary alert-dismissible fade show mt-2 w-50" role="alert">
                         {{ @result }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -29,7 +29,7 @@
                      data-caption="{{ @image['caption'] }}" data-source="{{ @image['url'] }}" alt="Gallery Image">
                 <check if="{{ @isAdmin }}">
                     <true>
-                        <button type="button" class="btn btn-dark btn-del-image rounded-0">
+                        <button type="button" class="btn btn-dark btn-del-image ">
                             <img src="{{ @BASE }}/assets/images/icons/close.svg" alt="X">
                         </button>
                     </true>

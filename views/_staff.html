@@ -21,7 +21,7 @@
 
     <check if="{{ @isAdmin }}">
         <div class="text-left mt-4">
-            <button type="button" class="btn btn-info btn-add" data-toggle="modal" data-target="#staffModal">Add Staff Member</button>
+            <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#staffModal">Add Staff Member</button>
         </div>
     </check>
 
@@ -31,17 +31,17 @@
             <div class="row my-3" data-id="{{ @StaffMember->getId() }}">
                 <div class="col-md-3 text-center my-auto">
                     <!--<div class="btn-group-vertical my-auto" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-info btn-shift-up" data-id="{{ @StaffMember->getId() }}">Move up</button>
-                        <button type="button" class="btn btn-info btn-shift-down" data-id="{{ @StaffMember->getId() }}">Move down</button>
+                        <button type="button" class="btn btn-primary btn-shift-up" data-id="{{ @StaffMember->getId() }}">Move up</button>
+                        <button type="button" class="btn btn-primary btn-shift-down" data-id="{{ @StaffMember->getId() }}">Move down</button>
                     </div>-->
                     <img class="rounded-circle image" style="width: 150px; height: 150px" src="{{ @StaffMember->getPortraitURL() }}" alt="Staff Member photo">
                     <check if="{{ @isAdmin }}">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-info btn-edit" data-id="{{ @StaffMember->getId() }}" data-order="{{ @StaffMember->getPageOrder() }}" data-toggle="modal" data-target="#staffModal">Edit</button>
+                            <button type="button" class="btn btn-primary btn-edit" data-id="{{ @StaffMember->getId() }}" data-order="{{ @StaffMember->getPageOrder() }}" data-toggle="modal" data-target="#staffModal">Edit</button>
                             <button type="button" class="btn btn-danger btn-delete" data-id="{{ @StaffMember->getId() }}">Remove</button>
                             <div class="btn-group-vertical btn-group-sm my-auto" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-info btn-shift-up" data-id="{{ @StaffMember->getId() }}">&#9650;</button>
-                                <button type="button" class="btn btn-info btn-shift-down" data-id="{{ @StaffMember->getId() }}">&#9660;</button>
+                                <button type="button" class="btn btn-primary btn-shift-up" data-id="{{ @StaffMember->getId() }}">&#9650;</button>
+                                <button type="button" class="btn btn-primary btn-shift-down" data-id="{{ @StaffMember->getId() }}">&#9660;</button>
                             </div>
                         </div>
 

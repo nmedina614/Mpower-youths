@@ -955,7 +955,6 @@ $f3->route('GET /administration', function($f3) {
     $title = "M-Power Youth: Administration";
     // List of paths to stylesheets.
     $styles = array(
-        'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css',
         'https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css'
     );
     // List of paths for sub-templates being used.
