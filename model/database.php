@@ -70,10 +70,35 @@ class Database
      *
      * @return mixed Returns an associative array of results.
      */
-    public static function getAllEvents()
+    public static function getUpcomingEvents()
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT idevent, title, description, DATE_FORMAT(`date`, "%m/%d/%Y") AS `dateFormatted` FROM event ORDER BY `date`';
+        $sql = 'SELECT idevent, title, description, DATE_FORMAT(`date`, "%m/%d/%Y") AS `dateFormatted`
+                FROM event 
+                WHERE `date` >= DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -1 DAY)
+                ORDER BY `date`';
+
+        $statement = self::$_dbh->prepare($sql);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
+     * Method used to pull all events from the Database.
+     *
+     * @return mixed Returns an associative array of results.
+     */
+    public static function getPastEvents()
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'SELECT idevent, title, description, DATE_FORMAT(`date`, "%m/%d/%Y") AS `dateFormatted`
+                FROM event
+                WHERE `date` <= DATE_ADD(CURRENT_TIMESTAMP, INTERVAL -1 DAY)
+                ORDER BY `date` DESC';
 
         $statement = self::$_dbh->prepare($sql);
 

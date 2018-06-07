@@ -14,7 +14,7 @@ $GLOBALS['f3'];
 
 $f3->route('GET|POST /', function($f3) {
 
-    $f3->set('events', Logic::getEvents());
+    $f3->set('events', Logic::getUpcomingEvents());
     $f3->set('pastOrUpcoming', 'Upcoming');
 
     // Title to use in template.
@@ -51,7 +51,7 @@ $f3->route('GET|POST /', function($f3) {
 });
 
 $f3->route('GET /past_events', function($f3) {
-    $f3->set('events', Logic::getEvents());
+    $f3->set('events', Logic::getPastEvents());
     $f3->set('pastOrUpcoming', 'Past');
 
     // Title to use in template.
