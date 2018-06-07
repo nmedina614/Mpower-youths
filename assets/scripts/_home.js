@@ -2,10 +2,12 @@
 $(".btn-edit").click(function(e) {
 
     var id = $(e.target).data('id');
-    var eventTitle = $("div[data-id='" + id +"']").find("h5").text();
-    var eventDate = $("div[data-id='" + id +"']").find(".date").text().split("/");
+    var dataIdSelector = $("div[data-id='" + id +"']")
+
+    var eventTitle = dataIdSelector.find("h5").text();
+    var eventDate = dataIdSelector.find(".date").text().split("/");
     var eventDateFormatted = eventDate[2] + "-" + eventDate[0] + "-" + eventDate[1];
-    var eventDesc = $("div[data-id='" + id +"']").find(".desc").text();
+    var eventDesc = dataIdSelector.find(".desc").text();
 
     fillModal("Modify Event", eventTitle, eventDateFormatted, eventDesc, id);
 
@@ -27,6 +29,7 @@ function fillModal(modalTitle, eventTitle = "", eventDate = "mm/dd/yyyy", eventD
     $("#eventDesc").val(eventDesc);
 
     $("#eventid").val(id);
+    $("#route").val(window.location.href);
 
 }
 

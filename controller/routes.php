@@ -15,6 +15,7 @@ $GLOBALS['f3'];
 $f3->route('GET|POST /', function($f3) {
 
     $f3->set('events', Logic::getEvents());
+    $f3->set('pastOrUpcoming', 'Upcoming');
 
     // Title to use in template.
     $title = "M-Power Youth";
@@ -28,6 +29,43 @@ $f3->route('GET|POST /', function($f3) {
     $includes = array(
         'views/_nav.html',
         'views/_home.html',
+        'views/_eventDisplay.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array(
+        BASE.'/assets/scripts/_home.js',
+    );
+
+    $footer = 'views/_footer.html';
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('GET /past_events', function($f3) {
+    $f3->set('events', Logic::getEvents());
+    $f3->set('pastOrUpcoming', 'Past');
+
+    // Title to use in template.
+    $title = "M-Power Youth";
+
+    // List of paths to stylesheets.
+    $styles = array(
+        BASE.'/assets/styles/_home.css'
+    );
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_eventDisplay.html',
         'views/_footer.html'
     );
 
@@ -58,6 +96,8 @@ $f3->route('POST /event-modify', function($f3) {
             $event = new Event($_POST['eventid'], $_POST['eventTitle'], $_POST['eventDesc'], $_POST['eventDate']);
             Logic::updateEvent($event);
         }
+
+        $f3->reroute($_POST['route']);
     }
 
     $f3->reroute('/');
