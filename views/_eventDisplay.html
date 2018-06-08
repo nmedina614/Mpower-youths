@@ -1,0 +1,63 @@
+<div class="container rest-body">
+    <!-- Modal -->
+    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modify Event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <include href="views/_editEvent.html" >
+
+            </div>
+        </div>
+    </div>
+
+    <check if="{{ @isAdmin }}">
+        <div class="text-right">
+            <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#eventModal">Add Event</button>
+        </div>
+    </check>
+
+    <h3>{{ @pastOrUpcoming }} Events</h3>
+    <div class="container">
+        <hr>
+        <repeat group="{{ @events }}" value="{{ @event }}">
+            <div class="row my-3 mx-1">
+                <div class="col-sm" data-id="{{ @event->getId() }}">
+
+                    <h5 class="title">{{ @event->getTitle() }}</h5><br>
+                    <p class="date">{{ @event->getDate() }}</p>
+                    <p class="desc">{{ @event->getDescription() }}</p>
+                </div>
+
+
+                <check if="{{ @isAdmin }}">
+                    <div class="row">
+                        <div class="my-auto">
+                            <!-- Button trigger modal -->
+
+                            <div class="btn-group-vertical" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-warning btn-edit" data-id="{{ @event->getId() }}" data-toggle="modal" data-target="#eventModal">
+                                    <img src="{{ @BASE }}/assets/images/icons/pencil.svg" alt="Edit" data-id="{{ @event->getId() }}">
+                                </button>
+                                <button type="button" class="btn btn-danger btn-delete" data-id="{{ @event->getId() }}">
+                                    <img src="{{ @BASE }}/assets/images/icons/close.svg" alt="X" data-id="{{ @event->getId() }}">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </check>
+            </div>
+            <hr>
+        </repeat>
+
+        <check if="{{ @pastOrUpcoming == 'Upcoming' }}">
+            <a href="{{@BASE}}/past_events">View past events</a>
+        </check>
+    </div>
+
+    <br><br><br>
+</div>

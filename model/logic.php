@@ -68,12 +68,31 @@ class Logic
      *
      * @return array Returns an array if event information.
      */
-    public static function getEvents()
+    public static function getUpcomingEvents()
     {
         $result = array();
 
         Database::connect();
-        $resultDB = Database::getAllEvents();
+        $resultDB = Database::getUpcomingEvents();
+
+        foreach ($resultDB as $key => $value) {
+            array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['dateFormatted']));
+        }
+
+        return $result;
+    }
+
+    /**
+     * Method used to process event information.
+     *
+     * @return array Returns an array if event information.
+     */
+    public static function getPastEvents()
+    {
+        $result = array();
+
+        Database::connect();
+        $resultDB = Database::getPastEvents();
 
         foreach ($resultDB as $key => $value) {
             array_push($result, new Event($value['idevent'], $value['title'], $value['description'], $value['dateFormatted']));
