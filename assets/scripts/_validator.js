@@ -8,11 +8,21 @@
 // all classes in regex JSON key's
 
 // leave off regex pre/post /'s
-let regex = {
-    "account-validate": ["^(\\w|\\d){1,45}$", "Please enter an account 1-45 characters with letters/numbers only"],
-    "name-validate": ["^([^0-9]*)$", "Please enter a name with dashes and letters"],
-    "zip-validate": ["^\\d\\d\\d\\d\\d$", "Please enter a phrase with 5 numbers"],
-    "phone-validate": ["^\\d{10}$", "Please enter a phone with 10 numbers - no symbols"]
+const regex = {
+    "name-validate": ["^([^0-9]{1,60})$", "Please enter a name with between 1-60 characters"],
+    "account-validate": ["^(\\w|\\d){1,60}$", "Please enter an account 1-60 letters or numbers"],
+    "school-validate": ["^([^0-9]{1,60})$", "Please enter a school 1 to 60 characters"],
+    "grade-validate": ["^([0-9]{1,2})$", "Please enter a grade with 1-2 numbers"],
+    "instrument-validate": ["^([^0-9]{1,60})$", "Please enter an instrument 1 to 60 characters"],
+    "email-validate": ["^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$", "Please enter a name with dashes and letters"],
+    "phone-validate": ["^\\d{10}$", "Please enter a phone with 10 numbers - no symbols"],
+    "address-validate": ["^[\\w]{1,60}$", "Please enter an address 1 to 60 characters"],
+    "city-validate": ["^([^0-9]{1,60})$", "Please enter a city 1 to 60 characters"],
+    "zip-validate": ["^\\d\\d\\d\\d\\d$", "Please enter a zip code with 5 numbers"],
+    "allergies-validate": ["^([^0-9]{1,60})$", "Please enter an allergy list 1 to 60 characters"],
+    "serial-validate": ["^([0-9]{1,20})$", "Please enter a serial number with numbers only"],
+    "make-validate": ["^([^0-9]{1,30})$", "Please enter a make 1 to 30 characters"],
+    "model-validate": ["^([^0-9]{1,30})$", "Please enter a model 1 to 30 characters"]
 };
 
 let stopSendClass = "validation-halt";
