@@ -22,7 +22,6 @@ $f3->route('GET|POST /', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
-        BASE.'/assets/styles/_home.css'
     );
 
     // List of paths for sub-templates being used.
@@ -73,8 +72,6 @@ $f3->route('GET /past_events', function($f3) {
     $scripts = array(
         BASE.'/assets/scripts/_home.js',
     );
-
-    $footer = 'views/_footer.html';
 
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
