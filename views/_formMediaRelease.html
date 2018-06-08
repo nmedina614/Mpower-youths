@@ -1,4 +1,4 @@
-<form method="post">
+<form method="post" class="needs-validation" novalidate>
     <div class="container">
         <h1 class="text-center">Minor Photo/Video Release Form</h1>
         <p>I give M-Power Youths my permission to publish in print, electronic, or video format the image or video of
@@ -6,16 +6,16 @@
 
         <div class="form-group">
             <label for="childName">Child's Name</label>
-            <input type="text" class="form-control" name="childName" id="childName" required>
+            <input type="text" class="form-control name-validate" name="childName" id="childName" required>
         </div>
 
         <div class="form-group">
             <label for="parentName">Parent's Name</label>
-            <input type="text" class="form-control" name="parent" id="parentName" required>
+            <input type="text" class="form-control zip-validate validation-optional" name="parent" id="parentName" required>
         </div>
 
         <div class="text-center">
-            <button type="button" class="btn btn-success w-25" data-toggle="modal" data-target="#exampleModal">Send</button>
+            <button type="button" class="btn btn-success w-25 validation-halt" data-toggle="modal" data-target="#exampleModal">Send</button>
         </div>
 
         <!-- Modal -->
