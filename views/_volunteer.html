@@ -12,40 +12,44 @@
 
         <hr>
 
-        <form class="pb-4" method="post">
+        <form class="pb-4" method="post" novalidate>
 
             <div class="form-group col-lg-6"> <!-- Student Full Name -->
                 <label for="Student_full_name_id" class="control-label">Full Legal Name</label>
-                <input required type="text" class="form-control" id="Student_full_name_id" name="full_name" value="{{@name}}">
+
+                <input required type="text" class="form-control name-validate" id="Student_full_name_id" name="full_name" value="{{@name}}">
+
             </div>
 
             <div class="form-group col-lg-6"> <!-- Street 1 -->
                 <label for="address" class="control-label">Home Address</label>
-                <input required type="text" class="form-control" id="address" name="address" value="{{@address}}">
+                <input required type="text" class="form-control address-validate" id="address" name="address" value="{{@address}}">
             </div>
 
             <div class="form-group col-lg-6"> <!-- Zip Code-->
                 <label for="zip_id" class="control-label">Zip Code</label>
-                <input required type="text" class="form-control" id="zip_id" name="zip" value="{{@zip}}">
+
+                <input required type="text" class="form-control zip-validate" id="zip_id" name="zip" value="{{@zip}}">
+
             </div>
 
             <div class="form-group col-lg-6"> <!-- Date -->
                 <label for="date" class="control-label">Date of Birth</label>
-                <input required type="date" class="form-control" id="date" name="date" value="{{@dob}}">
+                <input required type="date" class="form-control dateymd-validate" id="date" name="date" value="{{@dob}}">
             </div>
 
             <div class="form-group col-lg-6"> <!-- Telephone -->
                 <label for="phone" class="control-label">Telephone</label>
-                <input required type="text" class="form-control" id="phone" name="phone" value="{{@phone}}">
+                <input required type="text" class="form-control phone-validate" id="phone" name="phone" value="{{@phone}}">
             </div>
 
             <div class="form-group col-lg-6"> <!-- Drivers Licence -->
                 <label for="dl" class="control-label">Drivers License #</label>
-                <input required type="text" class="form-control" id="dl" name="dl" value="{{@dl}}">
+                <input required type="text" class="form-control license-validate" id="dl" name="dl" value="{{@dl}}">
             </div>
 
             <div class="form-group col-lg-6" > <!-- submit Button -->
-                <button type="submit" class="btn btn-primary" name='submit' value="yes">Submit Request</button>
+                <button type="submit" class="btn btn-primary validation-halt" name='submit' value="yes">Submit Request</button>
             </div>
 
         </form>

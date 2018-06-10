@@ -1,81 +1,78 @@
 <h1 class="text-center">Hello, {{@storedAccount->getUsername() }}</h1>
 
 
+<div class="container">
+    <div class="row">
+        <div class="col col-md-6 offset-md-3">
+            <form method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control account-validate validation-optional" name="username" id="username" value="{{ @curAccount->getUsername() }}"
+                    <check if="{{ !@editMode }}">
+                        readonly
+                    </check>
+                    ><br>
+                    <check if="{{ !is_null(@errors) && array_key_exists('account', @errors) }}">
+                        <small id="accountHelpBox" class="form-text text-muted">
+                            {{ @errors['account'] }}
+                        </small>
+                    </check>
+                </div>
 
-<div class="mx-auto w-50">
-    <div class="text-center">
-        <form method="post">
-            <button type="submit" class="btn btn-primary" name="edit">Edit Profile</button><br>
-        </form>
+                <check if="{{ @editMode }}">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password"><br>
+                        <check if="{{ !is_null(@errors) && array_key_exists('password', @errors) }}">
+                            <small id="passwordHelpBox" class="form-text text-muted">
+                                {{ @errors['password'] }}
+                            </small>
+                        </check>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"><br>
+                        <check if="{{ !is_null(@errors) && array_key_exists('confirmPassword', @errors) }}">
+                            <small id="confirmPasswordHelpBox" class="form-text text-muted">
+                                {{ @errors['confirmPassword'] }}
+                            </small>
+                        </check>
+                    </div>
+                </check>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control email-validate validation-optional" name="email" id="email" value="{{ @curAccount->getEmail() }}"
+                    <check if="{{ !@editMode }}">
+                        readonly
+                    </check>
+                    ><br>
+                    <check if="{{ !is_null(@errors) && array_key_exists('email', @errors) }}">
+                        <small id="emailHelpBox" class="form-text text-muted">
+                            {{ @errors['email'] }}
+                        </small>
+                    </check>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control phone-validate validation-optional" name="phone" id="phone" value="{{ @curAccount->getPhone() }}"
+                    <check if="{{ !@editMode }}">
+                        readonly
+                    </check>
+                    ><br>
+                    <check if="{{ !is_null(@errors) && array_key_exists('phone', @errors) }}">
+                        <small id="phoneHelpBox" class="form-text text-muted">
+                            {{ @errors['phone'] }}
+                        </small>
+                    </check>
+                </div>
+
+                <check if="{{ @editMode }}">
+                    <button type="submit" class="btn btn-success validation-halt" name="save">Save</button>
+                </check>
+            </form>
+        </div>
     </div>
-
-    <form method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username" value="{{ @curAccount->getUsername() }}"
-            <check if="{{ !@editMode }}">
-                readonly
-            </check>
-            ><br>
-            <check if="{{ !is_null(@errors) && array_key_exists('account', @errors) }}">
-                <small id="accountHelpBox" class="form-text text-muted">
-                    {{ @errors['account'] }}
-                </small>
-            </check>
-        </div>
-
-        <check if="{{ @editMode }}">
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password"><br>
-                <check if="{{ !is_null(@errors) && array_key_exists('password', @errors) }}">
-                    <small id="passwordHelpBox" class="form-text text-muted">
-                        {{ @errors['password'] }}
-                    </small>
-                </check>
-            </div>
-
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"><br>
-                <check if="{{ !is_null(@errors) && array_key_exists('confirmPassword', @errors) }}">
-                    <small id="confirmPasswordHelpBox" class="form-text text-muted">
-                        {{ @errors['confirmPassword'] }}
-                    </small>
-                </check>
-            </div>
-        </check>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" value="{{ @curAccount->getEmail() }}"
-            <check if="{{ !@editMode }}">
-                readonly
-            </check>
-            ><br>
-            <check if="{{ !is_null(@errors) && array_key_exists('email', @errors) }}">
-                <small id="emailHelpBox" class="form-text text-muted">
-                    {{ @errors['email'] }}
-                </small>
-            </check>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" class="form-control" name="phone" id="phone" value="{{ @curAccount->getPhone() }}"
-            <check if="{{ !@editMode }}">
-                readonly
-            </check>
-            ><br>
-            <check if="{{ !is_null(@errors) && array_key_exists('phone', @errors) }}">
-                <small id="phoneHelpBox" class="form-text text-muted">
-                    {{ @errors['phone'] }}
-                </small>
-            </check>
-        </div>
-
-        <check if="{{ @editMode }}">
-            <button type="submit" class="btn btn-success" name="save">Save</button>
-        </check>
-    </form>
 </div>

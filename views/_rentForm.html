@@ -13,56 +13,67 @@
 
             <hr>
 
-            <form class="pb-4" method="post">
+            <form class="pb-4" method="post" novalidate>
 
                 <div class="form-group col-lg-6"> <!-- Student Full Name -->
                     <label for="Student_full_name_id" class="control-label">Student Full Name</label>
-                    <input required type="text" class="form-control" id="Student_full_name_id" name="student_name" placeholder="" value="{{@student}}">
+
+                    <input required type="text" class="form-control name-validate" id="Student_full_name_id" name="student_name" placeholder="" value="{{@student}}">
+
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Guard Full Name -->
                     <label for="Guard_full_name_id" class="control-label">Parent/Guardian Full Name</label>
-                    <input required type="text" class="form-control" id="Guard_full_name_id" name="guard_name" placeholder="" value="{{@guardian}}">
+
+                    <input required type="text" class="form-control name-validate" id="Guard_full_name_id" name="guard_name" placeholder="" value="{{@guardian}}">
+
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Street 1 -->
                     <label for="street1_id" class="control-label">Street Address 1</label>
-                    <input required type="text" class="form-control" id="street1_id" name="street1" placeholder="" value="{{@add1}}">
+
+                    <input required type="text" class="form-control address-validate" id="street1_id" name="street1" placeholder="" value="{{@add1}}">
+
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Street 2 -->
                     <label for="street2_id" class="control-label">Street Address 2</label>
-                    <input type="text" class="form-control" id="street2_id" name="street2" placeholder="" value="{{@add2}}">
+
+                    <input type="text" class="form-control address-validate validation-optional" id="street2_id" name="street2" placeholder="" value="{{@add2}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- City-->
                     <label for="city_id" class="control-label">City</label>
-                    <input required type="text" class="form-control" id="city_id" name="city" value="{{@city}}">
+
+                    <input required type="text" class="form-control city-validate" id="city_id" name="city" value="{{@city}}">
+
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Zip Code-->
                     <label for="zip_id" class="control-label">Zip Code</label>
-                    <input required type="text" class="form-control" id="zip_id" name="zip" value="{{@zip}}">
+
+                    <input required type="text" class="form-control zip-validate" id="zip_id" name="zip" value="{{@zip}}">
+
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Telephone -->
                     <label for="phone" class="control-label">Telephone</label>
-                    <input required type="text" class="form-control" id="phone" name="phone" value="{{@phone}}">
+                    <input required type="text" class="form-control phone-validate" id="phone" name="phone" value="{{@phone}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- school -->
                     <label for="school" class="control-label">School</label>
-                    <input required type="text" class="form-control" id="school" name="school" value="{{@school}}">
+                    <input required type="text" class="form-control school-validate" id="school" name="school" value="{{@school}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Grade -->
                     <label for="grade" class="control-label">Grade</label>
-                    <input required type="text" class="form-control" id="grade" name="grade" value="{{@grade}}">
+                    <input required type="text" class="form-control grade-validate" id="grade" name="grade" value="{{@grade}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Instrument Selector TODO make dropdown and then select-->
                     <label for="instrument" class="control-label">Instrument</label>
-                    <input required type="text" class="form-control" id="instrument" name="instrument" value="{{@instrument}}">
+                    <input required type="text" class="form-control instrument-validate" id="instrument" name="instrument" value="{{@instrument}}">
                 </div>
 
 
@@ -73,28 +84,28 @@
                     <true>
                         <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
                             <label for="serial" class="control-label">Serial Num.</label>
-                            <input type="text" class="form-control" id="serial" name="serial">
+                            <input type="text" class="form-control serial-validate" id="serial" name="serial">
                         </div>
 
                         <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
                             <label for="contract" class="control-label">Contract Year</label>
-                            <input type="text" class="form-control" id="contract" name="school">
+                            <input type="text" class="form-control year-validate" id="contract" name="school">
                         </div>
 
                         <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
                             <label for="make" class="control-label">Make</label>
-                            <input type="text" class="form-control" id="make" name="grade">
+                            <input type="text" class="form-control make-validate" id="make" name="grade">
                         </div>
 
                         <div class="form-group col-lg-6"> <!-- Model of Instrument -->
                             <label for="model" class="control-label">Model</label>
-                            <input type="text" class="form-control" id="model" name="grade">
+                            <input type="text" class="form-control model-validate" id="model" name="grade">
                         </div>
                     </true>
                 </check>
 
                 <div class="form-group col-lg-6" > <!-- Request Button -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Request</button>
+                    <button type="button" class="btn btn-primary validation-halt" data-toggle="modal" data-target="#exampleModal">Request</button>
                 </div>
 
                 <!-- Modal -->
