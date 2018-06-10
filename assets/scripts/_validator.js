@@ -16,13 +16,15 @@ const regex = {
     "instrument-validate": ["^([^0-9]{1,60})$", "Please enter an instrument 1 to 60 characters"],
     "email-validate": ["^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$", "Please enter a name with dashes and letters"],
     "phone-validate": ["^\\d{10}$", "Please enter a phone with 10 numbers - no symbols"],
-    "address-validate": ["^[\\w]{1,60}$", "Please enter an address 1 to 60 characters"],
+    "dateymd-validate": ["^((?:19|20)\\d\\d)[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$", "Please enter a date in the yyyy-mm-dd format"],
+    "address-validate": ["^[\\w ]{1,60}$", "Please enter an address 1 to 60 characters"],
     "city-validate": ["^([^0-9]{1,60})$", "Please enter a city 1 to 60 characters"],
     "zip-validate": ["^\\d\\d\\d\\d\\d$", "Please enter a zip code with 5 numbers"],
     "allergies-validate": ["^([^0-9]{1,60})$", "Please enter an allergy list 1 to 60 characters"],
     "serial-validate": ["^([0-9]{1,20})$", "Please enter a serial number with numbers only"],
     "make-validate": ["^([^0-9]{1,30})$", "Please enter a make 1 to 30 characters"],
-    "model-validate": ["^([^0-9]{1,30})$", "Please enter a model 1 to 30 characters"]
+    "model-validate": ["^([^0-9]{1,30})$", "Please enter a model 1 to 30 characters"],
+    "license-validate": ["^.{1,40}$", "Please enter a license 1 to 40 characters"]
 };
 
 let stopSendClass = "validation-halt";
@@ -31,21 +33,33 @@ let optionClass = "validation-optional";
 $(document).ready(function() {
     // bind regex evaluation on each element
     bindInputs();
+    let sendBtn = $("." + stopSendClass);
+    let form = sendBtn.closest("form");
+
+    form.on("submit", function(event) {
+        cancelSubmission(event);
+    });
 
     // double check before submitting form that the data is valid!
-    $("." + stopSendClass).on("click", function(event) {
+    sendBtn.on("click", function(event) {
         // manually run input validation
-        forceValidationRun();
-
-        let invalidInputs = $(".is-invalid").length;
-        let invalidFeedbacks = $(".invalid-feedback").length;
-
-        if (invalidFeedbacks + invalidInputs !== 0){
-            alert("Input is incorrect!");
-            event.stopPropagation();
-        }
+        cancelSubmission(event);
     });
 });
+
+function cancelSubmission (event) {
+    // manually run input validation
+    forceValidationRun();
+
+    let invalidInputs = $(".is-invalid").length;
+    let invalidFeedbacks = $(".invalid-feedback").length;
+
+    if (invalidFeedbacks + invalidInputs !== 0){
+        alert("Input is incorrect!");
+        event.stopPropagation();
+        event.preventDefault();
+    }
+}
 
 // forces the validation to run before the user presses the send button for every element
 function forceValidationRun(){
