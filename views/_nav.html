@@ -1,16 +1,18 @@
 <div class="fixed-top">
-    <nav class="navbar navbar-sm navbar-light text-dark bg-secondary justify-content-end">
-        <a class=" btn btn-secondary navbar-sm-icon p-0 mr-2" href="https://www.facebook.com/mpoweryouthmusic/">
-            <img src="{{ @BASE }}/assets/images/icons/facebook.svg" alt="Facebook">
-        </a>
 
-        <div class="text-right">
-            <div class="my-3" id="google_translate_element"></div>
-        </div>
-    </nav>
+    <!--<nav class="navbar navbar-sm navbar-light text-dark bg-secondary justify-content-end">-->
+        <!--<a class=" btn btn-secondary navbar-sm-icon p-0 mr-2" href="https://www.facebook.com/mpoweryouthmusic/">-->
+            <!--<img src="{{ @BASE }}/assets/images/icons/facebook.svg" alt="Facebook">-->
+        <!--</a>-->
+
+        <!--<div class="text-right">-->
+            <!--<div class="my-3" id="google_translate_element"></div>-->
+        <!--</div>-->
+    <!--</nav>-->
     <!--<div class="jumbotron pt-2 pb-2 mb-0 bg-white">-->
         <!--<img src="{{ @BASE }}/assets/images/color_logo_transparent.svg" class="logo">-->
     <!--</div>-->
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand acme" href="{{ @BASE }}">
             <!--<img src="./assets/images/MPYLogo/svg/color_logo_transparent.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
@@ -27,17 +29,18 @@
                     <a class="nav-link" href="{{ @BASE }}">Home</a>
                 </li>
                 <li class="nav-item dropdown d-inline-flex">
-                    <a class="nav-link" href="{{ @BASE }}/about">About</a>
-                    <a class="nav-link dropdown-toggle pl-0" href="#" id="infoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link " id="infoDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >About</a>
+                    <a class="nav-link dropdown-toggle pl-0" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="infoDropdown">
+                        <a class="dropdown-item" href="{{ @BASE }}/about">About Us</a>
                         <a class="dropdown-item" href="{{ @BASE }}/staff">Staff</a>
                         <a class="dropdown-item" href="{{ @BASE }}/board_of_directors">Board of Directors</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ @BASE }}/gallery">Gallery</a>
                         <a class="dropdown-item" href="{{ @BASE }}/videos">Videos</a>
-                        <a class="dropdown-item" href="{{ @BASE }}/files">Files</a>
+                        <a class="dropdown-item" href="{{ @BASE }}/files">Downloadable Forms</a>
                         <a class="dropdown-item" href="{{ @BASE }}/testimonials">Testimonials</a>
                     </div>
                 </li>
@@ -56,7 +59,7 @@
                     <!--<a class="nav-link" href="#">Donate</a>-->
                 <!--</li>-->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ @BASE }}/contact">Contact</a>
+                    <a class="nav-link" href="{{ @BASE }}/contact">Contact Us</a>
                 </li>
 
 
@@ -97,6 +100,15 @@
 
 
             </ul>
+        </div>
+    </nav>
+    <nav class="navbar navbar-sm navbar-light text-dark bg-secondary justify-content-end">
+        <a class=" btn btn-secondary navbar-sm-icon p-0 mr-2" href="https://www.facebook.com/mpoweryouthmusic/">
+            <img src="{{ @BASE }}/assets/images/icons/facebook.svg" alt="Facebook">
+        </a>
+
+        <div class="text-right">
+            <div class="my-3" id="google_translate_element"></div>
         </div>
     </nav>
 </div>

@@ -175,7 +175,43 @@ $f3->route('POST /ajax-delete-event', function($f3) {
     }
 });
 
-$f3->route('GET|POST /account', function($f3) {
+$f3->route('GET /account', function($f3) {
+
+    $f3->set('rentals', Logic::getRentalRequests());
+    $f3->set('applications', Logic::getApplications());
+    $f3->set('volunteers', Logic::getVolunteers());
+
+
+    // Title to use in template.
+    $title = 'Account';
+    // List of paths to stylesheets.
+    $styles = array(
+        'https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css'
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_account.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array(
+        BASE.'/assets/scripts/_admin.js',
+        'https://code.jquery.com/jquery-1.12.4.js',
+        'https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js',
+        'https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js'
+    );
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('GET|POST /account/edit', function($f3) {
     $curAccount = Logic::accountData($f3->get('username'));
     $storedAccount = new Account($curAccount->getId(), $curAccount->getUsername(), $curAccount->getPassword(), $curAccount->getEmail(), $curAccount->getPhone(), $curAccount->getPrivilege());
     $f3->set('storedAccount', $storedAccount);
@@ -204,23 +240,23 @@ $f3->route('GET|POST /account', function($f3) {
     }
 
     // Title to use in template.
-    $title = "Account Management";
+    $title = "Edit Account";
 
     // List of paths to stylesheets.
     $styles = array(
-        'assets/styles/_home.css'
+        
     );
 
     // List of paths for sub-templates being used.
     $includes = array(
         'views/_nav.html',
-        'views/_account.html',
+        'views/_editAccount.html',
         'views/_footer.html'
     );
 
     // List of paths to scripts being used.
     $scripts = array(
-        BASE.'/assets/scripts/_account.js'
+        BASE.'/assets/scripts/_editAccount.js'
     );
 
     $f3->set('title' , $title);
@@ -241,7 +277,7 @@ $f3->route('GET|POST /staff', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
-        'assets/styles/_home.css'
+        
     );
 
     // List of paths for sub-templates being used.
@@ -317,7 +353,7 @@ $f3->route('GET|POST /board_of_directors', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
-        'assets/styles/_home.css'
+        
     );
 
     // List of paths for sub-templates being used.
@@ -563,7 +599,9 @@ $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
     }
 
     if(isset($_POST['submit'])){
+        $account = unserialize($_SESSION['account']);
 
+        $accountId = $account->getId();
         $student = $_POST['student_name'];
         $guardian = $_POST['guard_name'];
         $add1 = $_POST['street1'];
@@ -582,13 +620,14 @@ $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
             date_default_timezone_set('America/Los_Angeles');
             $date = date('Y-m-d');
 
-            $result = Logic::requestInstrument($student, $guardian, $add1,
+            $result = Logic::requestInstrument($accountId, $student, $guardian, $add1,
                                      $add2, $city, $zip, $phone,
                                      $school, $grade, $instrument,
                                      $date);
 
             if($result != false){
                 $f3->set('result', "Request Submitted");
+                $f3->reroute('/form/success');
             } else {
                 $f3->set('result', "Request failed to send");
             }
@@ -721,6 +760,56 @@ $f3->route('GET /files', function($f3) {
     $includes = array(
         'views/_nav.html',
         'views/_files.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array();
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('GET /about', function($f3) {
+    // Title to use in template.
+    $title = "M-Power Youth: About";
+    // List of paths to stylesheets.
+    $styles = array(
+        'assets/styles/_about.css'
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_about.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array(
+        BASE.'/assets/scripts/_home.js',
+
+    );
+
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('GET /form/success', function($f3) {
+    // Title to use in template.
+    $title = "M-Power Youth: Downloadable Files";
+    // List of paths to stylesheets.
+    $styles = array(
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_success.html',
         'views/_footer.html'
     );
     // List of paths to scripts being used.
@@ -914,6 +1003,8 @@ $f3->route('GET|POST /volunteer', function($f3) {
 
 
         //Values from POST array
+        $account = unserialize($_SESSION['account']);
+        $accountId = $account->getId();
         $name = $_POST['full_name']; //Name
         $address = $_POST['address']; //Address
         $zip = $_POST['zip']; //Zip code
@@ -926,14 +1017,17 @@ $f3->route('GET|POST /volunteer', function($f3) {
 
         if(count($errors)==0) {
 
+            echo "Rawr";
+
             date_default_timezone_set('America/Los_Angeles');
             $date = date('Y-m-d'); //Date of Request
 
-            $result = Logic::volunteerRequest($name, $address, $zip, $dob, $phone,
+            $result = Logic::volunteerRequest($accountId, $name, $address, $zip, $dob, $phone,
                 $dl, $date);
 
             if ($result != false) {
                 $f3->set('result', "Request Submitted");
+                $f3->reroute('/form/success');
             } else {
                 $f3->set('result', "Request failed to send");
             }
@@ -1006,6 +1100,44 @@ $f3->route('GET /administration', function($f3) {
         'https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js',
         'https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js'
     );
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
+$f3->route('GET /forms/review/@type/@id', function($f3, $params) {
+
+    if (!$f3->get('isAdmin')) {
+        $account = unserialize($_SESSION['account']);
+        $accountId = $account->getId();
+        if($params['id'] != $accountId)
+            $f3->reroute('/');
+    }
+
+    // Title to use in template.
+    $title = $params['type'] . ' form';
+    // List of paths to stylesheets.
+    $styles = array(
+        'https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css'
+    );
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_reviewForm.html',
+        'views/_footer.html'
+    );
+    // List of paths to scripts being used.
+    $scripts = array(
+        BASE.'/assets/scripts/_admin.js',
+        'https://code.jquery.com/jquery-1.12.4.js',
+        'https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js',
+        'https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js'
+    );
+
+    $f3->set('type', $params['type']);
     $f3->set('title' , $title);
     $f3->set('styles' , $styles);
     $f3->set('includes' , $includes);

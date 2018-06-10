@@ -1,5 +1,5 @@
 body {
-    padding-top: 190px;
+    padding-top: 86px;
     padding-bottom: 128px;
 }
 
@@ -14,4 +14,9 @@ nav.navbar-sm {
 .navbar-sm-icon {
     height: 30px;
     width: 30px;
+}
+
+.logo {
+    height: 128px;
+    width: 128px;
 }

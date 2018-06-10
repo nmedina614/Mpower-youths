@@ -669,7 +669,11 @@ class Logic
     {
         Database::connect();
 
-        $result = Database::getApplications();
+        if(Validator::isAdmin()) $result = Database::getApplications();
+        else {
+            $account = unserialize($_SESSION['account']);
+            $result = Database::getAccountApplications($account->getId());
+        }
 
         return $result;
     }
@@ -683,8 +687,11 @@ class Logic
     public static function getVolunteers()
     {
         Database::connect();
-
-        $result = Database::getVolunteers();
+        if(Validator::isAdmin()) $result = Database::getVolunteers();
+        else {
+            $account = unserialize($_SESSION['account']);
+            $result = Database::getAccountVolunteers($account->getId());
+        }
 
         return $result;
     }
@@ -714,7 +721,11 @@ class Logic
     {
         Database::connect();
 
-        $result = Database::getInstrumentRentals();
+        if(Validator::isAdmin()) $result = Database::getInstrumentRentals();
+        else {
+            $account = unserialize($_SESSION['account']);
+            $result = Database::getAccountInstrumentRentals($account->getId(accountId));
+        }
 
         return $result;
 
@@ -757,8 +768,8 @@ class Logic
      * @param $date mixed date of the instrument request
      * @return mixed true or false based on if statement executed correctly
      */
-    public static function requestInstrument($student, $guardian, $add1, $add2,
-                                             $city, $zip, $phone, $school,
+    public static function requestInstrument($accountId, $student, $guardian, $add1,
+                                             $add2, $city, $zip, $phone, $school,
                                              $grade, $instrument, $date)
     {
 
@@ -766,8 +777,8 @@ class Logic
 
         Database::createNotification('rental');
 
-        return Database::requestInstrument($student, $guardian, $add1, $add2,
-                                           $city, $zip, $phone, $school,
+        return Database::requestInstrument($accountId, $student, $guardian, $add1,
+                                           $add2, $city, $zip, $phone, $school,
                                            $grade, $instrument, $date);
     }
 
@@ -784,7 +795,7 @@ class Logic
      * @param $dateRequested string The date being requested
      * @return mixed true or false based on if statement executed correctly
      */
-    public static function volunteerRequest($name, $address, $zip, $dob,
+    public static function volunteerRequest($accountId, $name, $address, $zip, $dob,
                                             $phone, $drivers, $dateRequested)
     {
 
@@ -792,7 +803,7 @@ class Logic
 
         Database::createNotification('volunteer');
 
-        return Database::volunteerRequest($name, $address, $zip, $dob,
+        return Database::volunteerRequest($accountId, $name, $address, $zip, $dob,
             $phone, $drivers, $dateRequested);
     }
 }

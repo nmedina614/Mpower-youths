@@ -1,79 +1,73 @@
-<h1 class="text-center">Hello, {{@storedAccount->getUsername() }}</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-body">
+                <div id="applications" class="table-container" style="">
 
-<div class="mx-auto w-50">
-    <div class="text-center">
-        <form method="post">
-            <button type="submit" class="btn btn-primary" name="edit">Edit Profile</button><br>
-        </form>
+                    <h1>Account Forms</h1>
+                    <table class="data-table table table-striped table-bordered w-100">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Date Submitted</th>
+                            <th>Status</th>
+                            <th>Tools</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <repeat group="{{ @applications }}" value="{{ @application }}">
+                            <tr>
+                                <td>{{ @application['studentName'] }}</td>
+                                <td>Application</td>
+                                <td>{{ @application['submissionDate'] }}</td>
+                                <td>{{ Logic::translateRequestStatus(@application['decision']) }}</td>
+                                <td class="btn btn-light btn-sm">
+                                    <a href="#">
+                                        <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                    </a>
+                                </td>
+                            </tr>
+                        </repeat> <!-- Applications -->
+                        <repeat group="{{ @volunteers }}" value="{{ @volunteer }}">
+                            <tr>
+                                <td>{{ @volunteer['name'] }}</td>
+                                <td>Volunteer</td>
+                                <td>{{ @volunteer['dateRequested'] }}</td>
+                                <td>{{ Logic::translateRequestStatus(@volunteer['requestStatus']) }}</td>
+                                <td class="btn btn-light btn-sm">
+                                    <a href="#">
+                                        <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                    </a>
+                                </td>
+                            </tr>
+                        </repeat> <!-- Volunteer -->
+                        <repeat group="{{ @rentals }}" value="{{ @rental }}">
+                            <tr>
+                                <td>{{ @rental['studentName'] }}</td>
+                                <td>Rental</td>
+                                <td>{{ @rental['dateSubmited'] }}</td>
+                                <td>{{ Logic::translateRequestStatus(@rentals['requestStatus']) }}</td>
+                                <td class="btn btn-light btn-sm">
+                                    <a href="#">
+                                        <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                    </a>
+                                </td>
+                            </tr>
+                        </repeat> <!-- Rentals -->
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Grade</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div><!-- FORMS -->
+            </div>
+        </div>
     </div>
-
-    <form method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username" value="{{ @curAccount->getUsername() }}"
-            <check if="{{ !@editMode }}">
-                readonly
-            </check>
-            ><br>
-            <check if="{{ !is_null(@errors) && array_key_exists('account', @errors) }}">
-                <small id="accountHelpBox" class="form-text text-muted">
-                    {{ @errors['account'] }}
-                </small>
-            </check>
-        </div>
-
-        <check if="{{ @editMode }}">
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" id="password"><br>
-                <check if="{{ !is_null(@errors) && array_key_exists('password', @errors) }}">
-                    <small id="passwordHelpBox" class="form-text text-muted">
-                        {{ @errors['password'] }}
-                    </small>
-                </check>
-            </div>
-
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword"><br>
-                <check if="{{ !is_null(@errors) && array_key_exists('confirmPassword', @errors) }}">
-                    <small id="confirmPasswordHelpBox" class="form-text text-muted">
-                        {{ @errors['confirmPassword'] }}
-                    </small>
-                </check>
-            </div>
-        </check>
-
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" value="{{ @curAccount->getEmail() }}"
-            <check if="{{ !@editMode }}">
-                readonly
-            </check>
-            ><br>
-            <check if="{{ !is_null(@errors) && array_key_exists('email', @errors) }}">
-                <small id="emailHelpBox" class="form-text text-muted">
-                    {{ @errors['email'] }}
-                </small>
-            </check>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" class="form-control" name="phone" id="phone" value="{{ @curAccount->getPhone() }}"
-            <check if="{{ !@editMode }}">
-                readonly
-            </check>
-            ><br>
-            <check if="{{ !is_null(@errors) && array_key_exists('phone', @errors) }}">
-                <small id="phoneHelpBox" class="form-text text-muted">
-                    {{ @errors['phone'] }}
-                </small>
-            </check>
-        </div>
-
-        <check if="{{ @editMode }}">
-            <button type="submit" class="btn btn-success" name="save">Save</button>
-        </check>
-    </form>
-</div>

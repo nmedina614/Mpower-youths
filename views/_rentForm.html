@@ -2,7 +2,7 @@
     <div class="container-page">
 
         <div class="col-md-6">
-            <h2>Rental Agreement</h2>
+            <h2>Instrument Rental Agreement</h2>
             <h4>{{@result}}</h4>
 
             <repeat group="{{ @errors }}" value="{{ @error }}">
@@ -17,32 +17,32 @@
 
                 <div class="form-group col-lg-6"> <!-- Student Full Name -->
                     <label for="Student_full_name_id" class="control-label">Student Full Name</label>
-                    <input required type="text" class="form-control" id="Student_full_name_id" name="student_name" placeholder="John Deer jr." value="{{@student}}">
+                    <input required type="text" class="form-control" id="Student_full_name_id" name="student_name" placeholder="" value="{{@student}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Guard Full Name -->
                     <label for="Guard_full_name_id" class="control-label">Parent/Guardian Full Name</label>
-                    <input required type="text" class="form-control" id="Guard_full_name_id" name="guard_name" placeholder="John Deer" value="{{@guardian}}">
+                    <input required type="text" class="form-control" id="Guard_full_name_id" name="guard_name" placeholder="" value="{{@guardian}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Street 1 -->
                     <label for="street1_id" class="control-label">Street Address 1</label>
-                    <input required type="text" class="form-control" id="street1_id" name="street1" placeholder="Street address, P.O. box, company name, c/o" value="{{@add1}}">
+                    <input required type="text" class="form-control" id="street1_id" name="street1" placeholder="" value="{{@add1}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Street 2 -->
                     <label for="street2_id" class="control-label">Street Address 2</label>
-                    <input type="text" class="form-control" id="street2_id" name="street2" placeholder="Apartment, suite, unit, building, floor, etc." value="{{@add2}}">
+                    <input type="text" class="form-control" id="street2_id" name="street2" placeholder="" value="{{@add2}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- City-->
                     <label for="city_id" class="control-label">City</label>
-                    <input required type="text" class="form-control" id="city_id" name="city" placeholder="Kent" value="{{@city}}">
+                    <input required type="text" class="form-control" id="city_id" name="city" value="{{@city}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Zip Code-->
                     <label for="zip_id" class="control-label">Zip Code</label>
-                    <input required type="text" class="form-control" id="zip_id" name="zip" placeholder="98042" value="{{@zip}}">
+                    <input required type="text" class="form-control" id="zip_id" name="zip" value="{{@zip}}">
                 </div>
 
                 <div class="form-group col-lg-6"> <!-- Telephone -->
@@ -60,7 +60,7 @@
                     <input required type="text" class="form-control" id="grade" name="grade" value="{{@grade}}">
                 </div>
 
-                <div class="form-group col-lg-6"> <!-- Instrument Selector //TODO make dropdown and then select-->
+                <div class="form-group col-lg-6"> <!-- Instrument Selector TODO make dropdown and then select-->
                     <label for="instrument" class="control-label">Instrument</label>
                     <input required type="text" class="form-control" id="instrument" name="instrument" value="{{@instrument}}">
                 </div>

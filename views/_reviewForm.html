@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <check if="{{@type}} == 1">
+                <true><include href="views/_reviewEnrollment.html"></true>
+            </check>
+            <check if="{{@type}} == 2">
+                <true><include href="views/_reviewVolunteer.html"></true>
+            </check>
+            <check if="{{@type}} == 3">
+                <true><include href="views/_reviewRental.html"></true>
+            </check>
+        </div>
+    </div>
+</div>

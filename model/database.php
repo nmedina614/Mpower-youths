@@ -645,7 +645,7 @@ class Database
 
         $result = self::$_dbh->query($sql);
 
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        return (!empty($result)) ? $result->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
     /**
@@ -660,7 +660,7 @@ class Database
 
         $result = self::$_dbh->query($sql);
 
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        return (!empty($result)) ? $result->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
     /**
@@ -675,7 +675,7 @@ class Database
 
         $result = self::$_dbh->query($sql);
 
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        return (!empty($result)) ? $result->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
     public static function getAccounts()
@@ -684,7 +684,72 @@ class Database
 
         $result = self::$_dbh->query($sql);
 
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        return (!empty($result)) ? $result->fetchAll(PDO::FETCH_ASSOC) : false;
+    }
+
+    /**
+     * Method pulls all rentals from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
+    public static function getAccountInstrumentRentals($accountId)
+    {
+        $sql = 'SELECT studentName, dateSubmited, requestStatus FROM `formInstrumentRequest` WHERE formId=:accountId';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // If there are results, return them. Otherwise return false.
+        return (!empty($result)) ? $result : false;
+    }
+
+    /**
+     * Method pulls all applications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all application requests.
+     */
+    public static function getAccountApplications($accountId)
+    {
+        $sql = 'SELECT studentName, grade, submissionDate, decision FROM formEnrollment WHERE accountId=:accountId';
+
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // If there are results, return them. Otherwise return false.
+        return (!empty($result)) ? $result : false;
+    }
+
+    /**
+     * Method pulls all volunteer applications from the database
+     * and returns them as an array.
+     *
+     * @return mixed Returns an array containing all volunteer applications requests.
+     */
+    public static function getAccountVolunteers($accountId)
+    {
+        $sql = 'SELECT name, dateRequested, requestStatus FROM formVolunteer WHERE accountId=:accountId';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        // If there are results, return them. Otherwise return false.
+        return (!empty($result)) ? $result : false;
     }
 
     /**
@@ -703,17 +768,18 @@ class Database
      * @param $date mixed date of the instrument request
      * @return mixed true or false based on if statement executed correctly
      */
-    public static function requestInstrument($student, $guardian, $add1, $add2,
-                                             $city, $zip, $phone, $school,
+    public static function requestInstrument($accountId, $student, $guardian, $add1,
+                                             $add2, $city, $zip, $phone, $school,
                                              $grade, $instrument, $date)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = "INSERT INTO formInstrumentRequest (studentName, guardianName,
+        $sql = "INSERT INTO formInstrumentRequest (accountId, studentName, guardianName,
                 address1, address2, city, zip, phone, school, grade, instrument,
-                dateSubmited, requestStatus, formType) VALUES (:studentName, :guardName, :add1,
+                dateSubmited, requestStatus, formType) VALUES (:accountId, :studentName, :guardName, :add1,
                 :add2, :city, :zip, :phone, :school, :grade, :instrument, :date, 0, 4)";
 
         $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
         $statement->bindParam(':studentName', $student, PDO::PARAM_STR);
         $statement->bindParam(':guardName', $guardian, PDO::PARAM_STR);
         $statement->bindParam(':add1', $add1, PDO::PARAM_STR);
@@ -742,16 +808,17 @@ class Database
      * @param $dateRequested string The date being requested
      * @return mixed true or false based on if statement executed correctly
      */
-    public static function volunteerRequest($name, $address, $zip, $dob,
+    public static function volunteerRequest($accountId, $name, $address, $zip, $dob,
                                             $phone, $drivers, $dateRequested)
     {
+
         // Prepare a select to check if db contains queried params.
-        $sql = 'INSERT INTO `formVolunteer` (name, address, zip, dob, 
-        phone, drivers, dateRequested, requestStatus, formType) VALUES 
-        ( :name, :address, :zip, :dob, :phone, :drivers, :dateRequested, 
-        0, 1)';
+        $sql = 'INSERT INTO `formVolunteer` (`accountId`, `name`, `address`, `zip`, `dob`, `phone`, 
+                `drivers`, `dateRequested`, `requestStatus`, `formType`) VALUES (
+                :accountId, :name, :address, :zip, :dob, :phone, :drivers, :dateRequested, 0, 1)';
 
         $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
         $statement->bindParam(':name', $name, PDO::PARAM_STR);
         $statement->bindParam(':address', $address, PDO::PARAM_STR);
         $statement->bindParam(':zip', $zip, PDO::PARAM_INT);
@@ -759,6 +826,8 @@ class Database
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
         $statement->bindParam(':drivers', $drivers, PDO::PARAM_STR);
         $statement->bindParam(':dateRequested', $dateRequested, PDO::PARAM_STR);
+
+        echo $statement->debugDumpParams();
 
         return $statement->execute();
     }
