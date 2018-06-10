@@ -1,4 +1,4 @@
-<form method="post">
+<form method="post" novalidate>
 
     <div class="container">
         <h1 class="text-center">Enrollment Form</h1>
@@ -10,26 +10,26 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="studentName">Student's Name</label>
-                    <input type="text" class="form-control" name="studentName" id="studentName" required>
+                    <input type="text" class="form-control name-validate" name="studentName" id="studentName" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-9">
                     <label for="school">School</label>
-                    <input type="text" class="form-control" name="school" id="school" required>
+                    <input type="text" class="form-control school-validate" name="school" id="school" required>
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="grade">Grade</label>
-                    <input type="text" class="form-control" name="grade" id="grade" required>
+                    <input type="text" class="form-control grade-validate" name="grade" id="grade" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="instrument">Desired Instrument</label>
-                    <input type="text" class="form-control" name="instrument" id="instrument" required>
+                    <input type="text" class="form-control instrument-validate" name="instrument" id="instrument" required>
                 </div>
             </div>
 
@@ -41,13 +41,13 @@
 
             <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label for="studentSign">Student Sign Name</label>
-                    <input type="text" class="form-control" name="studentSign" id="studentSign" required>
+                    <label for="studentSign">Student Full Name</label>
+                    <input type="text" class="form-control name-validate" name="studentSign" id="studentSign" required>
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="studentSignDate">Date</label>
-                    <input type="date" class="form-control" id="studentSignDate" value='{{ @curDate }}' readonly>
+                    <input type="date" class="form-control dateymd-validate" id="studentSignDate" value='{{ @curDate }}' readonly>
                 </div>
             </div>
 
@@ -55,41 +55,41 @@
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="parent">Parent/Guardian Names</label>
-                    <input type="text" class="form-control" name="parent" id="parent" required>
+                    <label for="parent">Parent Name</label>
+                    <input type="text" class="form-control name-validate" name="parent" id="parent" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" name="email" id="email" placeholder="john@mail.com" required>
+                    <input type="text" class="form-control email-validate" name="email" id="email" placeholder="john@mail.com" required>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- Telephone -->
                     <label for="phone" class="control-label">Telephone</label>
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="(123)-111-1234" required>
+                    <input type="text" class="form-control phone-validate" id="phone" name="phone" placeholder="(123)-111-1234" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12"> <!-- Street 1 -->
                     <label for="street1_id" class="control-label">Street Address 1</label>
-                    <input type="text" class="form-control" id="street1_id" name="street1" placeholder="Street address, P.O. box, company name, c/o" required>
+                    <input type="text" class="form-control address-validate" id="street1_id" name="street1" placeholder="Street address, P.O. box, company name, c/o" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12"> <!-- Street 2 -->
                     <label for="street2_id" class="control-label">Street Address 2</label>
-                    <input type="text" class="form-control" id="street2_id" name="street2" placeholder="Apartment, suite, unit, building, floor, etc." required>
+                    <input type="text" class="form-control address-validate validation-optional" id="street2_id" name="street2" placeholder="Apartment, suite, unit, building, floor, etc." required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4"> <!-- City-->
                     <label for="city_id" class="control-label">City</label>
-                    <input type="text" class="form-control" id="city_id" name="city" placeholder="Kent" required>
+                    <input type="text" class="form-control city-validate" id="city_id" name="city" placeholder="Kent" required>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- State Button -->
@@ -151,14 +151,14 @@
 
                 <div class="form-group col-md-4"> <!-- Zip Code-->
                     <label for="zip_id" class="control-label">Zip Code</label>
-                    <input type="text" class="form-control" id="zip_id" name="zip" placeholder="98042" required>
+                    <input type="text" class="form-control zip-validate" id="zip_id" name="zip" placeholder="98042" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="allergies">Allergy List</label>
-                    <input type="text" class="form-control" id="allergies" name="allergies" required>
+                    <input type="text" class="form-control allergies-validate" id="allergies" name="allergies" required>
                 </div>
             </div>
 
@@ -198,19 +198,19 @@
 
             <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label for="parentSign">Parent Sign Name</label>
-                    <input type="text" class="form-control" name="parentSign" id="parentSign" required>
+                    <label for="parentSign">Parent Full Name</label>
+                    <input type="text" class="form-control name-validate" name="parentSign" id="parentSign" required>
                 </div>
 
                 <div class="form-group col-md-3">
                     <label for="parentSignDate">Date</label>
-                    <input type="date" class="form-control" id="parentSignDate" value='{{ @curDate }}' readonly>
+                    <input type="date" class="form-control dateymd-validate" id="parentSignDate" value='{{ @curDate }}' readonly>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="text-center">
-        <button type="submit" name="submit" class="btn btn-success w-25">Send</button>
+        <button type="submit" name="submit" class="btn btn-success w-25 validation-halt">Send</button>
     </div>
 </form>

@@ -10,7 +10,7 @@
     <form method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username" value="{{ @curAccount->getUsername() }}"
+            <input type="text" class="form-control account-validate validation-optional" name="username" id="username" value="{{ @curAccount->getUsername() }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" id="email" value="{{ @curAccount->getEmail() }}"
+            <input type="text" class="form-control email-validate validation-optional" name="email" id="email" value="{{ @curAccount->getEmail() }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -60,7 +60,7 @@
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" class="form-control" name="phone" id="phone" value="{{ @curAccount->getPhone() }}"
+            <input type="text" class="form-control phone-validate validation-optional" name="phone" id="phone" value="{{ @curAccount->getPhone() }}"
             <check if="{{ !@editMode }}">
                 readonly
             </check>
@@ -73,7 +73,7 @@
         </div>
 
         <check if="{{ @editMode }}">
-            <button type="submit" class="btn btn-success" name="save">Save</button>
+            <button type="submit" class="btn btn-success validation-halt" name="save">Save</button>
         </check>
     </form>
 </div>
