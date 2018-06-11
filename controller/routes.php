@@ -177,6 +177,9 @@ $f3->route('POST /ajax-delete-event', function($f3) {
 
 $f3->route('GET /account', function($f3) {
 
+    $account = unserialize($_SESSION['account']);
+    $accountId = $account->getId();
+    $f3->set('accountId', $accountId);
     $f3->set('rentals', Logic::getRentalRequests());
     $f3->set('applications', Logic::getApplications());
     $f3->set('volunteers', Logic::getVolunteers());
@@ -1108,14 +1111,23 @@ $f3->route('GET /administration', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET /forms/review/@type/@id', function($f3, $params) {
+$f3->route('GET /forms/review/@type/@accountId/@formId', function($f3, $params) {
 
+    // Ensure only admin and owner of form works
     if (!$f3->get('isAdmin')) {
         $account = unserialize($_SESSION['account']);
         $accountId = $account->getId();
-        if($params['id'] != $accountId)
+        if($params['accountId'] != $accountId)
             $f3->reroute('/');
+
     }
+
+    $formData = Logic::getForm($params['type'], $params['formId']);
+
+    var_dump($formData);
+
+    $f3->set('formData', $formData[0]);
+
 
     // Title to use in template.
     $title = $params['type'] . ' form';

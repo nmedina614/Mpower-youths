@@ -732,6 +732,27 @@ class Logic
     }
 
     /**
+     * TODO
+     */
+    public static function getForm($type, $formId)
+    {
+        Database::connect();
+
+        switch($type)
+        {
+            case 'enrollment':
+                return Database::getFormApplication($formId);
+            case 'volunteer':
+                return Database::getFormVolunteer($formId);
+            case 'rental':
+                return Database::getFormInstrumentRental($formId);
+            default:
+                throw new InvalidArgumentException("Invalid type: $type");
+        }
+
+    }
+
+    /**
      * Method used to convert the numeric value received into
      * a text string for ease of reading.
      *
