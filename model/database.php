@@ -641,7 +641,7 @@ class Database
      */
     public static function getInstrumentRentals()
     {
-        $sql = 'SELECT studentName, instrument, dateSubmited, requestStatus FROM `formInstrumentRequest`';
+        $sql = 'SELECT accountId, formId, studentName, instrument, dateSubmited, requestStatus FROM `formInstrumentRequest`';
 
         $result = self::$_dbh->query($sql);
 
@@ -656,7 +656,7 @@ class Database
      */
     public static function getApplications()
     {
-        $sql = 'SELECT studentName, grade, submissionDate, decision FROM formEnrollment';
+        $sql = 'SELECT accountId, formId, studentName, grade, submissionDate, decision FROM formEnrollment';
 
         $result = self::$_dbh->query($sql);
 
@@ -671,7 +671,7 @@ class Database
      */
     public static function getVolunteers()
     {
-        $sql = 'SELECT name, phone, dateRequested, requestStatus FROM formVolunteer';
+        $sql = 'SELECT accountId, formId, name, phone, dateRequested, requestStatus FROM formVolunteer';
 
         $result = self::$_dbh->query($sql);
 
@@ -695,7 +695,7 @@ class Database
      */
     public static function getAccountInstrumentRentals($accountId)
     {
-        $sql = 'SELECT studentName, dateSubmited, requestStatus FROM `formInstrumentRequest` WHERE formId=:accountId';
+        $sql = 'SELECT accountId, formId, studentName, dateSubmited, requestStatus FROM `formInstrumentRequest` WHERE accountId=:accountId';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
@@ -716,7 +716,7 @@ class Database
      */
     public static function getAccountApplications($accountId)
     {
-        $sql = 'SELECT studentName, grade, submissionDate, decision FROM formEnrollment WHERE accountId=:accountId';
+        $sql = 'SELECT accountId, formId, studentName, grade, submissionDate, decision FROM formEnrollment WHERE accountId=:accountId';
 
 
         $statement = self::$_dbh->prepare($sql);
@@ -738,7 +738,7 @@ class Database
      */
     public static function getAccountVolunteers($accountId)
     {
-        $sql = 'SELECT name, dateRequested, requestStatus FROM formVolunteer WHERE accountId=:accountId';
+        $sql = 'SELECT accountId, formId, name, dateRequested, requestStatus FROM formVolunteer WHERE accountId=:accountId';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
@@ -751,6 +751,70 @@ class Database
         // If there are results, return them. Otherwise return false.
         return (!empty($result)) ? $result : false;
     }
+
+    /**
+     * TODO
+     *
+     * @return mixed Returns an array containing all rental requests.
+     */
+    public static function getFormInstrumentRental($formId)
+    {
+        $sql = 'SELECT * FROM `formInstrumentRequest` WHERE formId=:formId';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':formId', $formId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // If there are results, return them. Otherwise return false.
+        return (!empty($result)) ? $result : false;
+    }
+
+    /**
+     * TODO
+     *
+     * @return mixed Returns an array containing all application requests.
+     */
+    public static function getFormApplication($formId)
+    {
+        $sql = 'SELECT * FROM formEnrollment WHERE formId=:formId';
+
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':formId', $formId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // If there are results, return them. Otherwise return false.
+        return (!empty($result)) ? $result : false;
+    }
+
+    /**
+     * TODO
+     *
+     * @return mixed Returns an array containing all volunteer applications requests.
+     */
+    public static function getFormVolunteer($formId)
+    {
+        $sql = 'SELECT * FROM formVolunteer WHERE formId=:formId';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':formId', $formId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+
+        // If there are results, return them. Otherwise return false.
+        return (!empty($result)) ? $result : false;
+    }
+
+
 
     /**
      * Send a Request for an Instrument
