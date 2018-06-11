@@ -3,6 +3,7 @@ assets/images/gallery
 assets/images/staffportraits
 vendor/
 tmp/
+.DS_Store
 
 #Ignore lock
 composer.lock
