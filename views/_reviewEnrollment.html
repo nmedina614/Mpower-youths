@@ -8,26 +8,26 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Student's Name</label>
-                    <p></p>
+                    <p>{{ @formData['studentName'] }}</p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-9">
                     <label>School</label>
-                    <p> </p>
+                    <p> {{ @formData['school'] }} </p>
                 </div>
 
                 <div class="form-group col-md-3">
                     <label>Grade</label>
-                    <p> </p>
+                    <p> {{ @formData['grade'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Desired Instrument</label>
-                    <p> </p>
+                    <p> {{ @formData['instrument'] }} </p>
                 </div>
             </div>
 
@@ -40,12 +40,12 @@
             <div class="form-row">
                 <div class="form-group col-md-9">
                     <label>Student Sign Name</label>
-                    <p> </p>
+                    <p>{{ @formData['studentName'] }}</p>
                 </div>
 
                 <div class="form-group col-md-3">
                     <label>Date</label>
-                    <p> </p>
+                    <p>{{ @formData['submissionDate'] }}</p>
                 </div>
             </div>
 
@@ -54,103 +54,75 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Parent/Guardian Names</label>
-                    <p> </p>
+                    <p> {{ @formData['parent'] }}</p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label>Email</label>
-                    <p> </p>
+                    <p> {{ @formData['email'] }} </p>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- Telephone -->
                     <label class="control-label">Telephone</label>
-                    <p> </p>
+                    <p> {{ @formData['phone'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12"> <!-- Street 1 -->
-                    <label for="street1_id" class="control-label">Street Address 1</label>
-                    <input type="text" class="form-control" id="street1_id" name="street1" required>
+                    <label class="control-label">Street Address 1</label>
+                    <p> {{ @formData['street1'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12"> <!-- Street 2 -->
                     <label class="control-label">Street Address 2</label>
-                    <p> </p>
+                    <p>{{ @formData['street2'] }}</p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4"> <!-- City-->
                     <label  class="control-label">City</label>
-                    <p> </p>
+                    <p> {{ @formData['city'] }} </p>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- State Button -->
                     <label  class="control-label">State</label>
-                    <p></p>
+                    <p>Washington</p>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- Zip Code-->
                     <label  class="control-label">Zip Code</label>
-                    <p> </p>
+                    <p> {{ @formData['zip'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Allergy List</label>
-                    <p> </p>
+                    <p> {{ @formData['allergies'] }}</p>
                 </div>
             </div>
 
-            <p class="col-form-label">How did you hear about this program?</p>
-            <div class="form-check">
-                <p> </p>
-                <label class="form-check-label" >Family/Friend</label>
-            </div>
-            <div class="form-check">
-                <p> </p>
-                <label class="form-check-label" >Other</label>
-            </div>
-
-            <p class="col-form-label">Why do you want your student in M-Power?</p>
-            <div class="form-check">
-                <p> </p>
-                <label class="form-check-label" >Music not available at school</label>
-            </div>
-            <div class="form-check">
-                <p> </p>
-                <label class="form-check-label" >Youth music</label>
-            </div>
-            <div class="form-check">
-                <p> </p>
-                <label class="form-check-label" >Other</label>
-            </div>
-
             <p class="col-form-label">As a parent do you wish for your child to be assigned an instrument to play and take home to practice.</p>
-            <div class="form-check">
-                <p> </p>
-                <label class="form-check-label" >Yes</label>
-            </div>
-            <div class="form-check">
-                <p> </p>
-                <label class="form-check-label" >No</label>
-            </div>
+            <check if="{{ @formData['takeHomeInstrument'] == 1}}">
+                <true><p>Yes</p></true>
+                <false><p>No</p></false>
+            </check>
 
             <div class="form-row">
                 <div class="form-group col-md-9">
                     <label >Parent Sign Name</label>
-                    <p> </p>
+                    <p>{{ @formData['guardianName'] }}</p>
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label >Date</label>
-                    <p> </p>
+                    <label>Date</label>
+                    <p>{{ @formData['submissionDate'] }}</p>
                 </div>
             </div>
         </div>

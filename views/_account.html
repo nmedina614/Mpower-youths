@@ -23,7 +23,7 @@
                                 <td>{{ @application['submissionDate'] }}</td>
                                 <td>{{ Logic::translateRequestStatus(@application['decision']) }}</td>
                                 <td class="btn btn-light btn-sm">
-                                    <a href="#">
+                                    <a href="{{ @BASE }}/forms/review/enrollment/{{ @application['accountId'] }}/{{@application['formId']}}">
                                         <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
                                     </a>
                                 </td>
@@ -36,7 +36,7 @@
                                 <td>{{ @volunteer['dateRequested'] }}</td>
                                 <td>{{ Logic::translateRequestStatus(@volunteer['requestStatus']) }}</td>
                                 <td class="btn btn-light btn-sm">
-                                    <a href="#">
+                                    <a href="{{ @BASE }}/forms/review/volunteer/{{ @volunteer['accountId'] }}/{{@volunteer['formId']}}">
                                         <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
                                     </a>
                                 </td>
@@ -49,7 +49,7 @@
                                 <td>{{ @rental['dateSubmited'] }}</td>
                                 <td>{{ Logic::translateRequestStatus(@rentals['requestStatus']) }}</td>
                                 <td class="btn btn-light btn-sm">
-                                    <a href="#">
+                                    <a href="{{ @BASE }}/forms/review/rental/{{@rental['accountId']}}/{{@rental['formId']}}">
                                         <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
                                     </a>
                                 </td>

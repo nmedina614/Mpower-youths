@@ -1,1 +1,109 @@
-<p>Rental</p>
+<div class="container">
+    <div class="container-page">
+
+        <h2>Instrument Rental Review</h2>
+
+        <hr>
+
+        <form class="pb-4" method="post" novalidate>
+
+            <div class="form-group col-lg-6"> <!-- Student Full Name -->
+                <label class="control-label">Student Full Name</label>
+
+                <p>{{ @formData['studentName'] }}</p>
+
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- Guard Full Name -->
+                <label class="control-label">Parent/Guardian Full Name</label>
+
+                <p>{{ @formData['guardianName'] }}</p>
+
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- Street 1 -->
+                <label class="control-label">Street Address 1</label>
+
+                <p>{{ @formData['address1'] }}</p>
+
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- Street 2 -->
+                <label class="control-label">Street Address 2</label>
+
+                <p>{{ @formData['address2'] }}</p>
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- City-->
+                <label class="control-label">City</label>
+
+                <p>{{ @formData['city'] }}</p>
+
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- Zip Code-->
+                <label class="control-label">Zip Code</label>
+
+                <p>{{ @formData['zip'] }}</p>
+
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- Telephone -->
+                <label class="control-label">Telephone</label>
+                <p>{{ @formData['phone'] }}</p>
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- school -->
+                <label class="control-label">School</label>
+                <p>{{ @formData['school'] }}</p>
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- Grade -->
+                <label class="control-label">Grade</label>
+                <p>{{ @formData['grade'] }}</p>
+            </div>
+
+            <div class="form-group col-lg-6"> <!-- Instrument Selector -->
+                <label class="control-label">Instrument</label>
+                <p>{{ @formData['instrument'] }}</p>
+            </div>
+
+
+
+            <!-- TODO Rest of form is only seen for admin -->
+
+            <check if="{{ @isAdmin }}">
+                <true>
+                    <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
+                        <label for="serial" class="control-label">Serial Num.</label>
+                        <input type="text" class="form-control serial-validate" id="serial" name="serial">
+                    </div>
+
+                    <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
+                        <label for="contract" class="control-label">Contract Year</label>
+                        <input type="text" class="form-control year-validate" id="contract" name="school">
+                    </div>
+
+                    <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
+                        <label for="make" class="control-label">Make</label>
+                        <input type="text" class="form-control make-validate" id="make" name="grade">
+                    </div>
+
+                    <div class="form-group col-lg-6"> <!-- Model of Instrument -->
+                        <label for="model" class="control-label">Model</label>
+                        <input type="text" class="form-control model-validate" id="model" name="grade">
+                    </div>
+
+                    <div class="form-group col-lg-6" > <!-- Request Button -->
+                        <button type="button" class="btn btn-primary validation-halt" data-toggle="modal" data-target="#exampleModal">Request</button>
+                    </div>
+                </true>
+            </check>
+            
+
+            <a href="{{@BASE}}/account" class="btn btn-primary">Go Back</a>
+
+        </form>
+    </div>
+
+</div>
