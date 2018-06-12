@@ -228,7 +228,7 @@ $f3->route('GET|POST /account/edit', function($f3) {
     if(isset($_POST['save'])){
         // check errors is empty
         // $errors in array
-        $errors = Validator::validateAccountPage($_POST['username'], $_POST['password'], $_POST['confirmPassword'], $_POST['email'], $_POST['phone']);
+        $errors = Validator::validAccountPage($_POST['username'], $_POST['password'], $_POST['confirmPassword'], $_POST['email'], $_POST['phone']);
 
         $curAccount->setUsername($_POST['username']);
         $curAccount->setPassword($_POST['password']);
@@ -617,7 +617,7 @@ $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
         $grade = $_POST['grade'];
         $instrument = $_POST['instrument'];
 
-        $errors = Validator::validateInstrument($student, $guardian, $zip, $phone, $instrument);
+        $errors = Validator::validInstrumentPage($student, $guardian, $zip, $phone, $instrument);
 
         if(count($errors)==0) {
 
@@ -1017,7 +1017,7 @@ $f3->route('GET|POST /volunteer', function($f3) {
         $dl = $_POST['dl']; //Driver's License Number
 
 
-        $errors = Validator::validateVolunteer($name, $phone);
+        $errors = Validator::validVolunteer($name, $phone);
 
         if(count($errors)==0) {
 
