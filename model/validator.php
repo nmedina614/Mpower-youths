@@ -181,7 +181,7 @@ class Validator
     }
 
     public static function validModel($value) {
-        $pattern = '/^([^0-9]{1,30})$/';
+        $pattern = '/^[\w\d]{1,30}$/';
         return preg_match($pattern, $value);
     }
 
