@@ -724,7 +724,7 @@ class Logic
         if(Validator::isAdmin()) $result = Database::getInstrumentRentals();
         else {
             $account = unserialize($_SESSION['account']);
-            $result = Database::getAccountInstrumentRentals($account->getId(accountId));
+            $result = Database::getAccountInstrumentRentals($account->getId());
         }
 
         return $result;
