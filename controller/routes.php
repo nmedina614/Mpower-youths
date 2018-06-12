@@ -935,7 +935,17 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
 
     if(isset($_POST['submit'])) {
         $data = array($_POST['childName'], $_POST['parent']);
-        Logic::insertMediaRelease($data);
+
+        $errors = Validator::validMediaRelease($data[0], $data[1]);
+
+        if (count($errors) == 0) {
+            Logic::insertMediaRelease($data);
+            $f3->set('formSuccess', true);
+        } else {
+            foreach ($errors as $key => $value) {
+                echo $key . " - " . $value;
+            }
+        }
     }
 
     // Title to use in template.

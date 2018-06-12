@@ -100,6 +100,15 @@ class Validator
 
     }
 
+    public static function validMediaRelease($student, $parent) {
+        $errors = array();
+
+        if(!self::validName($student)) $errors['student'] = "Please enter name under 60 characters with letters and numbers";
+        if(!self::validName($parent)) $errors['parent'] = "Please enter name under 60 characters with letters and numbers";
+
+        return $errors;
+    }
+
     public static function validVolunteer($name, $phone){
 
         $errors = array();
