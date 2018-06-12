@@ -23,7 +23,7 @@ const regex = {
     "allergies-validate": ["^([^0-9]{1,60})$", "Please enter an allergy list 1 to 60 characters"],
     "serial-validate": ["^([0-9]{1,20})$", "Please enter a serial number with numbers only"],
     "make-validate": ["^([^0-9]{1,30})$", "Please enter a make 1 to 30 characters"],
-    "model-validate": ["^([^0-9]{1,30})$", "Please enter a model 1 to 30 characters"],
+    "model-validate": ["^[\\w\\d]{1,30}$", "Please enter a model 1 to 30 characters"],
     "license-validate": ["^.{1,40}$", "Please enter a license 1 to 40 characters"],
     "year-validate": ["^[\\d]{4}$", "Please enter a valid year - 4 digits"],
     "message-validate": ["^[\\w ]{1,1000}$", "Please enter a message 1 to 1000 characters"],
