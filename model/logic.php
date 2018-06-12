@@ -393,7 +393,7 @@ class Logic
             if($result['privilege'] == 0) {
                 // Store user information in Session.
                 $account = new Account(
-                    $result['idaccount'],
+                    $result['accountId'],
                     $result['username'],
                     $result['password'],
                     $result['email'],
@@ -409,7 +409,7 @@ class Logic
             if ($result['privilege'] == 1) {
                 // Store user information in Session.
                 $account = new Admin(
-                    $result['idaccount'],
+                    $result['accountId'],
                     $result['username'],
                     $result['password'],
                     $result['email'],
@@ -563,7 +563,7 @@ class Logic
     {
         Database::connect();
         $res = Database::getAccountByUsername($username);
-        return new Account($res['idaccount'], $res['username'], NULL, $res['email'], $res['phone'], $res['privilege']);
+        return new Account($res['accountId'], $res['username'], NULL, $res['email'], $res['phone'], $res['privilege']);
     }
 
     /**
@@ -827,4 +827,43 @@ class Logic
         return Database::volunteerRequest($accountId, $name, $address, $zip, $dob,
             $phone, $drivers, $dateRequested);
     }
+
+
+    /**
+     * TODO
+     */
+    public static function updateVolunteer($submit, $formId)
+    {
+        Database::connect();
+
+        return Database::updateVolunteerStatus($submit, $formId);
+    }
+
+    /**
+     * TODO
+     */
+    public static function updateInstrument($serial, $contract, $make, $model, $submit, $formId)
+    {
+        Database::connect();
+
+        return Database::updateInstrumentStatus($serial, $contract, $make, $model, $submit, $formId);
+    }
+
+
+    /**
+     * TODO
+     */
+    public static function updateEnrollment($submit, $formId)
+    {
+        Database::connect();
+
+        return Database::updateEnrollmentStatus($submit, $formId);
+    }
+
+
+
+
+
+
+
 }

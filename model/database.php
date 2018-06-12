@@ -48,7 +48,7 @@ class Database
     {
 
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT idaccount, username, password, email, phone, privilege FROM account WHERE username=:username AND password=:password AND privilege>=:privilege';
+        $sql = 'SELECT accountId, username, password, email, phone, privilege FROM account WHERE username=:username AND password=:password AND privilege>=:privilege';
 
         $statement = self::$_dbh->prepare($sql);
 
@@ -397,7 +397,7 @@ class Database
     public static function getAccountByUsername($username)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT idaccount, username, email, phone, privilege FROM account WHERE username = :username';
+        $sql = 'SELECT accountId, username, email, phone, privilege FROM account WHERE username = :username';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':username', $username, PDO::PARAM_STR);
@@ -418,7 +418,7 @@ class Database
         // Prepare a select to check if db contains queried params.
         $sql = 'UPDATE account 
                 SET username = :username, password = sha2(:password, 256), email = :email, phone = :phone 
-                WHERE idaccount = :id';
+                WHERE accountId = :id';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':id', $id, PDO::PARAM_STR);
@@ -441,7 +441,7 @@ class Database
         // Prepare a select to check if db contains queried params.
         $sql = 'UPDATE account 
                 SET username = :username, email = :email, phone = :phone 
-                WHERE idaccount = :id';
+                WHERE accountId = :id';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':id', $id, PDO::PARAM_STR);
@@ -555,7 +555,7 @@ class Database
         // If result comes back positive, then activate account.
         if(isset($result['userid'])) {
             $userid = $result['userid'];
-            $sql2 = 'UPDATE account SET privilege=0 WHERE idaccount=:userid';
+            $sql2 = 'UPDATE account SET privilege=0 WHERE accountId=:userid';
 
             $updateQuery = self::$_dbh->prepare($sql2);
 
@@ -896,4 +896,56 @@ class Database
         return $statement->execute();
     }
 
+
+
+    /**
+     * TODO
+     */
+    public static function updateVolunteerStatus($submit, $formId)
+    {
+        $sql = 'UPDATE `formVolunteer` SET `requestStatus`= :status,`dateApproved`=CURRENT_DATE WHERE `formId`= :formId';
+
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':status', $submit, PDO::PARAM_INT);
+        $statement->bindParam(':formId', $formId, PDO::PARAM_INT);
+
+        return $statement->execute();
+
+    }
+
+    /**
+     * TODO
+     */
+    public static function updateInstrumentStatus($serial, $contract, $make, $model, $submit, $formId)
+    {
+        $sql = 'UPDATE `formInstrumentRequest` SET `serialNum`=:serial,`contractYear`= :contract,
+                `make`=:make,`model`=:model,`requestStatus`=:status,`dateApproved`= CURRENT_DATE WHERE `formId`=:formId';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':serial', $serial, PDO::PARAM_INT);
+        $statement->bindParam(':contract', $contract, PDO::PARAM_STR);
+        $statement->bindParam(':make', $make, PDO::PARAM_INT);
+        $statement->bindParam(':model', $model, PDO::PARAM_INT);
+        $statement->bindParam(':status', $submit, PDO::PARAM_INT);
+        $statement->bindParam(':formId', $formId, PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
+
+
+    /**
+     * TODO
+     */
+    public static function updateEnrollmentStatus($submit, $formId)
+    {
+        $sql = 'UPDATE `formEnrollment` SET `requestStatus`= :status WHERE `formId`= :formId';
+
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':status', $submit, PDO::PARAM_INT);
+        $statement->bindParam(':formId', $formId, PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
 }
