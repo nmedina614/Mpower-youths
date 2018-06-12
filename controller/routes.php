@@ -456,7 +456,7 @@ $f3->route('GET|POST /login', function($f3) {
         // If login is successful, redirect to main page.
         if($result != false) {
 
-            $f3->reroute('/login');
+            $f3->reroute('/');
 
         } else { // Otherwise generate error.
 
