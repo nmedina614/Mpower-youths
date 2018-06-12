@@ -1,0 +1,63 @@
+<div class="container">
+
+    <!--&lt;!&ndash; Modal &ndash;&gt;-->
+    <!--<div class="modal fade" id="staffModal" tabindex="-1" role="dialog" aria-labelledby="staffModal" aria-hidden="true">-->
+        <!--<div class="modal-dialog" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<h5 class="modal-title" id="exampleModalLabel">Modify Staff Member</h5>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    <!--</button>-->
+                <!--</div>-->
+                <!--<include href="views/_editStaffMember.html" >-->
+    <!---->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <check if="{{ @isAdmin }}">
+        <div class="text-left mt-4">
+            <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#staffModal">Add Carousel Item</button>
+        </div>
+    </check>
+
+    <br>
+    <div class="container">
+        <repeat group="{{ @StaffMembers }}" value="{{ @StaffMember }}">
+            <div class="row my-3" data-id="{{ @StaffMember->getId() }}">
+                <div class="col-md-3 text-center my-auto">
+                    <img class="rounded-circle image" style="width: 150px; height: 150px" src="{{ @StaffMember->getPortraitURL() }}" alt="Staff Member photo">
+                    <check if="{{ @isAdmin }}">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-edit" data-id="{{ @StaffMember->getId() }}" data-order="{{ @StaffMember->getPageOrder() }}" data-toggle="modal" data-target="#staffModal">Edit</button>
+                            <button type="button" class="btn btn-danger btn-delete" data-id="{{ @StaffMember->getId() }}">Remove</button>
+                            <div class="btn-group-vertical btn-group-sm my-auto" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary btn-shift-up" data-id="{{ @StaffMember->getId() }}">&#9650;</button>
+                                <button type="button" class="btn btn-primary btn-shift-down" data-id="{{ @StaffMember->getId() }}">&#9660;</button>
+                            </div>
+                        </div>
+
+                    </check>
+                </div>
+                <div class="col-md-9">
+                    <h5 class="mt-4"><span class="fname">{{ @StaffMember->getFName() }}</span> <span class="lname">{{ @StaffMember->getLname() }}</span>
+                        <check if="{{ @StaffMember->getTitle() }}">
+                            - <span class="title">{{ @StaffMember->getTitle() }}</span>
+                        </check>
+                    </h5>
+                    <p class="biography">{{ @StaffMember->getBiography() }}</p>
+                    <p>
+                        <check if="{{ @StaffMember->getEmail() }}">
+                            Email: <a href="mailto:{{ @StaffMember->getEmail() }}" class="email">{{ @StaffMember->getEmail() }}</a>
+                        </check>
+                        <check if="{{ @StaffMember->getPhone() }}">
+                            Phone: <span class="phone">{{ @StaffMember->getPhone() }}</span>
+                        </check>
+                    </p>
+
+                </div>
+            </div>
+        </repeat>
+    </div>
+</div>
