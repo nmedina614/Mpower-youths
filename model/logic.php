@@ -338,7 +338,7 @@ class Logic
         $newFile    = $targetDir . $newName;
 
 
-        if (Validator::validFileSize($file['size'])) {
+        if (!Validator::validFileSize($file['size'])) {
             return "File is too large.";
         }
 
@@ -444,7 +444,7 @@ class Logic
         $newFile    = $targetDir . $newName;
 
 
-        if (Validator::validFileSize($file['size'])) {
+        if (!Validator::validFileSize($file['size'])) {
             return "File is too large.";
         }
 
