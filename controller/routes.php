@@ -98,7 +98,7 @@ $f3->route('POST /event-modify', function($f3) {
         $f3->reroute($_POST['route']);
     }
 
-    $f3->reroute('/');
+    $f3->reroute('/login');
 });
 
 $f3->route('GET|POST /gallery', function($f3) {
@@ -599,7 +599,7 @@ $f3->route('GET /instruments', function($f3) {
 $f3->route('GET|POST /instruments/rental/@instrument', function($f3, $params ) {
 
     if(!$f3->get('loggedIn')){
-        $f3->reroute('/');
+        $f3->reroute('/login');
     }
 
     if(isset($_POST['submit'])){
@@ -891,7 +891,7 @@ $f3->route('GET|POST /accounts/register/confirmation', function($f3) {
 // Route for link for verifying new users.
 $f3->route('GET /accounts/register/verify/@hash', function($f3, $params) {
     if(isset($_SESSION['account'])) {
-        $f3->reroute('/');
+        $f3->reroute('/login');
     }
 
     $hash = $params['hash'];
@@ -930,7 +930,7 @@ $f3->route('GET /accounts/register/verify/@hash', function($f3, $params) {
 $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
 
     if(!$f3->get('loggedIn')){
-        $f3->reroute('/');
+        $f3->reroute('/login');
     }
 
     if(isset($_POST['submit'])) {
@@ -962,7 +962,7 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
 $f3->route('GET|POST /enrollment', function($f3) {
 
     if(!$f3->get('loggedIn')){
-        $f3->reroute('/');
+        $f3->reroute('/login');
     }
 
     if(isset($_POST['submit'])) {
@@ -999,7 +999,7 @@ $f3->route('GET|POST /enrollment', function($f3) {
 $f3->route('GET|POST /volunteer', function($f3) {
 
     if(!$f3->get('loggedIn')){
-        $f3->reroute('/');
+        $f3->reroute('/login');
     }
 
     if(isset($_POST['submit'])) {
@@ -1074,7 +1074,7 @@ $f3->route('GET|POST /volunteer', function($f3) {
 
 $f3->route('GET /administration', function($f3) {
     if (!$f3->get('isAdmin')) {
-        $f3->reroute('/');
+        $f3->reroute('/login');
     }
 
     $f3->set('notifications', Logic::getNotifications());
@@ -1117,7 +1117,7 @@ $f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $par
         $account = unserialize($_SESSION['account']);
         $accountId = $account->getId();
         if($params['accountId'] != $accountId)
-            $f3->reroute('/');
+            $f3->reroute('/login');
 
         if($_POST['submit'] == "1" || $_POST['submit']=="-1"){
 
