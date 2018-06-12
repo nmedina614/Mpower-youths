@@ -72,28 +72,131 @@ class Validator
 
     }
 
-    public static function validateAccountPage($username, $password, $confirmPassword, $email, $phone) {
+    public static function validAccountPage($username, $password, $confirmPassword, $email, $phone) {
         $errors = array();
 
-        if(!self::validateAccount($username)) $errors['account'] = "Please enter username under 45 letters with letters and numbers";
+        if(!self::validAccount($username)) $errors['account'] = "Please enter username under 45 letters with letters and numbers";
         if($password != $confirmPassword) $errors['password'] = "Please enter matching passwords";
-        if(strlen($email) > 0 && !self::validateEmail($email)) $errors['email'] = "Please a valid email";
-        if(strlen($phone) > 0 && !self::validatePhone($phone)) $errors['phone'] = "Please valid phone number";
+        if(strlen($email) > 0 && !self::validEmail($email)) $errors['email'] = "Please a valid email";
+        if(strlen($phone) > 0 && !self::validPhone($phone)) $errors['phone'] = "Please valid phone number";
 
         return $errors;
     }
 
-    public static function validateAccount($value) {
+    public static function validInstrumentPage($student, $guardian, $zip, $phone,
+                                              $instrument){
+
+        $errors = array();
+        $instruments = array("Trumpet", "Clarinet", "Violin", "Cello", "Viola", "Trombone", "Flute", "Drums", "Alto Sax");
+
+        if(!self::validName($student)) $errors['student'] = "Your Student's Name is Invalid Please make sure it contains no numbers";
+        if(!self::validName($guardian)) $errors['guardian'] = "Your Guardians's Name is Invalid Please make sure it contains no numbers";
+        if(!self::validZip($zip)) $errors['zip'] = "Your Zip Code is Invalid, please make sure it is 5 numbers only.";
+        if(!self::validPhone($phone)) $errors['phone'] = "Your Phone number is invalid";
+        if(!in_array($instrument, $instruments)) $errors['instrument'] = "Your Instrument is Invalid, please choose an instrument from the previous page";
+
+
+        return $errors;
+
+    }
+
+    public static function validVolunteer($name, $phone){
+
+        $errors = array();
+
+        if(!self::validName($name)) $errors['student'] = "Your Name is Invalid Please make sure it contains no numbers";
+        if(!self::validPhone($phone)) $errors['phone'] = "Your Phone number is invalid";
+
+
+        return $errors;
+
+    }
+
+    public static function validName($name){
+        $pattern = '/^([^0-9]{1,60})$/';
+        return preg_match($pattern, $name);
+    }
+
+    public static function validZip($zip){
+        $pattern = '/^\\d\\d\\d\\d\\d$/';
+        return preg_match($pattern, $zip);
+    }
+
+    public static function validAccount($value) {
         // validate account is letters and digits and fits in database
-        // /^(\w|\d){1,45}$/
-        $pattern = '/^(\w|\d){1,45}$/';
+        $pattern = '/^(\\w|\\d){1,60}$/';
         return preg_match($pattern, $value);
     }
 
-    public static function validatePhone($value) {
+    public static function validPhone($value) {
         // phone
         // /^\d{10}$/
-        $pattern = '/^\d{10}$/';
+        $pattern = '/^\\d{10}$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validSchool($value) {
+        $pattern = '/^([^0-9]{1,60})$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validGrade($value) {
+        $pattern = '/^([0-9]{1,2})$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validInstrument($value) {
+        $pattern = '/^([^0-9]{1,60})$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validDateYMD($value) {
+        $pattern = '/^((?:19|20)\\d\\d)[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validAddress($value) {
+        $pattern = '/^[\\w ]{1,60}$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validCity($value) {
+        $pattern = '/^([^0-9]{1,60})$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validAllergies($value) {
+        $pattern = '/^([^0-9]{1,60})$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validSerial($value) {
+        $pattern = '/^([0-9]{1,20})$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validMake($value) {
+        $pattern = '/^([^0-9]{1,30})$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validModel($value) {
+        $pattern = '/^[\w\d]{1,30}$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validLicense($value) {
+        $pattern = '/^.{1,40}$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validYear($value) {
+        $pattern = '/^[\\d]{4}$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function validMessage($value) {
+        $pattern = '/^[\\w ]{1,1000}$/';
         return preg_match($pattern, $value);
     }
 
@@ -103,57 +206,10 @@ class Validator
      * @param $email String address being checked.
      * @return Returns true if input matches email format.
      */
-    public static function validateEmail($email)
+    public static function validEmail($email)
     {
-        if(isset($email)) {
-            return filter_var($email, FILTER_VALIDATE_EMAIL);
-        }
-
-        return false;
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
-
-
-    public static function validateInstrument($student, $guardian, $zip, $phone,
-                                              $instrument){
-
-        $errors = array();
-        $instruments = array("Trumpet", "Clarinet", "Violin", "Cello", "Viola", "Trombone", "Flute", "Drums", "Alto Sax");
-
-        if(!self::validateName($student)) $errors['student'] = "Your Student's Name is Invalid Please make sure it contains no numbers";
-        if(!self::validateName($guardian)) $errors['guardian'] = "Your Guardians's Name is Invalid Please make sure it contains no numbers";
-        if(!self::validateZip($zip)) $errors['zip'] = "Your Zip Code is Invalid, please make sure it is 5 numbers only.";
-        if(!self::validatePhone($phone)) $errors['phone'] = "Your Phone number is invalid";
-        if(!in_array($instrument, $instruments)) $errors['instrument'] = "Your Instrument is Invalid, please choose an instrument from the previous page";
-
-
-        return $errors;
-
-    }
-
-    public static function validateVolunteer($name, $phone){
-
-        $errors = array();
-
-        if(!self::validateName($name)) $errors['student'] = "Your Name is Invalid Please make sure it contains no numbers";
-        if(!self::validatePhone($phone)) $errors['phone'] = "Your Phone number is invalid";
-
-
-        return $errors;
-
-    }
-
-    public static function validateName($name){
-
-        $pattern = '/^([^0-9]*)$/';
-        return preg_match($pattern, $name);
-
-    }
-
-    public static function validateZip($zip){
-        $pattern = '/^\d\d\d\d\d$/';
-        return preg_match($pattern, $zip);
-    }
-
 }
 
 
