@@ -827,4 +827,43 @@ class Logic
         return Database::volunteerRequest($accountId, $name, $address, $zip, $dob,
             $phone, $drivers, $dateRequested);
     }
+
+
+    /**
+     * TODO
+     */
+    public static function updateVolunteer($submit, $formId)
+    {
+        Database::connect();
+
+        return Database::updateVolunteerStatus($submit, $formId);
+    }
+
+    /**
+     * TODO
+     */
+    public static function updateInstrument($serial, $contract, $make, $model, $submit, $formId)
+    {
+        Database::connect();
+
+        return Database::updateInstrumentStatus($serial, $contract, $make, $model, $submit, $formId);
+    }
+
+
+    /**
+     * TODO
+     */
+    public static function updateEnrollment($submit, $formId)
+    {
+        Database::connect();
+
+        return Database::updateEnrollmentStatus($submit, $formId);
+    }
+
+
+
+
+
+
+
 }

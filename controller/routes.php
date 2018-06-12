@@ -1122,15 +1122,13 @@ $f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $par
         if($_POST['submit'] == "1" || $_POST['submit']=="-1"){
 
 
-            if($params['type'] == 'enrollment'){ Logic::updateEnrollment($_POST['serial'],
-                 $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit']);};
+            if($params['type'] == 'enrollment'){ Logic::updateEnrollment($_POST['submit'], $params['formId']);};
 
-            if($params['type'] == 'volunteer'){ Logic::updateVolunteer($_POST['serial'],
-                $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit']);};
+            if($params['type'] == 'volunteer'){ Logic::updateVolunteer($_POST['submit'], $params['formId']);};
 
 
             if($params['type'] == 'rental'){ Logic::updateInstrument($_POST['serial'],
-                $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit']);};
+                $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit'], $params['formId']);};
 
         }
     }
