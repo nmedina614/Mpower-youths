@@ -8,63 +8,63 @@
         <form class="pb-4" method="post" novalidate>
 
             <div class="form-group col-lg-6"> <!-- Student Full Name -->
-                <label class="control-label">Student Full Name</label>
+                <label class="control-label"><strong>Student Full Name</strong></label>
 
                 <p>{{ @formData['studentName'] }}</p>
 
             </div>
 
             <div class="form-group col-lg-6"> <!-- Guard Full Name -->
-                <label class="control-label">Parent/Guardian Full Name</label>
+                <label class="control-label"><strong>Parent/Guardian Full Name</strong></label>
 
                 <p>{{ @formData['guardianName'] }}</p>
 
             </div>
 
             <div class="form-group col-lg-6"> <!-- Street 1 -->
-                <label class="control-label">Street Address 1</label>
+                <label class="control-label"><strong>Street Address 1</strong></label>
 
                 <p>{{ @formData['address1'] }}</p>
 
             </div>
 
             <div class="form-group col-lg-6"> <!-- Street 2 -->
-                <label class="control-label">Street Address 2</label>
+                <label class="control-label"><strong>Street Address 2</strong></label>
 
                 <p>{{ @formData['address2'] }}</p>
             </div>
 
             <div class="form-group col-lg-6"> <!-- City-->
-                <label class="control-label">City</label>
+                <label class="control-label"><strong>City</strong></label>
 
                 <p>{{ @formData['city'] }}</p>
 
             </div>
 
             <div class="form-group col-lg-6"> <!-- Zip Code-->
-                <label class="control-label">Zip Code</label>
+                <label class="control-label"><strong>Zip Code</strong></label>
 
                 <p>{{ @formData['zip'] }}</p>
 
             </div>
 
             <div class="form-group col-lg-6"> <!-- Telephone -->
-                <label class="control-label">Telephone</label>
+                <label class="control-label"><strong>Telephone</strong></label>
                 <p>{{ @formData['phone'] }}</p>
             </div>
 
             <div class="form-group col-lg-6"> <!-- school -->
-                <label class="control-label">School</label>
+                <label class="control-label"><strong>School</strong></label>
                 <p>{{ @formData['school'] }}</p>
             </div>
 
             <div class="form-group col-lg-6"> <!-- Grade -->
-                <label class="control-label">Grade</label>
+                <label class="control-label"><strong>Grade</strong></label>
                 <p>{{ @formData['grade'] }}</p>
             </div>
 
             <div class="form-group col-lg-6"> <!-- Instrument Selector -->
-                <label class="control-label">Instrument</label>
+                <label class="control-label"><strong>Instrument</strong></label>
                 <p>{{ @formData['instrument'] }}</p>
             </div>
 
@@ -72,36 +72,37 @@
 
             <!-- TODO Rest of form is only seen for admin -->
 
-            <check if="{{ @isAdmin }}">
+            <!-- Check if the request is approved or denied -->
+            <check if="{{ @isAdmin }}" >
                 <true>
                     <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
-                        <label for="serial" class="control-label">Serial Num.</label>
+                        <label for="serial" class="control-label"><strong>Serial Num.</strong></label>
                         <input type="text" class="form-control serial-validate" id="serial" name="serial">
                     </div>
 
                     <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
-                        <label for="contract" class="control-label">Contract Year</label>
-                        <input type="text" class="form-control year-validate" id="contract" name="school">
+                        <label for="contract" class="control-label"><strong>Contract Year</strong></label>
+                        <input type="text" class="form-control year-validate" id="contract" name="contract">
                     </div>
 
                     <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
-                        <label for="make" class="control-label">Make</label>
-                        <input type="text" class="form-control make-validate" id="make" name="grade">
+                        <label for="make" class="control-label"><strong>Make</strong></label>
+                        <input type="text" class="form-control make-validate" id="make" name="make">
                     </div>
 
                     <div class="form-group col-lg-6"> <!-- Model of Instrument -->
-                        <label for="model" class="control-label">Model</label>
-                        <input type="text" class="form-control model-validate" id="model" name="grade">
+                        <label for="model" class="control-label"><strong>Model</strong></label>
+                        <input type="text" class="form-control model-validate" id="model" name="model">
                     </div>
 
-                    <div class="form-group col-lg-6" > <!-- Request Button -->
-                        <button type="button" class="btn btn-primary validation-halt" data-toggle="modal" data-target="#exampleModal">Request</button>
-                    </div>
+                            <!-- TODO CHECK IF REQUEST AND UPDATE-->
+                    <button type="submit" class="btn btn-primary validation-halt" name='submit' value="1">Approve Request</button>
+                    <button type="submit" class="btn btn-primary validation-halt" name='submit' value="-1">Deny Request</button>
+
                 </true>
             </check>
-            
 
-            <a href="{{@BASE}}/account" class="btn btn-primary">Go Back</a>
+            <a class="btn btn-primary" href="{{@BASE}}/account">Go Back</a>
 
         </form>
     </div>

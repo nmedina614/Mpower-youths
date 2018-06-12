@@ -4,111 +4,109 @@
 
         <h3 class="text-center">Student Information</h3>
 
+        <hr>
+
         <div class="container w-75">
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label>Student's Name</label>
+                    <label><strong>Student's Name</strong></label>
                     <p>{{ @formData['studentName'] }}</p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label>School</label>
+                    <label><strong>School</strong></label>
                     <p> {{ @formData['school'] }} </p>
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label>Grade</label>
+                    <label><strong>Grade</strong></label>
                     <p> {{ @formData['grade'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label>Desired Instrument</label>
+                    <label><strong>Desired Instrument</strong></label>
                     <p> {{ @formData['instrument'] }} </p>
                 </div>
             </div>
 
-            <h6>Terms and conditions</h6>
-            <ul>
-                <li>I will treat all students, teachers, and adults with the utmost respect at all times.</li>
-                <li>I will do my best to help and encourage other students to play their best in band.</li>
-            </ul>
-
             <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label>Student Sign Name</label>
+                    <label><strong>Student Sign Name</strong></label>
                     <p>{{ @formData['studentName'] }}</p>
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label>Date</label>
+                    <label><strong>Date</strong></label>
                     <p>{{ @formData['submissionDate'] }}</p>
                 </div>
             </div>
 
             <h3 class="text-center">Parental Information</h3>
 
+            <hr>
+
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label>Parent/Guardian Names</label>
+                    <label><strong>Parent/Guardian Names</strong></label>
                     <p> {{ @formData['parent'] }}</p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-8">
-                    <label>Email</label>
+                    <label><strong>Email</strong></label>
                     <p> {{ @formData['email'] }} </p>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- Telephone -->
-                    <label class="control-label">Telephone</label>
+                    <label class="control-label"><strong>Telephone</strong></label>
                     <p> {{ @formData['phone'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12"> <!-- Street 1 -->
-                    <label class="control-label">Street Address 1</label>
+                    <label class="control-label"><strong>Street Address 1</strong></label>
                     <p> {{ @formData['street1'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12"> <!-- Street 2 -->
-                    <label class="control-label">Street Address 2</label>
+                    <label class="control-label"><strong>Street Address 2</strong></label>
                     <p>{{ @formData['street2'] }}</p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-4"> <!-- City-->
-                    <label  class="control-label">City</label>
+                    <label  class="control-label"><strong>City</strong></label>
                     <p> {{ @formData['city'] }} </p>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- State Button -->
-                    <label  class="control-label">State</label>
+                    <label  class="control-label"><strong>State</strong></label>
                     <p>Washington</p>
                 </div>
 
                 <div class="form-group col-md-4"> <!-- Zip Code-->
-                    <label  class="control-label">Zip Code</label>
+                    <label  class="control-label"><strong>Zip Code</strong></label>
                     <p> {{ @formData['zip'] }} </p>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label>Allergy List</label>
+                    <label><strong>Allergy List</strong></label>
                     <p> {{ @formData['allergies'] }}</p>
                 </div>
             </div>
 
-            <p class="col-form-label">As a parent do you wish for your child to be assigned an instrument to play and take home to practice.</p>
+            <p class="col-form-label"><strong>As a parent do you wish for your child to be assigned an instrument to play and take home to practice.</strong></p>
             <check if="{{ @formData['takeHomeInstrument'] == 1}}">
                 <true><p>Yes</p></true>
                 <false><p>No</p></false>
@@ -116,18 +114,25 @@
 
             <div class="form-row">
                 <div class="form-group col-md-9">
-                    <label >Parent Sign Name</label>
-                    <p>{{ @formData['guardianName'] }}</p>
+                    <label><strong>Parent Sign Name</strong></label>
+                    <p>{{ @formData['parent'] }}</p>
                 </div>
 
                 <div class="form-group col-md-3">
-                    <label>Date</label>
+                    <label><strong>Date</strong></label>
                     <p>{{ @formData['submissionDate'] }}</p>
                 </div>
             </div>
         </div>
 
-    <div class="text-center">
-        <button type="submit" name="submit" class="btn btn-success w-25">Send</button>
-    </div>
+    <check if="{{ @isAdmin }}">
+        <true>
+            <!-- TODO CHECK IF REQUEST-->
+            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="approve">Approve Request</button>
+            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="deny">Deny Request</button>
+        </true>
+    </check>
+
+    <a class="btn btn-primary" href="{{@BASE}}/account">Go Back</a>
+    
 </form>

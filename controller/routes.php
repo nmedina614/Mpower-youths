@@ -1021,8 +1021,6 @@ $f3->route('GET|POST /volunteer', function($f3) {
 
         if(count($errors)==0) {
 
-            echo "Rawr";
-
             date_default_timezone_set('America/Los_Angeles');
             $date = date('Y-m-d'); //Date of Request
 
@@ -1112,7 +1110,7 @@ $f3->route('GET /administration', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET /forms/review/@type/@accountId/@formId', function($f3, $params) {
+$f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $params) {
 
     // Ensure only admin and owner of form works
     if (!$f3->get('isAdmin')) {
@@ -1121,11 +1119,25 @@ $f3->route('GET /forms/review/@type/@accountId/@formId', function($f3, $params) 
         if($params['accountId'] != $accountId)
             $f3->reroute('/');
 
+        if($_POST['submit'] == "1" || $_POST['submit']=="-1"){
+
+
+            if($params['type'] == 'enrollment'){ Logic::updateEnrollment($_POST['serial'],
+                 $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit']);};
+
+            if($params['type'] == 'volunteer'){ Logic::updateVolunteer($_POST['serial'],
+                $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit']);};
+
+
+            if($params['type'] == 'rental'){ Logic::updateInstrument($_POST['serial'],
+                $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit']);};
+
+        }
     }
 
-    $formData = Logic::getForm($params['type'], $params['formId']);
 
-    var_dump($formData);
+
+    $formData = Logic::getForm($params['type'], $params['formId']);
 
     $f3->set('formData', $formData[0]);
 

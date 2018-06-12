@@ -9,42 +9,48 @@
         <form class="pb-4" method="post" novalidate>
 
             <div class="form-group col-lg-6"> <!-- Student Full Name -->
-                <label class="control-label">Full Legal Name</label>
+                <label class="control-label"><strong>Full Legal Name</strong></label>
 
                 <p>{{ @formData['name'] }}</p>
 
             </div>
 
             <div class="form-group col-lg-6"> <!-- Street 1 -->
-                <label class="control-label">Home Address</label>
+                <label class="control-label"><strong>Home Address</strong></label>
                 <p>{{ @formData['address'] }}</p>
             </div>
 
             <div class="form-group col-lg-6"> <!-- Zip Code-->
-                <label class="control-label">Zip Code</label>
+                <label class="control-label"><strong>Zip Code</strong></label>
 
                 <p>{{ @formData['zip'] }}</p>
 
             </div>
 
             <div class="form-group col-lg-6"> <!-- Date -->
-                <label class="control-label">Date of Birth</label>
+                <label class="control-label"><strong>Date of Birth</strong></label>
                 <p>{{ @formData['dob'] }}</p>
             </div>
 
             <div class="form-group col-lg-6"> <!-- Telephone -->
-                <label class="control-label">Telephone</label>
+                <label class="control-label"><strong>Telephone</strong></label>
                 <p>{{ @formData['phone'] }}</p>
             </div>
 
             <div class="form-group col-lg-6"> <!-- Drivers Licence -->
-                <label class="control-label">Drivers License #</label>
+                <label class="control-label"><strong>Drivers License #</strong></label>
                 <p>{{ @formData['drivers'] }}</p>
             </div>
 
-            <div class="form-group col-lg-6" > <!-- submit Button -->
-                <button type="submit" class="btn btn-primary validation-halt" name='submit' value="yes">Submit Request</button>
-            </div>
+            <check if="{{ @isAdmin }}">
+                <true>
+                    <!-- TODO CHECK IF REQUEST-->
+                    <button type="submit" class="btn btn-primary validation-halt" name='submit' value="approve">Approve Request</button>
+                    <button type="submit" class="btn btn-primary validation-halt" name='submit' value="deny">Deny Request</button>
+                </true>
+            </check>
+
+            <a class="btn btn-primary" href="{{@BASE}}/account">Go Back</a>
 
         </form>
     </div>
