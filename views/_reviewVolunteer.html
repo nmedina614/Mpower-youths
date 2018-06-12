@@ -3,6 +3,22 @@
 
        
         <h2>Volunteer Registration</h2>
+
+        <h2 class="text-center">Form Status</h2>
+        <p>
+            <strong>
+                <check if="{{@formData['requestStatus']}} == 0">
+                    <true>Pending</true>
+                </check>
+                <check if="{{@formData['requestStatus']}} == -1">
+                    <true>Denied</true>
+                </check>
+
+                <check if="{{@formData['requestStatus']}} == 1">
+                    <true>Accepted</true>
+                </check>
+            </strong>
+        </p>
             
         <hr>
 
