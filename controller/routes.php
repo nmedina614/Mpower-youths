@@ -940,7 +940,7 @@ $f3->route('GET|POST /PhotoVideoRelease', function($f3) {
 
         if (count($errors) == 0) {
             Logic::insertMediaRelease($data);
-            $f3->set('formSuccess', true);
+            $f3->reroute('/form/success');
         } else {
             foreach ($errors as $key => $value) {
                 echo $key . " - " . $value;
@@ -981,6 +981,7 @@ $f3->route('GET|POST /enrollment', function($f3) {
             $_POST['allergies'], $_POST['referral'], $_POST['decision'], $_POST['takeHomeInstrument']);
 
         Logic::insertEnrollment($data);
+        $f3->reroute('/form/success');
     }
 
     $f3->set('curDate', (new DateTime("now", new DateTimeZone('America/Los_Angeles')))->format("Y-m-d"));
