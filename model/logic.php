@@ -559,6 +559,18 @@ class Logic
         }
     }
 
+    /**
+     * Method that lets you delete notification from the database.
+     *
+     * @param $id Integer id of notification to delete.
+     * @return boolean response of database query.
+     */
+    public static function deleteNotification($id)
+    {
+        Database::connect();
+        return Database::deleteNotification($id);
+    }
+
     public static function updateAccount($account)
     {
         if($account instanceof account) {

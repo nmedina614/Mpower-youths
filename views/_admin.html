@@ -21,8 +21,9 @@
                                 <td>{{ @notification['type'] }}</td>
                                 <td>{{ @notification['time'] }}</td>
                                 <td class="p-0">
-                                    <button type="button" class="btn btn-danger btn-sm">
-                                        <img class="mx-1 mt-2 mb-2" src="{{ @BASE }}/assets/images/icons/close.svg" alt="Review">
+                                    <button type="button" class="btn btn-danger btn-sm btn-delete p-1"
+                                            data-id="{{ @notification['idnotification'] }}">
+                                        <img class="m-0" src="{{ @BASE }}/assets/images/icons/close.svg" alt="Review">
                                     </button>
                                 </td>
                             </tr>
