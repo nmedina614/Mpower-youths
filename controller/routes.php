@@ -178,6 +178,10 @@ $f3->route('POST /ajax-delete-event', function($f3) {
 
 $f3->route('GET /account', function($f3) {
 
+    if(!$f3->get('loggedIn')){
+        $f3->reroute('/login');
+    }
+
     $account = unserialize($_SESSION['account']);
     $accountId = $account->getId();
     $f3->set('accountId', $accountId);
@@ -1124,14 +1128,14 @@ $f3->route('GET /administration', function($f3) {
 $f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $params) {
 
     // Ensure only admin and owner of form works
-    if (!$f3->get('isAdmin')) {
+    if ($f3->get('isAdmin')) {
+
         $account = unserialize($_SESSION['account']);
         $accountId = $account->getId();
         if($params['accountId'] != $accountId)
             $f3->reroute('/login');
 
-        if($_POST['submit'] == "1" || $_POST['submit']=="-1"){
-
+        if($_POST['submit'] == 1 || $_POST['submit']==-1){
 
             if($params['type'] == 'enrollment'){ Logic::updateEnrollment($_POST['submit'], $params['formId']);};
 
@@ -1142,7 +1146,6 @@ $f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $par
             $f3->reroute('/administration');
         }
     }
-
 
 
     $formData = Logic::getForm($params['type'], $params['formId']);
