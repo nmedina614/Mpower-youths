@@ -30,7 +30,9 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h3 class="header">{{ @carouselItem->getHeader() }}</h3>
                         <p class="paragraph">{{ @carouselItem->getParagraph() }}</p>
-                        <a class="btn btn-primary rounded button" href="{{ @carouselItem->getButtonLink() }}">{{ @carouselItem->getButtonText() }}</a>
+                        <check if="{{ @carouselItem->getButtonLink() || @carouselItem->getButtonText() }}">
+                            <a class="btn btn-primary rounded button" href="{{ @carouselItem->getButtonLink() }}">{{ @carouselItem->getButtonText() }}</a>
+                        </check>
                     </div>
                 </div>
             </div>
