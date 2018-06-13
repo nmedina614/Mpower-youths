@@ -77,7 +77,7 @@ $('.btn-shift-up').click(function(e) {
 
     $.ajax('ajax-shift-member', {
         method : "POST",
-        data : {id : id, memberType : 'staff', idColumnName : 'idstaff', direction : 'up'},
+        data : {id : id, memberType : 'carousel', idColumnName : 'idcarousel', direction : 'up'},
         dataType : 'json',
         success : function(response) {
             if (response == true) {
@@ -99,7 +99,7 @@ $('.btn-shift-down').click(function(e) {
 
     $.ajax('ajax-shift-member', {
         method : "POST",
-        data : {id : id, memberType : 'staff', idColumnName : 'idstaff', direction : 'down'},
+        data : {id : id, memberType : 'carousel', idColumnName : 'idcarousel', direction : 'down'},
         dataType : 'json',
         success : function(response) {
             if (response == true) {
