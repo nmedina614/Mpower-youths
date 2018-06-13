@@ -1173,8 +1173,11 @@ $f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $par
 
         $account = unserialize($_SESSION['account']);
         $accountId = $account->getId();
-        if($params['accountId'] != $accountId)
-            $f3->reroute('/login');
+        if ($params['accountId'] != $accountId)
+            if (!$f3->get('isAdmin')) {
+                $f3->reroute('/login');
+            }
+
 
         if($_POST['submit'] == 1 || $_POST['submit']==-1){
 
