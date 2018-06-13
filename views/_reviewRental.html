@@ -138,6 +138,9 @@
                                 <label for="model" class="control-label"><strong>Model</strong></label>
                                 <input type="text" class="form-control model-validate" id="model" name="model" value="{{@formData['model']}}">
                             </div>
+
+                            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="1">Approve Request</button>
+                            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="-1">Deny Request</button>
                         </false>
 
                     </check>
