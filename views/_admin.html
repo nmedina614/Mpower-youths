@@ -105,7 +105,7 @@
                                     <td>{{ @application['studentName'] }}</td>
                                     <td>{{ @application['grade'] }}</td>
                                     <td>{{ @application['submissionDate'] }}</td>
-                                    <td>{{ Logic::translateRequestStatus(@application['decision']) }}</td>
+                                    <td>{{ Logic::translateRequestStatus(@application['requestStatus']) }}</td>
                                     <a href="#">
                                         <td class="btn btn-warning btn-sm">
                                             <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
@@ -138,7 +138,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <repeat group="{{ @volunteer }}" value="{{ @volunteer }}">
+                            <repeat group="{{ @volunteers }}" value="{{ @volunteer }}">
                                 <tr>
                                     <td>{{ @volunteer['name'] }}</td>
                                     <td>{{ @volunteer['phone'] }}</td>
