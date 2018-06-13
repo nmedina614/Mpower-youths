@@ -111,14 +111,16 @@
                         <input type="text" class="form-control model-validate" id="model" name="model">
                     </div>
 
-                            <!-- TODO CHECK IF REQUEST AND UPDATE-->
-                    <button type="submit" class="btn btn-primary validation-halt" name='submit' value="1">Approve Request</button>
-                    <button type="submit" class="btn btn-primary validation-halt" name='submit' value="-1">Deny Request</button>
-
+                    <check if="{{@formData['requestStatus']}} == 0">
+                        <true>
+                            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="1">Approve Request</button>
+                            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="-1">Deny Request</button>
+                        </true>
+                    </check>
                 </true>
             </check>
 
-            <a class="btn btn-primary" href="{{@BASE}}/account">Go Back</a>
+            <a class="btn btn-primary" href=' <check if="{{ @isAdmin }}"><true> {{@BASE}}/administration</true><false>{{@BASE}}/account</false></check>'>Go Back</a>
 
         </form>
     </div>
