@@ -603,9 +603,9 @@ $f3->route('GET|POST /contact', function($f3) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $message = $_POST['message'];
-
+        echo "sent!";
         // TODO
-        Messenger::sendMessage("kjohnson207@mail.greenriver.edu", "New Contact", $fname
+        Messenger::sendMessage("njmedina614@gmail.com", "New Contact", $fname
             . " - " . $lname . " - " . $email . " - " . $phone . " : " . $message);
     }
 
