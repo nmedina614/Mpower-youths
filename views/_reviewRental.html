@@ -85,6 +85,31 @@
             </div>
 
 
+            <check if="{{@formData['requestStatus']}} != 0">
+                <true>
+                    <fieldset disabled>
+                        <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
+                            <label for="serial" class="control-label"><strong>Serial Num.</strong></label>
+                            <input type="text" class="form-control serial-validate" id="serial" name="serial" value="{{@formData['serialNum']}}">
+                        </div>
+
+                        <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
+                            <label for="contract" class="control-label"><strong>Contract Year</strong></label>
+                            <input type="text" class="form-control year-validate" id="contract" name="contract" value="{{@formData['contractYear']}}">
+                        </div>
+
+                        <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
+                            <label for="make" class="control-label"><strong>Make</strong></label>
+                            <input type="text" class="form-control make-validate" id="make" name="make" value="{{@formData['make']}}">
+                        </div>
+
+                        <div class="form-group col-lg-6"> <!-- Model of Instrument -->
+                            <label for="model" class="control-label"><strong>Model</strong></label>
+                            <input type="text" class="form-control model-validate" id="model" name="model" value="{{@formData['model']}}">
+                        </div>
+                    </fieldset>
+                </true>
+            </check>
 
             <!-- TODO Rest of form is only seen for admin -->
 
@@ -93,29 +118,6 @@
                 <true>
 
                     <check if="{{@formData['requestStatus']}} != 0">
-                        <true>
-                            <fieldset disabled>
-                                <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
-                                    <label for="serial" class="control-label"><strong>Serial Num.</strong></label>
-                                    <input type="text" class="form-control serial-validate" id="serial" name="serial" value="{{@formData['serialNum']}}">
-                                </div>
-
-                                <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
-                                    <label for="contract" class="control-label"><strong>Contract Year</strong></label>
-                                    <input type="text" class="form-control year-validate" id="contract" name="contract" value="{{@formData['contractYear']}}">
-                                </div>
-
-                                <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
-                                    <label for="make" class="control-label"><strong>Make</strong></label>
-                                    <input type="text" class="form-control make-validate" id="make" name="make" value="{{@formData['make']}}">
-                                </div>
-
-                                <div class="form-group col-lg-6"> <!-- Model of Instrument -->
-                                    <label for="model" class="control-label"><strong>Model</strong></label>
-                                    <input type="text" class="form-control model-validate" id="model" name="model" value="{{@formData['model']}}">
-                                </div>
-                            </fieldset>
-                        </true>
                         <false>
                             <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
                                 <label for="serial" class="control-label"><strong>Serial Num.</strong></label>
