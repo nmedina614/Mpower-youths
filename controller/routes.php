@@ -593,9 +593,22 @@ $f3->route('GET /event', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET /contact', function($f3) {
+$f3->route('GET|POST /contact', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Contact Us";
+
+    if(isset($_POST['submit'])) {
+        $fname = $_POST['name'];
+        $lname = $_POST['surname'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $message = $_POST['message'];
+
+        // TODO
+        Messenger::sendMessage("kjohnson207@mail.greenriver.edu", "New Contact", $fname
+            . " - " . $lname . " - " . $email . " - " . $phone . " : " . $message);
+    }
+
     // List of paths to stylesheets.
     $styles = array(
     );
