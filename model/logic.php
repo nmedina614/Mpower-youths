@@ -342,6 +342,40 @@ class Logic
     }
 
     /**
+     * Validates and sends a carousel item to the database to be added
+     *
+     * @param $carouselItem the carousel item to add
+     * @return mixed the result of the query
+     */
+    public static function addCarouselItem($carouselItem)
+    {
+
+        // TODO add validation before sending to database
+
+        Database::connect();
+        return Database::addCarouselItem($carouselItem->getHeader(), $carouselItem->getParagraph(),
+            $carouselItem->getImageURL(), $carouselItem->getButtonLink(),
+            $carouselItem->getButtonText(), $carouselItem->getPageOrder());
+    }
+
+    /**
+     * Validates and sends a carousel item to the database to be updated
+     *
+     * @param $carouselItem the carousel item to update
+     * @return mixed the result of the query
+     */
+    public static function updateCarouselItem($carouselItem)
+    {
+
+        // TODO add validation before sending to database
+
+        Database::connect();
+        return Database::updateCarouselItem($carouselItem->getId(), $carouselItem->getHeader(),
+            $carouselItem->getParagraph(), $carouselItem->getImageURL(), $carouselItem->getButtonLink(),
+            $carouselItem->getButtonText());
+    }
+
+    /**
      * Method used to process and submit a new image
      * to the server.
      *

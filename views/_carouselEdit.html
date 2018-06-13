@@ -24,13 +24,13 @@
 
     <repeat group="{{ @carouselItems }}" value="{{ @carouselItem }}">
         <div class="carousel row mb-4 align-items-center">
-            <div class="col-md-9">
+            <div class="col-md-9" data-id="{{ @carouselItem->getId() }}">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="{{ @carouselItem->getImageURL() }}" alt="Carousel slide">
+                    <img class="d-block w-100 image" src="{{ @carouselItem->getImageURL() }}" alt="Carousel slide">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3>{{ @carouselItem->getHeader() }}</h3>
-                        <p>{{ @carouselItem->getParagraph() }}</p>
-                        <a class="btn btn-primary rounded" href="{{ @carouselItem->getButtonLink() }}">{{ @carouselItem->getButtonText() }}</a>
+                        <h3 class="header">{{ @carouselItem->getHeader() }}</h3>
+                        <p class="paragraph">{{ @carouselItem->getParagraph() }}</p>
+                        <a class="btn btn-primary rounded button" href="{{ @carouselItem->getButtonLink() }}">{{ @carouselItem->getButtonText() }}</a>
                     </div>
                 </div>
             </div>

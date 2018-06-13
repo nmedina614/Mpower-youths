@@ -408,6 +408,53 @@ class Database
         return $result;
     }
 
+
+    /**
+     * Adds a carousel item to the database
+     *
+     * @param $header header to add
+     * @param $paragraph paragraph to add
+     * @param $imageURL image url to add
+     * @param $buttonLink button link to add
+     * @param $buttonText button text to add
+     * @param $pageOrder page order to add
+     * @return mixed result of the query
+     */
+    public static function addCarouselItem($header, $paragraph, $imageURL, $buttonLink, $buttonText, $pageOrder)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'INSERT INTO carousel (header, paragraph, imageURL, buttonLink, pageOrder, buttonText)
+                VALUES (:header, :paragraph, :imageURL, :buttonLink, :pageOrder, :buttonText)';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':header', $header, PDO::PARAM_STR);
+        $statement->bindParam(':paragraph', $paragraph, PDO::PARAM_STR);
+        $statement->bindParam(':imageURL', $imageURL, PDO::PARAM_STR);
+        $statement->bindParam(':buttonLink', $buttonLink, PDO::PARAM_STR);
+        $statement->bindParam(':pageOrder', $pageOrder, PDO::PARAM_INT);
+        $statement->bindParam(':buttonText', $buttonText, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
+    public static function updateCarouselItem($idcarousel, $header, $paragraph, $imageURL, $buttonLink, $buttonText)
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'UPDATE carousel
+                SET header=:header, paragraph=:paragraph, imageURL=:imageURL, buttonLink=:buttonLink, buttonText=:buttonText
+                WHERE idcarousel=:idcarousel';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':idcarousel', $idcarousel, PDO::PARAM_INT);
+        $statement->bindParam(':header', $header, PDO::PARAM_STR);
+        $statement->bindParam(':paragraph', $paragraph, PDO::PARAM_STR);
+        $statement->bindParam(':imageURL', $imageURL, PDO::PARAM_STR);
+        $statement->bindParam(':buttonLink', $buttonLink, PDO::PARAM_STR);
+        $statement->bindParam(':buttonText', $buttonText, PDO::PARAM_STR);
+
+        return $statement->execute();
+    }
+
     /**
      * Pulls relevant account information.
      *
