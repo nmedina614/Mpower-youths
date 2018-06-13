@@ -676,7 +676,7 @@ class Database
      */
     public static function getApplications()
     {
-        $sql = 'SELECT accountId, formId, studentName, grade, submissionDate, decision FROM formEnrollment';
+        $sql = 'SELECT * FROM formEnrollment';
 
         $result = self::$_dbh->query($sql);
 
@@ -736,7 +736,7 @@ class Database
      */
     public static function getAccountApplications($accountId)
     {
-        $sql = 'SELECT accountId, formId, studentName, grade, submissionDate, decision FROM formEnrollment WHERE accountId=:accountId';
+        $sql = 'SELECT * FROM formEnrollment WHERE accountId=:accountId';
 
 
         $statement = self::$_dbh->prepare($sql);

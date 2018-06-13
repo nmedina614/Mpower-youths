@@ -230,7 +230,6 @@ $f3->route('GET /account', function($f3) {
     $f3->set('applications', Logic::getApplications());
     $f3->set('volunteers', Logic::getVolunteers());
 
-
     // Title to use in template.
     $title = 'Account';
     // List of paths to stylesheets.

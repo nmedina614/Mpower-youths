@@ -21,7 +21,7 @@
                                 <td>{{ @application['studentName'] }}</td>
                                 <td>Application</td>
                                 <td>{{ @application['submissionDate'] }}</td>
-                                <td>{{ Logic::translateRequestStatus(@application['decision']) }}</td>
+                                <td>{{ Logic::translateRequestStatus(@application['requestStatus']) }}</td>
                                 <td class="btn btn-light btn-sm">
                                     <a href="{{ @BASE }}/forms/review/enrollment/{{ @application['accountId'] }}/{{@application['formId']}}">
                                         <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
@@ -47,7 +47,7 @@
                                 <td>{{ @rental['studentName'] }}</td>
                                 <td>Rental</td>
                                 <td>{{ @rental['dateSubmited'] }}</td>
-                                <td>{{ Logic::translateRequestStatus(@rentals['requestStatus']) }}</td>
+                                <td>{{ Logic::translateRequestStatus(@rental['requestStatus']) }}</td>
                                 <td class="btn btn-light btn-sm">
                                     <a href="{{ @BASE }}/forms/review/rental/{{@rental['accountId']}}/{{@rental['formId']}}">
                                         <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
@@ -69,5 +69,6 @@
                 </div><!-- FORMS -->
             </div>
         </div>
+
     </div>
 </div>
