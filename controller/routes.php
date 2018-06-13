@@ -76,7 +76,7 @@ $f3->route('GET /carousel_edit', function($f3) {
 
     // List of paths to scripts being used.
     $scripts = array(
-        //BASE.'/assets/scripts/_home.js',
+        BASE.'/assets/scripts/_carouselEdit.js',
     );
 
     $footer = 'views/_footer.html';
@@ -89,6 +89,49 @@ $f3->route('GET /carousel_edit', function($f3) {
 
     $template = new Template();
     echo $template->render('views/_base.html');
+});
+
+// carousel-modify is the route for a submitted form from carousel_edit
+$f3->route('POST /carousel-modify', function($f3) {
+    // this should work for adding and editing.
+    if ($f3->get('isAdmin') && isset($_POST['submit'])) {
+
+        $imageURL = $_POST['imageURL']; // sets variable to old portrait to start
+
+        // check if a new image has been uploaded
+        if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+            $imageURL = Logic::submitImageToFolder($_FILES['image'], 'carousel');
+            $portraitSubstr = substr($imageURL, 0, 5);
+
+            if ($portraitSubstr === "File " || $portraitSubstr === "Only ") { // failed image upload
+                $imageURL = $_POST['imageURL']; // reassign to old portraitURL
+            } else if (!empty($_POST['imageURL']))  { // successful image upload, delete old image if it exists
+                $imageNameWithoutFolder = substr($_POST['imageURL'], strrpos($_POST['imageURL'], '/') + 1);
+                $imageFolder = 'staffportraits';
+                Logic::deleteImage($imageNameWithoutFolder, $imageFolder);
+            }
+        }
+
+        // if editing an existing staff member, staffid will be set.
+        if ($_POST['idcarousel'] == -1) {
+            $newItemPageOrder = 1;
+
+            if (sizeof(Logic::getCarouselItems()) > 0) {
+                $newItemPageOrder = Logic::getMaxPageOrder('carousel') + 1;
+            }
+
+            $carouselItem = new CarouselItem(-1, $_POST['header'], $_POST['paragraph'],
+                $imageURL, $_POST['buttonLink'], $_POST['buttonText'], $newItemPageOrder);
+            Logic::addCarouselItem($carouselItem);
+        } else {
+            $carouselItem = new CarouselItem($_POST['idcarousel'], $_POST['header'],
+                $_POST['paragraph'], $imageURL, $_POST['buttonLink'],
+                $_POST['buttonText'], $_POST['pageOrder']);
+            Logic::updateCarouselItem($carouselItem);
+        }
+    }
+
+    $f3->reroute('/carousel_edit');
 });
 
 $f3->route('GET /past_events', function($f3) {
