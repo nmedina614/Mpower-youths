@@ -14,6 +14,7 @@ $GLOBALS['f3'];
 
 $f3->route('GET|POST /', function($f3) {
 
+    $f3->set('carouselItems', Logic::getCarouselItems());
     $f3->set('events', Logic::getUpcomingEvents());
     $f3->set('pastOrUpcoming', 'Upcoming');
 
@@ -63,6 +64,7 @@ $f3->route('GET /carousel_edit', function($f3) {
 
     // List of paths to stylesheets.
     $styles = array(
+        'assets/styles/_carouselEdit.css'
     );
 
     // List of paths for sub-templates being used.
