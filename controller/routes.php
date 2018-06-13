@@ -272,6 +272,7 @@ $f3->route('GET /account', function($f3) {
     $f3->set('rentals', Logic::getRentalRequests());
     $f3->set('applications', Logic::getApplications());
     $f3->set('volunteers', Logic::getVolunteers());
+    $f3->set('releases', Logic::getAccountRelease($accountId));
 
     // Title to use in template.
     $title = 'Account';
@@ -1180,6 +1181,7 @@ $f3->route('GET /administration', function($f3) {
     $f3->set('applications', Logic::getApplications());
     $f3->set('volunteers', Logic::getVolunteers());
     $f3->set('accounts', Logic::getAccounts());
+    $f3->set('releases', Logic::getAdminRelease());
 
     // Title to use in template.
     $title = "M-Power Youth: Administration";

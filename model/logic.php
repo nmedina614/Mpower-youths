@@ -916,7 +916,25 @@ class Logic
     }
 
 
+    /**
+     * TODO
+     */
+    public static function getAdminRelease()
+    {
+        Database::connect();
 
+        return Database::getRelease();
+    }
+
+    /**
+     * TODO
+     */
+    public static function getAccountRelease($accountId)
+    {
+        Database::connect();
+
+        return Database::getAccountRelease($accountId);
+    }
 
 
 

@@ -1015,4 +1015,35 @@ class Database
 
         return $statement->execute();
     }
+
+    /**
+     *
+     */
+    public static function getRelease()
+    {
+        $sql = 'SELECT * FROM `formMediaRelease`';
+
+        $result = self::$_dbh->query($sql);
+
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    /**
+     * TODO
+     */
+    public static function getAccountRelease($accountId)
+    {
+        $sql = 'SELECT * FROM `formMediaRelease` WHERE `accountId`=:accountId';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':accountId', $accountId, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+
 }

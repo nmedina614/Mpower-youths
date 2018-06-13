@@ -55,6 +55,17 @@
                                 </td>
                             </tr>
                         </repeat> <!-- Rentals -->
+
+                        <repeat group="{{ @releases }}" value="{{ @release }}">
+                            <tr>
+                                <td>{{ @release['childName'] }}</td>
+                                <td>Photo Release</td>
+                                <td>{{ @release['dateSigned'] }}</td>
+                                <td>Accepted</td>
+                                <td class="btn btn-light btn-sm">
+                                </td>
+                            </tr>
+                        </repeat> <!-- Photo Releases -->
                         </tbody>
                         <tfoot>
                         <tr>

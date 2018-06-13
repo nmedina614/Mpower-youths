@@ -47,6 +47,9 @@
                             <a class="nav-link table-selector" data-target="volunteers" href="#">Volunteers</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link table-selector" data-target="releases" href="#">Photo Releases</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link table-selector" data-target="users" href="#">Users</a>
                         </li>
                     </ul>
@@ -163,6 +166,37 @@
                             </tfoot>
                         </table>
                     </div><!-- VOLUNTEERS -->
+
+                    <div id="releases" class="table-container toshow" style="display:none">
+                        <table class="data-table table table-striped table-bordered w-100">
+                            <thead>
+                            <tr>
+                                <th>Child Name</th>
+                                <th>Parent Name</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <repeat group="{{ @releases }}" value="{{ @release }}">
+                                <tr>
+                                    <td>{{ @release['childName'] }}</td>
+                                    <td>{{ @release['parentName'] }}</td>
+                                    <td>{{ @release['dateSigned'] }}</td>
+                                    <td>Accepted</td>
+                                </tr>
+                            </repeat>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Child Name</th>
+                                <th>Parent Name</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div><!-- APPLICATIONS -->
 
                     <div id="users" class="table-container toshow" style="display:none">
                         <table class="data-table table table-striped table-bordered w-100">
