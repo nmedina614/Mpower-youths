@@ -59,7 +59,7 @@ $('.btn-delete').click(function(e) {
 
         $.ajax('ajax-delete-member', {
             method : "POST",
-            data : {id : id, memberType : 'board_of_directors', idColumnName : 'idbod'},
+            data : {id : id, memberType : 'board_of_directors', idColumnName : 'idbod', imageFolderName : 'staffportraits'},
             dataType : 'json',
             success : function(response) {
                 if(response == true) {

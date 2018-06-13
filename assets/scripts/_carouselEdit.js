@@ -47,20 +47,18 @@ function fillModal(modalTitle, header = "", paragraph = "", buttonLink = "",
 $('.btn-delete').click(function(e) {
 
     var id = $(e.target).data('id');
-    var fullName = $("div[data-id='" + id + "']").find(".fname").text() +
-        " " + $("div[data-id='" + id + "']").find(".lname").text();
-    let confirmed = confirm("Are you sure you want to remove " + fullName + " from the list?");
+    let confirmed = confirm("Are you sure you want to remove this item from the carousel?");
 
     if(confirmed) {
 
         $.ajax('ajax-delete-member', {
             method : "POST",
-            data : {id : id, memberType : 'staff', idColumnName : 'idstaff'},
+            data : {id : id, memberType : 'carousel', idColumnName : 'idcarousel', imageFolderName : 'carousel'},
             dataType : 'json',
             success : function(response) {
                 if(response == true) {
                     location.reload();
-                    alert("Staff Member removed!");
+                    alert("Carousel item removed!");
                 } else {
                     alert(response);
                 }
@@ -79,7 +77,7 @@ $('.btn-shift-up').click(function(e) {
 
     $.ajax('ajax-shift-member', {
         method : "POST",
-        data : {id : id, memberType : 'staff', idColumnName : 'idstaff', direction : 'up'},
+        data : {id : id, memberType : 'carousel', idColumnName : 'idcarousel', direction : 'up'},
         dataType : 'json',
         success : function(response) {
             if (response == true) {
@@ -101,7 +99,7 @@ $('.btn-shift-down').click(function(e) {
 
     $.ajax('ajax-shift-member', {
         method : "POST",
-        data : {id : id, memberType : 'staff', idColumnName : 'idstaff', direction : 'down'},
+        data : {id : id, memberType : 'carousel', idColumnName : 'idcarousel', direction : 'down'},
         dataType : 'json',
         success : function(response) {
             if (response == true) {

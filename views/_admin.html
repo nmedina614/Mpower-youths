@@ -20,11 +20,11 @@
                             <tr>
                                 <td>{{ @notification['type'] }}</td>
                                 <td>{{ @notification['time'] }}</td>
-                                <a href="#">
-                                    <td class="btn btn-danger btn-sm">
-                                        <img src="{{ @BASE }}/assets/images/icons/close.svg" alt="Review">
-                                    </td>
-                                </a>
+                                <td class="p-0">
+                                    <button type="button" class="btn btn-danger btn-sm">
+                                        <img class="mx-1 mt-2 mb-2" src="{{ @BASE }}/assets/images/icons/close.svg" alt="Review">
+                                    </button>
+                                </td>
                             </tr>
                         </repeat>
                         </tbody>
@@ -73,9 +73,9 @@
                                     <td>{{ @rental['instrument'] }}</td>
                                     <td>{{ @rental['dateSubmited'] }}</td>
                                     <td>{{ Logic::translateRequestStatus(@rental['requestStatus']) }}</td>
-                                    <td class="btn btn-warning btn-sm">
-                                        <a href="{{ @BASE }}/forms/review/rental/{{@rental['accountId']}}/{{@rental['formId']}}">
-                                            <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                    <td class="p-0">
+                                        <a class="btn btn-warning btn-sm" href="{{ @BASE }}/forms/review/rental/{{@rental['accountId']}}/{{@rental['formId']}}">
+                                            <img class="mx-1 mt-2 mb-2" src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
                                         </a>
                                     </td>
                                 </tr>
@@ -109,9 +109,9 @@
                                     <td>{{ @application['grade'] }}</td>
                                     <td>{{ @application['submissionDate'] }}</td>
                                     <td>{{ Logic::translateRequestStatus(@application['requestStatus']) }}</td>
-                                    <td class="btn btn-warning btn-sm">
-                                        <a href="{{ @BASE }}/forms/review/enrollment/{{ @application['accountId'] }}/{{@application['formId']}}">
-                                            <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                    <td class="p-0">
+                                        <a class="btn btn-warning btn-sm" href="{{ @BASE }}/forms/review/enrollment/{{ @application['accountId'] }}/{{@application['formId']}}">
+                                            <img class="mx-1 mt-2 mb-2" src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
                                         </a>
                                     </td>
                                 </tr>
@@ -147,10 +147,10 @@
                                     <td>{{ @volunteer['phone'] }}</td>
                                     <td>{{ @volunteer['dateRequested'] }}</td>
                                     <td>{{ Logic::translateRequestStatus(@volunteer['requestStatus']) }}</td>
-                                    <td class="btn btn-warning btn-sm">
-                                            <a href="{{ @BASE }}/forms/review/volunteer/{{ @volunteer['accountId'] }}/{{@volunteer['formId']}}">
-                                                <img src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
-                                            </a>
+                                    <td class="p-0" >
+                                        <a class="btn btn-warning btn-sm" href="{{ @BASE }}/forms/review/volunteer/{{ @volunteer['accountId'] }}/{{@volunteer['formId']}}">
+                                            <img class="mx-1 mt-2 mb-2" src="{{ @BASE }}/assets/images/icons/file-document-box-outline.svg" alt="Review">
+                                        </a>
                                     </td>
                                 </tr>
                             </repeat>
@@ -216,9 +216,7 @@
                                     <td>{{ @account['email'] }}</td>
                                     <td>{{ @account['phone'] }}</td>
                                     <td>{{ @account['privilege'] }}</td>
-                                        <td class="btn btn-danger btn-sm">
-                                                <img src="{{ @BASE }}/assets/images/icons/close.svg" alt="Review">
-                                        </td>
+                                    <td></td>
                                 </tr>
                             </repeat>
                             </tbody>
