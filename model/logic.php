@@ -321,6 +321,27 @@ class Logic
     }
 
     /**
+     * Method used to get carousel items from the database.
+     *
+     * @return array Returns an array of carousel information.
+     */
+    public static function getCarouselItems()
+    {
+        $result = array();
+
+        Database::connect();
+        $resultDB = Database::getCarouselItems($memberType);
+
+        foreach ($resultDB as $key => $value) {
+            array_push($result,
+                new CarouselItem($value['idcarousel'], $value['header'], $value['paragraph'],
+                    $value['imageURL'], $value['buttonLink'], $value['buttonText'], $value['pageOrder']));
+        }
+
+        return $result;
+    }
+
+    /**
      * Method used to process and submit a new image
      * to the server.
      *

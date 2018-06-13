@@ -50,6 +50,45 @@ $f3->route('GET|POST /', function($f3) {
     echo $template->render('views/_base.html');
 });
 
+$f3->route('GET /carousel_edit', function($f3) {
+
+    if (!$f3->get('isAdmin')) {
+        $f3->reroute('/login');
+    }
+
+    $f3->set('carouselItems', Logic::getCarouselItems());
+
+    // Title to use in template.
+    $title = "M-Power Youth: edit carousel";
+
+    // List of paths to stylesheets.
+    $styles = array(
+    );
+
+    // List of paths for sub-templates being used.
+    $includes = array(
+        'views/_nav.html',
+        'views/_carouselEdit.html',
+        'views/_footer.html'
+    );
+
+    // List of paths to scripts being used.
+    $scripts = array(
+        //BASE.'/assets/scripts/_home.js',
+    );
+
+    $footer = 'views/_footer.html';
+
+    $f3->set('title' , $title);
+    $f3->set('styles' , $styles);
+    $f3->set('includes' , $includes);
+    $f3->set('scripts' , $scripts);
+
+
+    $template = new Template();
+    echo $template->render('views/_base.html');
+});
+
 $f3->route('GET /past_events', function($f3) {
     $f3->set('events', Logic::getPastEvents());
     $f3->set('pastOrUpcoming', 'Past');

@@ -30,7 +30,7 @@ class CarouselItem
     public function __construct($id, $header, $paragraph, $imageURL, $buttonLink, $buttonText, $pageOrder)
     {
         $this->_id = $id;
-        $this->_header = $header
+        $this->_header = $header;
         $this->_paragraph = $paragraph;
         $this->_imageURL = $imageURL;
         $this->_buttonLink = $buttonLink;
