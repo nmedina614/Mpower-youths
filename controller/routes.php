@@ -1068,8 +1068,14 @@ $f3->route('GET|POST /enrollment', function($f3) {
             $_POST['email'], $_POST['phone'], $_POST['street1'], $_POST['street2'], $_POST['city'], $_POST['zip'],
             $_POST['allergies'], $_POST['referral'], $_POST['decision'], $_POST['takeHomeInstrument']);
 
-        Logic::insertEnrollment($data);
-        $f3->reroute('/form/success');
+        $errors = Validator::validEnrollment($_POST['studentName'], $_POST['school'], $_POST['grade'], $_POST['instrument'], $_POST['parent'],
+            $_POST['email'], $_POST['phone'], $_POST['street1'], $_POST['street2'], $_POST['city'], $_POST['zip'],
+            $_POST['allergies'], $_POST['referral'], $_POST['decision'], $_POST['takeHomeInstrument']);
+
+        if (count($errors) == 0) {
+            Logic::insertEnrollment($data);
+            $f3->reroute('/form/success');
+        }
     }
 
     $f3->set('curDate', (new DateTime("now", new DateTimeZone('America/Los_Angeles')))->format("Y-m-d"));
@@ -1103,8 +1109,6 @@ $f3->route('GET|POST /volunteer', function($f3) {
 
     if(isset($_POST['submit'])) {
 
-
-
         //Values from POST array
         $account = unserialize($_SESSION['account']);
         $accountId = $account->getId();
@@ -1116,7 +1120,7 @@ $f3->route('GET|POST /volunteer', function($f3) {
         $dl = $_POST['dl']; //Driver's License Number
 
 
-        $errors = Validator::validVolunteer($name, $phone);
+        $errors = Validator::validVolunteer($name, $address, $zip, $dob, $phone, $dl);
 
         if(count($errors)==0) {
 

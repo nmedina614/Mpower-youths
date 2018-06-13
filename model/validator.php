@@ -109,16 +109,49 @@ class Validator
         return $errors;
     }
 
-    public static function validVolunteer($name, $phone){
-
+    public static function validVolunteer($name, $address, $zip, $date, $phone, $license){
         $errors = array();
 
-        if(!self::validName($name)) $errors['student'] = "Your Name is Invalid Please make sure it contains no numbers";
-        if(!self::validPhone($phone)) $errors['phone'] = "Your Phone number is invalid";
-
+        if(!self::validName($name)) $errors['name'] = "Your name is invalid please make sure it contains no numbers";
+        if(!self::validAddress($address)) $errors['address'] = "Your address is invalid please make sure it contains no numbers";
+        if(!self::validZip($zip)) $errors['zip'] = "Your zip is invalid please make sure it contains no numbers";
+        if(!self::validDateYMD($date)) $errors['date'] = "Your date is invalid please make sure it contains no numbers";
+        if(!self::validPhone($phone)) $errors['phone'] = "Your phone number is invalid";
+        if(!self::validLicense($license)) $errors['license'] = "Your license is invalid please make sure it contains no numbers";
 
         return $errors;
+    }
 
+    public static function validEnrollment($studentName, $school, $grade, $instrument, $parentName, $email, $phone,
+                                           $street1, $street2, $city, $zip, $allergies, $referral, $decision,
+                                           $takeHomeInstrument){
+        $errors = array();
+
+        if(!self::validName($studentName)) $errors['student name'] = "Your student name is invalid please make sure there are no numbers";
+        if(!self::validSchool($school)) $errors['school'] = "Your school is invalid please make sure it contains no numbers";
+        if(!self::validGrade($grade)) $errors['grade'] = "Your grade is invalid please make sure it is 2 numbers";
+        if(!self::validInstrument($instrument)) $errors['instrument'] = "Your instrument is invalid please make sure it contains no numbers";
+        if(!self::validName($parentName)) $errors['parent name'] = "Your parent name is invalid please make sure there is no numbers";
+        if(!self::validEmail($email)) $errors['email'] = "Your email is invalid";
+        if(!self::validPhone($phone)) $errors['phone'] = "Your phone must be 10 numbers";
+        if(!self::validAddress($street1)) $errors['address1'] = "Your address 1 is invalid";
+        if (strlen($street2) != 0){
+            if(!self::validAddress($street2)) $errors['address2'] = "Your address 2 is invalid";
+        }
+        if(!self::validCity($city)) $errors['city'] = "Your city is invalid please make sure it contains no numbers";
+        if(!self::validZip($zip)) $errors['zip'] = "Your zip is invalid please make sure it contains 5 numbers";
+        if(!self::validAllergies($allergies)) $errors['allergies'] = "Your allergies is invalid please make sure it under 160 characters";
+
+        if ($referral != 0 || $referral != 1)
+            $errors['referral'] = "Your referral value is invalid";
+
+        if ($decision != 0 || $decision != 1 || $decision != 2)
+            $errors['decision'] = "Your decision value is invalid";
+
+        if ($takeHomeInstrument != 0 || $takeHomeInstrument != 1)
+            $errors['take home instrument'] = "Your choice of take home instruments is invalid";
+
+        return $errors;
     }
 
     public static function validName($name){
