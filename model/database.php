@@ -1063,5 +1063,23 @@ class Database
 
     }
 
+    /**
+     * TODO
+     *
+     * @param $id
+     * @return mixed
+     */
+    public static function getAccountEmail($id)
+    {
+        $sql = 'SELECT email FROM account WHERE accountId=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }

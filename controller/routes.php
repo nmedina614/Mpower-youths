@@ -1251,11 +1251,29 @@ $f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $par
 
         if($_POST['submit'] == 1 || $_POST['submit']==-1){
 
-            if($params['type'] == 'enrollment'){ Logic::updateEnrollment($_POST['submit'], $params['formId']);};
+            $recipient = Logic::getAccountEmail($params['accountId']);
 
-            if($params['type'] == 'volunteer'){ Logic::updateVolunteer($_POST['submit'], $params['formId']);};
+            if($params['type'] == 'enrollment'){
+                if(!empty($recipient))
+                    Messenger::sendMessage($recipient['email'], 'Enrollment Status Update', 'There has been 
+                change in your enrollment form status. Please go to your account page to view the updated status. Feel 
+                free to contact M-Power Youth about the change if so desired.');
+                Logic::updateEnrollment($_POST['submit'], $params['formId']);
+            };
 
-            if($params['type'] == 'rental'){ Logic::updateInstrument($_POST['serial'], $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit'], $params['formId']);};
+            if($params['type'] == 'volunteer'){
+                if(!empty($recipient))
+                    Messenger::sendMessage($recipient['email'], 'Volunteer Status Update', 'There has been 
+                change in your volunteer form status. Please go to your account page to view the updated status. Feel 
+                free to contact M-Power Youth about the change if so desired.');
+                Logic::updateVolunteer($_POST['submit'], $params['formId']);};
+
+            if($params['type'] == 'rental'){
+                if(!empty($recipient))
+                    Messenger::sendMessage($recipient['email'], 'Instrument Rental Status Update', 'There has been 
+                change in your instrument rental form status. Please go to your account page to view the updated status. Feel 
+                free to contact M-Power Youth about the change if so desired.');
+                Logic::updateInstrument($_POST['serial'], $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit'], $params['formId']);};
 
             $f3->reroute('/administration');
         }

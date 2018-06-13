@@ -932,6 +932,16 @@ class Logic
         return Database::updateEnrollmentStatus($submit, $formId);
     }
 
+    /**
+     * @param $id
+     */
+    public static function getAccountEmail($id)
+    {
+        Database::connect();
+
+        return Database::getAccountEmail($id);
+    }
+
 
     /**
      * TODO
