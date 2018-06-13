@@ -239,12 +239,13 @@ class Database
      * @param $memberType the type of member
      * @param $idColumnName the name of the id column
      * @param $id the id of the member
+     * @param $fieldName the field name of the member
      * @return the portrait url of the member. false if the query fails
      */
-    public static function getPortraitUrl($memberType, $idColumnName, $id)
+    public static function getPortraitUrl($memberType, $idColumnName, $id, $fieldName)
     {
         // Prepare a select to check if db contains queried params.
-        $sql = 'SELECT portraitURL FROM '.$memberType.' WHERE '.$idColumnName.'=:id';
+        $sql = 'SELECT '.$fieldName.' FROM '.$memberType.' WHERE '.$idColumnName.'=:id';
 
         $statement = self::$_dbh->prepare($sql);
         $statement->bindParam(':id', $id, PDO::PARAM_INT);

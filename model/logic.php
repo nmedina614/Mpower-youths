@@ -193,17 +193,22 @@ class Logic
      * @param $idstaff the id of the staff member to delete
      * @return true or false whether the deletion was successful
      */
-    public static function deleteMember($id, $memberType, $idColumnName)
+    public static function deleteMember($id, $memberType, $idColumnName, $imageFolderName)
     {
         Database::connect();
-        $image = Database::getPortraitUrl($memberType, $idColumnName, $id)[0]['portraitURL'];
+
+        if ($memberType === 'carousel') {
+            $image = Database::getPortraitURL($memberType, $idColumnName, $id, 'imageURL')[0]['imageURL'];
+        } else {
+            $image = Database::getPortraitUrl($memberType, $idColumnName, $id, 'portraitURL')[0]['portraitURL'];
+        }
 
         $imageNameWithoutFolder = substr($image, strrpos($image, '/') + 1);
 
         $result = Database::deleteStaffMember($memberType, $idColumnName, $id);
 
         if ($result) {
-            Logic::deleteImage($imageNameWithoutFolder, 'staffportraits');
+            Logic::deleteImage($imageNameWithoutFolder, $imageFolderName);
         }
         echo json_encode($result);
         return result;
