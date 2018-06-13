@@ -1,0 +1,41 @@
+<form action="carousel-modify" method="post" enctype="multipart/form-data">
+    <div class="modal-body">
+        <!--<img id="image-preview" class="mb-2" src="#" alt="your image" />-->
+        <div class="mb-2">
+            <label for="image">Select Image</label>
+            <br>
+            <input type="file" id="image" name="image">
+        </div>
+        <div class="form-group">
+            <label for="staffFName">First Name</label>
+            <input type="text" class="form-control" id="staffFName" name="staffFName" aria-describedby="staffFName" placeholder="First name">
+        </div>
+        <div class="form-group">
+            <label for="staffLName">Last Name</label>
+            <input type="text" class="form-control" id="staffLName" name="staffLName" aria-describedby="staffLName" placeholder="Last name">
+        </div>
+        <div class="form-group">
+            <label for="staffTitle">Title</label>
+            <input type="text" class="form-control" id="staffTitle" name="staffTitle" aria-describedby="staffTitle" placeholder="Staff member's title (ex. music teacher, director, conductor)">
+        </div>
+        <div class="form-group">
+            <label for="staffEmail">Email</label>
+            <input type="text" class="form-control" id="staffEmail" name="staffEmail" aria-describedby="staffEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="staffPhone">Phone</label>
+            <input type="text" class="form-control" id="staffPhone" name="staffPhone" aria-describedby="staffPhone" placeholder="Phone number">
+        </div>
+        <div class="form-group">
+            <label for="staffBio">Biography</label>
+            <textarea rows="5" cols="30" class="form-control" id="staffBio" name="staffBio" aria-describedby="staffBio" placeholder="Staff member's biography"></textarea>
+        </div>
+        <input type="number" id="staffid" name="staffid" class="d-none">
+        <input type="text" id="staffImage" name="staffImage" class="d-none">
+        <input type="number" id="pageOrder" name="pageOrder" class="d-none">
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" name="submit" class="btn btn-success">Update!</button>
+    </div>
+</form>

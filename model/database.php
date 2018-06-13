@@ -389,6 +389,26 @@ class Database
     }
 
     /**
+     * Method used to pull all staff information from
+     * the database.
+     *
+     * @return mixed Returns an associative array of staff information.
+     */
+    public static function getCarouselItems()
+    {
+        // Prepare a select to check if db contains queried params.
+        $sql = 'SELECT * FROM carousel ORDER BY pageOrder';
+
+        $statement = self::$_dbh->prepare($sql);
+
+        $statement->execute();
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    /**
      * Pulls relevant account information.
      *
      * @param $id id of account to fetch

@@ -1,0 +1,52 @@
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="carouselModal" tabindex="-1" role="dialog" aria-labelledby="carouselModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modify Carousel Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <include href="views/_editCarouselItem.html" >
+
+            </div>
+        </div>
+    </div>
+
+    <check if="{{ @isAdmin }}">
+        <div class="text-left my-4">
+            <button type="button" class="btn btn-primary btn-add" data-toggle="modal" data-target="#carouselModal">Add Carousel Item</button>
+        </div>
+    </check>
+
+    <repeat group="{{ @carouselItems }}" value="{{ @carouselItem }}">
+        <div class="carousel row mb-4 align-items-center">
+            <div class="col-md-9">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{{ @carouselItem->getImageURL() }}" alt="Carousel slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>{{ @carouselItem->getHeader() }}</h3>
+                        <p>{{ @carouselItem->getParagraph() }}</p>
+                        <a class="btn btn-primary rounded" href="{{ @carouselItem->getButtonLink() }}">{{ @carouselItem->getButtonText() }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <check if="{{ @isAdmin }}">
+                <div class="col-md-3">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary btn-edit" data-id="{{ @carouselItem->getId() }}" data-order="{{ @carouselItem->getPageOrder() }}" data-toggle="modal" data-target="#carouselModal">Edit</button>
+                        <button type="button" class="btn btn-danger btn-delete" data-id="{{ @carouselItem->getId() }}">Remove</button>
+                        <div class="btn-group-vertical btn-group-sm my-auto" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-shift-up" data-id="{{ @carouselItem->getId() }}">&#9650;</button>
+                            <button type="button" class="btn btn-primary btn-shift-down" data-id="{{ @carouselItem->getId() }}">&#9660;</button>
+                        </div>
+                    </div>
+                </div>
+            </check>
+        </div>
+    </repeat>
+</div>
