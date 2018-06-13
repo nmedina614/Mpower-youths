@@ -91,31 +91,53 @@
             <!-- Check if the request is approved or denied -->
             <check if="{{ @isAdmin }}" >
                 <true>
-                    <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
-                        <label for="serial" class="control-label"><strong>Serial Num.</strong></label>
-                        <input type="text" class="form-control serial-validate" id="serial" name="serial">
-                    </div>
 
-                    <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
-                        <label for="contract" class="control-label"><strong>Contract Year</strong></label>
-                        <input type="text" class="form-control year-validate" id="contract" name="contract">
-                    </div>
-
-                    <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
-                        <label for="make" class="control-label"><strong>Make</strong></label>
-                        <input type="text" class="form-control make-validate" id="make" name="make">
-                    </div>
-
-                    <div class="form-group col-lg-6"> <!-- Model of Instrument -->
-                        <label for="model" class="control-label"><strong>Model</strong></label>
-                        <input type="text" class="form-control model-validate" id="model" name="model">
-                    </div>
-
-                    <check if="{{@formData['requestStatus']}} == 0">
+                    <check if="{{@formData['requestStatus']}} != 0">
                         <true>
-                            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="1">Approve Request</button>
-                            <button type="submit" class="btn btn-primary validation-halt" name='submit' value="-1">Deny Request</button>
+                            <fieldset disabled>
+                                <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
+                                    <label for="serial" class="control-label"><strong>Serial Num.</strong></label>
+                                    <input type="text" class="form-control serial-validate" id="serial" name="serial" value="{{@formData['serialNum']}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
+                                    <label for="contract" class="control-label"><strong>Contract Year</strong></label>
+                                    <input type="text" class="form-control year-validate" id="contract" name="contract" value="{{@formData['contractYear']}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
+                                    <label for="make" class="control-label"><strong>Make</strong></label>
+                                    <input type="text" class="form-control make-validate" id="make" name="make" value="{{@formData['make']}}">
+                                </div>
+
+                                <div class="form-group col-lg-6"> <!-- Model of Instrument -->
+                                    <label for="model" class="control-label"><strong>Model</strong></label>
+                                    <input type="text" class="form-control model-validate" id="model" name="model" value="{{@formData['model']}}">
+                                </div>
+                            </fieldset>
                         </true>
+                        <false>
+                            <div class="form-group col-lg-6"> <!-- Serial No. of Instrument -->
+                                <label for="serial" class="control-label"><strong>Serial Num.</strong></label>
+                                <input type="text" class="form-control serial-validate" id="serial" name="serial" value="{{@formData['serial']}}">
+                            </div>
+
+                            <div class="form-group col-lg-6"> <!-- Contract Year of Rental -->
+                                <label for="contract" class="control-label"><strong>Contract Year</strong></label>
+                                <input type="text" class="form-control year-validate" id="contract" name="contract" value="{{@formData['contract']}}">
+                            </div>
+
+                            <div class="form-group col-lg-6"> <!-- Maker of Instrument -->
+                                <label for="make" class="control-label"><strong>Make</strong></label>
+                                <input type="text" class="form-control make-validate" id="make" name="make" value="{{@formData['make']}}">
+                            </div>
+
+                            <div class="form-group col-lg-6"> <!-- Model of Instrument -->
+                                <label for="model" class="control-label"><strong>Model</strong></label>
+                                <input type="text" class="form-control model-validate" id="model" name="model" value="{{@formData['model']}}">
+                            </div>
+                        </false>
+
                     </check>
                 </true>
             </check>
