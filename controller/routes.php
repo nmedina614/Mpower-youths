@@ -1094,6 +1094,8 @@ $f3->route('GET|POST /enrollment', function($f3) {
             $_POST['email'], $_POST['phone'], $_POST['street1'], $_POST['street2'], $_POST['city'], $_POST['zip'],
             $_POST['allergies'], $_POST['referral'], $_POST['decision'], $_POST['takeHomeInstrument']);
 
+
+
         if (count($errors) == 0) {
             Logic::insertEnrollment($data);
             $f3->reroute('/form/success');

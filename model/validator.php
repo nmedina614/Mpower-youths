@@ -142,14 +142,14 @@ class Validator
         if(!self::validZip($zip)) $errors['zip'] = "Your zip is invalid please make sure it contains 5 numbers";
         if(!self::validAllergies($allergies)) $errors['allergies'] = "Your allergies is invalid please make sure it under 160 characters";
 
-        if ($referral != 0 || $referral != 1)
+        /*if ($referral != 0 || $referral != 1)
             $errors['referral'] = "Your referral value is invalid";
 
         if ($decision != 0 || $decision != 1 || $decision != 2)
             $errors['decision'] = "Your decision value is invalid";
 
         if ($takeHomeInstrument != 0 || $takeHomeInstrument != 1)
-            $errors['take home instrument'] = "Your choice of take home instruments is invalid";
+            $errors['take home instrument'] = "Your choice of take home instruments is invalid";*/
 
         return $errors;
     }

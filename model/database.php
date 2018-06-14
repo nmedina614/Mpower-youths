@@ -951,6 +951,7 @@ class Database
     /**
      * Send a Request to be a Volunteer
      *
+     * @param $accountId int Account ID of the adding account.
      * @param $name string full legal name of volunteer
      * @param $address string address of volunteer
      * @param $zip int Zip Code for volunteer
@@ -978,8 +979,6 @@ class Database
         $statement->bindParam(':phone', $phone, PDO::PARAM_STR);
         $statement->bindParam(':drivers', $drivers, PDO::PARAM_STR);
         $statement->bindParam(':dateRequested', $dateRequested, PDO::PARAM_STR);
-
-        echo $statement->debugDumpParams();
 
         return $statement->execute();
     }
