@@ -979,8 +979,6 @@ class Database
         $statement->bindParam(':drivers', $drivers, PDO::PARAM_STR);
         $statement->bindParam(':dateRequested', $dateRequested, PDO::PARAM_STR);
 
-        echo $statement->debugDumpParams();
-
         return $statement->execute();
     }
 
