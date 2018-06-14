@@ -14,4 +14,23 @@ $(document).ready(function() {
         // Show New
         $(target).show().addClass('active');
     });
-} );
+
+    $('.btn-delete').click(function(event) {
+        let id = $(event.currentTarget).data('id');
+        $.ajax('ajax-delete-notification', {
+            method : "POST",
+            data : {notification : id},
+            dataType : 'json',
+            success : function(response) {
+                if(response === true) {
+                    $(event.currentTarget).parent().parent().remove();
+                } else {
+                    alert(response);
+                }
+            },
+            error : function() {
+                console.log("Failed to connect!");
+            }
+        });
+    })
+});

@@ -236,6 +236,15 @@ $f3->route('POST /ajax-delete-image', function($f3) {
 
 });
 
+$f3->route('POST /ajax-delete-notification', function($f3) {
+    if($f3->get('isAdmin')) {
+        echo json_encode(Logic::deleteNotification($_POST['notification']));
+    } else {
+        echo json_encode('Invalid Credentials!');
+    }
+
+});
+
 $f3->route('POST /ajax-delete-member', function($f3) {
     if ($f3->get('isAdmin')) {
         Logic::deleteMember($_POST['id'], $_POST['memberType'], $_POST['idColumnName'], $_POST['imageFolderName']);
@@ -593,9 +602,22 @@ $f3->route('GET /event', function($f3) {
     echo $template->render('views/_base.html');
 });
 
-$f3->route('GET /contact', function($f3) {
+$f3->route('GET|POST /contact', function($f3) {
     // Title to use in template.
     $title = "M-Power Youth: Contact Us";
+
+    if(isset($_POST['submit'])) {
+        $fname = $_POST['name'];
+        $lname = $_POST['surname'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $message = $_POST['message'];
+        echo "sent!";
+        // TODO
+        Messenger::sendMessage("njmedina614@gmail.com", "New Contact", $fname
+            . " - " . $lname . " - " . $email . " - " . $phone . " : " . $message);
+    }
+
     // List of paths to stylesheets.
     $styles = array(
     );
@@ -1229,11 +1251,29 @@ $f3->route('GET|POST /forms/review/@type/@accountId/@formId', function($f3, $par
 
         if($_POST['submit'] == 1 || $_POST['submit']==-1){
 
-            if($params['type'] == 'enrollment'){ Logic::updateEnrollment($_POST['submit'], $params['formId']);};
+            $recipient = Logic::getAccountEmail($params['accountId']);
 
-            if($params['type'] == 'volunteer'){ Logic::updateVolunteer($_POST['submit'], $params['formId']);};
+            if($params['type'] == 'enrollment'){
+                if(!empty($recipient))
+                    Messenger::sendMessage($recipient['email'], 'Enrollment Status Update', 'There has been 
+                change in your enrollment form status. Please go to your account page to view the updated status. Feel 
+                free to contact M-Power Youth about the change if so desired.');
+                Logic::updateEnrollment($_POST['submit'], $params['formId']);
+            };
 
-            if($params['type'] == 'rental'){ Logic::updateInstrument($_POST['serial'], $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit'], $params['formId']);};
+            if($params['type'] == 'volunteer'){
+                if(!empty($recipient))
+                    Messenger::sendMessage($recipient['email'], 'Volunteer Status Update', 'There has been 
+                change in your volunteer form status. Please go to your account page to view the updated status. Feel 
+                free to contact M-Power Youth about the change if so desired.');
+                Logic::updateVolunteer($_POST['submit'], $params['formId']);};
+
+            if($params['type'] == 'rental'){
+                if(!empty($recipient))
+                    Messenger::sendMessage($recipient['email'], 'Instrument Rental Status Update', 'There has been 
+                change in your instrument rental form status. Please go to your account page to view the updated status. Feel 
+                free to contact M-Power Youth about the change if so desired.');
+                Logic::updateInstrument($_POST['serial'], $_POST['contract'], $_POST['make'], $_POST['model'], $_POST['submit'], $params['formId']);};
 
             $f3->reroute('/administration');
         }

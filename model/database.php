@@ -214,6 +214,23 @@ class Database
     }
 
     /**
+     * Method used to delete notification entries from the database.
+     *
+     * @param $path Takes an integer id of the target notification.
+     * @return mixed Returns the result of the query.
+     */
+    public static function deleteNotification($id)
+    {
+        $sql = 'DELETE FROM notification WHERE idnotification=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
+
+
+    /**
      * Method used to pull all staff information from
      * the database.
      *
@@ -677,7 +694,7 @@ class Database
      */
     public static function getNotifications()
     {
-        $sql = 'SELECT * FROM notification ORDER BY time';
+        $sql = 'SELECT * FROM notification ORDER BY time DESC';
 
         $result = self::$_dbh->query($sql);
 
@@ -1044,6 +1061,24 @@ class Database
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    }
+
+    /**
+     * TODO
+     *
+     * @param $id
+     * @return mixed
+     */
+    public static function getAccountEmail($id)
+    {
+        $sql = 'SELECT email FROM account WHERE accountId=:id';
+
+        $statement = self::$_dbh->prepare($sql);
+        $statement->bindParam(':id', $id, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
 
