@@ -20,7 +20,7 @@
                                 <h3 class="text-outline">{{ @carouselItem->getHeader() }}</h3>
                                 <p class="text-outline">{{ @carouselItem->getParagraph() }}</p>
                                 <check if="{{ @carouselItem->getButtonLink() || @carouselItem->getButtonText() }}">
-                                    <a class="btn btn-primary rounded" href="{{ @carouselItem->getButtonLink() }}">{{ @carouselItem->getButtonText() }}</a>
+                                    <a class="btn btn-primary" href="{{ @carouselItem->getButtonLink() }}">{{ @carouselItem->getButtonText() }}</a>
                                 </check>
                             </div>
                         </div>
@@ -55,12 +55,33 @@
     </div>
     <check if="{{ @isAdmin }}">
         <div class="text-center my-1">
-            <a class="btn btn-primary rounded" href="{{ @BASE }}/carousel_edit">Edit Carousel</a>
+            <a class="btn btn-primary" href="{{ @BASE }}/carousel_edit">Edit Carousel</a>
         </div>
     </check>
 </div>
-<div class="container rest-body">
-    <br>
+<div class="container-fluid rest-body p-0">
+
+    <div class="bg-info p-4">
+        <div class="row justify-content-md-around p-4">
+            <div class="col-12 col-md-3 rounded-circle text-center">
+                <img class="icon-lg grow p-2" src="{{ @BASE }}/assets/images/icons/add-user.svg" alt=" ">
+                <br>
+                <a href="{{ @BASE }}/accounts/register" class="btn btn-lg btn-outline-light mt-2">Register</a>
+            </div>
+            <div class="col-12 col-md-3 rounded-circle text-center">
+                <img class="icon-lg grow p-2" src="{{ @BASE }}/assets/images/icons/donation.svg" alt=" ">
+                <br>
+                <a href="{{ @BASE }}/donate" class="btn btn-lg btn-outline-light mt-2">Donate</a>
+            </div>
+            <div class="col-12 col-md-3 rounded-circle text-center">
+                <img class="icon-lg grow p-2" src="{{ @BASE }}/assets/images/icons/testimonial.svg" alt=" ">
+                <br>
+                <a href="{{ @BASE }}/testimonials" class="btn btn-lg btn-outline-light mt-2">Testimonials</a>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="jumbotron text-center">
         <h1>Our Mission</h1>
@@ -68,7 +89,5 @@
             To provide academic or economic disadvantaged youth a path to becoming self-confident, productive citizens through participation in music
         </p>
     </div>
-
-
 
 </div>
