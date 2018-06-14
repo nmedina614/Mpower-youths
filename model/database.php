@@ -838,8 +838,9 @@ class Database
     }
 
     /**
-     * TODO
+     * Get the Instrument Rental Form data to review for user and admin
      *
+     * @param $formId int form ID to get data
      * @return mixed Returns an array containing all rental requests.
      */
     public static function getFormInstrumentRental($formId)
@@ -858,8 +859,9 @@ class Database
     }
 
     /**
-     * TODO
+     * Gets Enrollment forms for admin and users for review
      *
+     * @param $formId int form ID to get data
      * @return mixed Returns an array containing all application requests.
      */
     public static function getFormApplication($formId)
@@ -879,8 +881,9 @@ class Database
     }
 
     /**
-     * TODO
+     * gets volunteer forms for admin and users for review
      *
+     * @param $formId int form ID to get data
      * @return mixed Returns an array containing all volunteer applications requests.
      */
     public static function getFormVolunteer($formId)
@@ -982,9 +985,11 @@ class Database
     }
 
 
-
     /**
-     * TODO
+     * Updates the Volunteer Status for accepted / or denied
+     * @param $submit int accepted or denied , 1 being accepted, -1 being denied
+     * @param $formId int formId to change
+     * @return boolean based on if statement executed for not.
      */
     public static function updateVolunteerStatus($submit, $formId)
     {
@@ -1000,7 +1005,15 @@ class Database
     }
 
     /**
-     * TODO
+     * Updates the Instrument Rentals with the required data for the instrument being rented as
+     * well as the status of the rental.
+     * @param $serial int serial number of the instrument
+     * @param $contract int contract year of the instrument rental
+     * @param $make string make of the instrument
+     * @param $model string model of the instrument
+     * @param $submit int request status 1 being accepted, -1 being denied
+     * @param $formId int formId to locate correct form in database to change
+     * @return boolean true or false based on if the form executed or not
      */
     public static function updateInstrumentStatus($serial, $contract, $make, $model, $submit, $formId)
     {
@@ -1020,7 +1033,10 @@ class Database
 
 
     /**
-     * TODO
+     * Updates the Enrollment Status for accepted / or denied
+     * @param $submit int accepted or denied , 1 being accepted, -1 being denied
+     * @param $formId int formId to change
+     * @return boolean based on if statement executed for not.
      */
     public static function updateEnrollmentStatus($submit, $formId)
     {
@@ -1035,7 +1051,7 @@ class Database
     }
 
     /**
-     *
+     * Gets the Photo Release forms from the Database and returns them to be viewed
      */
     public static function getRelease()
     {
@@ -1048,7 +1064,9 @@ class Database
 
 
     /**
-     * TODO
+     * Gets the photo release forms for the specific account to be reviewed
+     * @param $accountId account that the sql will get the forms for that they filled out
+     * @return array returns an array of the multiple rows in the database filling the criteria
      */
     public static function getAccountRelease($accountId)
     {
@@ -1064,10 +1082,10 @@ class Database
     }
 
     /**
-     * TODO
+     * Gets the Accounts Email to alert the change in status.
      *
-     * @param $id
-     * @return mixed
+     * @param $id int ID of the user getting the email to send to
+     * @return mixed returns the email from the database
      */
     public static function getAccountEmail($id)
     {

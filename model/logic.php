@@ -804,7 +804,11 @@ class Logic
     }
 
     /**
-     * TODO
+     * Loads the correct form based on which type of form is chosen
+     *
+     * @param $type string type of form that is too be loaded
+     * @param $formId int FormID to ger the form of
+     * @return mixed returns the information of the form
      */
     public static function getForm($type, $formId)
     {
@@ -902,7 +906,11 @@ class Logic
 
 
     /**
-     * TODO
+     * Updates the volunteer form based on review from admin
+     *
+     * @param $submit int status being updated too, 1 being accepted, -1 being denied
+     * @param $formId int ID of the form being changed
+     * @return bool true or false based on if the statement executed
      */
     public static function updateVolunteer($submit, $formId)
     {
@@ -912,7 +920,15 @@ class Logic
     }
 
     /**
-     * TODO
+     * Updates the Instrument Information and Status of the Form
+     *
+     * @param $serial int Model of Instrument
+     * @param $contract int contract year of instrument
+     * @param $make String Make of the Instrument
+     * @param $model string Model of the instrument
+     * @param $submit int status being updated too, 1 being accepted, -1 being denied
+     * @param $formId int ID of the form being changed
+     * @return bool true or false based on if the statement executed
      */
     public static function updateInstrument($serial, $contract, $make, $model, $submit, $formId)
     {
@@ -923,7 +939,11 @@ class Logic
 
 
     /**
-     * TODO
+     * Updates the enrollment status in the Database
+     *
+     * @param $submit int status being updated too, 1 being accepted, -1 being denied
+     * @param $formId int ID of the form being changed
+     * @return bool true or false based on if the statement executed
      */
     public static function updateEnrollment($submit, $formId)
     {
@@ -933,7 +953,11 @@ class Logic
     }
 
     /**
-     * @param $id
+     * Gets the Email to notify that the status has been changed
+     *
+     * @param $id ID of the user that filled out the form to send them an email about the change of
+     * status
+     * @return mixed true or false based on if the statement executed
      */
     public static function getAccountEmail($id)
     {
@@ -944,7 +968,9 @@ class Logic
 
 
     /**
-     * TODO
+     * Gets the photo release forms for the admin to view
+     *
+     * @return array all the photo release forms that users have filled out
      */
     public static function getAdminRelease()
     {
@@ -954,7 +980,10 @@ class Logic
     }
 
     /**
-     * TODO
+     * Returns the Photo release forms that the user has filled out
+     *
+     * @param $accountId ID of the account getting the forms from.
+     * @return array all the photo release forms that the user has filled out
      */
     public static function getAccountRelease($accountId)
     {
