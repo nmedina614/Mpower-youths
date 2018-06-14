@@ -951,6 +951,7 @@ class Database
     /**
      * Send a Request to be a Volunteer
      *
+     * @param $accountId int Account ID of the adding account.
      * @param $name string full legal name of volunteer
      * @param $address string address of volunteer
      * @param $zip int Zip Code for volunteer
